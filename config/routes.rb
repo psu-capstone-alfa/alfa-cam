@@ -1,4 +1,6 @@
 CourseAssessmentManager::Application.routes.draw do
+  resources :terms
+
   resources :courses
 
   # The priority is based upon order of creation:
