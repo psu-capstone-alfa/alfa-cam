@@ -1,4 +1,6 @@
 CourseAssessmentManager::Application.routes.draw do
+  resources :offerings
+
   resources :terms
 
   resources :courses

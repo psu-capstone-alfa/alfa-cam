@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Course:</b>
+  <%= @offering.course_id %>
+</p>
+
+<p>
+  <b>Term:</b>
+  <%= @offering.term_id %>
+</p>
+
+<p>
+  <b>Section:</b>
+  <%= @offering.section %>
+</p>
+
+<p>
+  <b>Crn:</b>
+  <%= @offering.crn %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @offering.location %>
+</p>
+
+
+<%= link_to 'Edit', edit_offering_path(@offering) %> |
+<%= link_to 'Back', offerings_path %>
