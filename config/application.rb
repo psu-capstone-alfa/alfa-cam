@@ -44,5 +44,11 @@ module CourseAssessmentManager
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.generators do |g|
+      g.orm             :active_record
+      g.template_engine :erb
+      g.test_framework  :test_unit, :fixture => false
+    end
   end
 end
