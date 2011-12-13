@@ -16,6 +16,6 @@
     <%= f.text_field :title %>
   </div>
   <div class="actions">
-    <%= f.submit :disabled => @term.has_offerings? %>
+    <%= f.submit :disabled => @term.offerings.present? %>
   </div>
 <% end %>

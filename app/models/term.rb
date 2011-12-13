@@ -10,9 +10,4 @@ class Term < ActiveRecord::Base
       false
     end
   end
-
-  def has_offerings?
-    self.offerings.count > 0
-  end
-
 end
