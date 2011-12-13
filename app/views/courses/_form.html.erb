@@ -24,6 +24,6 @@
     <%= f.text_field :title %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :disabled => @course.has_offerings? %>
   </div>
 <% end %>

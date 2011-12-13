@@ -12,8 +12,8 @@
   <tr>
     <td><%= term.title %></td>
     <td><%= link_to 'Show', term %></td>
-    <td><%= link_to 'Edit', edit_term_path(term) %></td>
-    <td><%= link_to 'Destroy', term, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to_unless term.offerings.present?, 'Edit', edit_term_path(term) %></td>
+    <td><%= link_to_unless term.offerings.present?, 'Destroy', term, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

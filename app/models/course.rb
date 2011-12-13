@@ -11,4 +11,8 @@ class Course < ActiveRecord::Base
     end
   end
 
+  def has_offerings?
+    self.offerings.count > 0
+  end
+
 end

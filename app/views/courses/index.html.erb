@@ -16,8 +16,8 @@
     <td><%= course.course_num %></td>
     <td><%= course.title %></td>
     <td><%= link_to 'Show', course %></td>
-    <td><%= link_to 'Edit', edit_course_path(course) %></td>
-    <td><%= link_to 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to_unless course.offerings.present?, 'Edit', edit_course_path(course) %></td>
+    <td><%= link_to_unless course.offerings.present?, 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
