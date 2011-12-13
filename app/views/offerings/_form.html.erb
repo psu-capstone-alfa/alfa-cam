@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :course_id %><br />
-    <%= f.number_field :course_id %>
+    <%= f.label :term_id, "Term" %><br />
+    <%= f.collection_select :term_id, Term.all, :id, :title, :prompt => "Select a Term" %>
   </div>
   <div class="field">
-    <%= f.label :term_id %><br />
-    <%= f.number_field :term_id %>
+    <%= f.label :course_id, "Course" %><br />   
+    <%= f.collection_select :course_id, Course.find(:all), :id, :course_field, :prompt => "Select a Course" %>
   </div>
   <div class="field">
     <%= f.label :section %><br />
