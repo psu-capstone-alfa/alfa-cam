@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Login:</b>
+  <%= @user.login %>
+</p>
+
+<p>
+  <b>Last Login:</b>
+  <%= @user.last_login_at %>
+</p>
+
+<p>
+  <b>User Since:</b>
+  <%= @user.created_at %>
+</p>
+
+<p>
+  <%= link_to 'Log Out', user_session_path, confirm: 'Are you sure?', method: :delete %>
+</p>
+
