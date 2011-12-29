@@ -5,6 +5,14 @@ CourseAssessmentManager::Application.routes.draw do
 
   resources :courses
 
+  resource :user_session,
+    path: 'session',
+    only: [:create, :destroy]
+  match 'login' => 'user_sessions#new', as: 'login'
+  match 'logout' => 'user_sessions#destroy', as: 'logout'
+
+  match 'profile' => 'users#show', as: 'profile'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

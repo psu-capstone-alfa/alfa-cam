@@ -31,3 +31,6 @@ group :test do
   # Pretty printed test output
   gem 'turn', :require => false
 end
+
+# User session management
+gem 'authlogic'
