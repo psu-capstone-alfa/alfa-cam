@@ -15,3 +15,8 @@ User.create!( [
   { :login => 'admin', :name => 'Admin' },
 ])
 
+Outcome.create!( [
+  { key: 'A', title: "Outcome A", description: "I'm outcome A!!!" },
+  { key: 'B', title: 'Outcome B', description: "I'm a B outcome..." },
+  { key: 'C', title: 'C outcome with a longer title', description: "I have a long title to see how that works" },
+])
