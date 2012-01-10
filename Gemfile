@@ -32,5 +32,10 @@ group :test do
   gem 'turn', :require => false
 end
 
+# Testing setup
+group :test, :development do
+  gem 'minitest-rails'
+end
+
 # User session management
 gem 'authlogic'
