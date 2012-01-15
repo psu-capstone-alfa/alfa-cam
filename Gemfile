@@ -37,6 +37,8 @@ group :test, :development do
   gem 'minitest-rails',
     :git => "https://github.com/rawongithub/minitest-rails.git",
     :ref => "51bed9d17f3b5882fa5d45ee9d644e5badbffb10"
+  gem 'simplecov', :require => false
+  gem 'cane'
 end
 
 # User session management

@@ -1,3 +1,3 @@
-class Term < ActiveRecord::Base
-  has_many :offerings
-end
+#class Term < ActiveRecord::Base
+#  has_many :offerings
+#end

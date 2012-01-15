@@ -1,8 +1,11 @@
+require 'simplecov'
 require "minitest/autorun"
-require "minitest/rails"
+#require "minitest/rails"
 
 # Uncomment if you want awesome colorful output
 # require "minitest/pride"
+
+SimpleCov.command_name 'minitest'
 
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
