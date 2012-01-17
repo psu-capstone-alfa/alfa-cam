@@ -1,6 +1,7 @@
 require "minitest_helper"
 
-class CourseReplacementTest < MiniTest::Rails::Model
+#class CourseReplacementTest < MiniTest::Rails::Model
+describe CourseReplacement do
   it 'should work' do
     c1 = Course.create
     c2 = Course.create
