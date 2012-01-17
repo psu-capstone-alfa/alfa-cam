@@ -35,11 +35,11 @@ end
 # Testing setup
 group :test, :development do
   gem 'minitest-rails',
-    :git => "https://github.com/rawongithub/minitest-rails.git",
-    :ref => "51bed9d17f3b5882fa5d45ee9d644e5badbffb10"
+    :git => "https://github.com/scoz/minitest-rails.git",
+    :branch => "fix-assertion-requires"
   gem 'simplecov', :require => false
   gem 'cane'
 end
 
 # User session management
-gem 'authlogic'
+gem 'authlogic', :git => "https://github.com/scoz/authlogic.git", :branch => "fix-rails-adapter"
