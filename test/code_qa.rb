@@ -1,6 +1,10 @@
 require 'minitest/spec'
 require 'minitest/autorun'
 
+# Don't fail if `turn` is not available
+begin; require 'turn'; rescue LoadError; end
+
+
 describe 'Code QA' do
   it "must pass code quality standards" do
     app = %q{"app/**/*.rb"}
@@ -15,6 +19,8 @@ describe 'Code QA' do
 end
 
 describe 'Code Coverage' do
+  i_suck_and_my_tests_are_order_dependent!
+
   before do
     unless File.exists?('coverage/covered_percent')
       flunk('Code coverage has not run')
