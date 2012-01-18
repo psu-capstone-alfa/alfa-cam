@@ -29,17 +29,22 @@ gem 'jquery-rails'
 
 group :test do
   # Pretty printed test output
-  gem 'turn', :require => false
+  gem 'turn', :require => false,
+    :git => "https://github.com/scoz/turn.git",
+    :branch => "ignore-empty-cases"
 end
 
 # Testing setup
 group :test, :development do
-  gem 'minitest-rails',
+  gem 'minitest-rails', # FIXME: This shouldn't depend on Ryan's personal fork
     :git => "https://github.com/scoz/minitest-rails.git",
-    :branch => "fix-assertion-requires"
+    :branch => "gemspec"
+    #:branch => "rake-merge-tasks"
   gem 'simplecov', :require => false
   gem 'cane'
 end
 
 # User session management
-gem 'authlogic', :git => "https://github.com/scoz/authlogic.git", :branch => "fix-rails-adapter"
+gem 'authlogic', # FIXME: This shouldn't depend on Ryan's personal fork
+  :git => "https://github.com/scoz/authlogic.git",
+  :branch => "fix-rails-adapter"

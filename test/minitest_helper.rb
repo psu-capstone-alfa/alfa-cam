@@ -1,9 +1,10 @@
 require 'simplecov'
-require "minitest/autorun"
-require "minitest/rails"
+require 'minitest/autorun'
+require 'minitest/rails'
 
-# Uncomment if you want awesome colorful output
-# require "minitest/pride"
+# Don't fail if `turn` is not available
+begin; require 'turn'; rescue LoadError; end
+
 
 SimpleCov.command_name 'MiniTest'
 
