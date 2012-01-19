@@ -1,3 +1,4 @@
+#
 class TermsController < ApplicationController
   # GET /terms
   # GET /terms.json
@@ -44,11 +45,14 @@ class TermsController < ApplicationController
 
     respond_to do |format|
       if @term.save
-        format.html { redirect_to @term, notice: 'Term was successfully created.' }
-        format.json { render json: @term, status: :created, location: @term }
+        format.html { redirect_to @term,
+          notice: 'Term was successfully created.' }
+        format.json { render json: @term,
+          status: :created, location: @term }
       else
         format.html { render action: "new" }
-        format.json { render json: @term.errors, status: :unprocessable_entity }
+        format.json { render json: @term.errors,
+          status: :unprocessable_entity }
       end
     end
   end
@@ -60,11 +64,13 @@ class TermsController < ApplicationController
 
     respond_to do |format|
       if @term.update_attributes(params[:term])
-        format.html { redirect_to @term, notice: 'Term was successfully updated.' }
+        format.html { redirect_to @term,
+          notice: 'Term was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
-        format.json { render json: @term.errors, status: :unprocessable_entity }
+        format.json { render json: @term.errors,
+          status: :unprocessable_entity }
       end
     end
   end
