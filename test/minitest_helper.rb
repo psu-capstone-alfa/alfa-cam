@@ -3,7 +3,13 @@ require 'minitest/autorun'
 require 'minitest/rails'
 
 # Don't fail if `turn` is not available
-begin; require 'turn'; rescue LoadError; end
+begin
+  require 'turn'
+  Turn.config do |config|
+    config.natural = true
+  end
+rescue LoadError
+end
 
 
 SimpleCov.command_name 'MiniTest'
