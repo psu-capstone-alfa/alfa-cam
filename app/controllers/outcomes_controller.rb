@@ -1,4 +1,3 @@
-#
 class OutcomesController < ApplicationController
   # GET /outcomes
   # GET /outcomes.json

@@ -1,4 +1,4 @@
-#
+#Courses are the basic template for future offerings
 class Course < ActiveRecord::Base
   has_many :offerings
 
