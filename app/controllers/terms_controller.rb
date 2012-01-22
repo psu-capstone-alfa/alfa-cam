@@ -1,4 +1,3 @@
-#
 class TermsController < ApplicationController
   # GET /terms
   # GET /terms.json

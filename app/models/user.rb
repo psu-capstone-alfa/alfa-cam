@@ -1,4 +1,3 @@
-#
 class User < ActiveRecord::Base
   acts_as_authentic do |config|
     config.crypted_password_field = nil
