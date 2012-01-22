@@ -1,3 +1,4 @@
+#Details how courses replace one another
 class CourseReplacement < ActiveRecord::Base
 
     belongs_to :replaces, class_name: 'Course', foreign_key: 'replace_id'

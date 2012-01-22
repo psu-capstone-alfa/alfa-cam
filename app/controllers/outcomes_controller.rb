@@ -44,11 +44,14 @@ class OutcomesController < ApplicationController
 
     respond_to do |format|
       if @outcome.save
-        format.html { redirect_to @outcome, notice: 'Outcome was successfully created.' }
-        format.json { render json: @outcome, status: :created, location: @outcome }
+        format.html { redirect_to @outcome,
+          notice: 'Outcome was successfully created.' }
+        format.json { render json: @outcome,
+          status: :created, location: @outcome }
       else
         format.html { render action: "new" }
-        format.json { render json: @outcome.errors, status: :unprocessable_entity }
+        format.json { render json: @outcome.errors,
+          status: :unprocessable_entity }
       end
     end
   end
@@ -60,11 +63,13 @@ class OutcomesController < ApplicationController
 
     respond_to do |format|
       if @outcome.update_attributes(params[:outcome])
-        format.html { redirect_to @outcome, notice: 'Outcome was successfully updated.' }
+        format.html { redirect_to @outcome,
+          notice: 'Outcome was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
-        format.json { render json: @outcome.errors, status: :unprocessable_entity }
+        format.json { render json: @outcome.errors,
+          status: :unprocessable_entity }
       end
     end
   end
