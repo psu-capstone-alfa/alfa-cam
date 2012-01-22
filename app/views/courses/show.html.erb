@@ -15,6 +15,23 @@
   <%= @course.title %>
 </p>
 
+<p>
+  <b>Replaces</b>
+  <ul>
+  <% @course.replaces.each do |course| %>
+  <li> <%= link_to course.to_s, course %> </li>
+  <% end %>
+  </ul>
+</p>
+
+<p>
+  <b>Replaced By</b>
+  <ul>
+  <% @course.replaced_with.each do |course| %>
+  <li> <%= link_to course.to_s, course %> </li>
+  <% end %>
+  </ul>
+</p>
 
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>
