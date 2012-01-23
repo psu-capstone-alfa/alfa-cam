@@ -1,4 +1,4 @@
-<%= form_for(@academic_term) do |f| %>
+<%= no_bs_form_for(@academic_term) do |f| %>
   <% if @academic_term.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@academic_term.errors.count, "error") %> prohibited this academic_term from being saved:</h2>

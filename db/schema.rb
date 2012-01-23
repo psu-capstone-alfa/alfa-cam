@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20120201071710) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "outcome_group_id"
   end
 
   create_table "course_replacements", :force => true do |t|
@@ -47,6 +48,20 @@ ActiveRecord::Schema.define(:version => 20120201071710) do
     t.string   "section"
     t.string   "crn"
     t.string   "location"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "outcome_groups", :force => true do |t|
+    t.integer  "initial_term_id"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "outcome_mappings", :force => true do |t|
+    t.integer  "outcome_group_id"
+    t.integer  "outcome_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
