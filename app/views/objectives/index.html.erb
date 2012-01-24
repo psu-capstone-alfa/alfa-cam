@@ -1,0 +1,23 @@
+<h1>Listing objectives</h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @objectives.each do |objective| %>
+  <tr>
+    <td><%= objective.description %></td>
+    <td><%= link_to 'Show', objective %></td>
+    <td><%= link_to 'Edit', edit_objective_path(objective) %></td>
+    <td><%= link_to 'Destroy', objective, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Objective', new_objective_path %>
