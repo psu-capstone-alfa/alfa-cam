@@ -19,6 +19,25 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
       end
     end
   end
+
+  define_method('submit') do |*args|
+    if args.first && args.first.is_a?(Hash)
+      value, options = nil, args.first
+      options[:class] ||= 'btn primary'
+    elsif args.second.is_a?(Hash)
+      value, options = args.first, args.second
+      options[:class] ||= 'btn'
+    elsif args.length == 0
+      value, options = nil, {class: 'btn primary'}
+    else
+      raise ArgumentError, "submit called with something other than options hash or value, options hash: #{args.inspect}"
+    end
+    @template.submit_tag(value, options)
+  end
+
+  define_method('cancel') do
+    @template.button_tag('Cancel', {type: 'reset', class: 'btn'})
+  end
 end
 
 ActionView::Base.default_form_builder = BootstrapFormBuilder
