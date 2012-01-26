@@ -7,11 +7,9 @@ describe AcademicTerm do
     @academic_term = AcademicTerm.new
   end
 
-  it "must be valid" do
-    @academic_term.must_be :valid?
-  end
-
-  it "must be a real test" do
-    flunk "Need real tests"
+  it "must contain a title" do 
+    assert_equal false, @academic_term.valid?
+    @academic_term.title = "test"
+    assert_equal true, @academic_term.valid?
   end
 end
