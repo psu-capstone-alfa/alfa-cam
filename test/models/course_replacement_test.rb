@@ -6,7 +6,7 @@ describe CourseReplacement do
     @valid_course_attrs = { dept_code: 'C', course_num: '123', title: 'Testing' }
   end
 
-  it 'should work' do
+  it 'should allow course replacements to be set' do
     c1 = Course.create!(@valid_course_attrs)
     c2 = Course.create!(@valid_course_attrs)
     c1.replaces << c2
