@@ -17,6 +17,9 @@ class Course < ActiveRecord::Base
   # Cannot destroy course if offerings are related to it
   before_destroy :check_for_offerings
 
+  # Course details are required
+  validates_presence_of :dept_code, :course_num, :title
+
   #will show the fields
   def to_s
     "#{dept_code}#{course_num}: #{title}"
