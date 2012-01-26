@@ -20,3 +20,11 @@ Outcome.create!( [
   { key: 'B', title: 'Outcome B', description: "I'm a B outcome..." },
   { key: 'C', title: 'C outcome with a longer title', description: "I have a long title to see how that works" },
 ])
+
+year = Time.new.year
+terms = AcademicTerm.create!( [
+  {:title => "Fall #{year}"},
+  {:title => "Winter #{year}"},
+  {:title => "Spring #{year}"},
+  {:title => "Summer #{year}"},
+])
