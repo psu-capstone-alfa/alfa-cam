@@ -8,11 +8,10 @@
 
 
 User.create!( [
-  { :login => 'user',  :name => 'Some User' },
-  { :login => 'inst1', :name => 'Instructor 1' },
-  { :login => 'inst2', :name => 'Instructor 2' },
-  { :login => 'staff', :name => 'Staff' },
-  { :login => 'admin', :name => 'Admin' },
+  { :login => 'review', :name => 'Acred Reviewer', :roles => [:reviewer] },
+  { :login => 'inst1', :name => 'Instructor 1' , :roles => [:instructor]},
+  { :login => 'inst2', :name => 'Instructor Staff' , :roles => [:instructor, :staff]},
+  { :login => 'staff', :name => 'Staff', :roles => [:staff]},
 ])
 
 Outcome.create!( [

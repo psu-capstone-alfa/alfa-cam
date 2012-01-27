@@ -3,6 +3,7 @@ class AcademicTermsController < ApplicationController
   # GET /academic_terms.json
   def index
     @academic_terms = AcademicTerm.all
+    authorize! :index, AcademicTerm
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class AcademicTermsController < ApplicationController
   # GET /academic_terms/1.json
   def show
     @academic_term = AcademicTerm.find(params[:id])
+    authorize! :show, @academic_term
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,7 @@ class AcademicTermsController < ApplicationController
   # GET /academic_terms/new.json
   def new
     @academic_term = AcademicTerm.new
+    authorize! :new, @academic_term
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,12 +38,14 @@ class AcademicTermsController < ApplicationController
   # GET /academic_terms/1/edit
   def edit
     @academic_term = AcademicTerm.find(params[:id])
+    authorize! :edit, @academic_term
   end
 
   # POST /academic_terms
   # POST /academic_terms.json
   def create
     @academic_term = AcademicTerm.new(params[:academic_term])
+    authorize! :create, @academic_Term
 
     respond_to do |format|
       if @academic_term.save
@@ -57,6 +62,7 @@ class AcademicTermsController < ApplicationController
   # PUT /academic_terms/1.json
   def update
     @academic_term = AcademicTerm.find(params[:id])
+    authorize! :update, @academic_Term
 
     respond_to do |format|
       if @academic_term.update_attributes(params[:academic_term])
@@ -73,6 +79,7 @@ class AcademicTermsController < ApplicationController
   # DELETE /academic_terms/1.json
   def destroy
     @academic_term = AcademicTerm.find(params[:id])
+    authorize! :destroy, @academic_term
     @academic_term.destroy
 
     respond_to do |format|

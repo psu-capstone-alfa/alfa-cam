@@ -16,8 +16,8 @@
     <td><%= outcome.title %></td>
     <td><%= outcome.description %></td>
     <td><%= link_to 'Show', outcome %></td>
-    <td><%= link_to 'Edit', edit_outcome_path(outcome) %></td>
-    <td><%= link_to 'Destroy', outcome, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to_if can?(:edit, outcome), 'Edit', edit_outcome_path(outcome) %></td>
+    <td><%= link_to_if can?(:destroy, outcome), 'Destroy', outcome, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -3,6 +3,7 @@ class CoursesController < ApplicationController
   # GET /courses.json
   def index
     @courses = Course.all
+    authorize! :read, @course
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @course = Course.find(params[:id])
+    authorize! :read, @course
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,7 @@ class CoursesController < ApplicationController
   # GET /courses/new.json
   def new
     @course = Course.new
+    authorize! :read, @course
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,12 +38,14 @@ class CoursesController < ApplicationController
   # GET /courses/1/edit
   def edit
     @course = Course.find(params[:id])
+    authorize! :edit, @course
   end
 
   # POST /courses
   # POST /courses.json
   def create
     @course = Course.new(params[:course])
+    authorize! :create, @course
 
     respond_to do |format|
       if @course.save
@@ -63,6 +68,7 @@ class CoursesController < ApplicationController
   # PUT /courses/1.json
   def update
     @course = Course.find(params[:id])
+    authorize! :update, @course
 
     respond_to do |format|
       if @course.update_attributes(params[:course])
@@ -83,6 +89,7 @@ class CoursesController < ApplicationController
   # DELETE /courses/1.json
   def destroy
     @course = Course.find(params[:id])
+    authorize! :destroy, @course
     @course.destroy
 
     respond_to do |format|

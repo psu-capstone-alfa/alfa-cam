@@ -3,6 +3,8 @@ require 'minitest/autorun'
 require 'minitest/rails'
 require 'miniskirt'
 require 'factories'
+require 'authlogic'
+require 'authlogic/test_case'
 
 # Don't fail if `turn` is not available
 begin
@@ -19,6 +21,7 @@ SimpleCov.command_name 'MiniTest'
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 
+
 class MiniTest::Rails::Spec
   # Uncomment if you want to support fixtures for all specs
   # or
@@ -33,9 +36,18 @@ class MiniTest::Rails::Model
 end
 
 class MiniTest::Rails::Controller
+  include Authlogic::TestCase
+
   # Add methods to be used by controller specs here
   def must_render_nothing_here
     assert_select '.fail', "Nothing here"
+  end
+
+  def self.with_admin_session
+    before do
+      activate_authlogic
+      UserSession.create(Factory :admin)
+    end
   end
 end
 
