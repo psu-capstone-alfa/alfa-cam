@@ -1,14 +1,53 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>CourseAssessmentManager</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <title><%= 'title' %></title>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="/">Course Assessments</a>
+          <ul class="nav">
+            <li class="dropdown <%= 'active' if @section == :home %>" data-dropdown="dropdown">
+              <a class="dropdown-toggle" href="">Home</a>
+              <ul class="dropdown-menu">
+                <li><a href="/home/instructor">Instructor</a></li>
+                <li><a href="/home/staff">Staff</a></li>
+              </ul>
+            </li>
+            <li class="<%= 'active' if @section == :courses %>"><a href="/courses">Courses</a></li>
+            <li><a href="/offerings/search">Offering Search</a></li>
+            <li class="<%= 'active' if @section == :admin %>"><a href="/admin">Admin</a></li>
+          </ul>
+          <ul class="nav secondary-nav">
+            <li class="dropdown <%= 'active' if @section == :side %>" data-dropdown="dropdown">
+              <a class="dropdown-toggle" href="">Bart Massey</a>
+              <ul class="dropdown-menu">
+                <li><a href="/profile">Profile</a></li>
+                <li class="divider"></li>
+                <li><a href="/login">Sign In</a></li>
+                <li><a href="/logout">Sign Out</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-<%= yield %>
+    <div class="container">
+      <div class="row">&nbsp;</div>
 
-</body>
+      <%= yield %>
+
+      <footer>
+        <p>&copy; Team-Alfa 2011</p>
+      </footer>
+
+    </div>
+  </body>
 </html>
