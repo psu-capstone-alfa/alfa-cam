@@ -48,3 +48,8 @@ end
 gem 'authlogic', # FIXME: This shouldn't depend on Ryan's personal fork
   :git => "https://github.com/scoz/authlogic.git",
   :branch => "fix-rails-adapter"
+
+# Twitter Bootstrap integration
+# FIXME: This shouldn't depend on Eric's personal fork ;)
+gem 'twitter-bootstrap-rails',
+    :git => 'http://github.com/drd/twitter-bootstrap-rails.git'
