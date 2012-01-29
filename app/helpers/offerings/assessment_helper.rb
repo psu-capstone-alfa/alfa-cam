@@ -1,0 +1,2 @@
+module Offerings::AssessmentHelper
+end

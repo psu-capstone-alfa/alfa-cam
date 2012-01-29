@@ -104,6 +104,8 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.17.2)
+    miniskirt (1.1.1)
+      activesupport (>= 2.2)
     minitest (2.10.1)
     multi_json (1.0.4)
     polyglot (0.3.3)
@@ -172,6 +174,7 @@ DEPENDENCIES
   cane
   coffee-rails (~> 3.1.0)
   jquery-rails
+  miniskirt
   minitest-rails!
   rails (= 3.1.0)
   sass-rails (~> 3.1.0)

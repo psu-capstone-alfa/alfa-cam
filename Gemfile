@@ -42,6 +42,7 @@ group :test, :development do
     #:branch => "rake-merge-tasks"
   gem 'simplecov', :require => false
   gem 'cane'
+  gem 'miniskirt'
 end
 
 # User session management
