@@ -3,7 +3,29 @@ CourseAssessmentManager::Application.routes.draw do
 
   resources :outcomes
 
-  resources :offerings
+  resources :offerings do
+    collection { get :search }
+
+    scope module: :offerings do # Sub controllers under Offering::
+      resource :review, only: [:show, :update] do
+        get ':id', action: :specific, as: 'specific'
+      end
+
+      resource :details, only: [:edit, :show, :update, :destroy]
+
+      resource :objectives, only: [:edit, :show, :update, :destroy] do
+        get :summary, as: 'summarize'
+      end
+
+      resource :contents, only: [:edit, :show, :update, :destroy] do
+        get :summary, as: 'summarize'
+      end
+
+      resource :assessment, only: [:edit, :show, :update, :destroy] do
+        get :summary, as: 'summarize'
+      end
+    end
+  end
 
   resources :courses
 

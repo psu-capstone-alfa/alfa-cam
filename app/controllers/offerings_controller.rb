@@ -1,45 +1,25 @@
 #Manages Offerings which are courses taught in specific terms
 class OfferingsController < ApplicationController
-  # GET /offerings
-  # GET /offerings.json
+  respond_to :html, :json
   def index
     @offerings = Offering.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @offerings }
-    end
+    respond_with @offerings
   end
 
-  # GET /offerings/1
-  # GET /offerings/1.json
   def show
     @offering = Offering.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @offering }
-    end
+    respond_with @offering
   end
 
-  # GET /offerings/new
-  # GET /offerings/new.json
   def new
     @offering = Offering.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @offering }
-    end
+    respond_with @offering
   end
 
-  # GET /offerings/1/edit
   def edit
     @offering = Offering.find(params[:id])
   end
 
-  # POST /offerings
-  # POST /offerings.json
   def create
     @offering = Offering.new(params[:offering])
 
@@ -60,8 +40,6 @@ class OfferingsController < ApplicationController
     end
   end
 
-  # PUT /offerings/1
-  # PUT /offerings/1.json
   def update
     @offering = Offering.find(params[:id])
 
@@ -80,8 +58,6 @@ class OfferingsController < ApplicationController
     end
   end
 
-  # DELETE /offerings/1
-  # DELETE /offerings/1.json
   def destroy
     @offering = Offering.find(params[:id])
     @offering.destroy
@@ -90,5 +66,10 @@ class OfferingsController < ApplicationController
       format.html { redirect_to offerings_url }
       format.json { head :ok }
     end
+  end
+
+  def search
+    @offerings = Offering.all
+    respond_with @offerings
   end
 end

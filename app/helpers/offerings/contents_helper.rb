@@ -1,0 +1,2 @@
+module Offerings::ContentsHelper
+end

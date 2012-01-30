@@ -1,6 +1,6 @@
 require "minitest_helper"
 
-describe Offerings::ObjectivesController do
+describe Offerings::ContentsController do
   before do
     @offering = Factory :offering
     @args = { :offering_id => @offering.id }

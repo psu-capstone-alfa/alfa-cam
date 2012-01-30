@@ -9,7 +9,5 @@ end
 
 SimpleCov.formatter = SimpleCov::Formatter::QualityFormatter
 
-puts 'Running code coverage!'
-
 SimpleCov.start 'rails' unless ENV["NO_COV"]
 

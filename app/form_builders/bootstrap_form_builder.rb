@@ -8,10 +8,11 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
     define_method(name) do |field, *args|
       options_index = ActionView::Helpers::FormBuilder.instance_method(name.to_sym).parameters.index([:opt,:options])
       if options_index.nil?
-        options = args.last.is_a?(Hash) ? args.pop : {}
+        options = args.pop if args.last.is_a?(Hash)
       else
         options = args[options_index - 1]
       end
+      options ||= {}
       label = label(field, options[:label], :class => options[:label_class])
       @template.content_tag(:div, :class => 'clearfix') do
         @template.concat(label)

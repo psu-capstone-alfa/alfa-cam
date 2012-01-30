@@ -1,6 +1,8 @@
 require 'simplecov'
 require 'minitest/autorun'
 require 'minitest/rails'
+require 'miniskirt'
+require 'factories'
 
 # Don't fail if `turn` is not available
 begin
@@ -32,6 +34,9 @@ end
 
 class MiniTest::Rails::Controller
   # Add methods to be used by controller specs here
+  def must_render_nothing_here
+    assert_select '.fail', "Nothing here"
+  end
 end
 
 class MiniTest::Rails::Helper

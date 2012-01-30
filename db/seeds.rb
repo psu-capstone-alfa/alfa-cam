@@ -28,3 +28,10 @@ terms = AcademicTerm.create!( [
   {:title => "Spring #{year}"},
   {:title => "Summer #{year}"},
 ])
+
+courses = Course.create!( [
+  {dept_code: 'CEE', course_num: '101', title: 'Engineering for Dummies'},
+  {dept_code: 'CEE', course_num: '161', title: 'Intro to Civil Engineering'},
+  {dept_code: 'CEE', course_num: '201', title: 'Cull the Flock'}
+])
+

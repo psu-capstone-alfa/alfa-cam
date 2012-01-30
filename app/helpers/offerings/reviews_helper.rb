@@ -1,0 +1,2 @@
+module Offerings::ReviewsHelper
+end

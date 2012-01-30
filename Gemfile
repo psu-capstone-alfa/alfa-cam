@@ -36,12 +36,14 @@ end
 
 # Testing setup
 group :test, :development do
+  gem 'minitest'
   gem 'minitest-rails', # FIXME: This shouldn't depend on Ryan's personal fork
     :git => "https://github.com/scoz/minitest-rails.git",
     :branch => "gemspec"
     #:branch => "rake-merge-tasks"
   gem 'simplecov', :require => false
   gem 'cane'
+  gem 'miniskirt'
 end
 
 # User session management
