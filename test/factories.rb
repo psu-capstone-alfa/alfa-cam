@@ -11,7 +11,7 @@ Factory.define :academic_term do |f|
 end
 
 Factory.define :offering do |f|
-  f.academic_term { Factory :academic_term }
+  f.term { Factory :academic_term }
   f.course { Factory :course }
 end
 

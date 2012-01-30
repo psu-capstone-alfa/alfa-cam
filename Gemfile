@@ -36,6 +36,7 @@ end
 
 # Testing setup
 group :test, :development do
+  gem 'minitest'
   gem 'minitest-rails', # FIXME: This shouldn't depend on Ryan's personal fork
     :git => "https://github.com/scoz/minitest-rails.git",
     :branch => "gemspec"

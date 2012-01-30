@@ -25,6 +25,12 @@
   <%= @offering.location %>
 </p>
 
+<%= link_to 'Review', offering_review_path(@offering) %> |
+<%= link_to 'Details', offering_details_path(@offering) %> |
+<%= link_to 'Objectives', offering_objectives_path(@offering) %> |
+<%= link_to 'Assessment', offering_assessment_path(@offering) %>
+
+<br />
 
 <%= link_to 'Edit', edit_offering_path(@offering) %> |
 <%= link_to 'Back', offerings_path %>
