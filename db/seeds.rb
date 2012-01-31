@@ -12,6 +12,7 @@ User.create!( [
   { :login => 'inst1', :name => 'Instructor 1' , :roles => [:instructor]},
   { :login => 'inst2', :name => 'Instructor Staff' , :roles => [:instructor, :staff]},
   { :login => 'staff', :name => 'Staff', :roles => [:staff]},
+  { :login => 'admin', :name => 'Admin', :roles => [:admin]},
 ])
 
 Outcome.create!( [
