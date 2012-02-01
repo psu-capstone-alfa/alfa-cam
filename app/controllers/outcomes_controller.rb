@@ -3,6 +3,7 @@ class OutcomesController < ApplicationController
   # GET /outcomes.json
   def index
     @outcomes = Outcome.all
+    authorize! :read, @outcome
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class OutcomesController < ApplicationController
   # GET /outcomes/1.json
   def show
     @outcome = Outcome.find(params[:id])
+    authorize! :read, @outcome
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,7 @@ class OutcomesController < ApplicationController
   # GET /outcomes/new.json
   def new
     @outcome = Outcome.new
+    authorize! :read, @outcome
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,12 +38,14 @@ class OutcomesController < ApplicationController
   # GET /outcomes/1/edit
   def edit
     @outcome = Outcome.find(params[:id])
+    authorize! :edit, @outcome
   end
 
   # POST /outcomes
   # POST /outcomes.json
   def create
     @outcome = Outcome.new(params[:outcome])
+    authorize! :create, @outcome
 
     respond_to do |format|
       if @outcome.save
@@ -60,6 +65,7 @@ class OutcomesController < ApplicationController
   # PUT /outcomes/1.json
   def update
     @outcome = Outcome.find(params[:id])
+    authorize! :update, @outcome
 
     respond_to do |format|
       if @outcome.update_attributes(params[:outcome])
@@ -78,6 +84,7 @@ class OutcomesController < ApplicationController
   # DELETE /outcomes/1.json
   def destroy
     @outcome = Outcome.find(params[:id])
+    authorize! :destroy, @outcome
     @outcome.destroy
 
     respond_to do |format|

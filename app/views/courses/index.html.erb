@@ -16,8 +16,8 @@
     <td><%= course.course_num %></td>
     <td><%= course.title %></td>
     <td><%= link_to 'Show', course %></td>
-    <td><%= link_to 'Edit', edit_course_path(course) %></td>
-    <td><%= link_to_if course.offering_ids.empty?, 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to_if can?(:edit, course), 'Edit', edit_course_path(course) %></td>
+    <td><%= link_to_if can?(:destroy, course), 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
@@ -25,3 +25,4 @@
 <br />
 
 <%= link_to 'New Course', new_course_path %>
+

@@ -15,4 +15,9 @@ Factory.define :offering do |f|
   f.course { Factory :course }
 end
 
+Factory.define :admin, class: :user do |f|
+  f.login 'admin%d'
+  f.name 'Admin'
+  f.roles [:admin]
+end
 
