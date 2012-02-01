@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(:version => 20120128135057) do
     t.datetime "updated_at"
   end
 
+  create_table "objectives", :force => true do |t|
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "offering_id"
+  end
+
   create_table "offerings", :force => true do |t|
     t.integer  "course_id"
     t.integer  "term_id"
