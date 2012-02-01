@@ -1,3 +1,5 @@
+# Defines permissions of different user roles
+#
 class Ability
   include CanCan::Ability
 

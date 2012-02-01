@@ -1,3 +1,5 @@
+# Base controller providing global helper methods
+#
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all

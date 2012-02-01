@@ -1,4 +1,5 @@
-#Users may be either instructors or staff members
+# Manage user accounts and details
+#
 class UsersController < ApplicationController
   before_filter :require_user, only: :show
 

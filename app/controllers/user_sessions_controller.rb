@@ -1,3 +1,5 @@
+# Provides pages for logging in and out users
+#
 class UserSessionsController < ApplicationController
   before_filter :require_no_user, only: [:new, :create]
   before_filter :require_user, except: [:new, :create]

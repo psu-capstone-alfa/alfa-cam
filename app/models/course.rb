@@ -1,4 +1,6 @@
-#Courses are the basic template for future offerings
+# A course is identified by a subject, course number, and title
+# Provides a basic identification of an offering
+#
 class Course < ActiveRecord::Base
   has_many :offerings
 
