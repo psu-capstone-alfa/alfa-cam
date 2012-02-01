@@ -6,5 +6,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_academic_term_path(@academic_term) %> |
+<%= link_to_if can?(:edit, @academic_term), 'Edit', edit_academic_term_path(@academic_term) %> |
 <%= link_to 'Back', academic_terms_path %>

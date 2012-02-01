@@ -16,5 +16,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_outcome_path(@outcome) %> |
+<%= link_to_if can?(:edit, @outcome), 'Edit', edit_outcome_path(@outcome) %> |
 <%= link_to 'Back', outcomes_path %>

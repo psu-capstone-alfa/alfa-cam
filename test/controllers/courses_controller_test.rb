@@ -3,6 +3,8 @@ require "minitest_helper.rb"
 describe CoursesController do
   # fixtures :all
 
+  with_admin_session
+
   it "should index available courses" do
     get :index
     must_respond_with :success

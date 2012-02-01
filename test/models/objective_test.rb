@@ -7,7 +7,7 @@ describe Objective do
     @objective = Objective.new
   end
 
-  it "must be valid" do
+  it "must require a description" do
     @objective.wont_be :valid?
     @objective.description = "Development of mathematical techniques to solve engineering problems"
     @objective.must_be :valid?

@@ -1,9 +1,8 @@
 require "minitest_helper"
 
 describe AcademicTermsController do
+  with_admin_session
 
-  # fixtures :all
-  
   it "must get index" do
     get :index
     must_respond_with :success

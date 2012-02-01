@@ -12,8 +12,8 @@
   <tr>
     <td><%= academic_term.title %></td>
     <td><%= link_to 'Show', academic_term %></td>
-    <td><%= link_to 'Edit', edit_academic_term_path(academic_term) %></td>
-    <td><%= link_to 'Destroy', academic_term, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to_if can?(:edit, academic_term), 'Edit', edit_academic_term_path(academic_term) %></td>
+    <td><%= link_to_if can?(:destroy, academic_term), 'Destroy', academic_term, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
