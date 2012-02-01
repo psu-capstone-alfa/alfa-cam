@@ -23,11 +23,4 @@ class Ability
     end
   end
 
-  def self.ignore_auth
-    Ability.new(nil).ignore_authorizations
-  end
-
-  def ignore_authorizations
-    can :manage, :all
-  end
 end
