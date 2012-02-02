@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120128135057) do
+ActiveRecord::Schema.define(:version => 20120202165020) do
 
   create_table "academic_terms", :force => true do |t|
     t.string   "title"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20120128135057) do
 
   create_table "offerings", :force => true do |t|
     t.integer  "course_id"
-    t.integer  "term_id"
+    t.integer  "academic_term_id"
     t.string   "section"
     t.string   "crn"
     t.string   "location"
