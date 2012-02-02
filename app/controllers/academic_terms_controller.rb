@@ -49,11 +49,21 @@ class AcademicTermsController < ApplicationController
 
     respond_to do |format|
       if @academic_term.save
-        format.html { redirect_to @academic_term, notice: 'Academic term was successfully created.' }
-        format.json { render json: @academic_term, status: :created, location: @academic_term }
+        format.html {
+          redirect_to @academic_term,
+          notice: 'Academic term was successfully created.'
+        }
+        format.json {
+          render json: @academic_term,
+          status: :created,
+          location: @academic_term
+        }
       else
         format.html { render action: "new" }
-        format.json { render json: @academic_term.errors, status: :unprocessable_entity }
+        format.json {
+          render json: @academic_term.errors,
+          status: :unprocessable_entity
+        }
       end
     end
   end
@@ -66,11 +76,17 @@ class AcademicTermsController < ApplicationController
 
     respond_to do |format|
       if @academic_term.update_attributes(params[:academic_term])
-        format.html { redirect_to @academic_term, notice: 'Academic term was successfully updated.' }
+        format.html {
+          redirect_to @academic_term,
+          notice: 'Academic term was successfully updated.'
+        }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
-        format.json { render json: @academic_term.errors, status: :unprocessable_entity }
+        format.json {
+          render json: @academic_term.errors,
+          status: :unprocessable_entity
+        }
       end
     end
   end
