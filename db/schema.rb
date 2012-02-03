@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(:version => 20120202165020) do
     t.datetime "updated_at"
   end
 
+  create_table "teachings", :force => true do |t|
+    t.integer  "offering_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "login"
     t.string   "name"

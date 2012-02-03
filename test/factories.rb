@@ -21,3 +21,9 @@ Factory.define :admin, class: :user do |f|
   f.roles [:admin]
 end
 
+Factory.define :instructor, class: :user do |f|
+  f.login 'inst%d'
+  f.name 'Instructor'
+  f.roles [:instructor]
+end
+
