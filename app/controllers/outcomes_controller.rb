@@ -1,48 +1,32 @@
+# Outdated scaffold for outcomes
+# TODO: Replace with outcome sets completely maybe?
+#
 class OutcomesController < ApplicationController
-  # GET /outcomes
-  # GET /outcomes.json
+  respond_to :html, :json
+
   def index
     @outcomes = Outcome.all
-    authorize! :read, @outcome
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @outcomes }
-    end
+    authorize! :read, @outcomes
+    respond_with @outcomes
   end
 
-  # GET /outcomes/1
-  # GET /outcomes/1.json
   def show
     @outcome = Outcome.find(params[:id])
     authorize! :read, @outcome
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @outcome }
-    end
+    respond_with @outcome
   end
 
-  # GET /outcomes/new
-  # GET /outcomes/new.json
   def new
     @outcome = Outcome.new
     authorize! :read, @outcome
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @outcome }
-    end
+    respond_with @outcome
   end
 
-  # GET /outcomes/1/edit
   def edit
     @outcome = Outcome.find(params[:id])
     authorize! :edit, @outcome
   end
 
-  # POST /outcomes
-  # POST /outcomes.json
   def create
     @outcome = Outcome.new(params[:outcome])
     authorize! :create, @outcome
@@ -61,8 +45,6 @@ class OutcomesController < ApplicationController
     end
   end
 
-  # PUT /outcomes/1
-  # PUT /outcomes/1.json
   def update
     @outcome = Outcome.find(params[:id])
     authorize! :update, @outcome
@@ -80,8 +62,6 @@ class OutcomesController < ApplicationController
     end
   end
 
-  # DELETE /outcomes/1
-  # DELETE /outcomes/1.json
   def destroy
     @outcome = Outcome.find(params[:id])
     authorize! :destroy, @outcome

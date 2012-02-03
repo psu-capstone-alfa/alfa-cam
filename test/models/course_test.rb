@@ -1,6 +1,5 @@
 require "minitest_helper"
 
-#class CourseTest < MiniTest::Rails::Model
 describe Course do
   before do
     @course = Course.new

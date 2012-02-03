@@ -1,3 +1,5 @@
+# Rails form builder that outputs Bootstrap 1.X style fsorm
+#
 class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   helpers = field_helpers +
               %w{date_select datetime_select time_select} +
@@ -6,17 +8,26 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
   helpers.each do |name|
     define_method(name) do |field, *args|
-      options_index = ActionView::Helpers::FormBuilder.instance_method(name.to_sym).parameters.index([:opt,:options])
+      options_index = ActionView::Helpers::FormBuilder.
+        instance_method(name.to_sym).
+        parameters.index([:opt,:options])
+
       if options_index.nil?
         options = args.pop if args.last.is_a?(Hash)
       else
         options = args[options_index - 1]
       end
+
       options ||= {}
       label = label(field, options[:label], :class => options[:label_class])
+
       @template.content_tag(:div, :class => 'clearfix') do
         @template.concat(label)
-        @template.concat(@template.content_tag(:div, :class => 'input') { @template.concat(super(field, *args)) })
+        @template.concat(
+          @template.content_tag(:div, :class => 'input') {
+            @template.concat(super(field, *args))
+          }
+        )
       end
     end
   end
@@ -31,7 +42,9 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
     elsif args.length == 0
       value, options = nil, {class: 'btn primary'}
     else
-      raise ArgumentError, "submit called with something other than options hash or value, options hash: #{args.inspect}"
+      raise ArgumentError,
+        "submit called with something other than options hash or value," <<
+        " options hash: #{args.inspect}"
     end
     @template.submit_tag(value, options)
   end

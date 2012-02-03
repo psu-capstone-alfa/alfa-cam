@@ -1,48 +1,31 @@
+# Provides viewing and management of terms to users
+#
 class AcademicTermsController < ApplicationController
-  # GET /academic_terms
-  # GET /academic_terms.json
+  respond_to :html, :json
+
   def index
     @academic_terms = AcademicTerm.all
     authorize! :index, AcademicTerm
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @academic_terms }
-    end
+    respond_with @academic_terms
   end
 
-  # GET /academic_terms/1
-  # GET /academic_terms/1.json
   def show
     @academic_term = AcademicTerm.find(params[:id])
     authorize! :show, @academic_term
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @academic_term }
-    end
+    respond_with @academic_term
   end
 
-  # GET /academic_terms/new
-  # GET /academic_terms/new.json
   def new
     @academic_term = AcademicTerm.new
     authorize! :new, @academic_term
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @academic_term }
-    end
+    respond_with @academic_term
   end
 
-  # GET /academic_terms/1/edit
   def edit
     @academic_term = AcademicTerm.find(params[:id])
     authorize! :edit, @academic_term
   end
 
-  # POST /academic_terms
-  # POST /academic_terms.json
   def create
     @academic_term = AcademicTerm.new(params[:academic_term])
     authorize! :create, @academic_Term
@@ -68,8 +51,6 @@ class AcademicTermsController < ApplicationController
     end
   end
 
-  # PUT /academic_terms/1
-  # PUT /academic_terms/1.json
   def update
     @academic_term = AcademicTerm.find(params[:id])
     authorize! :update, @academic_Term
@@ -91,8 +72,6 @@ class AcademicTermsController < ApplicationController
     end
   end
 
-  # DELETE /academic_terms/1
-  # DELETE /academic_terms/1.json
   def destroy
     @academic_term = AcademicTerm.find(params[:id])
     authorize! :destroy, @academic_term

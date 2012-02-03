@@ -1,3 +1,5 @@
+# Second stage of an offering. Collects syllabus details about an offering.
+#
 class Offerings::DetailsController < ApplicationController
   def edit
   end
@@ -9,8 +11,5 @@ class Offerings::DetailsController < ApplicationController
   end
 
   def destroy
-  end
-
-  def summary
   end
 end

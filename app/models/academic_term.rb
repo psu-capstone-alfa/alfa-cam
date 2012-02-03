@@ -1,3 +1,5 @@
+# Academic terms are a period of time in which courses are taught
+#
 class AcademicTerm < ActiveRecord::Base
   validates :title, :presence => true
   has_many :offerings

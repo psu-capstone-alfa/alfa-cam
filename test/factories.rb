@@ -1,4 +1,4 @@
-
+# Collects factories for creating diffrent valid mock objects for testing
 
 Factory.define :course do |f|
   f.dept_code 'CS'

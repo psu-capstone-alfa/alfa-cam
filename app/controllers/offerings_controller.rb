@@ -1,6 +1,9 @@
-#Manages Offerings which are courses taught in specific terms
+# Manages the basic listing, searching, management of offerings
+# Offerings:: sub-controllers manage most of the instructor interactions
+#
 class OfferingsController < ApplicationController
   respond_to :html, :json
+
   def index
     @offerings = Offering.all
     authorize! :read, @offering

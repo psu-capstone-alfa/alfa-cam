@@ -1,3 +1,6 @@
+# Contains user login information
+# Defines authlogic login functionality
+#
 class User < ActiveRecord::Base
   has_many :teachings
   has_many :offerings, through: :teachings
