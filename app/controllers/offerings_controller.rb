@@ -4,6 +4,8 @@
 class OfferingsController < ApplicationController
   respond_to :html, :json
 
+  before_filter { @nav_section = :offerings }
+
   def index
     @offerings = Offering.all
     authorize! :read, @offering

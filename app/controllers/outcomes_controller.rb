@@ -4,6 +4,8 @@
 class OutcomesController < ApplicationController
   respond_to :html, :json
 
+  before_filter { @nav_section = :outcomes }
+
   def index
     @outcomes = Outcome.all
     authorize! :read, @outcomes

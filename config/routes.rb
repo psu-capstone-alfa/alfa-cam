@@ -39,6 +39,8 @@ CourseAssessmentManager::Application.routes.draw do
 
   match 'profile' => 'users#show', as: 'profile'
 
+  root to: 'welcome#home'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

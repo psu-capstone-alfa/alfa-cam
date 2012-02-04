@@ -5,6 +5,7 @@ class UserSessionsController < ApplicationController
   before_filter :require_user, except: [:new, :create]
 
   def new
+    @nav_section = :login
     @user_session = UserSession.new
     @users = User.all
   end
@@ -22,6 +23,10 @@ class UserSessionsController < ApplicationController
       flash[:notice] = "Invalid login"
       render :action => :new
     end
+  end
+
+  def delete
+    @nav_section = :logout
   end
 
   def destroy

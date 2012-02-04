@@ -1,0 +1,22 @@
+<ul class="nav">
+<% nav_bar = nav_bar_spec() %>
+<% nav_bar.each do |section,nav| %>
+  <% if nav.is_a? Hash %>
+  <li class="dropdown <%= active_section? section %>" data-dropdown="dropdown">
+    <%= link_to section.to_s.humanize, nav.delete(section), class: "dropdown-toggle" %>
+    <ul class="dropdown-menu">
+    <% nav.each do |subnav,path| %>
+      <% subnav.to_s %>
+      <li><%= link_to subnav.to_s.humanize, path %></li>
+    <% end %>
+    </ul>
+  </li>
+  <% else %>
+    <li class="<%= active_section? section %>">
+      <%= link_to section.to_s.humanize, nav %>
+    </li>
+  <% end %>
+<% end %>
+</ul>
+
+<%= render partial: "layouts/secondary_nav" %>
