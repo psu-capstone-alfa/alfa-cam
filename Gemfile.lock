@@ -1,12 +1,11 @@
 GIT
   remote: http://github.com/drd/twitter-bootstrap-rails.git
-  revision: 071ef01c62073812c597caae534322a392da5d98
+  revision: 0246739f9505e9e07b2f8a33a3ae8ac09d109dd1
   specs:
-    twitter-bootstrap-rails (1.4.3)
-      actionpack
-      jquery-rails (>= 1.0)
-      less-rails (~> 2.1.0)
-      railties
+    twitter-bootstrap-rails (2.0)
+      actionpack (>= 3.1)
+      less-rails (~> 2.1.2)
+      railties (>= 3.1)
 
 GIT
   remote: https://github.com/scoz/authlogic.git
@@ -85,7 +84,7 @@ GEM
     commonjs (0.2.0)
       therubyracer (~> 0.9.9)
     erubis (2.7.0)
-    execjs (1.2.13)
+    execjs (1.3.0)
       multi_json (~> 1.0)
     hike (1.2.1)
     i18n (0.6.0)
