@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120201071710) do
+ActiveRecord::Schema.define(:version => 20120211084128) do
 
   create_table "academic_terms", :force => true do |t|
     t.string   "title"
@@ -74,6 +74,13 @@ ActiveRecord::Schema.define(:version => 20120201071710) do
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "credits"
+    t.string   "day_and_time"
+    t.text     "textbook"
+    t.text     "additional_textbooks"
+    t.string   "required_or_elective"
+    t.text     "prerequisite"
+    t.text     "prerequisites"
   end
 
   create_table "outcome_groups", :force => true do |t|

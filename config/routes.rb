@@ -14,7 +14,10 @@ CourseAssessmentManager::Application.routes.draw do
   resources :outcomes
 
   resources :offerings do
-    collection { get :search }
+    collection { 
+      get :search 
+      get :export
+    }
 
     scope :module => :offerings do # Sub controllers under Offering::
       resource :review, only: [:show, :update] do

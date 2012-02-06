@@ -1,3 +1,5 @@
+require 'csv'
+
 # Manages the basic listing, searching, management of offerings
 # Offerings:: sub-controllers manage most of the instructor interactions
 #
@@ -86,6 +88,25 @@ class OfferingsController < ApplicationController
     respond_with @offerings
   end
 
+  def export
+    @rows = [Offering.exportHeadings]
+
+    @offerings = Offering.all
+    if @offerings.empty?
+      @rows.push ["No records found"]
+    end
+    @offerings.each{ |offering|
+      @rows.push offering.exportFields
+    }
+
+    respond_to do |format|
+      format.csv {
+        render :csv => @rows,
+        :filename => "offerings-#{Time.now.strftime('%Y%m%d-%H%M%S')}",
+      }
+    end
+  end
+
   private
 
   def find_resource
@@ -98,4 +119,7 @@ class OfferingsController < ApplicationController
         Offering.new
     end
   end
+
+
+
 end

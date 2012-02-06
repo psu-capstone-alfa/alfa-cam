@@ -37,7 +37,14 @@ terms = AcademicTerm.create!( [
 ])
 
 offerings = Offering.create!( [
-  { course: courses[0], term: terms[0], instructors: [users[1]] },
-  { course: courses[1], term: terms[0], instructors: [users[1]] },
-  { course: courses[2], term: terms[1], instructors: [users[2],users[1]] },
+  { course: courses[0], term: terms[0], instructors: [users[1]], section: '001', crn: '987665', credits: '3', day_and_time: "TR 9:00am - 10:30am", textbook: "Hydrology 101", additional_textbooks: "Another textbook", required_or_elective: "required for BSCE", prerequisites: "CE 101, CE 201", location: "FAB-098" },
+  { course: courses[1], term: terms[0], instructors: [users[1]], section: '002', crn: '655432', credits: '3', day_and_time: "MW 12:00pm - 1:30pm", textbook: "Traffic flow", additional_textbooks: "Grin and bear it", required_or_elective: "required for BSENVE", prerequisites: "CE 514", location: "NEU-201" },
+  { course: courses[2], term: terms[1], instructors: [users[2],users[1]], section: '001', crn: '322134', credits: '4', day_and_time: "M 8:00am - 11a.m.", textbook: "Asphalt Substrate", additional_textbooks: "Berenstein Bears Create A Road", required_or_elective: "required for BSCE and BSENVE", location:"REC-123" }
+])
+
+objectives = Objective.create!([
+  {offering_id: offerings[0].id, description: "Course Overview"},
+  {offering_id: offerings[0].id, description: "Microbes and You"},
+  {offering_id: offerings[1].id, description: "Chemical Principles"},
+  {offering_id: offerings[1].id, description: "Cell Structure"},
 ])
