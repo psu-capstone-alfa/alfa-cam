@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
   def valid_password?(*args)
     true
   end
+
+  def to_s
+    name
+  end
 end

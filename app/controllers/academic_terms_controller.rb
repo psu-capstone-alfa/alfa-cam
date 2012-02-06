@@ -82,4 +82,18 @@ class AcademicTermsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def bulk_courses
+    @instructors = User.all  #FIXME:cd for now all users are returned
+    @courses = Course.all
+    @academic_term = AcademicTerm.find(params[:id])
+    @new_offering = Offering.new term: @academic_term
+
+    respond_to do |format|
+      format.html # bulk_courses.html.erb
+      format.json { render json: @instructors }
+      format.json { render json: @courses }
+      format.json { render json: @academic_term.offerings }
+    end
+  end
 end
