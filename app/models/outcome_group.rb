@@ -16,7 +16,7 @@ class OutcomeGroup < ActiveRecord::Base
 
   # TODO:eo can this behavior be added "for free" by
   #   hooking into :outcomes= or similar?
-  # TODO:rs are we planning on using this for something? keeping around in-case
+  # TODO:rs replace with function to deep(?) clone outcome groups
   def replace_outcomes(new_outcomes)
     # build a hash of outcome keys => outcome mappings
     existing_outcomes = outcomes.inject({}) do |h,o|

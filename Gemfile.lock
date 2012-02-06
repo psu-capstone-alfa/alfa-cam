@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/swanandp/acts_as_list
+  revision: 7fd29b74eec9327a3d2a3033e1ca249ba04fc7e5
+  specs:
+    acts_as_list (0.1.4)
+
+GIT
   remote: http://github.com/drd/twitter-bootstrap-rails.git
   revision: 0246739f9505e9e07b2f8a33a3ae8ac09d109dd1
   specs:
@@ -171,6 +177,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_list!
   authlogic!
   cancan
   cane

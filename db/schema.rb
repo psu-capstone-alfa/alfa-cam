@@ -20,6 +20,21 @@ ActiveRecord::Schema.define(:version => 20120201071710) do
     t.integer  "outcome_group_id"
   end
 
+  create_table "content", :force => true do |t|
+    t.integer  "position"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "content_group_id"
+  end
+
+  create_table "content_groups", :force => true do |t|
+    t.integer  "offering_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "course_replacements", :force => true do |t|
     t.integer  "replace_id"
     t.integer  "with_id"
@@ -31,6 +46,15 @@ ActiveRecord::Schema.define(:version => 20120201071710) do
     t.string   "dept_code"
     t.string   "course_num"
     t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mappings", :force => true do |t|
+    t.integer  "outcome_id"
+    t.integer  "mappable_id"
+    t.string   "mappable_type"
+    t.integer  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

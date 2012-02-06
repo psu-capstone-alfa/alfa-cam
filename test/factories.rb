@@ -31,6 +31,7 @@ end
 
 Factory.define :academic_term do |f|
   f.title 'Term %d'
+  f.outcome_group { Factory :outcome_group }
 end
 
 Factory.define :offering do |f|
@@ -59,10 +60,13 @@ end
 Factory.define :outcome do |f|
   f.title 'Outcome %d'
   f.key '%d'
-  f.description 'An outcome description'
+  f.description 'Outcome description %d'
 end
 
 Factory.define :outcome_group do |f|
   f.outcomes { (1..5).collect { Factory :outcome } }
 end
 
+Factory.define :content_group do |f|
+  f.offering { Factory :offering }
+end

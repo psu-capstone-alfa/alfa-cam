@@ -58,3 +58,4 @@ gem 'cancan'
 gem 'twitter-bootstrap-rails',
     :git => 'http://github.com/drd/twitter-bootstrap-rails.git'
 
+gem 'acts_as_list', :git => 'git://github.com/swanandp/acts_as_list'
