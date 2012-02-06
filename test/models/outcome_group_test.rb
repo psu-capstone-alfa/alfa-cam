@@ -2,38 +2,30 @@ require 'minitest_helper'
 
 describe OutcomeGroup do
   before do
-    @original_outcomes = 
-      Outcome.create!([
-                       {key: 'A', title: 'A', description: 'A'},
-                       {key: 'B', title: 'B', description: 'B'},
-                       {key: 'C', title: 'C', description: 'C'},
-                      ])
+    @orig_outcomes = (1..4).collect { Factory :outcome }
+    @replace_outcomes = @orig_outcomes[1,2].map(&:dup)
+    @replace_outcomes[0].title = 'New Title!'
+    @replace_outcomes[1].title = 'Newer title!'
 
-    @replacement_outcomes = 
-      Outcome.create!([
-                       {key: 'A', title: 'A1', description: 'A1'},
-                       {key: 'B', title: 'B1', description: 'B1'}
-                      ])
-    
-    @og1 = OutcomeGroup.new({title: 'og1'})
-    @og2 = OutcomeGroup.new({title: 'og2'})
-
-    @og1.outcomes << @original_outcomes
+    @og1 = Factory :outcome_group, outcomes: @orig_outcomes
+    @og2 = Factory :outcome_group, outcomes: []
   end
 
   it 'should not allow multiple outcomes with the same key' do
     @og1.must_be :valid?
-    @og1.outcomes << @replacement_outcomes
+    @og1.outcomes << @replace_outcomes
     @og1.wont_be :valid?
   end
 
   it 'should replace outcomes with the same key as existing outcomes' do
     @og2.outcomes << @og1.outcomes
-    @og2.replace_outcomes(@replacement_outcomes)
+    @og2.replace_outcomes(@replace_outcomes)
     
-    @replacement_outcomes.each do |replacement|
+    @replace_outcomes.each do |replacement|
       @og2.outcomes.must_include replacement
-      @og2.outcomes.wont_include @original_outcomes.find {|o| o.key == replacement.key }
+      @og2.outcomes.wont_include(
+        @orig_outcomes.find {|o| o.key == replacement.key }
+      )
     end
   end
 
@@ -48,7 +40,7 @@ describe OutcomeGroup do
 
     describe 'creating a new term/outcome group combo' do
       it 'should set initial_term on outcome_groups when created' do
-        @t1.outcomes.must_equal @original_outcomes
+        @t1.outcomes.must_equal @orig_outcomes
         @og1.initial_term.must_equal @t1
       end
     end
