@@ -1,0 +1,17 @@
+<ul class="nav secondary-nav">
+<% if current_user.nil? %>
+  <li class="login <%= active_section? :login %>">
+    <%= link_to "Sign In", login_path %>
+  </li>
+<% else %>
+  <li class="dropdown <%= active_section? :profile %>" data-dropdown="dropdown">
+    <a class="dropdown-toggle" href=""><%= current_user.name %></a>
+    <ul class="dropdown-menu">
+      <li><a href="/profile">Profile</a></li>
+      <li class="divider"></li>
+      <li><a href="/logout">Sign Out</a></li>
+    </ul>
+  </li>
+<% end %>
+</ul>
+

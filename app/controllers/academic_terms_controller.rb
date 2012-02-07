@@ -2,6 +2,7 @@
 #
 class AcademicTermsController < ApplicationController
   respond_to :html, :json
+  before_filter { @nav_section = :terms }
 
   def index
     @academic_terms = AcademicTerm.all
