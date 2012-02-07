@@ -3,7 +3,7 @@
 <% nav_bar.each do |section,nav| %>
   <% if nav.is_a? Hash %>
   <li class="dropdown <%= active_section? section %>" data-dropdown="dropdown">
-    <%= link_to section.to_s.humanize, nav.delete(section), class: "dropdown-toggle" %>
+    <%= link_to section.to_s.humanize, '#', class: "dropdown-toggle" %>
     <ul class="dropdown-menu">
     <% nav.each do |subnav,path| %>
       <% subnav.to_s %>

@@ -3,6 +3,14 @@ CourseAssessmentManager::Application.routes.draw do
     member { get 'bulk_courses' }
   end
 
+  scope controller: :dashboard, path: 'home', as: 'home' do
+    get '', action: :home
+    get :reviewer
+    get :instructor
+    get :staff
+    get :admin
+  end
+
   resources :outcomes
 
   resources :offerings do

@@ -38,6 +38,12 @@ Factory.define :offering do |f|
   f.course { Factory :course }
 end
 
+Factory.define :user do |f|
+  f.login 'user%d'
+  f.name 'User McUserton'
+  f.roles []
+end
+
 Factory.define :admin, class: :user do |f|
   f.login 'admin%d'
   f.name 'Admin'
