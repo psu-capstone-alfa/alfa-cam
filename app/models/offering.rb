@@ -4,6 +4,7 @@
 class Offering < ActiveRecord::Base
   belongs_to :course
   belongs_to :term, class_name: 'AcademicTerm', foreign_key: 'term_id'
+  has_many :outcomes, :through => :term
 
   has_many :teachings
   has_many :instructors, through: :teachings

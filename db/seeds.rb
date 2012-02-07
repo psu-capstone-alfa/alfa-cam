@@ -17,14 +17,6 @@ outcomes = Outcome.create!( [
   { key: 'D', title: 'Da Outcome', description: 'Duh, Outcome!' },
 ])
 
-year = Time.new.year
-terms = AcademicTerm.create!( [
-  {:title => "Fall #{year}"},
-  {:title => "Winter #{year}"},
-  {:title => "Spring #{year}"},
-  {:title => "Summer #{year}"},
-])
-
 courses = Course.create!( [
   {dept_code: 'CEE', course_num: '101', title: 'Engineering for Dummies'},
   {dept_code: 'CEE', course_num: '161', title: 'Intro to Civil Engineering'},
@@ -40,5 +32,13 @@ offerings = Offering.create!( [
 outcome_groups = OutcomeGroup.create!( [
   { title: '1', outcomes: outcomes[0..2] },
   { title: '2', outcomes: outcomes },
+])
+
+year = Time.new.year
+terms = AcademicTerm.create!( [
+  {title: "Fall #{year}", outcome_group: outcome_groups.first},
+  {title: "Winter #{year}", outcome_group: outcome_groups.first},
+  {title: "Spring #{year}", outcome_group: outcome_groups.second},
+  {title: "Summer #{year}", outcome_group: outcome_groups.second},
 ])
 
