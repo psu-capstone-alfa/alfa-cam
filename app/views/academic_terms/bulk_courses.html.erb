@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="span12">
+    <h1>Course Assignment</h1>
+  </div>
+  <div class="span4" style="text-align: right;">
+    <h1>Fall 2011</h1>
+  </div>
+</div>
+
+<div class="row">
+  <%= form_for @new_offering do |f| %>
+    <%= f.hidden_field :term_id %>
+    <div class="span6">
+      <% @instructors.each do |instructor| %>
+        <label class="checkbox">
+          <%= f.check_box :instructor_ids, 
+                { name: "offering[instructor_ids][]", 
+                  id: "offering_instructor_ids_#{instructor.id}"}, 
+                instructor.id, '' %>
+          <%= instructor %>
+        </label>
+      <% end %>
+    </div>
+
+    <div class="span6">
+      <% @courses.each do |course| %>
+        <label class="checkbox">
+          <%= f.radio_button :course_id, course.id %>
+          <%= course %>
+        </label>
+      <% end %>
+    </div>
+    <%= f.submit "Submit" %>
+  <% end %>
+</div> 
+
+<table>
+  <thead>
+    <tr>
+      <th>Instructor</th>
+      <th>Course</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @academic_term.offerings.each do |offering| %>
+      <tr>
+        <td><%= offering.instructors.join(', ') %></td>
+        <td><%= offering.course %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
