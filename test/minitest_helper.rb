@@ -30,10 +30,10 @@ module AuthlogicTestHelpers
     end
   end
 
-  def with_user_session(user)
+  def with_user(user)
     before do
       activate_authlogic
-      UserSessionl.create!(Factory user)
+      UserSession.create!(user)
     end
   end
 end

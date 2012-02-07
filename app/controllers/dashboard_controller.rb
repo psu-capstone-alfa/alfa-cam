@@ -1,5 +1,5 @@
 # Manages viewing dashboard of instructor and staff
-
+#
 class DashboardController < ApplicationController
   respond_to :html, :json
   def home
@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
     elsif @user.is? :admin
       redirect_to home_admin_path
     elsif @user.is? :reviewer
-      redirect_to home_reviewer_path  
+      redirect_to home_reviewer_path
     end
   end
 
@@ -24,10 +24,10 @@ class DashboardController < ApplicationController
     @staff = current_user
     @offerings = Offering.all
   end
-  
-  def admin 
+
+  def admin
   end
-  
+
   def reviewer
   end
 

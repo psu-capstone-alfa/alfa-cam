@@ -28,11 +28,18 @@ module ApplicationHelper
       return { home: root_path }
     end
 
-    home = { home: root_path }
+    home = { }
     [:instructor, :staff, :reviewer].each do |role|
-      home[role] = root_path if current_user.is? role
+      home[role] = send("home_#{role.to_s}_path") if current_user.is? role
     end
-    home = home.values[1] if home.length == 2
+    home = case home.length
+      when 1
+        home.values[0]
+      when 0
+        root_path
+      else
+        home
+    end
 
     {
       home: home,
