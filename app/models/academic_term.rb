@@ -4,6 +4,11 @@ class AcademicTerm < ActiveRecord::Base
   validates :title, :presence => true
   has_many :offerings, foreign_key: :term_id
 
+  belongs_to :outcome_group, inverse_of: :terms
+  has_many :outcomes, through: :outcome_group
+
+  validates :title, :presence => true
+
   before_destroy :check_for_offerings
   def check_for_offerings()
     unless offering_ids.empty?

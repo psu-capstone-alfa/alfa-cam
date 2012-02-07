@@ -1,10 +1,5 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
 users = User.create!( [
@@ -19,6 +14,7 @@ outcomes = Outcome.create!( [
   { key: 'A', title: "Outcome A", description: "I'm outcome A!!!" },
   { key: 'B', title: 'Outcome B', description: "I'm a B outcome..." },
   { key: 'C', title: 'C outcome with a longer title', description: "I have a long title to see how that works" },
+  { key: 'D', title: 'Da Outcome', description: 'Duh, Outcome!' },
 ])
 
 year = Time.new.year
@@ -39,5 +35,10 @@ offerings = Offering.create!( [
   { course: courses[0], term: terms[0], instructors: [users[1]] },
   { course: courses[1], term: terms[0], instructors: [users[1]] },
   { course: courses[2], term: terms[1], instructors: [users[2],users[1]] },
+])
+
+outcome_groups = OutcomeGroup.create!( [
+  { title: '1', outcomes: outcomes[0..2] },
+  { title: '2', outcomes: outcomes },
 ])
 
