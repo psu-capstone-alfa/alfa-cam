@@ -23,6 +23,21 @@ end
 
 =end
 
+# Whoo, monkey patchin' !
+class Integer
+  def repetitions(item=nil, &block)
+    range = (1..self).to_a
+    if block_given?
+      warn "warning: ignoring item argument" unless item.nil?
+      range.map! &block
+    else
+      range.map! { item }
+    end
+  end
+end
+
+
+
 Factory.define :course do |f|
   f.dept_code 'CS'
   f.course_num '%d'
@@ -64,7 +79,7 @@ Factory.define :outcome do |f|
 end
 
 Factory.define :outcome_group do |f|
-  f.outcomes { (1..5).collect { Factory :outcome } }
+  f.outcomes { 3.repetitions { Factory :outcome } }
 end
 
 Factory.define :content_group do |f|
