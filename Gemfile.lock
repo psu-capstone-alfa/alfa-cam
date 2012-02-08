@@ -33,14 +33,6 @@ GIT
       minitest (~> 2.10)
       railties (~> 3.1)
 
-GIT
-  remote: https://github.com/scoz/turn.git
-  revision: 8f628ed14e72c4186d51766a008dff5771c3d01f
-  branch: ignore-empty-cases
-  specs:
-    turn (0.8.3.2)
-      ansi
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -73,7 +65,6 @@ GEM
       activesupport (= 3.1.0)
     activesupport (3.1.0)
       multi_json (~> 1.0)
-    ansi (1.4.1)
     arel (2.2.1)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
@@ -190,6 +181,5 @@ DEPENDENCIES
   sass-rails (~> 3.1.0)
   simplecov
   sqlite3
-  turn!
   twitter-bootstrap-rails!
   uglifier

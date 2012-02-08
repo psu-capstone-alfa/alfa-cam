@@ -1,16 +1,6 @@
 require 'minitest/spec'
 require 'minitest/autorun'
 
-# Don't fail if `turn` is not available
-begin
-  require 'turn'
-  Turn.config do |config|
-    config.natural = true
-  end
-rescue LoadError
-end
-
-
 describe 'Code QA' do
   it "must pass code quality standards" do
     app = %q{"app/**/*.rb"}
