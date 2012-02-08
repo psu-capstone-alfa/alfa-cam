@@ -1,21 +1,64 @@
-<%= no_bs_form_for(@academic_term) do |f| %>
-  <% if @academic_term.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@academic_term.errors.count, "error") %> prohibited this academic_term from being saved:</h2>
+<div class="row">
+  <div class="span8 offset2">
+      <div class="form-horizontal">
+      <!--FIXME:dkf there is two error when no title is filled out-->
+        <%= no_bs_form_for(@academic_term) do |f| %>
+          <% if @academic_term.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@academic_term.errors.count, "error") %>
+                prohibited this academic_term from being saved:</h2>
+              
+                <ul>
+                  <% @academic_term.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+            </div>
+          <% end %>
 
-      <ul>
-      <% @academic_term.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <div class="control-group">
+            <label class="control-label" for="outcome_group_id">
+              Outcome Set</label>
+                <div class="input">
+                  <div class="controls">
+                    <select id="select01">
+                      <!--%= f.text_field :outcome_group_id %></option-->
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                  </div>
+                </div>
+          </div>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+          <div class="control-group">
+          <label class="control-label" for="title">Title</label>
+            <div class="controls">
+              <%= f.text_field :title %>
+            </div>
+          </div>
+
+          <div class="control-group">
+          <label class="control-label" for="start_date">Start Date</label>
+            <div class= "controls">
+              <input type="text" id="start_date" class="input-xlarge">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="end_date">End Date</label>
+              <div class="controls">
+                <input id="end_date" type="text" class="input-xlarge">
+              </div>
+          </div>
+
+          <div class="actions">
+            <%= f.submit %>
+          </div>
+
+        <% end %>
+      </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

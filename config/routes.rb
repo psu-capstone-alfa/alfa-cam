@@ -1,6 +1,8 @@
 CourseAssessmentManager::Application.routes.draw do
   resources :academic_terms do
     member { get 'bulk_courses' }
+
+    resources :courses, shallow: true
   end
 
   scope controller: :dashboard, path: 'home', as: 'home' do
@@ -39,8 +41,6 @@ CourseAssessmentManager::Application.routes.draw do
       end
     end
   end
-
-  resources :courses
 
   resource :user_session,
     path: 'session',
