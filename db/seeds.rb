@@ -23,12 +23,6 @@ courses = Course.create!( [
   {dept_code: 'CEE', course_num: '201', title: 'Cull the Flock'}
 ])
 
-offerings = Offering.create!( [
-  { course: courses[0], term: terms[0], instructors: [users[1]] },
-  { course: courses[1], term: terms[0], instructors: [users[1]] },
-  { course: courses[2], term: terms[1], instructors: [users[2],users[1]] },
-])
-
 outcome_groups = OutcomeGroup.create!( [
   { title: '1', outcomes: outcomes[0..2] },
   { title: '2', outcomes: outcomes },
@@ -42,3 +36,8 @@ terms = AcademicTerm.create!( [
   {title: "Summer #{year}", outcome_group: outcome_groups.second},
 ])
 
+offerings = Offering.create!( [
+  { course: courses[0], term: terms[0], instructors: [users[1]] },
+  { course: courses[1], term: terms[0], instructors: [users[1]] },
+  { course: courses[2], term: terms[1], instructors: [users[2],users[1]] },
+])
