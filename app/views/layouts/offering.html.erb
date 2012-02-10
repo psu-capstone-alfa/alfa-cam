@@ -1,0 +1,39 @@
+<% content_for :content do %>
+  <div class="row">
+    <div class="span9">
+      <h1><%= link_to @offering.course.title, offering_path(@offering) %></h1>
+    </div>
+    <div class="span3" style="text-align: right;">
+      <h1><%= @offering.term %></h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <ul class="nav nav-pills">
+        <li class="<%= active_if(@nav_offering, :review) %>">
+          <%= link_to 'Review', offering_review_path(@offering) %>
+        </li>
+        <li class="<%= active_if(@nav_offering, :details) %>">
+          <%= link_to 'Details', offering_details_path(@offering) %>
+        </li>
+        <li class="<%= active_if(@nav_offering, :objectives) %>">
+          <%= link_to 'Objectives', offering_objectives_path(@offering) %>
+        </li>
+        <li class="<%= active_if(@nav_offering, :content) %>">
+          <%= link_to 'Content', offering_contents_path(@offering) %>
+        </li>
+        <li class="<%= active_if(@nav_offering, :assessment) %>">
+          <%= link_to 'Assessment', offering_assessment_path(@offering) %>
+        </li>
+        <li style="float: right;" class="<%= active_if(@nav_offering, :overview) %>">        
+          <%= link_to 'Overview', offering_path(@offering) %>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <%= content_for?(:offering_content) ? yield(:offering_content) : yield %>
+<% end %>
+
+<%= render template: 'layouts/application' %>

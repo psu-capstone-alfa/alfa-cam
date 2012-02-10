@@ -9,11 +9,18 @@
     <%= yield :head %>
   </head>
   <body>
-    <div class="topbar">
-      <div class="fill">
+    <div class="navbar">
+      <div class="navbar-inner">
         <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
           <a class="brand" href="/">Course Assessments</a>
-          <%= render partial: "layouts/nav_bar" %>
+          <div class="nav-collapse">
+            <%= render partial: "layouts/nav_bar" %>
+          </div>
         </div>
       </div>
     </div>
@@ -21,7 +28,7 @@
     <div class="container">
       <div class="row">&nbsp;</div>
 
-      <%= yield %>
+      <%= content_for?(:content) ? yield(:content) : yield %>
 
       <footer>
         <p>&copy; Team-Alfa 2011</p>

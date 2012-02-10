@@ -2,7 +2,11 @@
 # Contents are collected in groups(Lectures, Assignemnts, ..)
 # and mapped in a numeric(0-10) fashion against outcomes
 #
-class Offerings::ContentsController < ApplicationController
+class Offerings::ContentsController < OfferingsController
+  layout 'offering'
+
+  before_filter { @nav_offering = :content }
+
   def summary
   end
 

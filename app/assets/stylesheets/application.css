@@ -4,9 +4,7 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  *= require twitter/bootstrap
+ *= require twitter/bootstrap_responsive
+ *= require twitter/bootstrap
  *= require_tree . 
 */
-
-body {
-    padding-top: 60px !important;
-}

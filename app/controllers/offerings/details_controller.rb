@@ -1,6 +1,10 @@
 # Second stage of an offering. Collects syllabus details about an offering.
 #
-class Offerings::DetailsController < ApplicationController
+class Offerings::DetailsController < OfferingsController
+  layout 'offering'
+
+  before_filter { @nav_offering = :details }
+
   def edit
   end
 

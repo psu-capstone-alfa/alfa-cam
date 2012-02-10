@@ -1,7 +1,11 @@
 # Collecting course objectives in the third stage.
 # Objectives are mapped in a binary fashion against outcomes
 #
-class Offerings::ObjectivesController < ApplicationController
+class Offerings::ObjectivesController < OfferingsController
+  layout 'offering'
+
+  before_filter { @nav_offering = :objectives }
+
   def summary
   end
 

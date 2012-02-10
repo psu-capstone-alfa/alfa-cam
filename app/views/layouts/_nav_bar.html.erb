@@ -2,8 +2,12 @@
 <% nav_bar = nav_bar_spec() %>
 <% nav_bar.each do |section,nav| %>
   <% if nav.is_a? Hash %>
-  <li class="dropdown <%= active_section? section %>" data-dropdown="dropdown">
-    <%= link_to section.to_s.humanize, '#', class: "dropdown-toggle" %>
+  <li class="dropdown <%= active_section? section %>">
+    <%= link_to section.to_s.humanize,
+      '#',
+      class: 'dropdown-toggle',
+      'data-toggle' => 'dropdown'
+      %>
     <ul class="dropdown-menu">
     <% nav.each do |subnav,path| %>
       <% subnav.to_s %>

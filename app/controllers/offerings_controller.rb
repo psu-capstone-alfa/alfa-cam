@@ -4,28 +4,31 @@
 class OfferingsController < ApplicationController
   respond_to :html, :json
 
+  layout 'offering', except: [:index, :new]
+  #layout 'application', except: [:show, :edit]
+
   before_filter { @nav_section = :offerings }
+  before_filter :find_resource, except: [:index, :create]
 
   def index
     @offerings = Offering.all
-    authorize! :read, @offering
-    respond_with @offerings
+    authorize! :index, Offering
+    respond_with @offerings, layout: 'application'
   end
 
   def show
-    @offering = Offering.find(params[:id])
+    @nav_offering = :overview
     authorize! :read, @offering
     respond_with @offering
   end
 
   def new
-    @offering = Offering.new
     authorize! :read, @offering
     respond_with @offering
   end
 
   def edit
-    @offering = Offering.find(params[:id])
+    @nav_offering = :overview
     authorize! :edit, @offering
   end
 
@@ -51,7 +54,6 @@ class OfferingsController < ApplicationController
   end
 
   def update
-    @offering = Offering.find(params[:id])
     authorize! :update, @offering
 
     respond_to do |format|
@@ -70,7 +72,6 @@ class OfferingsController < ApplicationController
   end
 
   def destroy
-    @offering = Offering.find(params[:id])
     authorize! :destroy, @offering
     @offering.destroy
 
@@ -83,5 +84,18 @@ class OfferingsController < ApplicationController
   def search
     @offerings = Offering.all
     respond_with @offerings
+  end
+
+  private
+
+  def find_resource
+    @offering = case
+      when params.has_key?(:offering_id)
+        Offering.find params[:offering_id]
+      when params.has_key?(:id)
+        Offering.find params[:id]
+      else
+        Offering.new
+    end
   end
 end
