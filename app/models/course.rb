@@ -27,6 +27,10 @@ class Course < ActiveRecord::Base
     "#{dept_code}#{course_num}: #{title}"
   end
 
+  def short
+    "#{course_num}"
+  end
+
   def course_field
     to_s
   end

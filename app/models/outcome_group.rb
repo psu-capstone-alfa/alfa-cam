@@ -46,4 +46,8 @@ class OutcomeGroup < ActiveRecord::Base
       errors.add(:base, "#{count} outcomes have key '#{key}'") if count > 1
     end
   end
+
+  def to_s
+    title
+  end
 end

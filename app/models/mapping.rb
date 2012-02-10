@@ -8,4 +8,8 @@ class Mapping < ActiveRecord::Base
   # TODO:rs I'm not sure value restrictions should be hard-coded,
   #   I would prefer some sort of soft-fail
   validates :value, presence: true, inclusion: { in: 0..10 }
+
+  def to_s
+    "#{mappable} maps to #{outcome} with #{value}"
+  end
 end

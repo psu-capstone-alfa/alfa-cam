@@ -28,4 +28,8 @@ class ContentGroup < ActiveRecord::Base
   def name
     self['name'] || 'New Content Group'
   end
+
+  def to_s
+    title
+  end
 end

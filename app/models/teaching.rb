@@ -5,4 +5,8 @@
 class Teaching < ActiveRecord::Base
   belongs_to :instructor, class_name: 'User', foreign_key: 'user_id'
   belongs_to :offering
+
+  def to_s
+    "#{instructor}: #{offering}"
+  end
 end
