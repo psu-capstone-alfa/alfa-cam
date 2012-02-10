@@ -1,57 +1,57 @@
-# Rails form builder that outputs Bootstrap 1.X style fsorm
-#
 class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   helpers = field_helpers +
               %w{date_select datetime_select time_select} +
               %w{collection_select select country_select time_zone_select} -
               %w{hidden_field label fields_for}
 
+  def _options_index(field)
+    ActionView::Helpers::FormBuilder.
+      instance_method(field).
+      parameters.
+      index([:opt,:options])
+  end
+
+  def _options(field, *args)
+    idx = _options_index(field.to_sym)
+    if idx.nil?
+      args.last.is_a?(Hash) ? args.pop : {}
+    else
+      args[idx - 1]
+    end
+  end
+
   helpers.each do |name|
     define_method(name) do |field, *args|
-      options_index = ActionView::Helpers::FormBuilder.
-        instance_method(name.to_sym).
-        parameters.index([:opt,:options])
-
-      if options_index.nil?
-        options = args.pop if args.last.is_a?(Hash)
+      options = _options(name, *args)
+      if options[:label].nil?
+        super(field, *args)
       else
-        options = args[options_index - 1]
-      end
-
-      options ||= {}
-      label = label(field, options[:label], :class => options[:label_class])
-
-      @template.content_tag(:div, :class => 'clearfix') do
-        @template.concat(label)
-        @template.concat(
-          @template.content_tag(:div, :class => 'input') {
-            @template.concat(super(field, *args))
-          }
-        )
+        label = label(field, options[:label] || field.to_s.titleize, :class => (options[:label_class] || 'control-label'))
+        @template.content_tag(:div, :class => 'control-group') do
+          @template.concat(label)
+          @template.concat(@template.content_tag(:div, :class => 'controls') { @template.concat(super(field, *args)) })
+        end
       end
     end
   end
 
-  define_method('submit') do |*args|
-    if args.first && args.first.is_a?(Hash)
-      value, options = nil, args.first
-      options[:class] ||= 'btn primary'
-    elsif args.second.is_a?(Hash)
-      value, options = args.first, args.second
-      options[:class] ||= 'btn'
-    elsif args.length == 0
-      value, options = nil, {class: 'btn primary'}
-    else
-      raise ArgumentError,
-        "submit called with something other than options hash or value," <<
-        " options hash: #{args.inspect}"
+  define_method('check_box') do |field, *args|
+    options = _options('check_box', *args)
+    label_class = options[:label_class] || 'control-label'
+    outer_label = label(field, options[:short_label] || field.to_s.titleize, :class => label_class)
+    @template.content_tag(:div, :class => 'control-group clearfix') do
+      @template.concat(outer_label)
+      @template.concat(@template.content_tag(:div, :class => 'controls') do
+                         label(field, :class => 'checkbox') do
+                           super(field, *args) + options[:label]
+                         end
+                       end)
     end
-    @template.submit_tag(value, options)
   end
 
-  define_method('cancel') do
-    @template.button_tag('Cancel', {type: 'reset', class: 'btn'})
+  def no_bs_fields_for(record_name, record_object = nil, options = {}, &block)
+    options[:builder] = ActionView::Helpers::FormBuilder
+    fields_for(record_name, record_object, options, &block)
   end
+
 end
-
-ActionView::Base.default_form_builder = BootstrapFormBuilder
