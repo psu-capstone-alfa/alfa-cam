@@ -16,4 +16,8 @@ class AcademicTerm < ActiveRecord::Base
       false
     end
   end
+
+  def to_s
+    title
+  end
 end
