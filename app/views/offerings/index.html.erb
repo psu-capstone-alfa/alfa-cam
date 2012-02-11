@@ -20,7 +20,7 @@
     <td><%= offering.crn %></td>
     <td><%= offering.location %></td>
     <td><%= link_to 'Show', offering %></td>
-    <td><%= link_to_if can?(:edit, offering), 'Edit', edit_offering_path(offering) %></td>
+    <td><%= link_to_if can?(:edit, offering), 'Edit', edit_offering_details_path(offering) %></td>
     <td><%= link_to_if can?(:destroy, offering), 'Destroy', offering, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>

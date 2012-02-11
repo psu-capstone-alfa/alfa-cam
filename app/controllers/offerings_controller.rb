@@ -32,6 +32,7 @@ class OfferingsController < ApplicationController
   def edit
     @nav_offering = :overview
     authorize! :edit, @offering
+    respond_with @offering
   end
 
   def create
