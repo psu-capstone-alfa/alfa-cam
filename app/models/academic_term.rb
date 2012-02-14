@@ -2,6 +2,7 @@
 #
 class AcademicTerm < ActiveRecord::Base
   validates :title, :presence => true
+
   has_many :offerings, foreign_key: :term_id
 
   belongs_to :outcome_group, inverse_of: :terms
