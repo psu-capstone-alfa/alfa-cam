@@ -6,4 +6,18 @@ table.content-and-mappings {
     td.outcome input { width: 1.5em; }
 
     tbody input { margin: .5em; }
+
+    button#add-content { margin: .5em; }
+
+    .delete-content { margin-right: .5em; }
+
+    tr.destroyed {
+        td, th {
+           opacity: 0.5;
+        }
+    }
+
+    tr#content-footer td {
+        border-top: 1px solid #eee;
+    }
 }

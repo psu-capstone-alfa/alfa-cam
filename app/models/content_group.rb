@@ -23,7 +23,7 @@ class ContentGroup < ActiveRecord::Base
                              m['value'].blank?
                            end)
   end
-  accepts_nested_attributes_for :content, reject_if: REJECT
+  accepts_nested_attributes_for :content, reject_if: REJECT, allow_destroy: true
 
   def name
     self['name'] || 'New Content Group'

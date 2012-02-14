@@ -18,7 +18,7 @@
     <ul class="nav nav-pills">
       <% content_group_scopes(@offering.content_groups) do |group, id, name, css_class| %>
         <li class="<%= css_class %>">
-          <%= link_to name, "##{id}" %>
+          <%= link_to name, "##{id}", 'data-toggle' => "pill" %>
         </li>
       <% end %>
     </ul>
@@ -27,8 +27,6 @@
       <% content_group_scopes(@offering.content_groups) do |group, id, name, css_class| %>
         <%= f.fields_for :content_groups, group do |cgf| %>
           <div id="<%= id %>" class="tab-pane <%= css_class %>">
-            <%= cgf.text_field :name, placeholder: 'Content group name', label: nil %>
-
             <table class="table-bordered table-striped content-and-mappings">
               <thead>
                 <tr>
@@ -39,17 +37,32 @@
                 </tr>
               </thead>
               <tbody>
-                <%= cgf.no_bs_fields_for :content do |cf| %>
-                <tr>
-                  <th><%= cf.text_field :title, placeholder: 'Content name' %></th>
-                  <%= cf.fields_for :mappings do |mf| %>
-                  <td class="outcome">
-                    <%= mf.text_field :value, :class => 'number_field' %>
-                    <%= mf.hidden_field :outcome_id %>
-                  </td>
-                  <% end %>
-                </tr>
+                <% content_scopes(cgf.object.content) do |content, css_class| %>
+                  <tr class="<%= css_class %>">
+                    <%= cgf.no_bs_fields_for :content, content do |cf| %>
+                      <th>
+                        <%= cf.text_field :title, placeholder: 'Content name' %>
+                        <%= cf.hidden_field :_destroy, value: 1, disabled: true %>
+                        <button class="btn btn-danger delete-content">
+                          <i class="icon-white icon-remove">&nbsp;</i><span>Delete</span>
+                        </button>
+                      </th>
+                      <% mapping_scopes(cf.object.mappings) do |mapping| %>
+                        <td class="outcome">
+                          <%= cf.fields_for :mappings, mapping do |mf| %>
+                            <%= mf.text_field :value, :class => 'number_field' %>
+                            <%= mf.hidden_field :outcome_id %>
+                          <% end %>
+                        </td>
+                      <% end %>
+                    <% end %>
+                  </tr>
                 <% end %>
+                <tr id="content-footer">
+                  <td colspan="4">
+                    <button id="add-content" class="btn btn-success"><i class="icon-white icon-plus"></i> Add Content</button>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>

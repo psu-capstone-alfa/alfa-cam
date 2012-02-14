@@ -12,4 +12,17 @@ module Offerings::ContentHelper
       yield *content_group_scope(group), css_class
     end
   end
+
+  def content_scopes(contents, &blk)
+    contents.each_with_index do |content, i|
+      css_class = content.new_record? ? 'cloneable' : ''
+      yield content, css_class, i
+    end
+  end
+
+  def mapping_scopes(mappings, &blk)
+    mappings.each_with_index do |mapping, i|
+      yield mapping, i
+    end
+  end
 end
