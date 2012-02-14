@@ -12,6 +12,6 @@ class Offering < ActiveRecord::Base
   validates :course_id, :term_id, :presence => true
 
   def to_s
-    "#{term.short}-#{course.short}" 
+    "#{term.short}-#{course.short}"
   end
 end
