@@ -3,4 +3,8 @@
 class Objective < ActiveRecord::Base
   validates :description, :presence => true
   belongs_to :offering
+
+  def to_s
+    description
+  end
 end

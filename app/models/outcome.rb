@@ -9,4 +9,8 @@ class Outcome < ActiveRecord::Base
 #    with: /[A-Z]/,
 #    message: 'only singular capital letters allowed'
 #  }
+
+  def to_s
+    "#{key}:#{title}"
+  end
 end

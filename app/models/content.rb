@@ -14,4 +14,8 @@ class Content < ActiveRecord::Base
 
   validates :title, :presence => true
   validates_associated :mappings
+
+  def to_s
+    title
+  end
 end

@@ -17,6 +17,12 @@ class AcademicTerm < ActiveRecord::Base
     end
   end
 
+  # TODO:cd this should preferably output something like
+  # "Fa2012" or "Wi2012"
+  def short
+    to_s
+  end
+
   def to_s
     title
   end

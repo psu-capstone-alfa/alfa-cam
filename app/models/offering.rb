@@ -10,4 +10,8 @@ class Offering < ActiveRecord::Base
   has_many :instructors, through: :teachings
 
   validates :course_id, :term_id, :presence => true
+
+  def to_s
+    "#{term.short}-#{course.short}"
+  end
 end
