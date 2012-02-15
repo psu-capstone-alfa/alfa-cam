@@ -10,7 +10,7 @@ $.fn.toggleDisabled = ->
   this.attr('disabled', !currentState)
 
 $ ->
-  original = $('.content-and-mappings .cloneable') . hide() . first()
+  original = $('.content-and-mappings .cloneable') . first()
   $('#add-content') . click (e) ->
     # if this can be done w/o changing to markup,
     # then original.clone(true) could bring along the

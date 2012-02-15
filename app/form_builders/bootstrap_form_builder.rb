@@ -26,10 +26,16 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
       if options[:label].nil?
         super(field, *args)
       else
-        label = label(field, options[:label] || field.to_s.titleize, :class => (options[:label_class] || 'control-label'))
+        label = label(field,
+                      options[:label] || field.to_s.titleize,
+                      :class => (options[:label_class] || 'control-label'))
         @template.content_tag(:div, :class => 'control-group') do
           @template.concat(label)
-          @template.concat(@template.content_tag(:div, :class => 'controls') { @template.concat(super(field, *args)) })
+          @template.concat(
+            @template.content_tag(:div, :class => 'controls') do
+              @template.concat(super(field, *args))
+            end
+          )
         end
       end
     end
@@ -38,14 +44,18 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   define_method('check_box') do |field, *args|
     options = _options('check_box', *args)
     label_class = options[:label_class] || 'control-label'
-    outer_label = label(field, options[:short_label] || field.to_s.titleize, :class => label_class)
+    outer_label = label(field,
+                        options[:short_label] || field.to_s.titleize,
+                        :class => label_class)
     @template.content_tag(:div, :class => 'control-group clearfix') do
       @template.concat(outer_label)
-      @template.concat(@template.content_tag(:div, :class => 'controls') do
-                         label(field, :class => 'checkbox') do
-                           super(field, *args) + options[:label]
-                         end
-                       end)
+      @template.concat(
+        @template.content_tag(:div, :class => 'controls') do
+          label(field, :class => 'checkbox') do
+            super(field, *args) + options[:label]
+          end
+        end
+      )
     end
   end
 
