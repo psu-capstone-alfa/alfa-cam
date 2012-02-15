@@ -1,2 +1,86 @@
-<h1 class="fail">Nothing here</h1>
+<%= form_for(@offering, :html => {:class => 'form-horizontal edit-offering'}) do |f| %>
+  <% if @offering.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@offering.errors.count, "error") %> prohibited this offering from being saved:</h2>
 
+      <ul>
+      <% @offering.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label :crn %>
+    <%= f.text_field :crn %>
+  </div>
+  <div class="field">
+    <%= f.label :term_id, "Term" %>
+    <%= f.collection_select :term_id, AcademicTerm.all, :id, :title, :prompt => "Select a Term" %>
+  </div>
+  <div class="field">
+    <%= f.label :course_id, "Course" %> 
+    <%= f.collection_select :course_id, Course.find(:all), :id, :course_field, :prompt => "Select a Course" %>
+  </div>
+  <div class="field">
+    <%= f.label :section %>
+    <%= f.text_field :section %>
+  </div>
+  <div class="field">
+    <%= f.label :credits %>
+    <%= f.text_field :credits %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :required %>
+    <%= 
+      options = [
+        ["Required for BSCE", "Required for BSCE"], 
+        ["Required for BSENVE", "Required for BSENVE"],
+        ["Elective for BSCE", "Elective for BSCE"],
+        ["Elective for BSENVE", "Elective for BSENVE"]
+      ]
+      #f.select(:required_or_elective, options, {}, {:multiple=>true})
+      
+      # FIXME Use a control like a multi-select or radio button groups
+      # instead of a textfield for required_or_elective
+      f.text_field :required_or_elective
+    %>
+  </div>
+  <div class="field">
+    <%= f.label :instructors %>
+    <%=
+      f.collection_select :instructor_ids, User.with_role(:instructor).all, :id,
+      :name, {}, {:multiple => true}
+    %>
+  </div>
+  <div class="field">
+    <%= f.label "Day/Time" %>
+    <%= f.text_field :day_and_time %>
+  </div>
+  <div class="field">
+    <%= f.label :prerequisites %>
+    <%= f.text_area :prerequisites %>
+  </div>
+  <div class="field">
+    <%= f.label :textbook %>
+    <%= f.text_area :textbook %>
+  </div>
+  <div class="field">
+    <%= f.label :additional_textbooks %>
+    <%= f.text_area :additional_textbooks %>
+  </div>
+  <div class="field">
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<p>
+    <%= link_to 'View', offering_details_path(@offering) %> | 
+    <%= link_to 'Return to offering List', offerings_path %>
+</p>

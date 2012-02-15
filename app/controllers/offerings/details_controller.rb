@@ -6,9 +6,16 @@ class Offerings::DetailsController < OfferingsController
   before_filter { @nav_offering = :details }
 
   def edit
+    @offering = Offering.find(params[:offering_id])
   end
 
   def show
+    @offering = Offering.find(params[:offering_id])
+    @course = @offering.course
+    @term = @offering.term
+    @instructors = @offering.instructors
+    @outcomes = @offering.outcomes
+    @objectives = @offering.objectives
   end
 
   def update
