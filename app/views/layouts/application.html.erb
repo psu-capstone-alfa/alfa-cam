@@ -44,8 +44,22 @@
 
       <%= content_for?(:content) ? yield(:content) : yield %>
 
+      <div class="row">&nbsp;</div>
       <footer>
-        <p>&copy; Team-Alfa <%= Date.today.strftime('%Y') %></p>
+        <p>&copy;
+          <a rel="popover"
+            data-content="
+              Charles Daily<br>
+              David Ford<br>
+              Hoang Le<br>
+              Troy Martin<br>
+              Eric O'Connel<br>
+              Ryan Souza<br>
+            "
+            data-original-title="PSU CS Capstone Fa11-Wi12">
+            Team-Alfa 2012
+          </a>
+        </p>
       </footer>
 
     </div>
