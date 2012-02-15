@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
   def to_s
     name
   end
-  
-  scope :with_role, lambda { |role| { :conditions => "roles_mask & #{2**ROLES.index(role.to_sym)} > 0"} }
+
+  scope :with_role, lambda { |role|
+    { :conditions => "roles_mask & #{2**ROLES.index(role.to_sym)} > 0"}
+  }
 end

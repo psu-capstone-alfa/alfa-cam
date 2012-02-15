@@ -4,12 +4,28 @@ describe AcademicTerm do
   # fixtures :all
 
   before do
-    @academic_term = AcademicTerm.new
+    @term = AcademicTerm.new
   end
 
   it "must contain a title" do 
-    assert_equal false, @academic_term.valid?
-    @academic_term.title = "test"
-    assert_equal true, @academic_term.valid?
+    @term.wont_be :valid?
+    @term.title = "test"
+    @term.must_be :valid?
+  end
+
+  describe 'destruction restrictions' do
+    before do
+      @offering = Factory :offering
+    end
+
+    it 'must be destroyed when not related to offerings' do
+      @term.offerings = []
+      @term.destroy.wont_equal false
+    end
+
+    it 'must not be destroyed when related to offerings' do
+      @term.offerings = [@offering]
+      @term.destroy.must_equal false
+    end
   end
 end

@@ -42,32 +42,48 @@ class Offering < ActiveRecord::Base
   end
 
   def self.exportHeadings
-    return [
-      "Dept", "Course Number", "Term", "Section", "CRN", "Instructor(s)", "Credits",
-      "Day/Time", "Textbook", "Additional Textbook(s)", "Required", "Prerequisite(s)", "Location", "Program Outcomes", "Course Objectives"
+    [
+      'Dept',
+      'Course Number',
+      'Term',
+      'Section',
+      'CRN',
+      'Instructor(s)',
+      'Credits',
+      'Day/Time',
+      'Textbook',
+      'Additional Textbook(s)',
+      'Required',
+      'Prerequisite(s)',
+      'Location',
+      'Program Outcomes',
+      'Course Objectives'
     ]
   end
 
   def exportFields
-    course = self.course
-    term = self.term
+    joined_instructors = instructors.map(&:name).join(',')
 
-    instructors = ""
-    self.instructors.each { |instructor| instructors << instructor.name << "," }
-    instructors.chomp!(",")
+    joined_outcomes = outcomes.map(&:key).join(',')
 
-    outcomes = ""
-    self.outcomes.each { |outcome| outcomes << outcome.key << "," }
-    outcomes.chomp!(",")
-
-    objectives = ""
-    self.objectives.each { |objective| objectives << objective.description << "," }
-    objectives.chomp!(",")
+    joined_objectives = objectives.map(&:description).join(',')
 
     return [
-      course.dept_code, course.course_num, term.title,
-      self.section, self.crn, instructors, self.credits, self.day_and_time, self.textbook,
-      self.additional_textbooks, self.required_or_elective, self.prerequisite, self.location, outcomes, objectives
+      course.dept_code,
+      course.course_num,
+      term.title,
+      section,
+      crn,
+      joined_instructors,
+      credits,
+      day_and_time,
+      textbook,
+      additional_textbooks,
+      required_or_elective,
+      prerequisite,
+      location,
+      joined_outcomes,
+      joined_objectives
     ]
   end
 
