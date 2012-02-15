@@ -97,3 +97,12 @@ end
 
 Factory.define :outcome_mapping do |f|
 end
+
+Factory.define :mapping do |f|
+  f.outcome { Factory :outcome }
+  f.value { Random.new.rand(0..10) }
+end
+
+Factory.define :objective do |f|
+  f.description 'Objective description %d'
+end
