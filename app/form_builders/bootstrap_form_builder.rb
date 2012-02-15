@@ -1,3 +1,5 @@
+# Boostrap style form builder
+#
 class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   helpers = field_helpers +
               %w{date_select datetime_select time_select} +

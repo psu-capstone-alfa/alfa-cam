@@ -9,5 +9,7 @@ end
 
 SimpleCov.formatter = SimpleCov::Formatter::QualityFormatter
 
-SimpleCov.start 'rails' unless ENV["NO_COV"]
+SimpleCov.start 'rails' do
+  add_filter 'vendor/ruby/'
+end unless ENV['NO_COV']
 
