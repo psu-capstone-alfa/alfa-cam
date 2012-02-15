@@ -72,5 +72,28 @@ Factory.define :outcome_group do |f|
 end
 
 Factory.define :content_group do |f|
+  f.name 'Group %d'
   f.offering { Factory :offering }
+end
+
+Factory.define :mapping do |f|
+  f.outcome { Factory :outcome }
+  f.value { Random.new.rand(0..10) }
+end
+
+Factory.define :objective do |f|
+  f.description 'Objective description %d'
+end
+
+Factory.define :content do |f|
+  f.title 'Content %d'
+end
+
+Factory.define :course_replacement do |f|
+end
+
+Factory.define :teaching do |f|
+end
+
+Factory.define :outcome_mapping do |f|
 end

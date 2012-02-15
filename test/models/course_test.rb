@@ -19,4 +19,20 @@ describe Course do
     @course.must_be :valid?
   end
 
+  describe 'destruction restrictions' do
+    before do
+      @course = Factory :course
+    end
+
+    it 'must be destroyed when not related to offerings' do
+      @course.offerings = []
+      @course.destroy.wont_equal false
+    end
+
+    it 'must not be destroyed when related to offerings' do
+      @course.offerings = [(Factory :offering)]
+      @course.destroy.must_equal false
+    end
+  end
+
 end
