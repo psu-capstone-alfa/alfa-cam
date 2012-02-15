@@ -10,14 +10,12 @@ describe Offerings::DetailsController do
     it "respond with success" do
       get :edit, @args
       must_respond_with :success
-      must_render_nothing_here
     end
   end
   describe "show action" do
     it "respond with success" do
       get :show, @args
       must_respond_with :success
-      must_render_nothing_here
     end
   end
 end
