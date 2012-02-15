@@ -32,6 +32,6 @@ class ContentGroup < ActiveRecord::Base
   end
 
   def to_s
-    title
+    name
   end
 end
