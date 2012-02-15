@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/scoz/minitest-rails.git
-  revision: ee1c684164cacf73a4092c514cb8b55e94b6aff8
+  revision: e4151a4e38c6cac531987bb886ca61a198089cce
   branch: gemspec
   specs:
     minitest-rails (0.0.5)

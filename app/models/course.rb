@@ -24,11 +24,11 @@ class Course < ActiveRecord::Base
 
   #will show the fields
   def to_s
-    "#{dept_code}#{course_num}: #{title}"
+    "#{short}: #{title}"
   end
 
   def short
-    "#{course_num}"
+    "#{dept_code} #{course_num}"
   end
 
   def course_field

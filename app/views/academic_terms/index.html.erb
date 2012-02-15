@@ -1,23 +1,41 @@
-<h1>Listing academic_terms</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @academic_terms.each do |academic_term| %>
-  <tr>
-    <td><%= academic_term.title %></td>
-    <td><%= link_to 'Show', academic_term %></td>
-    <td><%= link_to_if can?(:edit, academic_term), 'Edit', edit_academic_term_path(academic_term) %></td>
-    <td><%= link_to_if can?(:destroy, academic_term), 'Destroy', academic_term, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Academic term', new_academic_term_path %>
+<div class="row">
+  <div class="span10 offset1">
+    <table id="term-index" class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Offerings</th>
+          <th class="actions"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @academic_terms.each do |term| %>
+        <tr>
+          <td><%= link_to term.title, term  %></td>
+          <td>Sept 26 : Dec 4</td>
+          <td>10 / <%= term.offerings.count %></td>
+          <td class="actions">
+            <div>
+            <% if can? :edit, term %>
+              <%= link_to edit_academic_term_path(term),
+                  :class => 'btn btn-tiny btn-success' do %>
+                <i class="icon-white icon-pencil"></i>
+              <% end %>
+            <% end %>
+            <%= link_to(term,
+                confirm: 'Are you sure?',
+                method: :delete,
+                :class => 'btn btn-tiny btn-danger') do %>
+              <i class="icon-white icon-trash"></i>
+            <% end %>
+            </div>
+          </td>
+        </tr>
+        <% end %>
+    </table>
+    <br>
+    <%= link_to 'New Term', new_academic_term_path, :class => 'btn' %>
+  </div>
+</div>

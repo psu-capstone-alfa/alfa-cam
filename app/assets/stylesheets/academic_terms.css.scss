@@ -1,3 +1,20 @@
 // Place all the styles related to the AcademicTerms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#term-index {
+  td.actions, th.actions {
+    width: 60px
+  }
+}
+
+#term-show {
+  th {
+    text-align: right;
+  }
+  th, td {
+    border: none;
+    line-height: 19px;
+  }
+
+}

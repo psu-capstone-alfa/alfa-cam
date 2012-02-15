@@ -1,4 +1,4 @@
-<%= bs_form_for(@course) do |f| %>
+<%= bs_form_for([@term, @course]) do |f| %>
   <% if @course.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
@@ -16,6 +16,5 @@
   <%= f.text_field :title, label: 'Course Title' %>
   <div class="actions">
     <%= f.submit %>
-    <%= f.cancel %>
   </div>
 <% end %>
