@@ -1,6 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+RAILS_VERSION = '~> 3.1.0'
+
+gem 'rails', RAILS_VERSION
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -11,8 +13,8 @@ gem 'sqlite3'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
+  gem 'sass-rails',   RAILS_VERSION
+  gem 'coffee-rails', RAILS_VERSION
   gem 'uglifier'
 end
 
@@ -45,7 +47,6 @@ gem 'authlogic', # FIXME: This shouldn't depend on Ryan's personal fork
 gem 'cancan'
 
 # Twitter Bootstrap integration
-# FIXME: This shouldn't depend on Eric's personal fork ;)
 gem 'twitter-bootstrap-rails',
   :git => "https://github.com/seyhunak/twitter-bootstrap-rails.git"
 
