@@ -49,6 +49,9 @@ Factory.define :academic_term do |f|
   f.outcome_group { Factory :outcome_group }
 end
 
+Factory.define :term, parent: :academic_term do |f|
+end
+
 Factory.define :offering do |f|
   f.term { Factory :academic_term }
   f.course { Factory :course }

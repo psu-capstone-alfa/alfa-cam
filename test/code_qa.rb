@@ -34,7 +34,7 @@ describe 'Code Coverage' do
     File.open('coverage/covered_percent','r') do |file|
       covered_percent = file.gets
       covered_percent.wont_be_nil 'No coverage percentage'
-      Float(covered_percent).round(1).must_be :>, 65,
+      Float(covered_percent).round(1).must_be :>, 70,
         'Insufficient code coverage percentage'
     end
   end

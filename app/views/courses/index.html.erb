@@ -26,7 +26,7 @@
           </td>
           <td class="actions">
             <div class="btn-group">
-              <a class="btn btn-tiny" href="<%= edit_course_path course %>">
+              <a class="btn btn-tiny" href="<%= url_for [:edit, @term, course] %>">
                 <i class="icon-pencil"></i>
               </a>
               <a class="btn btn-tiny" href="#">

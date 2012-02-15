@@ -1,0 +1,29 @@
+<% content_for :content do %>
+  <div class="row">
+    <div class="span9">
+      <h1><%= link_to @term, @term %></h1>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="span12">
+      <ul class="nav nav-tabs">
+        <li class="<%= active_if(@nav_term, :details) %>">
+          <%= link_to 'Details', @term %>
+        </li>
+        <li class="<%= active_if(@nav_term, :courses) %>">
+          <%= link_to 'Courses', [@term, :courses] %>
+        </li>
+        <li class="<%= active_if(@nav_term, :bulk) %>">
+          <%= link_to 'Offerings', [:bulk_edit, @term, :courses] %>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <%= content_for?(:term_content) ? yield(:term_content) : yield %>
+<% end %>
+
+<%= render template: 'layouts/application' %>

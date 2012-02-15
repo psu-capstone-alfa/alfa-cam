@@ -33,5 +33,5 @@
   </ul>
 </p>
 
-<%= link_to_if can?(:edit, @course), 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+<%= link_to_if can?(:edit, @course), 'Edit', [:edit, @term, @course] %> |
+<%= link_to 'Back', [@term, :courses] %>

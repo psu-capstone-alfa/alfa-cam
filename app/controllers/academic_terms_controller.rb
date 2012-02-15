@@ -3,27 +3,30 @@
 class AcademicTermsController < ApplicationController
   respond_to :html, :json
   before_filter { @nav_section = :terms }
+  before_filter only: [:show, :edit] { @nav_term = :details }
+
+  layout 'term', except: [:index, :new]
 
   def index
-    @academic_terms = AcademicTerm.all
+    @term = @academic_terms = AcademicTerm.all
     authorize! :index, AcademicTerm
-    respond_with @academic_terms
+    respond_with @academic_terms, layout: 'application'
   end
 
   def show
-    @academic_term = AcademicTerm.find(params[:id])
+    @term = @academic_term = AcademicTerm.find(params[:id])
     authorize! :show, @academic_term
     respond_with @academic_term
   end
 
   def new
-    @academic_term = AcademicTerm.new
+    @term = @academic_term = AcademicTerm.new
     authorize! :new, @academic_term
-    respond_with @academic_term
+    respond_with @academic_term, layout: 'application'
   end
 
   def edit
-    @academic_term = AcademicTerm.find(params[:id])
+    @term = @academic_term = AcademicTerm.find(params[:id])
     authorize! :edit, @academic_term
   end
 
