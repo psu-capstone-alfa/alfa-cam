@@ -1,0 +1,78 @@
+<h1><%= @offering %></h1>
+<hr>
+
+<%= bs_form_for(@offering, html: {class: 'offering-content-groups'}) do |f| %>
+  <% if @offering.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@offering.errors.count, "error") %> prohibited this offering from being saved:</h2>
+
+    <ul>
+      <% @offering.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="tabbable">
+    <ul class="nav nav-pills">
+      <% content_group_scopes(@offering.content_groups) do |group, id, name, css_class| %>
+        <li class="<%= css_class %>">
+          <%= link_to name, "##{id}", 'data-toggle' => "pill" %>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="tab-content">
+      <% content_group_scopes(@offering.content_groups) do |group, id, name, css_class| %>
+        <%= f.fields_for :content_groups, group do |cgf| %>
+          <div id="<%= id %>" class="tab-pane <%= css_class %>">
+            <table class="table-bordered table-striped content-and-mappings">
+              <thead>
+                <tr>
+                  <th></th>
+                  <% @outcomes.each do |outcome| %>
+                  <th class="outcome"><abbr title="<%= outcome.title %>"><%= outcome.key %></abbr></th>
+                  <% end %>
+                </tr>
+              </thead>
+              <tbody>
+                <% content_scopes(cgf.object.content) do |content, css_class| %>
+                  <tr class="<%= css_class %>">
+                    <%= cgf.no_bs_fields_for :content, content do |cf| %>
+                      <th>
+                        <%= cf.text_field :title, placeholder: 'Content name' %>
+                        <%= cf.hidden_field :_destroy, value: 1, disabled: true %>
+                        <button class="btn btn-danger delete-content">
+                          <i class="icon-white icon-remove">&nbsp;</i><span>Delete</span>
+                        </button>
+                      </th>
+                      <% mapping_scopes(cf.object.mappings) do |mapping| %>
+                        <td class="outcome">
+                          <%= cf.fields_for :mappings, mapping do |mf| %>
+                            <%= mf.text_field :value, :class => 'number_field' %>
+                            <%= mf.hidden_field :outcome_id %>
+                          <% end %>
+                        </td>
+                      <% end %>
+                    <% end %>
+                  </tr>
+                <% end %>
+                <tr id="content-footer">
+                  <td colspan="4">
+                    <button id="add-content" class="btn btn-success"><i class="icon-white icon-plus"></i> Add Content</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="reset" class="btn">Cancel</button>
+  </div>
+<% end %>

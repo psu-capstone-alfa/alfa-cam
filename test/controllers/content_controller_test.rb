@@ -1,6 +1,6 @@
 require "minitest_helper"
 
-describe Offerings::ContentsController do
+describe Offerings::ContentController do
   before do
     @offering = Factory :offering
     @args = { :offering_id => @offering.id }
@@ -17,7 +17,7 @@ describe Offerings::ContentsController do
     it "respond with success" do
       get :edit, @args
       must_respond_with :success
-      must_render_nothing_here
+      assert_select '.offering-content-groups'
     end
   end
   describe "show action" do
