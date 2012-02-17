@@ -1,3 +1,63 @@
 // Place all the styles related to the Dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#instructor-dash {
+  .stages .btn {
+    width: 120px;
+    height: 30px;
+    font-size: 12pt;
+    letter-spacing: 1px;
+    text-align: center;
+    cursor: pointer;
+    vertical-align: bottom;
+    color: white;
+    line-height: 28px;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    z-index: auto;
+  }
+
+  .stages {
+    .normal {
+      color: black;
+    }
+    .red {
+      background: #DA4F49;
+      background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+      background-image: -o-linear-gradient(top, #ee5f5b, #bd362f);
+      background-image: linear-gradient(top, #ee5f5b, #bd362f);
+      background-repeat: repeat-x;
+    }
+    .green {
+      background: #5BB75B;
+      background-image: -webkit-linear-gradient(top, #62c462, #51a351);
+      background-image: -o-linear-gradient(top, #62c462, #51a351);
+      background-image: linear-gradient(top, #62c462, #51a351);
+      background-repeat: repeat-x;
+    }
+    .yellow {
+      background: #FFAD33;
+    }
+
+    &.btn-group {
+      $border-radius: 8px;
+      .btn:first-child {
+        -webkit-border-top-left-radius: $border-radius;
+        -moz-border-radius-topleft: $border-radius;
+        border-top-left-radius: $border-radius;
+        -webkit-border-bottom-left-radius: $border-radius;
+        -moz-border-radius-bottomleft: $border-radius;
+        border-bottom-left-radius: $border-radius
+      }
+      .btn:last-child {
+        -webkit-border-top-right-radius: $border-radius;
+        -moz-border-radius-topright: $border-radius;
+        border-top-right-radius: $border-radius;
+        -webkit-border-bottom-right-radius: $border-radius;
+        -moz-border-radius-bottomright: $border-radius;
+        border-bottom-right-radius: $border-radius;
+      }
+    }
+  }
+
+}
