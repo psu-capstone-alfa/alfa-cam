@@ -102,7 +102,7 @@ class OfferingsController < ApplicationController
     respond_to do |format|
       format.csv {
         render :csv => @rows,
-        :filename => "offerings-#{Time.now.strftime('%Y%m%d-%H%M%S')}",
+        :filename => "offerings-#{Time.now.strftime('%Y%m%d-%H%M%S')}"
       }
     end
   end
