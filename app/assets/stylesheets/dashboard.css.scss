@@ -1,3 +1,52 @@
 // Place all the styles related to the Dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#instructor-dash {
+  .stages .btn {
+    width: 120px;
+    height: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    vertical-align: bottom;
+    color: white;
+    line-height: 28px
+
+  }
+  .stages {
+    .normal {
+      color: black;
+    }
+    .red {
+      background: #DA4F49;
+      background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+      background-image: -o-linear-gradient(top, #ee5f5b, #bd362f);
+      background-image: linear-gradient(top, #ee5f5b, #bd362f);
+      background-repeat: repeat-x;
+      border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+      border-top-color: rgba(0, 0, 0, 0.0976562);
+      border-right-color: rgba(0, 0, 0, 0.0976562);
+      border-bottom-color: rgba(0, 0, 0, 0.246094);
+      border-left-color: rgba(0, 0, 0, 0.0976562);
+
+    }
+    .green {
+      background: #5BB75B;
+      background-image: -webkit-linear-gradient(top, #62c462, #51a351);
+      background-image: -o-linear-gradient(top, #62c462, #51a351);
+      background-image: linear-gradient(top, #62c462, #51a351);
+      background-repeat: repeat-x;
+      border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+      border-top-color: rgba(0, 0, 0, 0.0976562);
+      border-right-color: rgba(0, 0, 0, 0.0976562);
+      border-bottom-color: rgba(0, 0, 0, 0.246094);
+      border-left-color: rgba(0, 0, 0, 0.0976562);
+    }
+    .yellow {
+      background: #FFAD33;
+    }
+  }
+
+}
