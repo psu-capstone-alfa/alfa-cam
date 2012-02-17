@@ -5,4 +5,4 @@ tmp/
 .sass-cache/
 coverage/
 app/assets/stylesheets/scaffolds.css.scss
-vendor/ruby
+vendor/bundle
