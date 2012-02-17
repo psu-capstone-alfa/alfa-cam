@@ -16,6 +16,10 @@ class Offerings::ObjectivesController < OfferingsController
   def edit
     @outcomes = @offering.outcomes
     @objectives = @offering.objectives
+    @new_objective = Objective.new
+    @new_objective.mappings = @outcomes.map do |outcome|
+      Mapping.new mappable: @new_objective, outcome: outcome
+    end
   end
 
   def show

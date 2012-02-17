@@ -14,52 +14,29 @@
   </div>
   <% end %>
 
-  <div class="tabbable">
-    <div class="tab-content">
-          <div class="tab-pane">
-            <table class="table-bordered table-striped content-and-mappings">
-              <thead>
-                <tr>
-                  <th></th>
-                  <% @outcomes.each do |outcome| %>
-                  <th class="outcome"><abbr title="<%= outcome.title %>"><%= outcome.key %></abbr></th>
-                  <% end %>
-                </tr>
-              </thead>
-              <tbody>
-<% @objectives << Objective.new %>
-                <% @objectives.each_with_index do |objective, i| %>
-                    <%= f.no_bs_fields_for :objectives, objective do |of| %>
-                  <tr class="<%= 'cloneable' if objective.new_record? %>">
-
-                      <th>
-                        <%= of.text_field :description, placeholder: 'Objective description' %>
-                        <%= of.hidden_field :_destroy, value: 1, disabled: true %>
-                        <button class="btn btn-danger delete-content">
-                          <i class="icon-white icon-remove">&nbsp;</i><span>Delete</span>
-                        </button>
-                      </th>
-                      <% mapping_scopes(of.object.mappings) do |mapping| %>
-                        <td class="outcome">
-                          <%= of.fields_for :mappings, mapping do |mf| %>
-                            <%= mf.check_box :value, :class => 'number_field' %>
-                            <%= mf.hidden_field :outcome_id %>
-                          <% end %>
-                        </td>
-                      <% end %>
-                    <% end %>
-                  </tr>
-                <% end %>
-                <tr id="content-footer">
-                  <td colspan="4">
-                    <button id="add-content" class="btn btn-success"><i class="icon-white icon-plus"></i> Add Objective</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-    </div>
-  </div>
+  <table class="table-bordered table-striped objective mappings">
+    <thead>
+      <tr>
+        <th></th>
+        <% @outcomes.each do |outcome| %>
+        <th class="outcome"><abbr title="<%= outcome.title %>"><%= outcome.key %></abbr></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'objective',
+        collection: @objectives,
+        locals: {f: f} %>
+      <%= render partial: 'objective',
+            object: @new_objective,
+            locals: {f: f, fields_for_args: {child_index: 'new'}} %>
+      <tr id="content-footer">
+        <td colspan="4">
+          <a id="add-mapping" class="btn btn-success"><i class="icon-white icon-plus"></i> Add Objective</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>

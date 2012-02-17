@@ -29,6 +29,9 @@ class Offering < ActiveRecord::Base
       ContentGroup::REJECT.call(c)
     end)
   end
+  accepts_nested_attributes_for :objectives,
+    allow_destroy: true,
+    reject_if: ->(obj) { obj['description'].blank? }
 
   validates :course_id, :term_id, :presence => true
   validates_associated :content_groups
