@@ -4,13 +4,18 @@
 class Offerings::ObjectivesController < OfferingsController
   layout 'offering'
 
-  before_filter { @nav_offering = :objectives }
   before_filter :require_user
+  before_filter do
+    @nav_offering = :objectives
+    @offering = Offering.find params[:offering_id]
+  end
 
   def summary
   end
 
   def edit
+    @outcomes = @offering.outcomes
+    @objectives = @offering.objectives
   end
 
   def show

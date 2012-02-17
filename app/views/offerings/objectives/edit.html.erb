@@ -1,2 +1,69 @@
-<h1 class="fail">Nothing here</h1>
+<h1><%= @offering %></h1>
+<hr>
+
+<%= bs_form_for(@offering, html: {class: 'offering-content-groups'}) do |f| %>
+  <% if @offering.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@offering.errors.count, "error") %> prohibited this offering from being saved:</h2>
+
+    <ul>
+      <% @offering.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="tabbable">
+    <div class="tab-content">
+          <div class="tab-pane">
+            <table class="table-bordered table-striped content-and-mappings">
+              <thead>
+                <tr>
+                  <th></th>
+                  <% @outcomes.each do |outcome| %>
+                  <th class="outcome"><abbr title="<%= outcome.title %>"><%= outcome.key %></abbr></th>
+                  <% end %>
+                </tr>
+              </thead>
+              <tbody>
+<% @objectives << Objective.new %>
+                <% @objectives.each_with_index do |objective, i| %>
+                    <%= f.no_bs_fields_for :objectives, objective do |of| %>
+                  <tr class="<%= 'cloneable' if objective.new_record? %>">
+
+                      <th>
+                        <%= of.text_field :description, placeholder: 'Objective description' %>
+                        <%= of.hidden_field :_destroy, value: 1, disabled: true %>
+                        <button class="btn btn-danger delete-content">
+                          <i class="icon-white icon-remove">&nbsp;</i><span>Delete</span>
+                        </button>
+                      </th>
+                      <% mapping_scopes(of.object.mappings) do |mapping| %>
+                        <td class="outcome">
+                          <%= of.fields_for :mappings, mapping do |mf| %>
+                            <%= mf.check_box :value, :class => 'number_field' %>
+                            <%= mf.hidden_field :outcome_id %>
+                          <% end %>
+                        </td>
+                      <% end %>
+                    <% end %>
+                  </tr>
+                <% end %>
+                <tr id="content-footer">
+                  <td colspan="4">
+                    <button id="add-content" class="btn btn-success"><i class="icon-white icon-plus"></i> Add Objective</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="reset" class="btn">Cancel</button>
+  </div>
+<% end %>
 
