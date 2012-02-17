@@ -1,24 +1,22 @@
 <div id="instructor-dash">
 <% @offerings_by_term.each do |term,offerings| %>
-
-   <div class = "span10 offset1">
-    <h2><%=term.title%></h2>
-     <%for offering in offerings%> 
-      <div class = "well offering">
+  <div class="row"><div class="span10 offset1">
+    <h2><%= term.title %></h2>
+    <% for offering in offerings %> 
+      <div class="well offering">
         <div>
-         <h3><%=offering.course.dept_code%> <%=offering.course.course_num%> : <%=offering.course.title%></h3>
+          <h3><%=offering.course.dept_code%> <%=offering.course.course_num%> : <%=offering.course.title%></h3>
         </div>
         <br/>
         <div class = "btn-group stages"> 
-         <a class="btn normal" href=<%=offering_review_path(offering)%>>Review</a>
-         <a class="btn red" href=<%=offering_details_path(offering)%>>Details</a>
-         <a class="btn green" href=<%=offering_objectives_path(offering)%>>Objectives</a> 
-         <a class="btn red" href=<%=offering_details_path(offering)%>> Mappings</a> 
-         <a class="btn yellow" href=<%=offering_assessment_path(offering)%>> Assessments</a>
+          <a class="btn green" href="<%=offering_review_path(offering)%>">Review</a>
+          <a class="btn green" href="<%=offering_details_path(offering)%>">Details</a>
+          <a class="btn green" href="<%=offering_objectives_path(offering)%>">Objectives</a> 
+          <a class="btn yellow" href="<%=offering_content_path(offering)%>">Content</a> 
+          <a class="btn red" href="<%=offering_assessment_path(offering)%>">Assessment</a>
         </div>
       </div>
-     <%end%>
-   </div>
-
+    <%end%>
+  </div></div>
 <%end%>
 </div>
