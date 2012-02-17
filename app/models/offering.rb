@@ -10,6 +10,9 @@ class Offering < ActiveRecord::Base
   has_many :teachings
   has_many :instructors, through: :teachings
 
+  has_one :assessment, include: :objective_assessments
+  has_many :objective_assessments
+
   has_many :content_groups do
     def build_with_content
       new_group = self.build

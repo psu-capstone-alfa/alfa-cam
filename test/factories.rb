@@ -106,3 +106,18 @@ end
 Factory.define :objective do |f|
   f.description 'Objective description %d'
 end
+
+Factory.define :offering_w_objectives, parent: :offering do |f|
+  f.objectives { 3.repetitions { Factory :objective } }
+end
+
+Factory.define :assessment do |f|
+  f.offering { Factory :offering }
+end
+
+Factory.define :objective_assessment do |f|
+  f.assessment do
+    Factory :assessment, offering: Factory(:offering_w_objectives)
+  end
+  f.objective { |o| o.offering.objectives.first }
+end
