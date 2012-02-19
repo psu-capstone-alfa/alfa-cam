@@ -87,4 +87,23 @@ class Offering < ActiveRecord::Base
     ]
   end
 
+  # Stage status methods
+  STAGES = [:review, :importing, :details, :objectives, :content, :assessment]
+  EDITING_STAGES = STAGES - [:review, :importing]
+
+  def ready_stages
+    [:details, :objectives, :content]
+  end
+
+  def complete_stages
+    [:review, :importing, :details, :objectives]
+  end
+
+  def started_stages
+    [:details, :objectives, :content]
+  end
+
+  def completed?
+    false
+  end
 end
