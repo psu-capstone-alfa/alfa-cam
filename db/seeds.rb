@@ -18,9 +18,9 @@ outcomes = Outcome.create!( [
 ])
 
 courses = Course.create!( [
-  {dept_code: 'CEE', course_num: '101', title: 'Engineering for Dummies'},
-  {dept_code: 'CEE', course_num: '161', title: 'Intro to Civil Engineering'},
-  {dept_code: 'CEE', course_num: '201', title: 'Cull the Flock'}
+  {dept_code: 'CEE', course_num: '101', title: 'Engineering for Dummies', group: 'One Test'},
+  {dept_code: 'CEE', course_num: '161', title: 'Intro to Civil Engineering', group: 'Two Beta'},
+  {dept_code: 'CEE', course_num: '201', title: 'Cull the Flock', group: 'Two Beta'}
 ])
 
 outcome_groups = OutcomeGroup.create!( [

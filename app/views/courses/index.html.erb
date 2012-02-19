@@ -1,46 +1,55 @@
-
 <div class="row">
   <div class="span10 offset1">
-    <table id="courses-index" class="table" cellspacing="5px">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Course</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-      <tbody class="no-first-border">
-      <% @courses.each do |course| %>
-        <tr class="">
-          <td class="select">
-            <input type="checkbox" id="course_check_<%= course.id %>" value="option1">
-          </td>
-          <td class="subject-num">
-            <%= course.short %>
-          </td>
-          <td class="title">
-            <%= course.title %>
-          </td>
-          <td class="status">
-            <span class="label label-important">Retired</span>
-          </td>
-          <td class="actions">
-            <div class="btn-group">
-              <a class="btn btn-tiny" href="<%= url_for [:edit, @term, course] %>">
-                <i class="icon-pencil"></i>
-              </a>
-              <a class="btn btn-tiny" href="#">
-                <i class="icon-share-alt"></i>
-              </a>
-              <!--TODO:when in retire mode change to icon-refresh -->
-              <a class="btn btn-tiny btn-danger" href="#">
-                <i class="icon-trash icon-white"></i>
-              </a>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+    <% @courses.group_by(&:group).each do |group, courses| %>
+      <div class="span3"><b>Group: <%= group %></b></div>
+      <table class="courses-index table" cellspacing="5px">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Course</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody class="no-first-border">
+        <% courses.each do |course| %>
+          <tr class="">
+            <td class="select">
+                <input type="checkbox" 
+                       id="course_check_<%= course.id %>"
+                       value="option1">
+            </td>
+            <td class="subject-num"><%= course.short %></td>
+            <td class="title"><%= course.title %></td>
+            <td class="status">
+              <span class="label label-important">Retired</span>
+            </td>
+            <td class="actions">
+              <div class="btn-group">
+                <a class="btn btn-tiny"
+                   rel="tooltip"
+                   title="Edit" 
+                   data-placement="bottom"
+                   href="<%= url_for [:edit, @term, course] %>"
+                ><i class="icon-pencil"></i></a>
+                <a class="btn btn-tiny"
+                   rel="tooltip"
+                   title="Replacement"
+                   data-placement="bottom"
+                   href="#" 
+                ><i class="icon-share-alt"></i></a>
+                <!--TODO:dkf when in retire mode change to icon-refresh -->
+                <a class="btn btn-tiny btn-danger"
+                   rel="tooltip"
+                   title="Remove"
+                   data-placement="bottom"
+                   href="#"
+                ><i class="icon-trash icon-white"></i></a>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
   </div>
 </div>
