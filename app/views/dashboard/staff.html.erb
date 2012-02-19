@@ -1,34 +1,33 @@
-<h3>Instructor - Offerings Status</h3>
-<p>List of Instructors teaching in the current term and their status in completing 
-necessary information</p>
-<table id="sortTableExample" class="zebra-striped">	
-	<thead>
-		<tr>
-			<th class="label" style="height: 25px">&nbsp;</th>
-			<th class="label" style="height: 25px; width: 145px;">Instructor</th>
-			<th class="label" style="height: 25px; width: 85px;">Course No</th>
-			<th class="label" style="height: 25px">Course Title</th>
-			<th class="label" style="height: 25px; width: 60px" title="Status of Editting Details">Details</th>
-			<th class="label" style="height: 25px; width: 60px" title="Status of Editting Mappings">Mappings</th>
-			<th class="label" style="height: 25px; width: 60px" title="Status of Editting Assessments">Assessments</th>
-			<th class="label" style="height: 25px; width: 60px" title="Status of Editting Objective">Objectives</th>
-		</tr>
-	</thead>
+<div id="staff-dash">
+ <h3>Instructor - Offerings Status</h3>
+ <p>List of Instructors teaching in the current term and their status in completing necessary information</p>
+ <table id="sortTableExample" class="table table-striped">	
+  <thead>
+   <tr>
+    <th >&nbsp;</th>
+    <th>Instructor</th>
+    <th>Course No</th>
+    <th>Course Title</th>
+    <th title="Status of Editting Details">Details</th>
+    <th title="Status of Editting Mappings">Mappings</th>
+    <th title="Status of Editting Assessments">Assessments</th>
+    <th title="Status of Editting Objective">Objectives</th>
+   </tr>
+  </thead>
 	
-	<% @offerings.each do |offering| %>
-		<%for instructor in offering.instructors%>
-			<tr title=<%=instructor.name%>>
-				<td>1</td>
-				<td style="width: 145px"><%=instructor.name%></td>
-				<td style="width: 85px"><%=offering.course.dept_code%> <%=offering.course.course_num%></td>
-				<td><%=offering.course.title%></td>
-				<td><span class="label success">Details</span></td>
-				<td><span class="label success">Mappings</span></td>
-				<td><span class="label important">Assessments</span></td>
-				<td><span class="label success">Objective</span></td>
-			</tr>
-		<%end%>	
-	<%end%>
-	
-	
-</table>
+  <% @offerings.each do |offering| %>
+   <%for instructor in offering.instructors%>
+    <tr title=<%=instructor.name%>>
+     <td>1</td>
+     <td><%=instructor.name%></td>
+     <td><%=offering.course.dept_code%> <%=offering.course.course_num%></td>
+     <td><%=offering.course.title%></td>
+     <td><span class="label label-success"   >Details</span></td>
+     <td><span class="label label-warning"   >Mappings</span></td>
+     <td><span class="label label-important" >Assessments</span></td>
+     <td><span class="label label-success"   >Objective</span></td>
+    </tr>
+   <%end%>	
+  <%end%>
+ </table>
+</div>
