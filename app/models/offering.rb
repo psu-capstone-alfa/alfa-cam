@@ -98,10 +98,12 @@ class Offering < ActiveRecord::Base
     [:details, :objectives, :content]
   end
 
+  # Green
   def complete_stages
     [:review, :importing, :details, :objectives]
   end
 
+  # Yellow
   def started_stages
     [:details, :objectives, :content]
   end
@@ -109,4 +111,5 @@ class Offering < ActiveRecord::Base
   def completed?
     false
   end
+
 end
