@@ -1,7 +1,7 @@
 require "minitest_helper"
 
 describe WelcomeController do
-  # fixtures :all
+  with_admin_session
 
   describe "home action" do
     it "respond with success" do

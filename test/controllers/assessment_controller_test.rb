@@ -1,6 +1,8 @@
 require "minitest_helper"
 
 describe Offerings::AssessmentsController do
+  with_admin_session
+
   before do
     @offering = Factory :offering
     @args = { :offering_id => @offering.id }

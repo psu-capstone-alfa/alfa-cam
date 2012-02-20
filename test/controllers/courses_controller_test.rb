@@ -1,8 +1,6 @@
 require "minitest_helper.rb"
 
 describe CoursesController do
-  # fixtures :all
-
   with_admin_session
 
   before do

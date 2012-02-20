@@ -1,6 +1,8 @@
 require "minitest_helper"
 
 describe Offerings::DetailsController do
+  with_admin_session
+
   before do
     @offering = Factory :offering
     @args = { :offering_id => @offering.id }
