@@ -1,4 +1,4 @@
-<div id="staff-dash">
+<div id="staff-dash" class="dashboard">
  <h3>Instructor - Offerings Status</h3>
  <p>List of Instructors teaching in the current term and their status in completing necessary information</p>
  <table id="sortTableExample" class="table table-striped">	
@@ -8,10 +8,7 @@
     <th>Instructor</th>
     <th>Course No</th>
     <th>Course Title</th>
-    <th title="Status of Editting Details">Details</th>
-    <th title="Status of Editting Mappings">Mappings</th>
-    <th title="Status of Editting Assessments">Assessments</th>
-    <th title="Status of Editting Objective">Objectives</th>
+    <th title="Status of Editting Details">Status</th>
    </tr>
   </thead>
 	
@@ -22,10 +19,16 @@
      <td><%=instructor.name%></td>
      <td><%=offering.course.dept_code%> <%=offering.course.course_num%></td>
      <td><%=offering.course.title%></td>
-     <td><span class="label label-success"   >Details</span></td>
-     <td><span class="label label-warning"   >Mappings</span></td>
-     <td><span class="label label-important" >Assessments</span></td>
-     <td><span class="label label-success"   >Objective</span></td>
+     <td>
+        <div class = "btn-group stages"> 
+          <a class="btn green btn-tiny" href="<%=offering_review_path(offering)%>">Review</a>
+          <a class="btn green btn-tiny" href="<%=offering_details_path(offering)%>">Details</a>
+          <a class="btn green btn-tiny" href="<%=offering_objectives_path(offering)%>">Objectives</a> 
+          <a class="btn yellow btn-tiny" href="<%=offering_content_path(offering)%>">Content</a> 
+          <a class="btn red btn-tiny" href="<%=offering_assessment_path(offering)%>">Assessment</a>
+        </div>
+     </td>
+    
     </tr>
    <%end%>	
   <%end%>
