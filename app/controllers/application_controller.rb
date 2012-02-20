@@ -14,6 +14,13 @@ class ApplicationController < ActionController::Base
     redirect_to unauthorized_path
   end
 
+  def redirect_to(*args)
+    if params[:_redirect_endpoint]
+      args[0] = params[:_redirect_endpoint]
+    end
+    super(*args)
+  end
+
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
