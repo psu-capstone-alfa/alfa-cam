@@ -12,6 +12,7 @@ CourseAssessmentManager::Application.routes.draw do
     get :reviewer
     get :instructor
     get :staff
+    get :staff2
     get :admin
   end
 
