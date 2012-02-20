@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
 
   layout 'application'
 
+  rescue_from CanCan::AccessDenied do |exception|
+    exception.default_message = "You do not have authorization for this page"
+    redirect_to unauthorized_path
+  end
+
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
