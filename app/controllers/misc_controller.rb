@@ -1,3 +1,4 @@
+# Miscellaneous pages
 class MiscController < ApplicationController
   skip_authorization_check
 

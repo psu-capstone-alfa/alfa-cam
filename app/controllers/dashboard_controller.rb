@@ -29,21 +29,18 @@ class DashboardController < ApplicationController
   end
 
   def staff2
-    @staff = current_user
-    @offerings = Offering.all
-    @allInstructors   = User.with_role(:instructor)
-    instructors_n_offerings = {}
-    @allInstructors.map! do |instructor|
+    @instructors = User.with_role(:instructor)
+    @instructors.map! do |instructor|
+      offerings = instructor.offerings
       {
         :instructor => instructor,
-        :complete => instructor.offerings.select(&:completed?), 
-        :uncomplete =>instructor.offerings.reject(&:completed?)
+        :complete => offerings.select(&:completed?),
+        :uncomplete => offerings.reject(&:completed?)
       }
     end
-    @greenInstructors = @allInstructors.select {|inst| inst[:uncomplete].length ==0}
-    @redInstructors = @allInstructors.reject {|inst| inst[:uncomplete].length ==0}
-
-   end
+    @greenInstructors = @instructors.select {|inst| inst[:uncomplete].empty?}
+    @redInstructors = @instructors.reject {|inst| inst[:uncomplete].empty?}
+  end
 
   def admin
   end
