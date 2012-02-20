@@ -16,8 +16,17 @@
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     z-index: auto;
   }
+}
 
-
+#staff2-dash {
+  td, th {
+    &.instructor {
+      width: 150px;
+    }
+    &.stages {
+      width: 330px;
+    }
+  }
 }
 
 

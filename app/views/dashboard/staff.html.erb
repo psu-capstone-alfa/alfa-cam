@@ -1,26 +1,23 @@
-<div id="staff-dash" class="dashboard">
+<div class="row">
+<div id="staff2-dash" class="dashboard span12">
  <h3>Instructor - Offerings Status</h3>
  <p>List of Instructors teaching in the current term and their status in completing necessary information</p>
  <table id="sortTableExample" class="table table-striped">	
   <thead>
    <tr>
-    <th >&nbsp;</th>
-    <th>Instructor</th>
-    <th>Course No</th>
-    <th>Course Title</th>
-    <th title="Status of Editting Details">Status</th>
+    <th class="instructor">Instructor</th>
+    <th class="course">Course</th>
+    <th class="stages"></th>
    </tr>
   </thead>
 	
   <% @offerings.each do |offering| %>
    <%for instructor in offering.instructors%>
     <tr title=<%=instructor.name%>>
-     <td>1</td>
-     <td><%=instructor.name%></td>
-     <td><%=offering.course.dept_code%> <%=offering.course.course_num%></td>
-     <td><%=offering.course.title%></td>
-     <td>
-        <div class = "btn-group stages"> 
+     <td class="instructor"><%=instructor.name%></td>
+     <td class="course"><%=offering.course %></td>
+     <td class="stages">
+        <div class="btn-group"> 
           <a class="btn <%= stage_color(offering, :review)%> btn-tiny" href="<%=offering_review_path(offering)%>">Review</a>
           <a class="btn <%= stage_color(offering, :details)%> btn-tiny" href="<%=offering_details_path(offering)%>">Details</a>
           <a class="btn <%= stage_color(offering, :objectives)%> btn-tiny" href="<%=offering_objectives_path(offering)%>">Objectives</a> 
@@ -33,4 +30,5 @@
    <%end%>	
   <%end%>
  </table>
+</div>
 </div>

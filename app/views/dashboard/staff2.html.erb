@@ -1,32 +1,31 @@
 <div id="staff-dash">
   <div>
-   <h3>Instructor - ABET - Status</h3>
-   <p>List of instructor with status of completing ABET information</p> 
+   <h3>Instructor Completion Status</h3>
+   <p>List of instructors with complete and uncomplete courses</p> 
   </div>
-
   <div class="row">
     <div class="span5 alert alert-success">
-      <h4>Instructors with all green</h4>
+      <h4>Instructors with all complete classes</h4><br>
       <div class="mini-layout">
         <ul>
           <% @greenInstructors.each do |inst| %>
-            <li><%=inst[:instructor].name%></li>
-          <%end%>
+            <li><%= inst[:instructor].name %></li>
+          <% end %>
         </ul>
       </div>
     </div>
     <div class="span5 alert alert-error">
-      <h4>Instructors with a red</h4>
+      <h4>Instructors with uncomplete classes</h4><br>
       <div class="mini-layout">
         <ul>
           <% @redInstructors.each do |inst_offr| %>
-            <li><%=inst_offr[:instructor].name%></li>
+            <li><%= inst_offr[:instructor].name %></li>
             <ul>
-              <%for ucOffr in inst_offr[:uncomplete] %>
-                <li><%=ucOffr.course.dept_code%> <%=ucOffr.course.course_num%></li>
-              <%end%>
+              <% inst_offr[:uncomplete].each do |offering| %>
+                <li><%= offering.course.dept_code%> <%= offering.course.course_num%></li>
+              <% end %>
             </ul>
-          <%end%>
+          <% end %>
         </ul>
       </div>
     </div>
