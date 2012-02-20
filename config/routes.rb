@@ -49,6 +49,7 @@ CourseAssessmentManager::Application.routes.draw do
     only: [:create, :destroy]
   match 'login' => 'user_sessions#new', as: 'login'
   match 'logout' => 'user_sessions#destroy', as: 'logout'
+  match 'unauthorized' => "misc#un_auth", as: 'unauthorized'
 
   match 'profile' => 'users#show', as: 'profile'
 
