@@ -4,6 +4,7 @@ class Offerings::DetailsController < OfferingsController
   layout 'offering'
 
   before_filter { @nav_offering = :details }
+  before_filter :require_user
 
   def edit
     @offering = Offering.find(params[:offering_id])

@@ -5,6 +5,7 @@ class Offerings::ReviewsController < OfferingsController
   layout 'offering'
 
   before_filter { @nav_offering = :review }
+  before_filter :require_user
 
   def show
   end

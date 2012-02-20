@@ -7,33 +7,30 @@ class CoursesController < ApplicationController
   before_filter { @nav_term = :courses }
 
   layout 'term'
+  before_filter :require_user
+  authorize_resource
 
   def index
     @courses = Course.all
-    authorize! :read, Course
     respond_with @courses
   end
 
   def show
     @course = Course.find(params[:id])
-    authorize! :read, @course
     respond_with @course
   end
 
   def new
     @course = Course.new
-    authorize! :read, @course
     respond_with @course
   end
 
   def edit
     @course = Course.find(params[:id])
-    authorize! :edit, @course
   end
 
   def create
     @course = Course.new(params[:course])
-    authorize! :create, @course
 
     respond_to do |format|
       if @course.save
@@ -55,7 +52,6 @@ class CoursesController < ApplicationController
 
   def update
     @course = Course.find(params[:id])
-    authorize! :update, @course
 
     respond_to do |format|
       if @course.update_attributes(params[:course])
@@ -75,7 +71,6 @@ class CoursesController < ApplicationController
 
   def destroy
     @course = Course.find(params[:id])
-    authorize! :destroy, @course
     @course.destroy
 
     respond_to do |format|

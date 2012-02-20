@@ -5,38 +5,34 @@ require 'csv'
 #
 class OfferingsController < ApplicationController
   respond_to :html, :json
+  before_filter :require_user
+  authorize_resource class: Offering
 
   layout 'offering', except: [:index, :new]
-  #layout 'application', except: [:show, :edit]
 
   before_filter { @nav_section = :offerings }
   before_filter :find_resource, except: [:index, :create]
 
   def index
     @offerings = Offering.all
-    authorize! :index, Offering
     respond_with @offerings, layout: 'application'
   end
 
   def show
     @nav_offering = :overview
-    authorize! :read, @offering
     respond_with @offering
   end
 
   def new
-    authorize! :read, @offering
     respond_with @offering
   end
 
   def edit
     @nav_offering = :overview
-    authorize! :edit, @offering
   end
 
   def create
     @offering = Offering.new(params[:offering])
-    authorize! :create, @offering
 
     respond_to do |format|
       if @offering.save
@@ -56,8 +52,6 @@ class OfferingsController < ApplicationController
   end
 
   def update
-    authorize! :update, @offering
-
     respond_to do |format|
       if @offering.update_attributes(params[:offering])
         format.html {
@@ -74,7 +68,6 @@ class OfferingsController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, @offering
     @offering.destroy
 
     respond_to do |format|

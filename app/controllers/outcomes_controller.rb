@@ -5,33 +5,30 @@ class OutcomesController < ApplicationController
   respond_to :html, :json
 
   before_filter { @nav_section = :outcomes }
+  before_filter :require_user
+  authorize_resource
 
   def index
     @outcomes = Outcome.all
-    authorize! :read, @outcomes
     respond_with @outcomes
   end
 
   def show
     @outcome = Outcome.find(params[:id])
-    authorize! :read, @outcome
     respond_with @outcome
   end
 
   def new
     @outcome = Outcome.new
-    authorize! :read, @outcome
     respond_with @outcome
   end
 
   def edit
     @outcome = Outcome.find(params[:id])
-    authorize! :edit, @outcome
   end
 
   def create
     @outcome = Outcome.new(params[:outcome])
-    authorize! :create, @outcome
 
     respond_to do |format|
       if @outcome.save
@@ -49,7 +46,6 @@ class OutcomesController < ApplicationController
 
   def update
     @outcome = Outcome.find(params[:id])
-    authorize! :update, @outcome
 
     respond_to do |format|
       if @outcome.update_attributes(params[:outcome])
@@ -66,7 +62,6 @@ class OutcomesController < ApplicationController
 
   def destroy
     @outcome = Outcome.find(params[:id])
-    authorize! :destroy, @outcome
     @outcome.destroy
 
     respond_to do |format|

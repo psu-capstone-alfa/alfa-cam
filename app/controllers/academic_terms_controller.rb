@@ -6,33 +6,30 @@ class AcademicTermsController < ApplicationController
   before_filter only: [:show, :edit] { @nav_term = :details }
 
   layout 'term', except: [:index, :new]
+  before_filter :require_user
+  authorize_resource
 
   def index
     @term = @academic_terms = AcademicTerm.all
-    authorize! :index, AcademicTerm
     respond_with @academic_terms, layout: 'application'
   end
 
   def show
     @term = @academic_term = AcademicTerm.find(params[:id])
-    authorize! :show, @academic_term
     respond_with @academic_term
   end
 
   def new
     @term = @academic_term = AcademicTerm.new
-    authorize! :new, @academic_term
     respond_with @academic_term, layout: 'application'
   end
 
   def edit
     @term = @academic_term = AcademicTerm.find(params[:id])
-    authorize! :edit, @academic_term
   end
 
   def create
     @academic_term = AcademicTerm.new(params[:academic_term])
-    authorize! :create, @academic_Term
 
     respond_to do |format|
       if @academic_term.save
@@ -57,7 +54,6 @@ class AcademicTermsController < ApplicationController
 
   def update
     @academic_term = AcademicTerm.find(params[:id])
-    authorize! :update, @academic_Term
 
     respond_to do |format|
       if @academic_term.update_attributes(params[:academic_term])
@@ -78,7 +74,6 @@ class AcademicTermsController < ApplicationController
 
   def destroy
     @academic_term = AcademicTerm.find(params[:id])
-    authorize! :destroy, @academic_term
     @academic_term.destroy
 
     respond_to do |format|
