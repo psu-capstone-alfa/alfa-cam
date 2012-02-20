@@ -27,7 +27,7 @@
       <% content_group_scopes(@offering.content_groups) do |group, id, name, css_class| %>
         <%= f.fields_for :content_groups, group do |cgf| %>
           <div id="<%= id %>" class="tab-pane <%= css_class %>">
-            <table class="table-bordered table-striped content-and-mappings">
+            <table class="table-bordered table-striped mappings content-and-mappings">
               <thead>
                 <tr>
                   <th></th>
