@@ -12,12 +12,21 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    @user_session = UserSession.new(params[:user_session])
+    login_type = case params[:login_type]
+      when 'ldap'
+        :ldap
+      when 'local'
+        :local
+      when 'skip' # TODO:rs remove authentication avoidance in production? :D
+        :skip
+      else
+        :local
+    end
 
-    # TODO: Remove after LDAP authenticating
-    @user_session.password = 'noth1n@here'
+    @session = UserSession.new(params[:user_session], login_type: login_type)
 
-    if @user_session.save!
+
+    if @session.save!
       flash[:notice] = "Login successful"
       redirect_back_or_default profile_path
     else

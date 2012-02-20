@@ -1,3 +1,4 @@
+require 'net/ldap'
 # Contains user login information
 # Defines authlogic login functionality
 #
@@ -5,9 +6,9 @@ class User < ActiveRecord::Base
   has_many :teachings
   has_many :offerings, through: :teachings
 
+  validates :login, format: { with: /\w+/ }
+
   acts_as_authentic do |config|
-    config.crypted_password_field = nil
-    config.validate_password_field(false)
   end
 
   ROLES = %w[instructor staff admin reviewer].map! &:to_sym
@@ -27,7 +28,19 @@ class User < ActiveRecord::Base
     roles.include?(role.to_sym)
   end
 
-  def valid_password?(*args)
+  def valid_ldap_password?(password)
+    ldap = Net::LDAP.new
+    ldap.host = 'ldap.cat.pdx.edu'
+    ldap.port = 389
+    ldap.encryption(:start_tls)
+    ldap.auth "uid=#{login},ou=People,dc=catnip", password
+    ldap.bind
+  end
+
+  # Called when password checking is being skipped
+  # TODO:rs don't keep this around in production
+  def skip_password_check(*)
+    puts "Skipped password check"
     true
   end
 

@@ -1,8 +1,42 @@
-<h1>Login</h1>
+<h1>Sign In</h1>
 
 <%= form_for @user_session, :url => user_session_path do |f| %>
-  <%= f.label :login %><br />
-  <%= f.select :login, @users.collect {|u| u.login } %><br />
+  <%= f.label :login %>
+  <%= f.text_field :login %>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
   <br />
-  <%= f.submit "Login" %>
+  <%= button_tag(
+    "CAT Login",
+    name: "login_type",
+    value: 'ldap',
+    class: 'btn'
+    )
+  %>
+  <%= button_tag(
+    "Local Login",
+    name: "login_type",
+    value: 'local',
+    class: 'btn'
+    )
+  %>
+<% end %>
+
+<br><br><br>
+
+<p>Or, since we're currently developing</p>
+<h2>Passwordless Sign In</h2>
+
+<%= form_for @user_session, :url => user_session_path do |f| %>
+  <%= f.label :login %>
+  <%= f.collection_select :login, User.all, :login, :name %>
+  <%= f.hidden_field :password, value: 'nopass' %>
+  <br>
+  <%= button_tag(
+    "Passwordless Login",
+    name: "login_type",
+    value: 'skip',
+    class: 'btn'
+    )
+  %>
 <% end %>
