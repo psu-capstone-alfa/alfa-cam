@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(:version => 20120220014614) do
     t.string   "required_or_elective"
     t.text     "prerequisite"
     t.text     "prerequisites"
+    t.text     "description"
   end
 
   create_table "outcome_groups", :force => true do |t|
