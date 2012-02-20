@@ -14,7 +14,9 @@
         <% @academic_terms.each do |term| %>
         <tr>
           <td><%= link_to term.title, term  %></td>
-          <td>Sept 26 : Dec 4</td>
+          <td>
+            <%= format_term_date(term.start_date) %> - <%= format_term_date(term.end_date) %>
+          </td>
           <td>10 / <%= term.offerings.count %></td>
           <td class="actions">
             <div>
