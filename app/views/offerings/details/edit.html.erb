@@ -1,7 +1,11 @@
-<%= form_for(@offering, :html => {:class => 'form-horizontal edit-offering'}) do |f| %>
+<%= form_for(@offering,
+  :html => {:class => 'form-horizontal edit-offering'}) do |f|
+%>
   <% if @offering.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@offering.errors.count, "error") %> prohibited this offering from being saved:</h2>
+      <h2><%= pluralize(@offering.errors.count, "error") %>
+        prohibited this offering from being saved:
+      </h2>
 
       <ul>
       <% @offering.errors.full_messages.each do |msg| %>
@@ -17,11 +21,21 @@
   </div>
   <div class="field">
     <%= f.label :term_id, "Term" %>
-    <%= f.collection_select :term_id, AcademicTerm.all, :id, :title, :prompt => "Select a Term" %>
+    <%= f.collection_select :term_id,
+      AcademicTerm.all,
+      :id,
+      :title,
+      :prompt => "Select a Term"
+    %>
   </div>
   <div class="field">
-    <%= f.label :course_id, "Course" %> 
-    <%= f.collection_select :course_id, Course.find(:all), :id, :course_field, :prompt => "Select a Course" %>
+    <%= f.label :course_id, "Course" %>
+    <%= f.collection_select :course_id,
+      Course.find(:all),
+      :id,
+      :course_field,
+      :prompt => "Select a Course"
+    %>
   </div>
   <div class="field">
     <%= f.label :section %>
@@ -31,19 +45,22 @@
     <%= f.label :credits %>
     <%= f.text_field :credits %>
   </div>
-  
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
   <div class="field">
     <%= f.label :required %>
-    <%= 
+    <%=
       options = [
-        ["Required for BSCE", "Required for BSCE"], 
+        ["Required for BSCE", "Required for BSCE"],
         ["Required for BSENVE", "Required for BSENVE"],
         ["Elective for BSCE", "Elective for BSCE"],
         ["Elective for BSENVE", "Elective for BSENVE"]
       ]
       #f.select(:required_or_elective, options, {}, {:multiple=>true})
       
-      # FIXME Use a control like a multi-select or radio button groups
+      # FIXME: tm Use a control like a multi-select or radio button groups
       # instead of a textfield for required_or_elective
       f.text_field :required_or_elective
     %>
@@ -51,8 +68,12 @@
   <div class="field">
     <%= f.label :instructors %>
     <%=
-      f.collection_select :instructor_ids, User.with_role(:instructor).all, :id,
-      :name, {}, {:multiple => true}
+      f.collection_select :instructor_ids,
+        User.with_role(:instructor).all,
+        :id,
+        :name,
+        {},
+        {:multiple => true}
     %>
   </div>
   <div class="field">
@@ -81,6 +102,6 @@
 <% end %>
 
 <p>
-    <%= link_to 'View', offering_details_path(@offering) %> | 
+    <%= link_to 'View', offering_details_path(@offering) %> |
     <%= link_to 'Return to offering List', offerings_path %>
 </p>
