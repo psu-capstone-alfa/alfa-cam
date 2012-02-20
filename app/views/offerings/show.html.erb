@@ -1,37 +1,67 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Course:</b>
-  <%= @offering.course_id %>
-</p>
+<div class="row">
+  <div class="span5 offset3">
+    <div class="row">
+      <div class="span2"><b>Instructor</b></div>
+      <div class="span3">
+        <div>Bart Massey</div>
+        <div>Andrew Tolmach</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span2"><b>Section</b></div>
+      <div class="span3"><%= @offering.section %></div>
+    </div>
+    <div class="row">
+      <div class="span2"><b>Credit</b></div>
+      <div class="span3">4</div>
+    </div>
+    <div class="row">
+      <div class="span2"><b>CRN</b></div>
+      <div class="span3"><%= @offering.crn %></div>
+    </div>
+    <div class="row">
+      <div class="span2"><b>Prerequisite(s)</b></div>
+      <div class="span3">CS300</div>
+    </div>
+    <div class="row">
+      <div class="span2"><b>Days/time</b></div>
+      <div class="span3">Monday 4:00-5:00</div>
+    </div>
+    <div class="row">
+      <div class="span2"><b>Location</b></div>
+      <div class="span3"><%= @offering.location %></div>
+    </div>
+    <div class="row">
+      <div class="span2"><b>Course Objective</b></div>
+      <div class="span3">First Objective: A,B,C,D</div>
+    </div>
+    <div class="row">
+      <div class="span2"><b>Assessment</b></div>
+      <div class="span3">
+        <div>First: no</div>
+        <div>Second: no</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span2"><b>Content</b></div>
+      <div class="span3">
+        <div>Lecture Topics: 10</div>
+        <div>Assignment(s): 0</div>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <b>Term:</b>
-  <%= @offering.term_id %>
-</p>
-
-<p>
-  <b>Section:</b>
-  <%= @offering.section %>
-</p>
-
-<p>
-  <b>Crn:</b>
-  <%= @offering.crn %>
-</p>
-
-<p>
-  <b>Location:</b>
-  <%= @offering.location %>
-</p>
-
-<%= link_to 'Review', offering_review_path(@offering) %> |
-<%= link_to 'Details', offering_details_path(@offering) %> |
-<%= link_to 'Objectives', offering_objectives_path(@offering) %> |
-<%= link_to 'Content', offering_content_path(@offering) %> |
-<%= link_to 'Assessment', offering_assessment_path(@offering) %>
-
-<br />
-
-<%= link_to_if can?(:edit, @offering), 'Edit', edit_offering_details_path(@offering) %> |
-<%= link_to 'Back', offerings_path %>
+  <!--Sidebar-->
+  <div class="span2 float-right">
+    <dl>
+      <dt>Export</dt>
+        <dd><a href="#">CSV</a></dd>
+        <dd><a href="#">HTML</a></dd>
+      <dt>Other</dt>
+        <dd><a href="#">Do Something</a></dd>
+        <dd><a href="#">Other</a></dd>
+    </dl>
+  </div>
+</div>
