@@ -82,19 +82,11 @@ class OfferingsController < ApplicationController
   end
 
   def export
-    @rows = [Offering.exportHeadings]
-
-    @offerings = Offering.all
-    if @offerings.empty?
-      @rows.push ["No records found"]
-    end
-    @offerings.each{ |offering|
-      @rows.push offering.exportFields
-    }
+    @offerings = Offering
 
     respond_to do |format|
       format.csv {
-        render :csv => @rows,
+        render :csv => @offerings,
           :filename => "offerings-#{Time.now.strftime('%Y%m%d-%H%M%S')}"
       }
     end
@@ -113,6 +105,10 @@ class OfferingsController < ApplicationController
     end
   end
 
-
-
+  def redirect_to(*args)
+    if params[:_redirect_endpoint]
+      args[0] = params[:_redirect_endpoint]
+    end
+    super(*args)
+  end
 end

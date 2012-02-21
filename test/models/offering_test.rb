@@ -1,62 +1,44 @@
 require "minitest_helper"
 
 describe Offering do
-  # fixtures :all
-
   before do
-    #@co = Course.create!(:dept_code => 'CE', :course_num => '123', :title => 'Testing')
-    #@at = AcademicTerm.create!(:title => "Fall 2020")
-    @co = Course.first
-    @at = AcademicTerm.first
-  end
-  
-  after do 
-    #@co.destroy
-    #@at.destroy
+    @offering = Factory(:offering)
   end
 
-  it "must not be valid without a term id" do 
-    @of = Offering.new(
-      :course_id => @co.id,
-      :section => "001",
-      :crn => "47668",
-      :location => "FAB 40-06"
-    )
-    assert_equal false, @of.valid?
-    #@of.academic_term_id = @at.id
-    @of.term_id = @at.id
-    assert_equal true, @of.valid?
-  end
-  
-  it "must not be valid without a course id" do 
-    @of = Offering.new(
-      :term_id => @at.id,
-      :section => "001",
-      :crn => "47668",
-      :location => "FAB 40-06"
-    )
-    assert_equal false, @of.valid?
-    @of.course_id = @co.id
-    assert_equal true, @of.valid?
-  end
-  
-  it "must export an array of export headings" do
-    exportHeadings = Offering.exportHeadings
-    exportHeadings.must_be_instance_of Array
-    exportHeadings.size.must_be :>, 0
-  end
-  
-  it "must export an array of export fields" do 
-    @of = Offering.new(
-      :course_id => @co.id,
-      :term_id => @at.id,
-      :section => "001",
-      :crn => "47668",
-      :location => "FAB 40-06"
-    )
-    exportFields = @of.exportFields
-    exportFields.must_be_instance_of Array
-    exportFields.size.must_be :>, 0
-  end 
+  describe "validations" do
+    it "must not be valid without a term id" do
+      @offering.term_id = nil
+      @offering.wont_be :valid?
+    end
 
+    it "must not be valid without a course id" do
+      @offering.course_id = nil
+      @offering.wont_be :valid?
+    end
+  end
+
+  describe "instructor relationships" do
+    it "must know who its instructors are" do
+      i1, i2 = Factory(:user), Factory(:user)
+      offering = Factory(:offering)
+      offering.instructors << i1
+      assert offering.taught_by? i1
+      assert !offering.taught_by?(i2)
+    end
+  end
+
+  describe "exporting" do
+    it "must export an array of export headings" do
+      export_headings = Offering.export_headings
+      export_headings.must_be_instance_of Array
+      export_headings.wont_equal []
+    end
+
+    it "must export an array of export fields" do
+      @offering = Factory(:offering)
+      export_fields = @offering.export_fields
+      export_fields.must_be_instance_of Array
+      export_fields.size.must_be :>, 0
+    end
+  end
 end

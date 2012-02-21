@@ -47,7 +47,11 @@ class Offering < ActiveRecord::Base
     "#{term.short}-#{course.short}"
   end
 
-  def self.exportHeadings
+  def taught_by?(instructor)
+    instructors.include? instructor
+  end
+
+  def self.export_headings
     [
       'Dept',
       'Course Number',
@@ -67,7 +71,7 @@ class Offering < ActiveRecord::Base
     ]
   end
 
-  def exportFields
+  def export_fields
     joined_instructors = instructors.map(&:name).join(',')
 
     joined_outcomes = outcomes.map(&:key).join(',')
@@ -115,4 +119,17 @@ class Offering < ActiveRecord::Base
     false
   end
 
+  %w[ready started complete].each do |phase|
+    define_method "is_#{phase}?" do |stage|
+      # call to_sym to allow strings to be passed
+      send("#{phase}_stages").include? stage.to_sym
+    end
+
+    STAGES.each do |stage|
+      define_method "is_#{stage}_#{phase}?" do
+        # no need for to_sym since we're iterating over the array of symbols
+        send("#{phase}_stages").include? stage
+      end
+    end
+  end
 end

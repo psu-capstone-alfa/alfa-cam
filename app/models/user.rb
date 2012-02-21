@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   acts_as_authentic do |config|
   end
 
-  ROLES = %w[instructor staff admin reviewer].map! &:to_sym
+  ROLES = [:instructor, :staff, :admin, :reviewer]
 
   def roles=(roles)
     roles.map!(&:to_sym)
@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
 
   def to_s
     name
+  end
+
+  def teaches?(offering)
+    offering.taught_by? self
   end
 
   scope :with_role, lambda { |role|
