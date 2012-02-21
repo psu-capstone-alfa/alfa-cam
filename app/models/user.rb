@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
 
   validates :login, format: { with: /\w+/ }
 
-  acts_as_authentic do |config|
+  acts_as_authentic do |c|
+    c.merge_validates_length_of_password_field_options({allow_nil: true})
   end
 
   ROLES = [:instructor, :staff, :admin, :reviewer]
