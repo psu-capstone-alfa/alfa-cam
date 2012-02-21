@@ -1,0 +1,68 @@
+<h1>Listing users</h1>
+
+<div class="row">
+  <div class="span10 offset1">
+    <table class="users-index table table-condensed">
+      <thead>
+      </thead>
+        <tr>
+          <th>Login</th>
+          <th>Name</th>
+          <th>Roles</th>
+          <th class="actions"></th>
+        </tr>
+
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to user.login, user %></td>
+          <td><%= user.name %></td>
+          <td class="actions">
+            <div>
+              <% user.roles.each do |role| %>
+                <% if role == :reviewer %>
+                  <a class="label"><%= role %></a>
+                  <% elsif role == :staff %>
+                    <a class="label label-success"><%= role %></a>
+                  <% elsif role == :admin %>
+                    <a class="label label-warning"><%= role %></a>
+                  <% else role == :instructor %>
+                    <a></a>
+                <% end %>
+              <% end %>
+                <% if user.roles.empty? == true %>
+                  <a class="label label-important">Disabled</a>
+                <% end %>
+            </div>
+          </td>
+
+          <td class="btn-group">
+            <div>
+              <% if can? :edit, user %>
+                <%= link_to edit_user_path(user),
+                  :class => 'btn btn-tiny btn-success' do
+                %>Edit
+                <% end %>
+              <% end %>
+              <a class="btn btn-tiny btn-danger"
+                 rel="tooltip"
+                 title="Remove"
+                 data-placement="bottom"
+                  <%= link_to(user,
+                    confirm: 'Are you sure?',
+                    method: :delete,
+                    :class => 'btn btn-tiny btn-danger') do
+                  %>
+                    <i class="icon-trash icon-white"></i></a>
+                  <% end %>
+            </div>
+        </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+
+<%= link_to 'New User', new_user_path %>

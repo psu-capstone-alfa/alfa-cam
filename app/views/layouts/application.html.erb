@@ -40,6 +40,11 @@
     </div>
 
     <div class="container">
+    <div class="row">
+       <% if flash[:alert] %>
+    <div class="notice"><%= flash[:alert] %></div>
+  <% end %>
+    </div>
       <div class="row">&nbsp;</div>
 
       <%= content_for?(:content) ? yield(:content) : yield %>
