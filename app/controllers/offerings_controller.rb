@@ -104,11 +104,4 @@ class OfferingsController < ApplicationController
         Offering.new
     end
   end
-
-  def redirect_to(*args)
-    if params[:_redirect_endpoint]
-      args[0] = params[:_redirect_endpoint]
-    end
-    super(*args)
-  end
 end

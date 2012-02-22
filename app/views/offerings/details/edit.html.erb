@@ -1,6 +1,7 @@
 <%= form_for(@offering,
   :html => {:class => 'form-horizontal edit-offering'}) do |f|
 %>
+  <%= redirect_token url_for(action: 'edit') %>
   <% if @offering.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@offering.errors.count, "error") %>

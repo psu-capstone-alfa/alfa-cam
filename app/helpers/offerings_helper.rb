@@ -13,4 +13,8 @@ module OfferingsHelper
       end
     end
   end
+
+  def redirect_token(path)
+    tag :input, name: '_redirect_endpoint', type: 'hidden', value: path
+  end
 end

@@ -1,7 +1,7 @@
 # Collecting course objectives in the third stage.
 # Objectives are mapped in a binary fashion against outcomes
 #
-class Offerings::ObjectivesController < OfferingsController
+class Offerings::ObjectivesController < Offerings::Children
   layout 'offering'
 
   before_filter :require_user
