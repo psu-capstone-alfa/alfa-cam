@@ -18,15 +18,16 @@ describe CoursesController do
   end
 
   it "should create course" do
+    attributes = Factory.build(:course).attributes
     lambda do
-      post :create, academic_term_id: @term, course: { dept_code: 'CS', course_num: '123', title: 'Testing' }
+      post :create, academic_term_id: @term, course: attributes
     end.must_change 'Course.count'
     must_redirect_to [@term, assigns(:course)]
   end
 
   describe 'an existing course' do
     before do
-      @course = Course.create!(dept_code: 'CS', course_num: '123', title: 'Testing')
+      @course = Factory :course
     end
 
     it 'must display show page' do

@@ -27,4 +27,12 @@ class AcademicTerm < ActiveRecord::Base
   def to_s
     title
   end
+
+  def available_courses
+    Course.available_during(self)
+  end
+
+  def self.current
+    last
+  end
 end

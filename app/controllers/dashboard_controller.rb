@@ -25,7 +25,12 @@ class DashboardController < ApplicationController
 
   def staff
     @staff = current_user
-    @offerings = Offering.all
+    @term = AcademicTerm.current
+    @offerings = Offering.
+      where(term_id: @term).
+      course_order.
+      with_instructors.
+      all
   end
 
   def staff2

@@ -17,12 +17,6 @@ outcomes = Outcome.create!( [
   { key: 'D', title: 'Da Outcome', description: 'Duh, Outcome!' },
 ])
 
-courses = Course.create!( [
-  {dept_code: 'CEE', course_num: '101', title: 'Engineering for Dummies', group: 'One Test'},
-  {dept_code: 'CEE', course_num: '161', title: 'Intro to Civil Engineering', group: 'Two Beta'},
-  {dept_code: 'CEE', course_num: '201', title: 'Cull the Flock', group: 'Two Beta'}
-])
-
 outcome_groups = OutcomeGroup.create!( [
   { title: '1', outcomes: outcomes[0..2] },
   { title: '2', outcomes: outcomes },
@@ -34,6 +28,12 @@ terms = AcademicTerm.create!( [
   {title: "Winter #{year}", outcome_group: outcome_groups.first},
   {title: "Spring #{year}", outcome_group: outcome_groups.second},
   {title: "Summer #{year}", outcome_group: outcome_groups.second},
+])
+
+courses = Course.create!( [
+  {dept_code: 'CEE', course_num: '101', title: 'Engineering for Dummies', group: 'One Test', created_term: terms[0]},
+  {dept_code: 'CEE', course_num: '161', title: 'Intro to Civil Engineering', group: 'Two Beta', created_term: terms[0]},
+  {dept_code: 'CEE', course_num: '201', title: 'Cull the Flock', group: 'Two Beta',created_term: terms[0]}
 ])
 
 offerings = Offering.create!( [

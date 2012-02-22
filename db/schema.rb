@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221005226) do
+ActiveRecord::Schema.define(:version => 20120221210802) do
 
   create_table "academic_terms", :force => true do |t|
     t.string   "title"
@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(:version => 20120221005226) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "group"
+    t.integer  "created_term_id"
+    t.integer  "retired_term_id"
   end
 
   create_table "mappings", :force => true do |t|

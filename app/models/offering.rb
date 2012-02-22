@@ -36,6 +36,15 @@ class Offering < ActiveRecord::Base
   validates :course_id, :term_id, :presence => true
   validates_associated :content_groups
 
+  # Scope
+  scope :course_order,
+    includes(:course).
+    order("courses.dept_code ASC, courses.course_num ASC")
+
+  scope :with_instructors,
+    includes(:instructors).
+    order("users.name ASC")
+
   def prepare_content_groups
     content_groups.each do |cg|
       cg.content.build_with_mappings(term.outcomes)

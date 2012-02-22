@@ -28,6 +28,7 @@ Factory.define :course do |f|
   f.dept_code 'CS'
   f.course_num '%d'
   f.title 'A course title'
+  f.created_term { Factory :term }
 end
 
 Factory.define :academic_term do |f|

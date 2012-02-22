@@ -11,7 +11,7 @@ class CoursesController < ApplicationController
   authorize_resource
 
   def index
-    @courses = Course.all
+    @courses = Course.available_during(@term).ordered
     respond_with @courses
   end
 

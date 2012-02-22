@@ -2,28 +2,30 @@ require "minitest_helper"
 
 describe Course do
   before do
-    @course = Course.new
+    @course = Factory :course
   end
 
-  it "must be invalid without department, number, and title" do
+  it 'must be invalid without department' do
+    @course.dept_code = nil
     @course.wont_be :valid?
+  end
 
-    @course[:dept_code] = 'CS'
+  it 'wont be valid without course number' do
+    @course.course_num = nil
     @course.wont_be :valid?
+  end
 
-    @course[:course_num] = '123'
+  it 'wont be valid without title' do
+    @course.title = nil
     @course.wont_be :valid?
+  end
 
-    @course[:title] = "Writing Unit Tests"
-
-    @course.must_be :valid?
+  it 'wont be valid without associated creation term' do
+    @course.created_term = nil
+    @course.wont_be :valid?
   end
 
   describe 'destruction restrictions' do
-    before do
-      @course = Factory :course
-    end
-
     it 'must be destroyed when not related to offerings' do
       @course.offerings = []
       @course.destroy.wont_equal false

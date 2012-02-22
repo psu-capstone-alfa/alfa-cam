@@ -16,11 +16,21 @@ class Course < ActiveRecord::Base
   has_many :replaces, through: :replacements_to
   has_many :replaced_with, through: :replacements_from
 
+  # Term created/retired links
+  belongs_to :created_term, class_name: 'AcademicTerm'
+  belongs_to :retired_term, class_name: 'AcademicTerm'
+  validates_presence_of :created_term
+
   # Cannot destroy course if offerings are related to it
   before_destroy :check_for_offerings
 
   # Course details are required
   validates_presence_of :dept_code, :course_num, :title
+
+  #
+  # Scopes
+  #
+  scope :ordered, order("dept_code ASC, course_num ASC")
 
   #will show the fields
   def to_s
@@ -40,6 +50,11 @@ class Course < ActiveRecord::Base
       self.errors[:base] << "Sorry, you cannot delete a course with offerings."
       false
     end
+  end
+
+  def self.available_during(term)
+    where("created_term_id <= ?", term.id).
+    where("retired_term_id >= ? OR retired_term_id IS NULL", term.id)
   end
 
 end
