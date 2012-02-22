@@ -19,7 +19,7 @@ class OfferingsController < ApplicationController
   end
 
   def show
-    @nav_offering = :overview
+    @nav_offering = :summary
     respond_with @offering
   end
 
@@ -28,7 +28,7 @@ class OfferingsController < ApplicationController
   end
 
   def edit
-    @nav_offering = :overview
+    @nav_offering = :manage
   end
 
   def create
