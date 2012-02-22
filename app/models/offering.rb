@@ -12,9 +12,18 @@ class Offering < ActiveRecord::Base
   has_many :teachings
   has_many :instructors, through: :teachings
 
-  has_one :assessment, include: :objective_assessments
-  has_many :objective_assessments
 
+  ## Assessments
+  has_one :assessment, include: :objective_assessments
+  has_many :objective_assessments, through: :assessment
+  accepts_nested_attributes_for :assessment, :objective_assessments
+  def get_or_create_assessment
+    return assessment unless assessment.nil?
+    create_assessment!
+  end
+
+
+  ## Contents
   has_many :content_groups do
     def build_with_content
       new_group = self.build
@@ -23,6 +32,7 @@ class Offering < ActiveRecord::Base
     end
   end
   has_many :content, :through => :content_groups
+
 
   # don't accept unnamed content groups with no content attributes
   accepts_nested_attributes_for :content_groups, reject_if: ->(cg) do

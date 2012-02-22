@@ -4,13 +4,15 @@
 class Offerings::AssessmentsController < Offerings::Children
   layout 'offering'
 
-  before_filter { @nav_offering = :assessment }
+  before_filter { @nav_offering = :assessments }
   before_filter :require_user
 
   def summary
   end
 
   def edit
+    @assessment = @offering.get_or_create_assessment
+    @objective_assessments = @assessment.objective_assessments
   end
 
   def show

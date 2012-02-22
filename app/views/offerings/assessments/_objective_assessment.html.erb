@@ -1,0 +1,31 @@
+<% first = objective_assessment_counter == 0 %>
+<% obj = objective_assessment %>
+
+<%= f.fields_for :objective_assessments, objective_assessment do |of| %>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a
+        class="accordion-toggle"
+        data-toggle="collapse"
+        data-parent="#assessment-accordion"
+        href="#objective-<%= obj.id %>"
+      ><%= obj.objective %></a>
+    </div>
+    <div id="objective-<%= obj.id %>"
+         class="accordion-body collapse <%= 'in' if first %>">
+      <div class="accordion-inner">
+        <%
+          { :assessed => "How was the objective assessed?",
+            :well_met => "How well met was this objective?",
+            :improved => "How could the objective be improved?"
+          }.each do |field,label| %>
+            <%= render partial: 'assessment_field',
+              locals:
+                { field: field,
+                  label: label,
+                  f: of } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

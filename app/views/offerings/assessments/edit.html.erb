@@ -1,2 +1,49 @@
-<h1 class="fail">Nothing here</h1>
+
+<% if @offering.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@offering.errors.count, "error") %> prohibited this offering from being saved:</h2>
+
+    <ul>
+      <% @offering.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<%= form_for(@offering,
+  html: {class: 'offering-assessment form-horizontal'}) do |f|
+  %>
+  <%= f.hidden_field :assessments_done, value: true %>
+  <div class="row"><div class="span8 offset1">
+    <div class="accordion" id="assessment-accordion">
+      <%= render partial: 'objective_assessment',
+        collection: @objective_assessments,
+        locals: {f: f}
+      %>
+    </div>
+    <br>
+    <%= f.fields_for :assessment do |af| %>
+      <%= render partial: 'assessment_field', locals: {
+        f: af,
+        field: :improved,
+        label: "How could this course be improved?" }
+      %>
+      <%= render partial: 'assessment_field', locals: {
+        f: af,
+        field: :comments,
+        label: "Any additional comments:" }
+      %>
+    <% end %>
+
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="reset" class="btn">Cancel</button>
+    </div>
+
+  </div></div>
+<% end %>
+
 
