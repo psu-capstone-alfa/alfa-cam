@@ -52,7 +52,8 @@ CourseAssessmentManager::Application.routes.draw do
   match 'logout' => 'user_sessions#destroy', as: 'logout'
   match 'unauthorized' => "misc#un_auth", as: 'unauthorized'
 
-  match 'profile' => 'users#show', as: 'profile'
+  resources :users
+  match 'profile' => 'users#profile', as: 'profile'
 
   root to: 'dashboard#home'
 

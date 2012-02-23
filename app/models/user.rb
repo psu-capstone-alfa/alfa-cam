@@ -12,9 +12,10 @@ class User < ActiveRecord::Base
     c.merge_validates_length_of_password_field_options({allow_nil: true})
   end
 
-  ROLES = [:instructor, :staff, :admin, :reviewer]
+  ROLES = [:reviewer, :instructor, :staff, :admin]
 
   def roles=(roles)
+    roles = [roles] if roles.is_a? String
     roles.map!(&:to_sym)
     self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
   end

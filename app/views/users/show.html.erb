@@ -1,32 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
-
-<p>
   <b>Login:</b>
   <%= @user.login %>
 </p>
 
 <p>
-  <b>Last Login:</b>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Last login at:</b>
   <%= @user.last_login_at %>
 </p>
 
 <p>
-  <b>User Since:</b>
-  <%= @user.created_at %>
+  <b>Roles:</b>
+  <%= user_role_labels(@user,true) %>
 </p>
 
-<p>
-  <b>Roles:</b><br>
-  <% for role in @user.roles %>
-    <%=h role.to_s.humanize %><br />
-  <% end %>
-</p>
 
-<p>
-  <%= link_to 'Log Out', user_session_path, confirm: 'Are you sure?', method: :delete %>
-</p>
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

@@ -1,0 +1,54 @@
+<h1>Users</h1>
+
+<%= empty_row %>
+
+<div id="users-index" class="row">
+  <div class="span10 offset1">
+    <table class="users-index table table-condensed">
+      <thead>
+      </thead>
+        <tr>
+          <th>Login</th>
+          <th>Name</th>
+          <th>Roles</th>
+          <th class="actions"></th>
+        </tr>
+
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <td class="login"><%= link_to user.login, user %></td>
+          <td class="name"><%= user.name %></td>
+          <td class="roles">
+            <div><%= user_role_labels(user) %></div>
+          </td>
+
+          <td class="actions">
+            <div>
+              <% if can? :edit, user %>
+                <%= link_to edit_user_path(user),
+                  :class => 'btn btn-tiny btn-success' do
+                %>Edit
+                <% end %>
+              <% end %>
+              <a class="btn btn-tiny btn-danger"
+                 title="Remove"
+                 data-placement="bottom"
+                  <%= link_to(user,
+                    confirm: 'Are you sure?',
+                    method: :delete,
+                    :class => 'btn btn-tiny btn-danger') do
+                  %>
+                    <i class="icon-trash icon-white"></i></a>
+                  <% end %>
+            </div>
+        </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+
+<%= link_to 'New User', new_user_path %>
