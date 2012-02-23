@@ -1,22 +1,30 @@
 <% content_for :content do %>
   <div class="row">
     <div class="span9">
-      <h1><%= link_to @offering.course.title, offering_path(@offering) %></h1>
+      <h1><%= link_to @offering.course, offering_path(@offering) %></h1>
     </div>
     <div class="span3" style="text-align: right;">
       <h1><%= @offering.term %></h1>
     </div>
   </div>
-
+  <br>
   <div class="row">
     <div class="span12">
       <ul class="nav nav-tabs">
         <li class="<%= active_if(@nav_offering, :summary) %>">
           <%= link_to 'Summary', @offering %>
         </li>
+        <li class="disabled"><a></a></li>
         <% Offering::EDITING_STAGES.each do |stage| %>
           <%= stage_navbar_link stage %>
         <% end %>
+        <li class="status">
+          <% unless @offering.completed? %>
+            <span class="label label-warning">In-Progress</span>
+          <% else %>
+            <span class="label label-success">Complete</span>
+          <% end %>
+        </li>
       </ul>
     </div>
   </div>

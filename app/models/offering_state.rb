@@ -62,6 +62,7 @@ module OfferingState
   end
 
   def completed?
+    populate_stage_status unless @stages_cached
     @complete == STAGES
   end
 
