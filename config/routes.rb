@@ -39,7 +39,7 @@ CourseAssessmentManager::Application.routes.draw do
         get :summary, as: 'summarize'
       end
 
-      resource :assessment, only: [:edit, :show, :update, :destroy] do
+      resource :assessments, only: [:edit, :show, :update, :destroy] do
         get :summary, as: 'summarize'
       end
     end

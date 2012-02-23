@@ -106,6 +106,12 @@ ActiveRecord::Schema.define(:version => 20120221210802) do
     t.text     "prerequisite"
     t.text     "prerequisites"
     t.text     "description"
+    t.boolean  "review_done"
+    t.boolean  "importing_done"
+    t.boolean  "details_done"
+    t.boolean  "objectives_done"
+    t.boolean  "content_done"
+    t.boolean  "assessments_done"
   end
 
   create_table "outcome_groups", :force => true do |t|

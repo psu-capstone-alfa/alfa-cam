@@ -2,6 +2,8 @@
 # by some number of instructors
 #
 class Offering < ActiveRecord::Base
+  include OfferingState
+
   belongs_to :course
   belongs_to :term, class_name: 'AcademicTerm', foreign_key: 'term_id'
   has_many :outcomes, :through => :term
@@ -106,39 +108,4 @@ class Offering < ActiveRecord::Base
     ]
   end
 
-  # Stage status methods
-  STAGES = [:review, :importing, :details, :objectives, :content, :assessment]
-  EDITING_STAGES = STAGES - [:review, :importing]
-
-  def ready_stages
-    [:details, :objectives, :content]
-  end
-
-  # Green
-  def complete_stages
-    [:review, :importing, :details, :objectives]
-  end
-
-  # Yellow
-  def started_stages
-    [:details, :objectives, :content]
-  end
-
-  def completed?
-    false
-  end
-
-  %w[ready started complete].each do |phase|
-    define_method "is_#{phase}?" do |stage|
-      # call to_sym to allow strings to be passed
-      send("#{phase}_stages").include? stage.to_sym
-    end
-
-    STAGES.each do |stage|
-      define_method "is_#{stage}_#{phase}?" do
-        # no need for to_sym since we're iterating over the array of symbols
-        send("#{phase}_stages").include? stage
-      end
-    end
-  end
 end

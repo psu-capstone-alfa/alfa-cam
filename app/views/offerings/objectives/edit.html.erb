@@ -2,6 +2,7 @@
 <hr>
 
 <%= bs_form_for(@offering, html: {class: 'offering-content-groups'}) do |f| %>
+  <%= f.hidden_field :objectives_done, value: true %>
   <% if @offering.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@offering.errors.count, "error") %> prohibited this offering from being saved:</h2>

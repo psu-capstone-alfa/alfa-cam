@@ -10,7 +10,7 @@ class Ability
     end
     if user.is? :instructor
       can :manage, Offering do |offering|
-        offering.taught_by user
+        offering.taught_by? user
       end
       can :read, :all
     end

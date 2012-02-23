@@ -14,7 +14,7 @@
         <li class="<%= active_if(@nav_offering, :summary) %>">
           <%= link_to 'Summary', @offering %>
         </li>
-        <% [:details, :objectives, :content, :assessment].each do |stage| %>
+        <% Offering::EDITING_STAGES.each do |stage| %>
           <%= stage_navbar_link stage %>
         <% end %>
       </ul>
