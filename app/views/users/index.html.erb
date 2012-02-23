@@ -6,14 +6,13 @@
   <div class="span10 offset1">
     <table class="users-index table table-condensed">
       <thead>
-      </thead>
         <tr>
           <th>Login</th>
           <th>Name</th>
           <th>Roles</th>
           <th class="actions"></th>
         </tr>
-
+      </thead>
       <tbody>
         <% @users.each do |user| %>
         <tr>
@@ -22,7 +21,6 @@
           <td class="roles">
             <div><%= user_role_labels(user) %></div>
           </td>
-
           <td class="actions">
             <div>
               <% if can? :edit, user %>
