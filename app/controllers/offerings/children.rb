@@ -1,3 +1,4 @@
+# Common functionality among Offerings:: sub controllers
 class Offerings::Children < OfferingsController
 
   before_filter :redirect_to_edit, only: [:show]

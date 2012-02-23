@@ -9,8 +9,8 @@ class Ability
       can :read, :all
     end
     if user.is? :instructor
-      can :edit, Offering do |offering|
-        offering.instructors.include? user
+      can :manage, Offering do |offering|
+        offering.taught_by user
       end
       can :read, :all
     end

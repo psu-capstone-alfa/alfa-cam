@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     exception.default_message = "You do not have authorization for this page"
-    redirect_to unauthorized_path
+    render 'misc/un_auth'
   end
 
   def redirect_to(*args)
