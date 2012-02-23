@@ -1,6 +1,8 @@
-<h1>Listing users</h1>
+<h1>Users</h1>
 
-<div class="row">
+<%= empty_row %>
+
+<div id="users-index" class="row">
   <div class="span10 offset1">
     <table class="users-index table table-condensed">
       <thead>
@@ -15,28 +17,13 @@
       <tbody>
         <% @users.each do |user| %>
         <tr>
-          <td><%= link_to user.login, user %></td>
-          <td><%= user.name %></td>
-          <td class="actions">
-            <div>
-              <% user.roles.each do |role| %>
-                <% if role == :reviewer %>
-                  <a class="label"><%= role %></a>
-                  <% elsif role == :staff %>
-                    <a class="label label-success"><%= role %></a>
-                  <% elsif role == :admin %>
-                    <a class="label label-warning"><%= role %></a>
-                  <% else role == :instructor %>
-                    <a></a>
-                <% end %>
-              <% end %>
-                <% if user.roles.empty? == true %>
-                  <a class="label label-important">Disabled</a>
-                <% end %>
-            </div>
+          <td class="login"><%= link_to user.login, user %></td>
+          <td class="name"><%= user.name %></td>
+          <td class="roles">
+            <div><%= user_role_labels(user) %></div>
           </td>
 
-          <td class="btn-group">
+          <td class="actions">
             <div>
               <% if can? :edit, user %>
                 <%= link_to edit_user_path(user),
@@ -45,7 +32,6 @@
                 <% end %>
               <% end %>
               <a class="btn btn-tiny btn-danger"
-                 rel="tooltip"
                  title="Remove"
                  data-placement="bottom"
                   <%= link_to(user,

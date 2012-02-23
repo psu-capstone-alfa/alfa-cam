@@ -70,4 +70,10 @@ module ApplicationHelper
     end
   end
 
+
+  def empty_row
+    content_tag :div, class: 'row' do
+      content_tag :br
+    end
+  end
 end
