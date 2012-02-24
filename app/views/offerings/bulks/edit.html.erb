@@ -1,0 +1,51 @@
+<h2>Course Offerings for <%= @term %></h2>
+
+<form method="get">
+  <div class="row">
+    <div id="instructors" class="span4">
+      <h3>Instructors</h3>
+      <div class="row">
+        <% @instructors.each do |instructor| %>
+          <button class="btn span2"
+                  value="<%= instructor.id %>"><%= instructor %></button>
+        <% end %>
+      </div>
+    </div>
+
+    <div id="courses" class="span8">
+      <% @instructors.each do |instructor| %>
+      <div id="course-<%= instructor.id %>">
+        <h3>Offerings for <%= instructor %></h3>
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#frequent_<%= instructor.id %>" data-toggle="tab">Frequent</a></li>
+          <li class="all-courses"><a href="#all_<%= instructor.id %>" data-toggle="tab">All</a></li>
+        </ul>
+        <div class="tabbable">
+          <div class="tab-content">
+            <div class="tab-pane active row" id="frequent_<%= instructor.id %>">
+              <% @frequent_courses[instructor.id][:courses].each do |course| %>
+              <button class="btn span2" value="<%= instructor.id %>_<%= course.id %>">
+                <%= course %>
+              </button>
+              <% end %>
+            </div>
+            <div class="tab-pane row" id="all_<%= instructor.id %>">
+              <% @courses.each do |course| %>
+              <button class="btn span2" value="<%= instructor.id %>_<%= course.id %>">
+                <%= course %>
+              </button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="span8 offset4">
+      <hr>
+      <button class="btn btn-primary pull-right" type="submit">Do eet</button>
+    </div>
+  </div>
+</form>

@@ -7,6 +7,10 @@ CourseAssessmentManager::Application.routes.draw do
     resources :courses do
       collection { get :bulk_edit }
     end
+
+    namespace :offerings do
+      resource :bulk, only: [:edit, :update, :create]
+    end
   end
 
   scope controller: :dashboard, path: 'home', as: 'home' do
