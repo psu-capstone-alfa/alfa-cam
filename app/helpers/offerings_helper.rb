@@ -18,3 +18,13 @@ module OfferingsHelper
     tag :input, name: '_redirect_endpoint', type: 'hidden', value: path
   end
 end
+
+def stage_label_color(offering, stage)
+    if offering.complete_stages.include?(stage)
+      "label-success"
+    elsif offering.started_stages.include?(stage)
+      "label-warning"
+    else
+      "label-important"
+    end
+  end

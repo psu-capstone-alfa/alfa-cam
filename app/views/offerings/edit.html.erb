@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-  
+
   <div class="field">
     <%= f.label :crn %>
     <%= f.text_field :crn %>
@@ -20,7 +20,7 @@
     <%= f.collection_select :term_id, AcademicTerm.all, :id, :title, :prompt => "Select a Term" %>
   </div>
   <div class="field">
-    <%= f.label :course_id, "Course" %> 
+    <%= f.label :course_id, "Course" %>
     <%= f.collection_select :course_id, Course.find(:all), :id, :course_field, :prompt => "Select a Course" %>
   </div>
   <div class="field">
@@ -31,18 +31,18 @@
     <%= f.label :credits %>
     <%= f.text_field :credits %>
   </div>
-  
+
   <div class="field">
     <%= f.label :required %>
-    <%= 
+    <%=
       options = [
-        ["Required for BSCE", "Required for BSCE"], 
+        ["Required for BSCE", "Required for BSCE"],
         ["Required for BSENVE", "Required for BSENVE"],
         ["Elective for BSCE", "Elective for BSCE"],
         ["Elective for BSENVE", "Elective for BSENVE"]
       ]
       #f.select(:required_or_elective, options, {}, {:multiple=>true})
-      
+
       # FIXME Use a control like a multi-select or radio button groups
       # instead of a textfield for required_or_elective
       f.text_field :required_or_elective
@@ -81,6 +81,6 @@
 <% end %>
 
 <p>
-    <%= link_to 'View', offering_details_path(@offering) %> | 
+    <%= link_to 'View', offering_details_path(@offering) %> |
     <%= link_to 'Return to offering List', offerings_path %>
 </p>

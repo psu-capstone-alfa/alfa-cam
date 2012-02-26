@@ -1,74 +1,190 @@
-<table class='offering-details-view'>
-  <tr>
-    <td>CRN#</td><td><%= @offering.crn %></td>
-  </tr>
-  <tr>
-    <td>Term</td><td><%= @term.title %></td>
-  </tr>
-  <tr>
-    <td>Course</td><td><%= "#{@course.dept_code} #{@course.course_num}" %></td>
-  </tr>
-  <tr>
-    <td>Title</td><td><%= @course.title %></td>
-  </tr>
-  <tr>
-    <td>Section</td><td><%= @offering.section %></td>
-  </tr>
-  <tr>
-    <td>Credits</td><td><%= @offering.credits %></td>
-  </tr>
-  <tr>
-    <td>Required/Elective</td>
-    <td>
-      <%= @offering.required_or_elective %>
-    </td>
-  </tr>
-  <tr>
-    <td>Instructor(s)</td>
-    <td>
-      <%=
-        str = ""
-        @instructors.each { |instructor| str << "#{instructor.name}, " }
-        str.chomp!(", ")
-        str
-      %>
-    </td>
-  </tr>
-  <tr>
-    <td>Day/Time</td>
-    <td>
-      <%= @offering.day_and_time %>
-    </td>
-  </tr>
-  <tr>
-    <td>Prerequisites</td>
-    <td>
-      <%= @offering.prerequisites %>
-    </td>
-  </tr>
-  <tr>
-    <td>Textbook</td>
-    <td>
-      <%= @offering.textbook %>
-    </td>
-  </tr>
-  <tr>
-    <td>Additional Textbook(s)</td>
-    <td>
-      <%= @offering.additional_textbooks %>
-    </td>
-  </tr>
-  <tr>
-    <td>Location</td>
-    <td>
-      <%= @offering.location %>
-    </td>
-  </tr>
-</table>
-<p>
-<%= 
-  link_to_if can?(:edit, @offering), 'Edit',
-  edit_offering_details_path(@offering) 
-%> 
-| <%= link_to 'Return to offering List', offerings_path %>
-</p>
+<!-- Offering Details Show -->
+
+<div class="span12">
+  <div class="row">
+
+    <div id="offering-summary">
+      <div class="span4">
+          <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Instructor(s)</dt>
+            </div>
+            <div class="span2">
+              <dd>
+                <%=
+                  str = ""
+                  @offering.instructors.each { |instructor| str << "#{instructor.name}, " }
+                  str.chomp!(", ")
+                  str
+                %>
+              </dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>CRN</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.crn %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Term</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.term %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Course</dt>
+            </div>
+            <div class="span2">
+              <dd><%= "#{@course.dept_code} #{@course.course_num}" %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Title</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @course.title %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Section</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.section %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Credit(s)</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.credits %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Location</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.location %></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="span6">
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Days/Time</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.day_and_time %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Required/Elective</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.required_or_elective %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Course Objective</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.objectives_done %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Content</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.content_done %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Assessment</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.assessments_done %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Textbook</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.textbook %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Additional Textbooks</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.additional_textbooks %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Prerequisite(s)</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.prerequisites %></dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="offset1">
+  <%=
+    link_to_if can?(:edit, @offering),
+      'Edit',
+      edit_offering_details_path(@offering),
+      :class => 'btn btn-success'
+  %>
+</div>
