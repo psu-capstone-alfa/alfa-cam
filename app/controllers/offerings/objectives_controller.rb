@@ -23,6 +23,8 @@ class Offerings::ObjectivesController < Offerings::Children
   end
 
   def show
+    @outcomes = @offering.outcomes
+    @objectives = @offering.objectives
   end
 
 end

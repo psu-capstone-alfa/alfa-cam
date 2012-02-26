@@ -1,2 +1,27 @@
-<h1 class="fail">Nothing here</h1>
+<h1><%= @offering %></h1>
+<hr>
 
+<table class="table-bordered table-striped objective mappings">
+  <thead>
+    <tr>
+      <th></th>
+        <% @outcomes.each do |outcome| %>
+        <th class="outcome"><abbr title="<%= outcome.title %>"><%= outcome.key %></abbr></th>
+        <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @objectives.each do |objective| %>
+      <tr> 
+        <th><%= objective.description %></th>
+        <% objective.mappings.each do |outcome| %>
+          <td>
+          <% if outcome.value > 0 %>
+            X
+          <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
