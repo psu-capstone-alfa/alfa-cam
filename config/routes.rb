@@ -20,12 +20,10 @@ CourseAssessmentManager::Application.routes.draw do
 
   resources :offerings do
     collection do
-      post :search 
       get :search
       get :export
       get :facets
     end
-
     scope :module => :offerings do # Sub controllers under Offering::
       resource :review, only: [:show, :update] do
         get ':id', action: :specific, as: 'specific'

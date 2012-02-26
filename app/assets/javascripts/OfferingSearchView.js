@@ -19,6 +19,7 @@ var OfferingSearchView = Backbone.View.extend({
   },
 
 	initializeSearch: function() {
+		$(".visual_search").after("<div id='search_help'>Possible search terms: Term, Instructor, Crn</div>");
 		var facets = $.extend(true, [], this.model.attributes);
 		VS.init({
 	     container  : $('.visual_search'),
@@ -31,7 +32,7 @@ var OfferingSearchView = Backbone.View.extend({
 						data[facet.get("category")] = facet.get("value");
 					});
 					var offerings = $.ajax({
-					  type: 'POST',
+					  type: 'GET',
 					  url: '/offerings/search.json',
 					  data: data,
 					  success: function(data) {

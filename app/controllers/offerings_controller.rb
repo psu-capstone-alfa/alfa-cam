@@ -77,7 +77,6 @@ class OfferingsController < ApplicationController
   end
 
   def facets
-    
     instructors = Array.new
     User.with_role(:instructor).all.each {
       |inst| instructors << {
@@ -107,7 +106,6 @@ class OfferingsController < ApplicationController
     respond_to do |format|
       format.json { render :json => obj }
     end
-    
   end
   
   def search
