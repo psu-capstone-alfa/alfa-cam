@@ -8,7 +8,7 @@ class OfferingsController < ApplicationController
   before_filter :require_user
   authorize_resource class: Offering
 
-  layout 'offering', except: [:index, :new]
+  layout 'offering', only: [:show, :new, :edit]
 
   before_filter { @nav_section = :offerings }
   before_filter :find_resource, except: [:index, :create]
@@ -114,10 +114,12 @@ class OfferingsController < ApplicationController
     conditions[:users] = {:id => params[:instructor].to_i} unless params[:instructor].blank?
     conditions[:crn] = params[:crn].to_i unless params[:crn].blank?
     @offerings = Offering.joins(:instructors).where(conditions).uniq
-    respond_to do |format|
-      format.html
-      format.json { render :json => @offerings }
+    if params[:partial].blank?
+      respond_with @offerings, :layout => 'application'
+    else
+      render :partial => 'search_table', :layout => false
     end
+    
   end
 
 =begin
