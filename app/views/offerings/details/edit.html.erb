@@ -1,110 +1,110 @@
-<%= form_for(@offering,
-  :html => {:class => 'form-horizontal edit-offering'}) do |f|
-%>
-  <%= redirect_token url_for(action: 'edit') %>
+<!-- Offering-Details-Edit -->
+<h2>Details Edit</h2>
+
+
+
+<div class="row"><div class="span12">
   <% if @offering.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@offering.errors.count, "error") %>
+      <h2>
+        <%= pluralize(@offering.errors.count, "error") %>
         prohibited this offering from being saved:
       </h2>
-
       <ul>
-      <% @offering.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @offering.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-  
-  <div class="field">
-    <%= f.label :crn %>
-    <%= f.text_field :crn %>
-  </div>
-  <div class="field">
-    <%= f.label :term_id, "Term" %>
-    <%= f.collection_select :term_id,
-      AcademicTerm.all,
-      :id,
-      :title,
-      :prompt => "Select a Term"
-    %>
-  </div>
-  <div class="field">
-    <%= f.label :course_id, "Course" %>
-    <%= f.collection_select :course_id,
-      Course.find(:all),
-      :id,
-      :course_field,
-      :prompt => "Select a Course"
-    %>
-  </div>
-  <div class="field">
-    <%= f.label :section %>
-    <%= f.text_field :section %>
-  </div>
-  <div class="field">
-    <%= f.label :credits %>
-    <%= f.text_field :credits %>
-  </div>
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :required %>
-    <%=
-      options = [
-        ["Required for BSCE", "Required for BSCE"],
-        ["Required for BSENVE", "Required for BSENVE"],
-        ["Elective for BSCE", "Elective for BSCE"],
-        ["Elective for BSENVE", "Elective for BSENVE"]
-      ]
-      #f.select(:required_or_elective, options, {}, {:multiple=>true})
-      
-      # FIXME: tm Use a control like a multi-select or radio button groups
-      # instead of a textfield for required_or_elective
-      f.text_field :required_or_elective
-    %>
-  </div>
-  <div class="field">
-    <%= f.label :instructors %>
-    <%=
-      f.collection_select :instructor_ids,
-        User.with_role(:instructor).all,
-        :id,
-        :name,
-        {},
-        {:multiple => true}
-    %>
-  </div>
-  <div class="field">
-    <%= f.label "Day/Time" %>
-    <%= f.text_field :day_and_time %>
-  </div>
-  <div class="field">
-    <%= f.label :prerequisites %>
-    <%= f.text_area :prerequisites %>
-  </div>
-  <div class="field">
-    <%= f.label :textbook %>
-    <%= f.text_area :textbook %>
-  </div>
-  <div class="field">
-    <%= f.label :additional_textbooks %>
-    <%= f.text_area :additional_textbooks %>
-  </div>
-  <div class="field">
-    <%= f.label :location %>
-    <%= f.text_field :location %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-
-  <%= f.hidden_field :details_done, value: true %>
-<% end %>
-
-<p>
-    <%= link_to 'View', offering_details_path(@offering) %> |
-    <%= link_to 'Return to offering List', offerings_path %>
-</p>
+  <%= form_for(@offering,
+    :html => {:class => 'form-horizontal edit-offering'}) do |f|
+  %>
+    <%= redirect_token url_for(action: 'edit') %>
+    <div class="row">
+      <div class="span6">
+        <div class="control-group">
+          <label class="control-label">CRN</label>
+          <div class="controls">
+            <%= f.text_field :crn, class: 'span4' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Section</label>
+          <div class="controls">
+            <%= f.text_field :section, class: 'span4' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Credit(s)</label>
+          <div class="controls">
+            <%= f.text_field :credits, class: 'span4' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Location</label>
+          <div class="controls">
+            <%= f.text_field :location, class: 'span4' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Required</label>
+          <div class="controls">
+            <%=
+              #options = [
+              #  ["Required for BSCE", "Required for BSCE"],
+              #  ["Required for BSENVE", "Required for BSENVE"],
+              #  ["Elective for BSCE", "Elective for BSCE"],
+              #  ["Elective for BSENVE", "Elective for BSENVE"]
+              #]
+              #f.select(:required_or_elective, options, {}, {:multiple=>true})
+              # FIXME: tm Use a control like a multi-select or radio
+              # button groups
+              # instead of a textfield for required_or_elective
+              f.text_field :required_or_elective, class: 'span4'
+            %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Day/Time</label>
+          <div class="controls">
+            <%= f.text_field :day_and_time, class: 'span4' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Description</label>
+          <div class="controls">
+            <%= f.text_area :description, class: 'span4' %>
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+        <div class="control-group">
+          <label class="control-label">Prerequisite(s)</label>
+          <div class="controls">
+            <%= f.text_area :prerequisites, class: 'span4' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Textbook</label>
+          <div class="controls">
+            <%= f.text_area :textbook, class: 'span4' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Additional Textbooks</label>
+          <div class="controls">
+            <%= f.text_area :additional_textbooks, class: 'span4' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="actions offset1">
+      <%= f.submit class: 'btn btn-success' %>
+      <%= link_to 'View', offering_details_path(@offering),
+        :class => 'btn btn-info' %>
+      <%= link_to 'Return to offering List', offerings_path,  :class => 'btn'%>
+    </div>
+    <%= f.hidden_field :details_done, value: true %>
+  <% end %>
+</div>
