@@ -76,10 +76,58 @@ class OfferingsController < ApplicationController
     end
   end
 
-  def search
-    @offerings = Offering.all
-    respond_with @offerings
+  def facets
+    
+    instructors = Array.new
+    User.with_role(:instructor).all.each {
+      |inst| instructors << {
+        :label => inst.name,
+        :value => "#{inst.id}_#{inst.to_s.gsub(/\s/, '_')}"
+      }
+    }
+    
+    terms = Array.new
+    AcademicTerm.all.each {
+      |term| terms << {
+        :label => term.title,
+        :value => "#{term.id}_#{term.to_s.gsub(/\s/, '_')}"
+      }
+    }
+    
+    crns = Offering.find(:all, :select => "crn").map(&:crn)
+    
+    obj = {
+      "instructors" => instructors,
+      "terms"       => terms,
+      "crns"        => crns
+    }
+    
+    ActiveSupport::JSON.encode(obj)
+    
+    respond_to do |format|
+      format.json { render :json => obj }
+    end
+    
   end
+  
+  def search
+    conditions = Hash.new
+    conditions[:term_id] = params[:term].to_i unless params[:term].blank?
+    conditions[:users] = {:id => params[:instructor].to_i} unless params[:instructor].blank?
+    conditions[:crn] = params[:crn].to_i unless params[:crn].blank?
+    @offerings = Offering.joins(:instructors).where(conditions).uniq
+    respond_to do |format|
+      format.html
+      format.json { render :json => @offerings }
+    end
+  end
+
+=begin
+    def search
+      @offerings = Offering.all
+      respond_with @offerings
+    end
+=end
 
   def export
     @offerings = Offering

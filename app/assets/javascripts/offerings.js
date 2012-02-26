@@ -1,11 +1,26 @@
-$(document).ready(function() {
-   var visualSearch = VS.init({
+function init_search(facets) {
+	VS.init({
      container  : $('.visual_search'),
      query      : '',
      unquotable : [],
      callbacks  : {
        search : function(query, searchCollection) {
-         var $query = $('#search_query');
+				var obj = {};
+				var queriedFacets = searchCollection.each(function(facet){
+					obj[facet.get("category")] = facet.get("value");
+				});
+				var offerings = $.ajax({
+				  type: 'POST',
+				  url: '/offerings/search.json',
+				  data: obj,
+				  success: function(data) {
+				    console.log(data)
+				  },
+				  dataType: 'json'
+				});
+        /* 
+				var $query = $('#search_query');
+				 console.log(searchCollection.facets());
          var count  = searchCollection.size();
          $query.stop().animate({opacity : 1}, {duration: 300, queue: false});
          $query.html('<span class="raquo">&raquo;</span> You searched for: ' +
@@ -19,7 +34,12 @@ $(document).ready(function() {
              duration: 1000,
              queue: false
            });
-         }, 2000);
+         }, 4000);
+				var obj = {};
+				var queriedFacets = searchCollection.each(function(facet){
+					obj[facet.get("category")] = facet.get("value");
+				});
+				*/
        },
        facetMatches : function(callback) {
          callback(['term', 'crn', 'instructor']);
@@ -27,29 +47,27 @@ $(document).ready(function() {
        valueMatches : function(facet, searchTerm, callback) {
          switch (facet) {
          case 'term':
-            callback([
-							'Winter 2012',
-							'Spring 2012',
-							'Summer 2012',
-							'Fall 2012'
-             ]);
+            callback(facets.terms);
              break;
            case 'crn':
-             callback([
-							'60500',
-							'60507',
-							'60510'
-							]);
+             callback(facets.crns);
              break;
            case 'instructor':
-						callback([
-							{label: 'Dr. Christopher Monsere', value: '1_monsere'},
-							{label: 'Dr. Mike Gorji', value: '2_gorji'},
-							{label: 'Dr. Bill Fish', value: '3_fish'}
-						]);
+						callback(facets.instructors);
              break;
          }
        }
      }
    });
+}
+$(document).ready(function() {
+	var facets = $.ajax({
+	  type: 'GET',
+	  url: '/offerings/facets.json',
+	  success: function(data) {
+	    init_search(data)
+	  },
+	  dataType: 'json'
+	});
+   
  });
