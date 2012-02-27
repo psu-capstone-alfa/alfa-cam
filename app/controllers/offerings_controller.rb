@@ -96,16 +96,15 @@ class OfferingsController < ApplicationController
     crns = Offering.find(:all, :select => "crn").map(&:crn)
     
     obj = {
-      "instructors" => instructors,
-      "terms"       => terms,
-      "crns"        => crns
+      "Instructor" => instructors,
+      "Term"       => terms,
+      "CRN"        => crns
     }
     
     ActiveSupport::JSON.encode(obj)
+
+    render :json => obj
     
-    respond_to do |format|
-      format.json { render :json => obj }
-    end
   end
   
   def search
@@ -121,14 +120,7 @@ class OfferingsController < ApplicationController
     end
     
   end
-
-=begin
-    def search
-      @offerings = Offering.all
-      respond_with @offerings
-    end
-=end
-
+  
   def export
     @offerings = Offering
 
