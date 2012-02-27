@@ -22,7 +22,7 @@
 
     <%= yield :head %>
   </head>
-  <body>
+  <body class="<% if controller %><%= controller.controller_name %> <%= controller.action_name %><% end %>">
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
