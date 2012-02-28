@@ -87,4 +87,17 @@ module OfferingState
     end
     output
   end
+
+
+  def update_stages_complete
+    self.stages_left = [
+      review_done,
+      importing_done,
+      details_done,
+      objectives_done,
+      content_done,
+      assessments_done
+    ].count {|x| x != true}
+  end
+
 end

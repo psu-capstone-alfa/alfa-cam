@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(:version => 20120302023735) do
     t.boolean  "content_done"
     t.boolean  "assessments_done"
     t.text     "description"
+    t.integer  "stages_left"
   end
 
   create_table "outcome_groups", :force => true do |t|

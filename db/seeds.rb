@@ -194,6 +194,9 @@ end
       name: 'Staff Instructor TEST')
     @instructors << Factory(:instructor, name: 'Instructor TEST')
 
+    # Some instructors without classes
+    2.times { Factory :instructor, name: 'Instructor w/ 0 Offerings' }
+
     @staff = Factory :staff,  name: 'Staff TEST'
     @admin = Factory :admin, name: 'Admin TEST'
     @reviewer = Factory :reviewer, name: 'Reviewer TEST'
