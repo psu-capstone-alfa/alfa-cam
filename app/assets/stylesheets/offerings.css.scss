@@ -36,3 +36,12 @@ form.offering-assessment {
     width: 40em;
   }
 }
+
+#offering-summary {
+
+
+  dt, dd { float: right; }
+  dd { float: left;}
+  dt: { clear: left; }
+  dd {margin-bottom: 2em}
+}
