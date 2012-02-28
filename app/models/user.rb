@@ -5,6 +5,18 @@ require 'net/ldap'
 class User < ActiveRecord::Base
   has_many :teachings
   has_many :offerings, through: :teachings
+  has_many :courses, through: :offerings do
+    def frequent(term, limit = 5)
+      self.available_during(term).limit(limit).order('
+(select count(*)
+   from offerings o
+   join teachings t
+     on o.id = t.offering_id
+  where t.user_id = ?
+    and o.course_id = courses.id) desc
+', proxy_association.owner.id)
+    end
+  end
 
   validates :login, format: { with: /\w+/ }
 

@@ -33,6 +33,9 @@ class Offering < ActiveRecord::Base
 
   IMPORTED_DETAILS = DETAILS - [:section, :crn, :location, :day_and_time]
 
+  accepts_nested_attributes_for :teachings
+  validates_associated :teachings
+
   ## Assessments
   has_one :assessment, include: :objective_assessments
   has_many :objective_assessments, through: :assessment

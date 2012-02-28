@@ -6,6 +6,9 @@ $ ->
   # highlight the active instructor
   $('#instructors button:first').addClass 'active btn-primary'
 
+  # hide all the destroy checkboxes
+  $('[name*=_destroy]:checkbox')
+
   # switch to courses for the selected instructor
   $('#instructors button').click (event)->
     $('#instructors button').removeClass 'active btn-primary'
@@ -15,8 +18,20 @@ $ ->
     false
 
   # toggle all buttons matching this instructor-course
+  # and disable/enable the _destroy input for this offering
+  # 2 cases:
+  # - this is a new (potential) offering:
+  #   - the _destroy input is enabled on render
+  #   - therefore, if the button is never clicked the record is ignored
+  #   - after button clicked, _destroy is disabled, so record is created
+  # - this is an existing offering:
+  #   - the _destroy input is disabled on render
+  #   - if the button is clicked, then _destroy is enabled and the
+  #     record will be deleted
   $('#courses button').click (event)->
     buttons = $ 'button[value=' + ($ this).val() + ']'
     buttons.toggleClass 'btn-primary active'
-    # TODO:eo add/remove (enable/disable?) a hidden form
-    # field for this pair
+    destroy_disabled = buttons.siblings('[name*=_destroy]').attr('disabled')
+    disabled = destroy_disabled != 'disabled'
+    buttons.siblings('[name*=_destroy]').attr('disabled', disabled)
+    false
