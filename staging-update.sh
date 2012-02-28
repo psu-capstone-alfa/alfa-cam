@@ -2,5 +2,5 @@
 git reset --hard
 git pull
 bundle
-rake db:reset
+RAILS_ENV=production rake db:reset
 
