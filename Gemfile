@@ -46,11 +46,17 @@ gem 'authlogic', # FIXME: This shouldn't depend on Ryan's personal fork
   :branch => "fix-rails-adapter"
 gem 'cancan'
 
+gem 'forgery'
+
 # Twitter Bootstrap integration
 gem 'twitter-bootstrap-rails',
   :git => "https://github.com/seyhunak/twitter-bootstrap-rails.git"
 
 gem 'acts_as_list', :git => 'git://github.com/swanandp/acts_as_list'
+
 group :ldap do
   gem 'net-ldap'
 end
+
+gem 'seedbank'
+gem 'activerecord-import'
