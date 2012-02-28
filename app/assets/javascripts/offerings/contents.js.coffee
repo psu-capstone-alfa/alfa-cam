@@ -2,14 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-$.fn.outerHTML = ->
-  this.clone().wrap('<div/>').parent().html()
-
-$.fn.toggleDisabled = ->
-  currentState = this.attr('disabled') == 'disabled'
-  this.attr('disabled', !currentState)
-
 $ ->
+  unless ($ 'body.content').present()
+    return
+
   original = $('.content-and-mappings .cloneable') . first()
   $('#add-content') . click (e) ->
     # if this can be done w/o changing to markup,
