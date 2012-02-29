@@ -46,6 +46,15 @@ class User < ActiveRecord::Base
     true
   end
 
+  def self.facets
+    User.all.map {
+      |user| {
+        :label => user.name,
+        :value => "#{user.id}_#{user.to_s.gsub(/\s/, '_')}"
+      }
+    }
+  end
+
   def to_s
     name
   end

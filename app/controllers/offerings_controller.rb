@@ -19,11 +19,13 @@ class OfferingsController < ApplicationController
   end
 
   def show
+    @offering = Offering.find(params[:id])
     @nav_offering = :summary
     respond_with @offering
   end
 
   def new
+    @offering = Offering.new
     respond_with @offering
   end
 
@@ -77,40 +79,22 @@ class OfferingsController < ApplicationController
   end
 
   def facets
-    instructors = Array.new
-    User.with_role(:instructor).all.each {
-      |inst| instructors << {
-        :label => inst.name,
-        :value => "#{inst.id}_#{inst.to_s.gsub(/\s/, '_')}"
-      }
-    }
-    
-    terms = Array.new
-    AcademicTerm.all.each {
-      |term| terms << {
-        :label => term.title,
-        :value => "#{term.id}_#{term.to_s.gsub(/\s/, '_')}"
-      }
-    }
-    
-    crns = Offering.find(:all, :select => "crn").map(&:crn)
-    
-    obj = {
-      "Instructor" => instructors,
-      "Term"       => terms,
-      "CRN"        => crns
-    }
-    
+    obj = {}
+    obj["Instructor"] = User.with_role(:instructor).facets
+    obj["Term"] = AcademicTerm.facets
+    obj["CRN"] = Offering.find(:all, :select => "crn").map(&:crn)
+
     ActiveSupport::JSON.encode(obj)
 
     render :json => obj
-    
   end
-  
+
   def search
     conditions = Hash.new
     conditions[:term_id] = params[:term].to_i unless params[:term].blank?
-    conditions[:users] = {:id => params[:instructor].to_i} unless params[:instructor].blank?
+    conditions[:users] = {
+      :id => params[:instructor].to_i
+    } unless params[:instructor].blank?
     conditions[:crn] = params[:crn].to_i unless params[:crn].blank?
     @offerings = Offering.joins(:instructors).where(conditions).uniq
     if params[:partial].blank?
@@ -118,9 +102,9 @@ class OfferingsController < ApplicationController
     else
       render :partial => 'search_table', :layout => false
     end
-    
+
   end
-  
+
   def export
     @offerings = Offering
 

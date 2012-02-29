@@ -21,7 +21,7 @@ function initializeSearch(facets) {
 				});
 				var offerings = $.ajax({
 					type: 'GET',
-				  url: location.pathname.match(/^\/([^/]*)\/?/)[0] + 'search', 
+				  url: "/" + location.pathname.match(/^\/([^/]*)\/?/)[1] + '/search', 
 				  data: data,
 				  success: function(newTable) {
 						$("#offeringsList").replaceWith(newTable);
@@ -42,7 +42,7 @@ $(document).ready(function(){
 	// Load facets
 	$.ajax({
 		type: 'GET',
-		url: location.pathname.match(/^\/([^/]*)\/?/)[0] + "facets",
+		url: "/" + location.pathname.match(/^\/([^/]*)\/?/)[1] + "/facets",
 		dataType: 'json',
 		success: function(data, textStatus, jqXHR) {
 			initializeSearch(data);
