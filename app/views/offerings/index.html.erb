@@ -1,8 +1,7 @@
 <div id="search"></div>
 <h1>Listing offerings</h1>
 
-<table id='offeringsList'>
-  <thead>
+<table>
   <tr>
     <th>Course</th>
     <th>Term</th>
@@ -13,8 +12,7 @@
     <th></th>
     <th></th>
   </tr>
-  </thead>
-  <tbody>
+
 <% @offerings.each do |offering| %>
   <tr>
     <td><%= offering.course_id %></td>
@@ -27,7 +25,6 @@
     <td><%= link_to_if can?(:destroy, offering), 'Destroy', offering, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
-  </tbody>
 </table>
 
 <br />
