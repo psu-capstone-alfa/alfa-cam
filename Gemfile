@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-RAILS_VERSION = '~> 3.1.0'
+RAILS_VERSION = '~> 3.2.0'
 
 gem 'rails', RAILS_VERSION
 
@@ -49,10 +49,10 @@ gem 'cancan'
 gem 'forgery'
 
 # Twitter Bootstrap integration
-gem 'twitter-bootstrap-rails',
-  :git => "https://github.com/seyhunak/twitter-bootstrap-rails.git"
+gem 'twitter-bootstrap-rails' #,
+  #:git => "https://github.com/seyhunak/twitter-bootstrap-rails.git"
 
-gem 'acts_as_list', :git => 'git://github.com/swanandp/acts_as_list'
+gem 'acts_as_list' #, :git => 'git://github.com/swanandp/acts_as_list'
 
 group :ldap do
   gem 'net-ldap'
