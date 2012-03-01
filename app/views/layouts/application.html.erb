@@ -12,7 +12,14 @@
 
     <!-- Styles -->
 
-    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    
+    <!--[if (!IE)|(gte IE 8)]><!-->
+      <%= stylesheet_link_tag "visualsearch-datauri", :media => "all" %>
+    <!--<![endif]-->
+    <!--[if lte IE 7]><!-->
+      <%= stylesheet_link_tag "visualsearch", :media => "all" %>
+    <!--<![endif]-->
 
     <!-- Le fav and touch icons -->
     <link href="images/favicon.ico" rel="shortcut icon">

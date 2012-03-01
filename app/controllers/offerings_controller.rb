@@ -8,7 +8,7 @@ class OfferingsController < ApplicationController
   before_filter :require_user
   authorize_resource class: Offering
 
-  layout 'offering', except: [:index, :new]
+  layout 'offering', only: [:show, :new, :edit]
 
   before_filter { @nav_section = :offerings }
   before_filter :find_resource, except: [:index, :create]
@@ -19,11 +19,13 @@ class OfferingsController < ApplicationController
   end
 
   def show
+    @offering = Offering.find(params[:id])
     @nav_offering = :summary
     respond_with @offering
   end
 
   def new
+    @offering = Offering.new
     respond_with @offering
   end
 
@@ -76,9 +78,31 @@ class OfferingsController < ApplicationController
     end
   end
 
+  def facets
+    obj = {}
+    obj["Instructor"] = User.with_role(:instructor).facets
+    obj["Term"] = AcademicTerm.facets
+    obj["CRN"] = Offering.find(:all, :select => "crn").map(&:crn)
+
+    ActiveSupport::JSON.encode(obj)
+
+    render :json => obj
+  end
+
   def search
-    @offerings = Offering.all
-    respond_with @offerings
+    conditions = Hash.new
+    conditions[:term_id] = params[:term].to_i unless params[:term].blank?
+    conditions[:users] = {
+      :id => params[:instructor].to_i
+    } unless params[:instructor].blank?
+    conditions[:crn] = params[:crn].to_i unless params[:crn].blank?
+    @offerings = Offering.joins(:instructors).where(conditions).uniq
+    if params[:partial].blank?
+      respond_with @offerings, :layout => 'application'
+    else
+      render :partial => 'search_table', :layout => false
+    end
+
   end
 
   def export

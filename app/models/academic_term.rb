@@ -35,4 +35,13 @@ class AcademicTerm < ActiveRecord::Base
   def self.current
     last
   end
+
+  def self.facets
+    AcademicTerm.all.map {
+      |term| {
+        :label => term.title,
+        :value => "#{term.id}_#{term.to_s.gsub(/\s/, '_')}"
+      }
+    }
+  end
 end

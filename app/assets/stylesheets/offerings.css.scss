@@ -38,8 +38,6 @@ form.offering-assessment {
 }
 
 #offering-summary {
-
-
   dt, dd { float: right; }
   dd { float: left;}
   dt: { clear: left; }
@@ -50,4 +48,9 @@ form.offering-assessment {
   background-color: #E4F2E1;
   height: 20px; 
   line-height:30px;
+}
+
+#search_help {
+  font-size: 11px;
+  color: #aaa;
 }

@@ -27,5 +27,10 @@ describe AcademicTerm do
       @term.offerings = [@offering]
       @term.destroy.must_equal false
     end
+    
+    it "must return an array of facets" do 
+      assert_instance_of Array, AcademicTerm.facets
+    end
+    
   end
 end

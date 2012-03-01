@@ -18,5 +18,11 @@ describe User do
       assert @instructor.teaches?(@taught)
       assert !@instructor.teaches?(@not)
     end
+    
+    it "must return an array of instructor facets" do 
+      facets = User.with_role(:instructor).facets
+      assert_instance_of Array, facets
+    end
+    
   end
 end
