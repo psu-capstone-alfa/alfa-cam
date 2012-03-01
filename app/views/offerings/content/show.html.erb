@@ -1,2 +1,66 @@
-<h1 class="fail">Nothing here</h1>
+<h1><%= @offering %></h1>
+<hr>
 
+
+<div class="tabbable">
+  <ul class="nav nav-pills">
+    <li class="active"><a href="#1" data-toggle="tab">Summary</a></li>
+    <% @offering.content_groups.each do |group| %>
+      <li><a href="#group-<%= group.id %>" data-toggle="tab"><%= group.name %></a></li>
+    <% end %>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="1">
+      <% @offering.content_groups.each do |group| %>
+        <table class="table-bordered table-striped objective mappings">
+          <thead>
+            <tr>
+              <th class="content_group">
+                <abbr title="<%= group.name %>"><%= group.name %></abbr>
+              </th>
+              <% @offering.outcomes.each do |outcome| %>
+                <td><%= outcome.key %></td>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% group.content.each do |content| %>
+              <tr>
+              <th><%= content.title %></th>
+                <% content.mappings.each do |mapping| %>
+                  <td><%= mapping.value %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+    <% @offering.content_groups.each do |group| %>
+      <div class="tab-pane" id="group-<%= group.id %>">
+        <table class="table-bordered table-striped objective mappings">
+          <thead>
+            <tr>
+              <th class="content_group">
+                <abbr title="<%= group.name %>"><%= group.name %></abbr>
+              </th>
+              <% @offering.outcomes.each do |outcome| %>
+                <td><%= outcome.key %></td>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% group.content.each do |content| %>
+              <tr>
+              <th><%= content.title %></th>
+                <% content.mappings.each do |mapping| %>
+                  <td><%= mapping.value %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+</div>
