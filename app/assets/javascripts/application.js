@@ -9,4 +9,5 @@
 //= require twitter/bootstrap
 //= require underscore-min
 //= require backbone-min
+//= require visualsearch
 //= require_tree .

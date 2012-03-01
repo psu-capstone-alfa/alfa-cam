@@ -2,19 +2,8 @@ function forceHelper(e,ui) {
 	$(".ui-state-highlight").html("<td colspan='100%'>&nbsp;</td>");
 }
 
-$(document).ready(function(){
-	sortItems = $("#offeringsList tbody");
-	sortItems.sortable({
-		placeholder: "ui-state-highlight",
-		change: function(e, ui) {
-       forceHelper(e,ui);
-    }
-	});
-	sortItems.disableSelection();
-});
-
 function initializeSearch(facets) {
-	var searchContainer = $('#search');
+	var searchContainer = $('#visual-search');
 	if(searchContainer.length < 1) {
 		return;
 	}
@@ -53,8 +42,11 @@ function initializeSearch(facets) {
    });
 	searchContainer.append("<div id='search_help'>Possible search terms are: " + facetCategories.join(", "));
 }
+
 $(document).ready(function(){
 	// Load facets
+	if( ! $('#visual-search').present() ) return;
+
 	$.ajax({
 		type: 'GET',
 		url: "/" + location.pathname.match(/^\/([^/]*)\/?/)[1] + "/facets",
