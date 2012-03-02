@@ -13,10 +13,11 @@ module Offerings::ContentHelper
     end
   end
 
-  def content_scopes(contents, &blk)
-    contents.each_with_index do |content, i|
+  def content_scopes(content_group, &blk)
+    content_group.content.each_with_index do |content, i|
       css_class = content.new_record? ? 'cloneable' : ''
-      yield content, css_class, i
+      row_id    = "group-#{content_group.id}-#{css_class}"
+      yield content, css_class, row_id
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221210802) do
+ActiveRecord::Schema.define(:version => 20120302015953) do
 
   create_table "academic_terms", :force => true do |t|
     t.string   "title"
@@ -38,11 +38,18 @@ ActiveRecord::Schema.define(:version => 20120221210802) do
     t.integer  "content_group_id"
   end
 
-  create_table "content_groups", :force => true do |t|
-    t.integer  "offering_id"
+  create_table "content_group_names", :force => true do |t|
     t.string   "name"
+    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "content_groups", :force => true do |t|
+    t.integer  "offering_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "content_group_name_id"
   end
 
   create_table "course_replacements", :force => true do |t|
@@ -103,15 +110,14 @@ ActiveRecord::Schema.define(:version => 20120221210802) do
     t.text     "textbook"
     t.text     "additional_textbooks"
     t.string   "required_or_elective"
-    t.text     "prerequisite"
     t.text     "prerequisites"
-    t.text     "description"
     t.boolean  "review_done"
     t.boolean  "importing_done"
     t.boolean  "details_done"
     t.boolean  "objectives_done"
     t.boolean  "content_done"
     t.boolean  "assessments_done"
+    t.text     "description"
   end
 
   create_table "outcome_groups", :force => true do |t|

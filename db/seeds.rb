@@ -43,6 +43,11 @@ Factory.define :objective do |f|
   f.description { Lorem.sentences(2).join ' ' }
 end
 
+Factory.define :content_group_name do |f|
+  f.name { Forgery::University.content_group_name }
+  f.active true
+end
+
 class Seederation
   include RandomText
 
@@ -57,10 +62,12 @@ class Seederation
       { title: 'Original outcomes', outcomes: @outcomes[0..8] },
       { title: 'New outcomes', outcomes: @outcomes },
     ])
+
+    @content_group_names = 3.repetitions { Factory :content_group_name }
   end
 
   def content_group_with_mappings(offering)
-    cg = ContentGroup.create!(offering: offering, name: 'Content Group')
+    cg = ContentGroup.create!(offering: offering, content_group_name: @content_group_names.sample)
     Random.new.rand(2..10).repetitions {
       content_with_mappings(cg)
     }

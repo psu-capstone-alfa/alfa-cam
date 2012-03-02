@@ -19,6 +19,7 @@ class Ability
       can :manage, Term
       can :manage, Outcome
       can :manage, Offering
+      can :manage, ContentGroupName
       can :read, :all
     end
     if user.is? :admin

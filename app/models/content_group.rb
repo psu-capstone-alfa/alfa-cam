@@ -1,6 +1,9 @@
 # Collects similar course contents for displaying grouped
 #
 class ContentGroup < ActiveRecord::Base
+  belongs_to :content_group_name
+  delegate :name, to: :content_group_name
+
   belongs_to :offering
   has_many :outcomes, :through => :offering
 
@@ -14,7 +17,6 @@ class ContentGroup < ActiveRecord::Base
     end
   end
 
-  validates :name, presence: true
   validates_associated :content
 
   # don't accept completely empty content rows
@@ -26,10 +28,6 @@ class ContentGroup < ActiveRecord::Base
   accepts_nested_attributes_for :content,
     reject_if: REJECT,
     allow_destroy: true
-
-  def name
-    self['name'] || 'New Content Group'
-  end
 
   def to_s
     name

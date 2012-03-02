@@ -36,14 +36,18 @@ class Offering < ActiveRecord::Base
 
 
   ## Contents
-  has_many :content_groups do
-    def build_with_content
-      new_group = self.build
-      new_group.content.build_with_mappings(proxy_association.owner.outcomes)
-      return new_group
+  def prepare_content_groups
+    (ContentGroupName.active.all - content_group_names).each do |missing_content_group_name|
+      content_group_names << missing_content_group_name
+    end
+    content_groups.each do |cg|
+      cg.content.build_with_mappings(term.outcomes)
     end
   end
-  has_many :content, :through => :content_groups
+
+  has_many :content_groups
+  has_many :content_group_names, through: :content_groups
+  has_many :content, through: :content_groups
 
 
   # don't accept unnamed content groups with no content attributes
@@ -68,13 +72,6 @@ class Offering < ActiveRecord::Base
   scope :with_instructors,
     includes(:instructors).
     order("users.name ASC")
-
-  def prepare_content_groups
-    content_groups.each do |cg|
-      cg.content.build_with_mappings(term.outcomes)
-    end
-    content_groups.build_with_content
-  end
 
   def to_s
     "#{term.short}-#{course.short}"
