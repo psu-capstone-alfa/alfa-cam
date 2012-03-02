@@ -12,6 +12,18 @@ class Offering < ActiveRecord::Base
   has_many :teachings
   has_many :instructors, through: :teachings
 
+  DETAILS = [
+              :section,
+              :crn,
+              :location,
+              :credits,
+              :day_and_time,
+              :prerequisites,
+              :textbook,
+              :additional_textbooks
+            ]
+
+  IMPORTED_DETAILS = DETAILS - [:section, :crn, :location, :day_and_time]
 
   ## Assessments
   has_one :assessment, include: :objective_assessments
@@ -118,4 +130,11 @@ class Offering < ActiveRecord::Base
     ]
   end
 
+  def import_details_from(offering)
+    update_attributes(
+      offering.attributes.select do |key, v|
+        IMPORTED_DETAILS.include? key.to_sym
+      end
+    )
+  end
 end
