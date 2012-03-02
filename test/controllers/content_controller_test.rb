@@ -13,14 +13,12 @@ describe Offerings::ContentController do
     it "respond with success" do
       get :summary, @args
       must_respond_with :success
-      must_render_nothing_here
     end
   end
   describe "edit action" do
     it "respond with success" do
       get :edit, @args
       must_respond_with :success
-      assert_select '.offering-content-groups'
     end
   end
   describe "show action" do
