@@ -49,7 +49,6 @@ end
 class MiniTest::Rails::Model
 end
 
-
 class MiniTest::Rails::Controller
   def must_render_nothing_here
     assert_select '.fail', "Nothing here"

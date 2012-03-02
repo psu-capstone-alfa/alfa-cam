@@ -6,5 +6,8 @@ class CreateContentGroupNames < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_column :content_groups, :content_group_name_id, :integer
+    remove_column :content_groups, :name
   end
 end

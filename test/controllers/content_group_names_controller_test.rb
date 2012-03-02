@@ -1,22 +1,22 @@
 require "minitest_helper"
 
-describe ContentGroupNameController do
-
-  # fixtures :all
+describe ContentGroupNamesController do
+  with_admin_session
 
   before do
-    @content_group_name = content_group_names(:one)
+    @content_group_name = Factory(:content_group_name)
   end
 
   it "must get index" do
     get :index
-    assert_response :success
-    assert_not_nil assigns(:content_group_names)
+    must_respond_with :success
+    assigns(:content_group_names).wont_be :nil?
   end
 
   it "must get new" do
     get :new
-    assert_response :success
+    must_respond_with :success
+    assigns(:content_group_name).wont_be :nil?
   end
 
   it "must create content_group_name" do
@@ -29,12 +29,12 @@ describe ContentGroupNameController do
 
   it "must show content_group_name" do
     get :show, id: @content_group_name.to_param
-    assert_response :success
+    must_respond_with :success
   end
 
   it "must get edit" do
     get :edit, id: @content_group_name.to_param
-    assert_response :success
+    must_respond_with :success
   end
 
   it "must update content_group_name" do

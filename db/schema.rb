@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120302015953) do
+ActiveRecord::Schema.define(:version => 20120302023735) do
 
   create_table "academic_terms", :force => true do |t|
     t.string   "title"

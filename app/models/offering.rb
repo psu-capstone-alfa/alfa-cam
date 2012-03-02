@@ -120,7 +120,7 @@ class Offering < ActiveRecord::Base
       textbook,
       additional_textbooks,
       required_or_elective,
-      prerequisite,
+      prerequisites,
       location,
       joined_outcomes,
       joined_objectives
