@@ -32,6 +32,15 @@ end
 class MiniTest::Rails::Spec
   include Authlogic::TestCase
   extend AuthlogicTestHelpers
+
+  def run(*args, &blk)
+    run_output = nil
+    ActiveRecord::Base.transaction do
+      run_output = super
+      raise ActiveRecord::Rollback
+    end
+    run_output
+  end
 end
 
 class MiniTest::Rails::Model
