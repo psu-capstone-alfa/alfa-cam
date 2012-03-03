@@ -42,12 +42,13 @@ function loadFacets() {
 		return;
 	}
 	var baseUrl = $('#search').data('baseurl');
+	var resultsSelector = $('#search').data('results-selector');
 	$.ajax({
 		type: 'GET',
 		url: baseUrl + "/facets",
 		dataType: 'json',
 		success: function(facets, textStatus, jqXHR) {
-			initializeSearch(facets, searchContainer, baseUrl);
+			initializeSearch(facets, searchContainer, baseUrl, resultsSelector);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			console.log(textStatus);
@@ -55,7 +56,7 @@ function loadFacets() {
 	});
 }
 
-function initializeSearch(facets, searchContainer, baseUrl) {
+function initializeSearch(facets, searchContainer, baseUrl, resultsSelector) {
 	facetCategories = [];
 	for (var propertyName in facets) {
 	  if (facets.hasOwnProperty(propertyName)) {
@@ -78,7 +79,7 @@ function initializeSearch(facets, searchContainer, baseUrl) {
 				  data: data,
 				  dataType: "html",
 				  success: function(newTable, textStatus, jqXHR) {
-						$("#offeringsList").replaceWith(newTable);
+						$(resultsSelector).replaceWith(newTable);
 				  },
 				});
        },
