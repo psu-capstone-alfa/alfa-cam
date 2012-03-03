@@ -1,31 +1,7 @@
-<div id="visual-search"></div>
+<div id="search" data-baseurl='/offerings'></div>
 <h1>Listing offerings</h1>
 
-<table>
-  <tr>
-    <th>Course</th>
-    <th>Term</th>
-    <th>Section</th>
-    <th>Crn</th>
-    <th>Location</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @offerings.each do |offering| %>
-  <tr>
-    <td><%= offering.course_id %></td>
-    <td><%= offering.term_id %></td>
-    <td><%= offering.section %></td>
-    <td><%= offering.crn %></td>
-    <td><%= offering.location %></td>
-    <td><%= link_to 'Show', offering %></td>
-    <td><%= link_to_if can?(:edit, offering), 'Edit', edit_offering_details_path(offering) %></td>
-    <td><%= link_to_if can?(:destroy, offering), 'Destroy', offering, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+<%= render "search_table" %>
 
 <br />
 
