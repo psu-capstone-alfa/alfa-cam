@@ -1,2 +1,15 @@
-<h1 class="fail">Nothing here</h1>
+<h2>Assessment</h2>
+
+<br><br>
+
+<% @assessment.objective_assessments.each do |obj| %>
+  Objective: <%= obj.objective %><br>
+  Assessed: <%= obj.assessed %><br>
+  How well met: <%= obj.well_met %><br>
+  Improved: <%= obj.improved %><br>
+  <br>
+<% end %>
+
+Improved: <%= @assessment.improved %><br>
+Comments: <%= @assessment.comments %><br>
 

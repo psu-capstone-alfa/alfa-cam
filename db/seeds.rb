@@ -65,12 +65,32 @@ class Seederation
     cg
   end
 
+  def content_with_mappings(cg)
+    c = Content.create! title: 'Some content', content_group: cg
+    Mapping.import (c.outcomes.map { |o|
+      Mapping.new value: Random.new.rand(0..10), outcome: o, mappable: c
+    })
+    c.save!
+  end
+
+  def assessment_for_offering(offering)
+    assessment = offering.create_assessment!
+    assessment.improved = Forgery::LoremIpsum.paragraph
+    assessment.comments = Forgery::LoremIpsum.paragraph
+    assessment.objective_assessments.each do |obj|
+      obj.assessed = Forgery::LoremIpsum.paragraph
+      obj.well_met = Forgery::LoremIpsum.paragraph
+      obj.improved = Forgery::LoremIpsum.paragraph
+      obj.save!
+    end
+  end
+
   def build_completed_offering(&blk)
     offering = build_started_offering(&blk)
     offering.objectives_done = true
     offering.content_done = true
     offering.assessments_done = true
-    # TODO:rs build assessments
+    assessment_for_offering(offering)
     offering.save!
     offering
   end
@@ -93,15 +113,6 @@ class Seederation
   def objective_with_mappings(offering)
     objective = Factory :objective, offering: offering
     objective.mappings.create!(offering.outcomes.map {|out| {outcome: out}})
-  end
-
-
-  def content_with_mappings(cg)
-    c = Content.create! title: 'Some content', content_group: cg
-    Mapping.import (c.outcomes.map { |o|
-      Mapping.new value: Random.new.rand(0..10), outcome: o, mappable: c
-    })
-    c
   end
 
   def build_old_year(year,outcome_group)
