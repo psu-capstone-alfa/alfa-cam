@@ -82,7 +82,7 @@ class OfferingsController < ApplicationController
     obj = {}
     obj["Instructor"] = User.with_role(:instructor).facets
     obj["Term"] = AcademicTerm.facets
-    obj["CRN"] = Offering.find(:all, :select => "crn").map(&:crn)
+    obj["CRN"] = Offering.find(:all, :select => "crn").map(&:crn).compact!
 
     ActiveSupport::JSON.encode(obj)
 
@@ -95,7 +95,7 @@ class OfferingsController < ApplicationController
     conditions[:users] = {
       :id => params[:instructor].to_i
     } unless params[:instructor].blank?
-    conditions[:crn] = params[:crn].to_i unless params[:crn].blank?
+    conditions[:crn] = params[:crn] unless params[:crn].blank?
     @offerings = Offering.joins(:instructors).where(conditions).uniq
     if params[:partial].blank?
       respond_with @offerings, :layout => 'application'
