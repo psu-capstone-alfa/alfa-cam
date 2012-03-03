@@ -1,6 +1,7 @@
 require "minitest_helper"
 
 describe Offerings::ContentController do
+  tests Offerings::ContentController
   with_admin_session
 
   before do

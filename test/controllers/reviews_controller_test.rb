@@ -1,6 +1,7 @@
 require "minitest_helper"
 
 describe Offerings::ReviewsController do
+  tests Offerings::ReviewsController
   with_admin_session
 
   before do

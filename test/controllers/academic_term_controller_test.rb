@@ -1,6 +1,7 @@
 require "minitest_helper"
 
 describe AcademicTermsController do
+  tests AcademicTermsController
   with_admin_session
 
   it "must get index" do

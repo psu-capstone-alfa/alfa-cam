@@ -1,6 +1,8 @@
 require "minitest_helper"
 
 describe DashboardController do
+  tests DashboardController
+
   describe "any user" do
     with_user(Factory :user, roles: [:reviewer, :instructor, :staff, :admin])
 

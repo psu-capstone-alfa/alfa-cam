@@ -1,6 +1,7 @@
 require "minitest_helper"
 
 describe Offerings::ObjectivesController do
+  tests Offerings::ObjectivesController
   with_admin_session
 
   before do
