@@ -15,6 +15,8 @@ class Content < ActiveRecord::Base
   validates :title, :presence => true
   validates_associated :mappings
 
+  default_scope order(:position)
+
   def to_s
     title
   end

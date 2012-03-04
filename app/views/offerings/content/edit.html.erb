@@ -28,7 +28,7 @@
       <% content_group_scopes(@offering.content_groups) do |group, id, name, css_class| %>
         <%= f.fields_for :content_groups, group do |cgf| %>
           <div id="<%= id %>" class="tab-pane <%= css_class %>">
-            <table class="table-bordered table-striped mappings content-and-mappings">
+            <table id='content_container' class="table-bordered table-striped mappings content-and-mappings">
               <thead>
                 <tr>
                   <th></th>
@@ -42,6 +42,7 @@
                   <tr class="<%= css_class %>">
                     <%= cgf.no_bs_fields_for :content, content do |cf| %>
                       <th>
+                        <%= cf.hidden_field :position, :class => "position" %>
                         <%= cf.text_field :title, placeholder: 'Content name' %>
                         <%= cf.hidden_field :_destroy, value: 1, disabled: true %>
                         <button class="btn btn-danger delete-content">
