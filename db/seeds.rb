@@ -1,6 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+include RandomText
 
 Factory.define :user do |f|
   f.name { Forgery::Name.full_name }
@@ -31,24 +32,25 @@ Factory.define :detailed_offering, parent: :offering do |f|
     f.location { Forgery::Address.street_name << " Hall" }
     f.credits { rand(1..6) }
     f.day_and_time { Forgery::Date.day_of_week }
-    f.textbook { Forgery::LoremIpsum.paragraph }
-    f.additional_textbooks { Forgery::LoremIpsum.paragraphs(3, sentences: 2) }
+    f.textbook { Lorem.paragraph }
+    f.additional_textbooks { Lorem.paragraphs(3).join "\n" }
     f.required_or_elective { %w(Required Elective).sample }
     f.prerequisites { Factory.build(:course).to_s }
-    f.description { Forgery::LoremIpsum.sentences(5) }
+    f.description { Lorem.sentences(5).join ' ' }
 end
 
 Factory.define :objective do |f|
-  f.description { Forgery::LoremIpsum.sentences }
+  f.description { Lorem.sentences(2).join ' ' }
 end
 
 class Seederation
+  include RandomText
 
   def initialize
     @outcomes = ('A'..'K').map do |key|
       Outcome.create! key: key,
         title: "Outcome #{key}",
-        description: Forgery::LoremIpsum.sentence
+        description: Lorem.sentence
     end
 
     @ogroups = OutcomeGroup.create!( [
@@ -65,12 +67,32 @@ class Seederation
     cg
   end
 
+  def content_with_mappings(cg)
+    c = Content.create! title: 'Some content', content_group: cg
+    Mapping.import (c.outcomes.map { |o|
+      Mapping.new value: Random.new.rand(0..10), outcome: o, mappable: c
+    })
+    c.save!
+  end
+
+  def assessment_for_offering(offering)
+    assessment = offering.create_assessment!
+    assessment.improved = Lorem.paragraph
+    assessment.comments = Lorem.paragraph
+    assessment.objective_assessments.each do |obj|
+      obj.assessed = Lorem.paragraph
+      obj.well_met = Lorem.paragraph
+      obj.improved = Lorem.paragraph
+      obj.save!
+    end
+  end
+
   def build_completed_offering(&blk)
     offering = build_started_offering(&blk)
     offering.objectives_done = true
     offering.content_done = true
     offering.assessments_done = true
-    # TODO:rs build assessments
+    assessment_for_offering(offering)
     offering.save!
     offering
   end
@@ -93,15 +115,6 @@ class Seederation
   def objective_with_mappings(offering)
     objective = Factory :objective, offering: offering
     objective.mappings.create!(offering.outcomes.map {|out| {outcome: out}})
-  end
-
-
-  def content_with_mappings(cg)
-    c = Content.create! title: 'Some content', content_group: cg
-    Mapping.import (c.outcomes.map { |o|
-      Mapping.new value: Random.new.rand(0..10), outcome: o, mappable: c
-    })
-    c
   end
 
   def build_old_year(year,outcome_group)

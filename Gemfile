@@ -50,6 +50,7 @@ gem 'authlogic', # FIXME: This shouldn't depend on Ryan's personal fork
 gem 'cancan'
 
 gem 'forgery'
+gem 'random_text'
 
 # Twitter Bootstrap integration
 gem 'twitter-bootstrap-rails' #,

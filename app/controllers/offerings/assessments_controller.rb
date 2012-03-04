@@ -16,6 +16,8 @@ class Offerings::AssessmentsController < Offerings::Children
   end
 
   def show
+    @assessment = @offering.assessment
+    render 'no_assessment' and return if @assessment.nil?
   end
 
 end

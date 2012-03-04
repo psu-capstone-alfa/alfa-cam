@@ -26,7 +26,6 @@ describe Offerings::AssessmentsController do
     it "respond with success" do
       get :show, @args
       must_respond_with :success
-      must_render_nothing_here
     end
   end
 end
