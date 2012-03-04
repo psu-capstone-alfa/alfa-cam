@@ -5,4 +5,6 @@
 
 <br />
 
-<%= link_to 'New Offering', new_offering_path %>
+<% if can? :edit, @offerings %>
+	<%= link_to 'New Offering', new_offering_path, :class => 'btn' %>
+<% end %>

@@ -1,4 +1,4 @@
-
+<!-- Academic terms Index -->
 <div class="row">
   <div class="span10 offset1">
     <table id="term-index" class="table table-condensed">
@@ -23,14 +23,16 @@
             <% if can? :edit, term %>
               <%= link_to edit_academic_term_path(term),
                   :class => 'btn btn-tiny btn-success' do %>
-                <i class="icon-white icon-pencil"></i>
+                  Edit
               <% end %>
             <% end %>
-            <%= link_to(term,
-                confirm: 'Are you sure?',
-                method: :delete,
-                :class => 'btn btn-tiny btn-danger') do %>
-              <i class="icon-white icon-trash"></i>
+            <% if can? :delete, term %>
+              <%= link_to(term,
+                  confirm: 'Are you sure?',
+                  method: :delete,
+                  :class => 'btn btn-tiny btn-danger') do %>
+                <i class="icon-white icon-trash"></i>
+              <% end %>
             <% end %>
             </div>
           </td>
@@ -38,6 +40,9 @@
         <% end %>
     </table>
     <br>
-    <%= link_to 'New Term', new_academic_term_path, :class => 'btn' %>
+
+    <% if can? :edit, @academic_terms %>
+      <%= link_to 'New Term', new_academic_term_path, :class => 'btn' %>
+    <% end %>
   </div>
 </div>
