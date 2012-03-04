@@ -130,11 +130,39 @@ class Offering < ActiveRecord::Base
     ]
   end
 
-  def import_details_from(offering)
+  def import_from(offering)
     update_attributes(
       offering.attributes.select do |key, v|
         IMPORTED_DETAILS.include? key.to_sym
       end
     )
+
+    if self.term.outcome_group == offering.term.outcome_group
+      import_with_mappings(offering)
+    else
+      import_without_mappins(offering)
+    end
+
+    importing_done = true
+    save
   end
+
+  def import_with_mappings(offering)
+    offering.objectives.each do |objective|
+      objective.clones_with_mapping(self)
+    end
+    offering.content_groups.each do |group|
+      group.clones_with_mappings(self)
+    end
+  end
+
+  def import_without_mappings(offering)
+    offering.objectives.each do |objective|
+      objective.clones_without_mapping(self)
+    end
+    offering.content_groups.each do |group|
+      group.clones_without_mappings(self)
+    end
+  end
+
 end

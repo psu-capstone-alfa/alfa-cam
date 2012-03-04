@@ -19,4 +19,15 @@ class Objective < ActiveRecord::Base
     description
   end
 
+  def clones_without_mapping(new_offering)
+    obj = Objective.create! offering: new_offering, description: description
+  end
+
+  def clones_with_mapping(new_offering)
+    obj = Objective.create! offering: new_offering, description: description
+    mappings.each do |mapping|
+      mapping.clone_for_mappable(obj)
+    end
+  end
+
 end
