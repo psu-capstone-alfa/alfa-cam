@@ -48,3 +48,9 @@ form.offering-assessment {
   font-size: 11px;
   color: #aaa;
 }
+
+#offering-index {
+  td.actions, th.actions {
+    width: 70px
+  }
+}
