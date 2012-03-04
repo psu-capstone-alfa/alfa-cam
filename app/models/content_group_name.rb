@@ -6,4 +6,8 @@ class ContentGroupName < ActiveRecord::Base
   def self.to_content_groups
     active.all.map {|cgn| cgn.content_groups.build }
   end
+
+  def to_s
+    name
+  end
 end
