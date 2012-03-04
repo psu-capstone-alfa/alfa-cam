@@ -35,18 +35,12 @@ class AcademicTermsController < ApplicationController
       if @academic_term.save
         format.html {
           redirect_to @academic_term,
-          notice: 'Academic term was successfully created.'
-        }
-        format.json {
-          render json: @academic_term,
-          status: :created,
-          location: @academic_term
+          success: 'Academic term was successfully created.'
         }
       else
-        format.html { render action: "new" }
-        format.json {
-          render json: @academic_term.errors,
-          status: :unprocessable_entity
+        format.html {
+          flash[:error] = @academic_term.errors.full_messages.to_sentence
+          render action: "new"
         }
       end
     end
@@ -61,12 +55,10 @@ class AcademicTermsController < ApplicationController
           redirect_to @academic_term,
           notice: 'Academic term was successfully updated.'
         }
-        format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json {
-          render json: @academic_term.errors,
-          status: :unprocessable_entity
+        format.html {
+          flash[:error] = @academic_term.errors.full_messages.to_sentence
+          render action: "edit"
         }
       end
     end

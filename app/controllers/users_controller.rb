@@ -23,8 +23,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to @user, notice: 'User was successfully created.'
+      redirect_to @user, success: 'User was successfully created.'
     else
+      flash[:error] = @user.errors.full_messages.to_sentence
       render action: "new"
     end
   end
@@ -32,8 +33,9 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      redirect_to @user, notice: 'User was successfully updated.'
+      redirect_to @user, success: 'User was successfully updated.'
     else
+      flash[:error] = @user.errors.full_messages.to_sentence
       render action: "edit"
     end
   end
