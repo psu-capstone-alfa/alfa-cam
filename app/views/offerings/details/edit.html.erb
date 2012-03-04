@@ -1,8 +1,6 @@
 <!-- Offering-Details-Edit -->
 <h2>Details Edit</h2>
 
-
-
 <div class="row"><div class="span12">
   <% if @offering.errors.any? %>
     <div id="error_explanation">
@@ -24,31 +22,51 @@
     <div class="row">
       <div class="span6">
         <div class="control-group">
-          <label class="control-label">CRN</label>
+          <label class="control-label">
+            CRN
+            <%= help_tooltip("Course Number") %>
+          </label>
           <div class="controls">
-            <%= f.text_field :crn, class: 'span4' %>
+            <%= f.text_field :crn, :placeholder =>'12345', class: 'span4' %>
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label">Section</label>
+          <label class="control-label">
+            Section
+            <%= help_tooltip("Distinguish multiple classes of the same course
+              number.")
+            %>
+          </label>
           <div class="controls">
-            <%= f.text_field :section, class: 'span4' %>
+            <%= f.text_field :section, :placeholder =>'01', class: 'span4' %>
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label">Credit(s)</label>
+          <label class="control-label">
+            Credit(s)
+            <%= help_tooltip("The number of hours for a course") %>
+          </label>
           <div class="controls">
-            <%= f.text_field :credits, class: 'span4' %>
+            <%= f.text_field :credits, :placeholder =>'4', class: 'span4' %>
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label">Location</label>
+          <label class="control-label">
+            Location
+            <%= help_tooltip("Building and Room") %>
+          </label>
           <div class="controls">
-            <%= f.text_field :location, class: 'span4' %>
+            <%= f.text_field :location,
+                             :placeholder =>'FAB 88',
+                             class: 'span4'
+            %>
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label">Required</label>
+          <label class="control-label">
+            Required
+            <%= help_tooltip("Required for the degree program") %>
+          </label>
           <div class="controls">
             <%=
               #options = [
@@ -61,40 +79,75 @@
               # FIXME: tm Use a control like a multi-select or radio
               # button groups
               # instead of a textfield for required_or_elective
-              f.text_field :required_or_elective, class: 'span4'
+              f.text_field :required_or_elective,
+                           :placeholder =>'Required for BSCE',
+                           class: 'span4'
             %>
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label">Day/Time</label>
+          <label class="control-label">
+            Day/Time
+            <%= help_tooltip("Day and time of the course being offered") %>
+          </label>
           <div class="controls">
-            <%= f.text_field :day_and_time, class: 'span4' %>
+            <%= f.text_field :day_and_time,
+                             :placeholder =>'MW 18:40-21:20:00',
+                             class: 'span4'
+            %>
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label">Description</label>
+          <label class="control-label">
+            Description
+            <%= help_tooltip("Describe the course offering") %>
+          </label>
           <div class="controls">
-            <%= f.text_area :description, class: 'span4' %>
+            <%= f.text_area :description,
+                            :placeholder =>'Describe the course in your own
+                            terms',
+                            class: 'span4'
+            %>
           </div>
         </div>
       </div>
       <div class="span6">
         <div class="control-group">
-          <label class="control-label">Prerequisite(s)</label>
+          <label class="control-label">
+            Prerequisite(s)
+            <%= help_tooltip("A course that must be taken
+              prior to taking the offering")
+            %>
+          </label>
           <div class="controls">
-            <%= f.text_area :prerequisites, class: 'span4' %>
+            <%= f.text_area :prerequisites,
+                            :placeholder =>'CE 210',
+                            class: 'span4'
+            %>
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label">Textbook</label>
+          <label class="control-label">
+            Textbook
+            <%= help_tooltip("Textbook name") %>
+          </label>
           <div class="controls">
-            <%= f.text_area :textbook, class: 'span4' %>
+            <%= f.text_area :textbook,
+                            :placeholder =>'A Textbook',
+                            class: 'span4'
+            %>
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label">Additional Textbooks</label>
+          <label class="control-label">
+            Other Textbooks
+            <%= help_tooltip("Listed additional textbooks") %>
+          </label>
           <div class="controls">
-            <%= f.text_area :additional_textbooks, class: 'span4' %>
+            <%= f.text_area :additional_textbooks,
+                            :placeholder =>'Some more books',
+                            class: 'span4'
+            %>
           </div>
         </div>
       </div>
@@ -108,3 +161,5 @@
     <%= f.hidden_field :details_done, value: true %>
   <% end %>
 </div>
+
+
