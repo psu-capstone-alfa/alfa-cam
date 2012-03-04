@@ -6,30 +6,30 @@ function forceHelper(e,ui) {
 }
 
 function makeContentAndObjectivesSortable() {
-	var container = $('#offering_objectives_container, #offering_content_container');
+	var container = $('#objectives_container, #content_container');
 	if(container.length < 1) {
 		return;
 	}
 	container.each(function(index, element){
-		$('tbody tr', element).addClass("draggable");
-		$('tbody', element).sortable({
-			axis: 'y',
-			items: 'tr',
-			placeholder: 'ui-state-highlight',
-			opacity: 0.4,
-			scroll: true,
-			change: function(e, ui) {
-      	forceHelper(e,ui);
-      }
-		});
+	  $('tbody tr', element).addClass("draggable");
+	  $('tbody', element).sortable({
+	    axis: 'y',
+	    items: 'tr',
+	    placeholder: 'ui-state-highlight',
+            opacity: 0.4,
+	    scroll: true,
+	    change: function(e, ui) {
+      	      forceHelper(e,ui);
+            }
+	  });
 	});
 	
-	$('.offering-content-groups').submit(function(){
-    $(".offering-content-groups input.position").each(function(index) {
-      $(this).val(index);
-    });
-   	return true;
-	});
+      $('.offering-content-groups').submit(function(){
+        $(".offering-content-groups input.position").each(function(index) {
+          $(this).val(index);
+        });
+        return true;
+      });
 }
 
 // ------------------------------------------------------------
