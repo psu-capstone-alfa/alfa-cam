@@ -48,9 +48,20 @@
 
     <div class="container">
     <div class="row">
-       <% if flash[:alert] %>
-    <div class="notice"><%= flash[:alert] %></div>
-  <% end %>
+    <div class="span8 offset2">
+      <% if flash[:alert] %>
+        <div class = "alert"><strong>Alert: </strong><%= flash[:alert] %></div>
+      <% end %>
+      <% if flash[:error] %>
+        <div class = "alert alert-error"><strong>Error: </strong><%= flash[:error] %></div>
+      <% end %>
+      <% if flash[:notice] %>
+        <div class = "alert alert-info"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:success] %>
+        <div class = "alert alert-success"><%= flash[:success] %></div>
+      <% end %>
+    </div>
     </div>
       <div class="row">&nbsp;</div>
 

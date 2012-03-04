@@ -39,15 +39,12 @@ class OfferingsController < ApplicationController
     respond_to do |format|
       if @offering.save
         format.html {
-          redirect_to @offering, notice: 'Offering was successfully created.'
-        }
-        format.json {
-          render json: @offering, status: :created, location: @offering
+          redirect_to @offering, success: 'Offering was successfully created.'
         }
       else
-        format.html { render action: "new" }
-        format.json {
-          render json: @offering.errors, status: :unprocessable_entity
+        format.html {
+          flash[:error] = @offering.errors.full_messages.to_sentence
+          render action: "new"
         }
       end
     end
@@ -57,13 +54,12 @@ class OfferingsController < ApplicationController
     respond_to do |format|
       if @offering.update_attributes(params[:offering])
         format.html {
-          redirect_to @offering, notice: 'Offering was successfully updated.'
+          redirect_to @offering, success: 'Offering was successfully updated.'
         }
-        format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json {
-          render json: @offering.errors, status: :unprocessable_entity
+        format.html {
+          flash[:error] = @offering.errors.full_messages.to_sentence
+          render action: "edit"
         }
       end
     end

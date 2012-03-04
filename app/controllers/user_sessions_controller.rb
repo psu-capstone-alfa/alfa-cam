@@ -27,10 +27,10 @@ class UserSessionsController < ApplicationController
 
 
     if @session.save!
-      flash[:notice] = "Login successful"
+      flash[:success] = "Login successful"
       redirect_back_or_default profile_path
     else
-      flash[:notice] = "Invalid login"
+      flash[:alert] = "Invalid login"
       render :action => :new
     end
   end
@@ -41,7 +41,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
-    flash[:notice] = 'Logout successful'
+    flash[:success] = 'Logout successful'
     redirect_to login_path
   end
 end

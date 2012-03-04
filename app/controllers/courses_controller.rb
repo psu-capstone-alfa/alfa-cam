@@ -36,15 +36,12 @@ class CoursesController < ApplicationController
       if @course.save
         format.html {
           redirect_to [@term, @course],
-            notice: 'Course was successfully created.'
-        }
-        format.json {
-          render json: @course, status: :created, location: @course
+            success: 'Course was successfully created.'
         }
       else
-        format.html { render action: "new" }
-        format.json {
-          render json: @course.errors, status: :unprocessable_entity
+        format.html {
+          flash[:error] = @course.errors.full_messages.to_sentence
+          render action: "new"
         }
       end
     end
@@ -57,13 +54,12 @@ class CoursesController < ApplicationController
       if @course.update_attributes(params[:course])
         format.html {
           redirect_to [@term, @course],
-            notice: 'Course was successfully updated.'
+            success: 'Course was successfully updated.'
         }
-        format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json {
-          render json: @course.errors, status: :unprocessable_entity
+        format.html {
+          flash[:error] = @course.errors.full_messages.to_sentence
+          render action: "edit"
         }
       end
     end
