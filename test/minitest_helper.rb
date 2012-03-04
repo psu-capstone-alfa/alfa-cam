@@ -29,6 +29,9 @@ module AuthlogicTestHelpers
   end
 end
 
+# Make the basic class MiniTest::Rails::Spec instead of MiniTest::Spec
+MiniTest::Spec::TYPES.last[1] = MiniTest::Rails::Spec
+
 class MiniTest::Rails::Spec
   include Authlogic::TestCase
   extend AuthlogicTestHelpers
