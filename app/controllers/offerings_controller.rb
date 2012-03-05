@@ -14,7 +14,7 @@ class OfferingsController < ApplicationController
   before_filter :find_resource, except: [:index, :create]
 
   def index
-    @offerings = Offering.all
+    @offerings = Offering.order(:term_id).page params[:page]
     respond_with @offerings, layout: 'application'
   end
 

@@ -64,3 +64,6 @@ end
 
 gem 'seedbank'
 gem 'activerecord-import'
+
+# Pagination
+gem "kaminari"

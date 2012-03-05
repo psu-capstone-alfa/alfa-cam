@@ -60,3 +60,12 @@ form.offering-assessment {
     width: 70px
   }
 }
+
+.pagination .current {
+  float: left;
+  padding: 0 14px;
+  line-height: 34px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-left-width: 0;
+}
