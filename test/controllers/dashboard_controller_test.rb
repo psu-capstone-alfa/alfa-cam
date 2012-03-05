@@ -48,6 +48,12 @@ describe DashboardController do
         must_redirect_to home_staff_path
       end
     end
+
+    describe "second dashboard" do
+      it "must be success" do
+        get :staff2
+      end
+    end
   end
 
   describe "admin" do

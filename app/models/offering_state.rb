@@ -6,14 +6,6 @@ module OfferingState
   STAGES = [:review, :importing, :details, :objectives, :content, :assessments]
   EDITING_STAGES = STAGES - [:review, :importing]
 
-  # FIXME:rs Remove when we have reviewing and importing
-  def review_done
-    true
-  end
-  def importing_done
-    true
-  end
-
   def populate_stage_status
     # Reset the stage variables
     @ready = []
@@ -78,5 +70,21 @@ module OfferingState
         send("#{phase}_stages").include? stage
       end
     end
+  end
+
+  def stage_phases
+    { :ready => ready_stages,
+      :started => started_stages,
+      :complete => complete_stages }
+  end
+
+  def stage
+    output = {}
+    stage_phases.each do |phase,stages|
+      stages.each do |stage|
+        output[stage] = phase
+      end
+    end
+    output
   end
 end

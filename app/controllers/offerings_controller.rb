@@ -30,7 +30,17 @@ class OfferingsController < ApplicationController
   end
 
   def edit
-    @nav_offering = :manage
+    puts @offering
+    puts current_user
+    if @offering.taught_by? current_user
+      # Redirect to the first non-complete stage
+      @offering.stage.each do |stage,phase|
+        redirect_to [@offering, stage] and return unless phase == :complete
+      end
+      # Or to details if all stages are complete
+      redirect_to [:edit, @offering, :details]
+    end
+    render
   end
 
   def create
@@ -124,4 +134,6 @@ class OfferingsController < ApplicationController
         Offering.new
     end
   end
+
+
 end
