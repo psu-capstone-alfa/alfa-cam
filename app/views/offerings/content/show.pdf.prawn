@@ -1,3 +1,13 @@
+# pdf format of objective show page
+pdf.text "<font size='16'><b>#{@offering.course.dept_code} #{@offering.course.course_num} : #{@offering.course.title}</b></font>", :inline_format => true
+pdf.text " ",:leading => 5
+pdf.text "<font size='16'><b>#{@offering}</b></font>", :inline_format => true
+pdf.text " ",:leading => 5
+
+pdf.text "<font size='16'><b>OFFERING CONTENTS</b></font>", :inline_format => true
+
+pdf.text " ",:leading => 5
+
 # array of Outcome Key
 arrKey = []
 @offering.outcomes.each do |outcome|
@@ -24,5 +34,6 @@ content_groups = @offering.content_groups.each do |group|
   end
 
   pdf.table(allRows, :row_colors => ["FFFFFF","DDDDDD"])
-end
+  pdf.text " ",:leading => 5
 
+end
