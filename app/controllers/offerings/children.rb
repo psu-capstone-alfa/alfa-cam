@@ -26,10 +26,9 @@ private
       return if @offering.is_ready?(:review)
     end
 
-    render "offerings/not_ready" and return
-    #[:review, :importing].each do |stage|
-      #redirect_to [@offering, stage] and return if @offering.is_ready?(stage)
-    #end
+    [:review, :importing].each do |stage|
+      render "offerings/not_ready" and return if @offering.is_ready?(stage)
+    end
   end
 
   def redirect_to_edit
