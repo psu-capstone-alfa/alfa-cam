@@ -30,7 +30,7 @@ class Offering < ActiveRecord::Base
   has_many :objective_assessments, through: :assessment
   accepts_nested_attributes_for :assessment, :objective_assessments
   def get_or_create_assessment
-    return assessment unless assessment.nil?
+    return assessment.create_objective_assessments unless assessment.nil?
     create_assessment!
   end
 

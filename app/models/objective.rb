@@ -9,6 +9,8 @@ class Objective < ActiveRecord::Base
     through: :mappings,
     class_name: 'Outcome'
 
+  has_one :objective_assessment, dependent: :destroy
+
   accepts_nested_attributes_for :mappings
 
   acts_as_list :scope => :offering_id
