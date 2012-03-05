@@ -8,4 +8,10 @@ class Mapping < ActiveRecord::Base
   def to_s
     "#{mappable} maps to #{outcome} with #{value}"
   end
+
+  def clone_for_mappable(new_mappable)
+    Mapping.create! mappable: new_mappable, outcome_id: outcome_id,
+      value: value
+  end
+
 end
