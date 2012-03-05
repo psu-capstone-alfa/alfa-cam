@@ -1,15 +1,19 @@
-<h2>Assessment</h2>
+<h1><%= @offering %></h1>
+<hr>
 
 <br><br>
 
 <% @assessment.objective_assessments.each do |obj| %>
-  Objective: <%= obj.objective %><br>
-  Assessed: <%= obj.assessed %><br>
-  How well met: <%= obj.well_met %><br>
-  Improved: <%= obj.improved %><br>
+  <h3><%= obj.to_s %></h3>
+  <ul>
+  	<li><strong>Objective: </strong><%= obj.objective %><br></li>
+  	<li><strong>Assessed: </strong><%= obj.assessed %><br></li>
+  	<li><strong>How well met: </strong><%= obj.well_met %><br></li>
+  	<li><strong>Improved: </strong><%= obj.improved %><br></li>
+  </ul>
   <br>
 <% end %>
 
-Improved: <%= @assessment.improved %><br>
-Comments: <%= @assessment.comments %><br>
+<strong>Improved: </strong><%= @assessment.improved %><br>
+<strong>Comments: </strong><%= @assessment.comments %><br>
 
