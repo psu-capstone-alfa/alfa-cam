@@ -57,4 +57,16 @@ class Course < ActiveRecord::Base
     where("retired_term_id >= ? OR retired_term_id IS NULL", term.id)
   end
 
+  # Querying recent offerings for a course
+  def recent_offerings
+    offerings.order(:term_id)
+  end
+
+  # Restrict to a specific instructor
+  def recent_offerings_taught_by(instructor)
+    recent_offerings.
+      joins(:instructors).
+      where(:users => {:id => instructor.id })
+  end
+
 end
