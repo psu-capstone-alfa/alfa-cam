@@ -1,9 +1,10 @@
 <div id="instructor-dash" class="dashboard">
 <% @offerings_by_term.each do |term,offerings| %>
-  <div class="row"><div class="span10 offset1">
+  <div class="row"><div class="span8 offset2">
     <h2><%= term.title %></h2>
+    <div class="well">
     <% for offering in offerings %> 
-      <div class="well offering">
+    <div class="row"><div class="span8 offering">
         <div>
           <h3><%=offering.course.dept_code%> <%=offering.course.course_num%> : <%=offering.course.title%></h3>
         </div>
@@ -15,8 +16,9 @@
           <a class="btn <%= stage_color(offering, :content)%>" href="<%=offering_content_path(offering)%>">Content</a> 
           <a class="btn <%= stage_color(offering, :assessments)%>" href="<%=offering_assessments_path(offering)%>">Assessment</a>
         </div>
-      </div>
+      </div></div>
     <%end%>
+    </div>
   </div></div>
 <%end%>
 </div>
