@@ -1,3 +1,5 @@
+# Handles bulk creation of offerings for a term, for use by staff/admin
+# to easily create lots and lots of offerings.
 class Offerings::BulksController < ApplicationController
 
   authorize_resource class: Offering
