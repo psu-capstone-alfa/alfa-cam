@@ -14,7 +14,7 @@
         <% courses.each do |course| %>
           <tr class="">
             <td class="select">
-                <input type="checkbox" 
+                <input type="checkbox"
                        id="course_check_<%= course.id %>"
                        value="option1">
             </td>
@@ -24,27 +24,25 @@
               <span class="label label-important">Retired</span>
             </td>
             <td class="actions">
-              <div class="btn-group">
-                <a class="btn btn-tiny"
-                   rel="tooltip"
-                   title="Edit" 
-                   data-placement="bottom"
-                   href="<%= url_for [:edit, @term, course] %>"
-                ><i class="icon-pencil"></i></a>
-                <a class="btn btn-tiny"
+              <% if can? :edit, course %>
+              <a class="btn btn-tiny btn-success"
+                href="<%= url_for [:edit, @term, course] %>"
+              >Edit
+              <% end %>
+              </a>
+           <!--      <a class="btn btn-tiny"
                    rel="tooltip"
                    title="Replacement"
                    data-placement="bottom"
-                   href="#" 
-                ><i class="icon-share-alt"></i></a>
-                <!--TODO:dkf when in retire mode change to icon-refresh -->
-                <a class="btn btn-tiny btn-danger"
-                   rel="tooltip"
-                   title="Remove"
-                   data-placement="bottom"
                    href="#"
+                ><i class="icon-share-alt"></i></a> -->
+                <!--TODO:dkf when in retire mode change to icon-refresh -->
+
+                <% if can? :edit, course %>
+                <a class="btn btn-tiny btn-danger"
+                   href="<% url_for [:edit, @term, course] %>"
                 ><i class="icon-trash icon-white"></i></a>
-              </div>
+                <% end %>
             </td>
           </tr>
         <% end %>
@@ -53,3 +51,4 @@
     <% end %>
   </div>
 </div>
+
