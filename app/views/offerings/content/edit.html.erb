@@ -27,8 +27,9 @@
     <div class="tab-content">
       <% content_group_scopes(@offering.content_groups) do |group, id, name, css_class| %>
         <%= f.fields_for :content_groups, group do |cgf| %>
-          <div id="<%= id %>" class="tab-pane <%= css_class %>">
-            <table id='content_container' class="table-bordered table-striped mappings content-and-mappings">
+          <div id="<%= id %>" class="content-group tab-pane <%= css_class %>">
+            <table id="content_container" class="table-bordered table-striped mappings content-and-mappings">
+            <table class="table-bordered table-striped mappings content-and-mappings">
               <thead>
                 <tr>
                   <th></th>
@@ -38,15 +39,15 @@
                 </tr>
               </thead>
               <tbody>
-                <% content_scopes(cgf.object.content) do |content, css_class| %>
-                  <tr class="<%= css_class %>">
+                <% content_scopes(cgf.object) do |content, css_class, row_id| %>
+                  <tr class="content <%= css_class %>" id="<%= row_id %>">
                     <%= cgf.no_bs_fields_for :content, content do |cf| %>
                       <th>
                         <%= cf.hidden_field :position, :class => "position" %>
                         <%= cf.text_field :title, placeholder: 'Content name' %>
                         <%= cf.hidden_field :_destroy, value: 1, disabled: true %>
                         <button class="btn btn-danger delete-content">
-                          <i class="icon-white icon-remove">&nbsp;</i><span>Delete</span>
+                          <i class="icon-white icon-remove">&nbsp;</i>
                         </button>
                       </th>
                       <% mapping_scopes(cf.object.mappings) do |mapping| %>
@@ -61,8 +62,8 @@
                   </tr>
                 <% end %>
                 <tr id="content-footer">
-                  <td colspan="4">
-                    <button id="add-content" class="btn btn-success"><i class="icon-white icon-plus"></i> Add Content</button>
+                  <td colspan="<%= 1 + @outcomes.count %>">
+                    <button id="" class="add-content btn btn-success"><i class="icon-white icon-plus"></i> Add Content</button>
                   </td>
                 </tr>
               </tbody>

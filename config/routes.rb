@@ -1,4 +1,6 @@
 CourseAssessmentManager::Application.routes.draw do
+  resources :content_group_names
+
   resources :academic_terms do
     member { get 'bulk_courses' }
 

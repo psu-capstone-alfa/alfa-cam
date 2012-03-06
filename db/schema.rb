@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221210802) do
+ActiveRecord::Schema.define(:version => 20120302023735) do
 
   create_table "academic_terms", :force => true do |t|
     t.string   "title"
@@ -38,11 +38,18 @@ ActiveRecord::Schema.define(:version => 20120221210802) do
     t.integer  "content_group_id"
   end
 
+  create_table "content_group_names", :force => true do |t|
+    t.string   "name"
+    t.boolean  "active"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "content_groups", :force => true do |t|
     t.integer  "offering_id"
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "content_group_name_id"
   end
 
   create_table "course_replacements", :force => true do |t|

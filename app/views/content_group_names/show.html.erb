@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @content_group_name.name %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @content_group_name.active %>
+</p>
+
+
+<%= link_to 'Edit', edit_content_group_name_path(@content_group_name) %> |
+<%= link_to 'Back', content_group_names_path %>

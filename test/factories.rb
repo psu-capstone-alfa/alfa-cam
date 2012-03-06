@@ -72,8 +72,13 @@ Factory.define :outcome_group do |f|
   f.outcomes { 3.repetitions { Factory :outcome } }
 end
 
+Factory.define :content_group_name do |f|
+      f.name { 'Group %d' }
+  f.active true
+end
+
 Factory.define :content_group do |f|
-  f.name 'Group %d'
+  f.content_group_name { Factory :content_group_name }
   f.offering { Factory :offering }
 end
 

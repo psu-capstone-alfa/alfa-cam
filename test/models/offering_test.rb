@@ -27,6 +27,19 @@ describe Offering do
     end
   end
 
+  describe "content and content groups" do
+    before do
+      @term = Factory(:academic_term)
+      @content_group_names = 4.repetitions { Factory(:content_group_name) }
+    end
+
+    it "must be able to build active content groups" do
+      @offering.prepare_content_groups
+      @offering.content_groups.length.must_equal @content_group_names.length
+      @offering.content_groups.map(&:content_group_name).must_equal @content_group_names
+    end
+  end
+
   describe "exporting" do
     it "must export an array of export headings" do
       export_headings = Offering.export_headings
