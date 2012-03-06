@@ -66,4 +66,26 @@ class User < ActiveRecord::Base
   scope :with_role, lambda { |role|
     { :conditions => "roles_mask & #{2**ROLES.index(role.to_sym)} > 0"}
   }
+
+  scope :with_offerings_during, lambda { |term|
+    includes(:offerings).
+    where("offerings.term_id == ?", term.id)
+  }
+
+  scope :with_offerings_during_or_before, lambda { |term|
+    includes(:offerings).
+    where("offerings.term_id <= ?", term.id)
+  }
+
+  scope :with_uncomplete_offerings_during_or_before, lambda { |term|
+    with_offerings_during_or_before(term).
+    where("offerings.stages_left > 0")
+  }
+
+  scope :with_complete_offerings_during, lambda { |term|
+    with_offerings_during(term).
+    where("offerings.stages_left = 0")
+  }
+
+  scope :instructors, with_role(:instructor)
 end

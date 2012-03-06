@@ -12,23 +12,22 @@
   </thead>
 	
   <% @offerings.each do |offering| %>
-   <%for instructor in offering.instructors%>
-    <tr title=<%=instructor.name%>>
-     <td class="instructor"><%=instructor.name%></td>
+    <tr>
+     <td class="instructor"><%=offering.instructors.first.name%></td>
      <td class="course"><%=offering.course %></td>
      <td class="stages">
         <div class="btn-group"> 
-          <a class="btn <%= stage_color(offering, :review)%> btn-tiny" href="<%=offering_review_path(offering)%>">Review</a>
-          <a class="btn <%= stage_color(offering, :details)%> btn-tiny" href="<%=offering_details_path(offering)%>">Details</a>
-          <a class="btn <%= stage_color(offering, :objectives)%> btn-tiny" href="<%=offering_objectives_path(offering)%>">Objectives</a> 
-          <a class="btn <%= stage_color(offering, :content)%> btn-tiny" href="<%=offering_content_path(offering)%>">Content</a> 
-          <a class="btn <%= stage_color(offering, :assessment)%> btn-tiny" href="<%=offering_assessments_path(offering)%>">Assessment</a>
+          <% stages = stage_colors(offering) %>
+          <button class="btn btn-mini <%= stages[:review] %>">Review</button>
+          <button class="btn btn-mini <%= stages[:details] %>">Details</button>
+          <button class="btn btn-mini <%= stages[:objectives] %>">Objectives</button>
+          <button class="btn btn-mini <%= stages[:content] %>">Content</button>
+          <button class="btn btn-mini <%= stages[:assessments] %>">Assessments</button>
         </div>
      </td>
     
     </tr>
-   <%end%>	
-  <%end%>
+  <% end %>
  </table>
 </div>
 </div>

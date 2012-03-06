@@ -1,6 +1,7 @@
 # Academic terms are a period of time in which courses are taught
 #
 class AcademicTerm < ActiveRecord::Base
+  default_scope order("id DESC")
   validates :title, :presence => true
 
   has_many :offerings, foreign_key: :term_id
@@ -33,7 +34,7 @@ class AcademicTerm < ActiveRecord::Base
   end
 
   def self.current
-    last
+    first
   end
 
   def self.facets

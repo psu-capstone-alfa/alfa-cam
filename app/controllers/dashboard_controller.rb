@@ -20,7 +20,11 @@ class DashboardController < ApplicationController
 
   def instructor
     @instructor = current_user
-    @offerings_by_term = @instructor.offerings.group_by(&:term)
+    @offerings_by_term = @instructor.
+      offerings.
+      term_order.
+      order_by_status.
+      group_by(&:term)
   end
 
   def staff
@@ -34,17 +38,27 @@ class DashboardController < ApplicationController
   end
 
   def staff2
-    @instructors = User.with_role(:instructor)
-    @instructors.map! do |instructor|
-      offerings = instructor.offerings
+    @term = AcademicTerm.current
+
+    @redInstructors = User.
+      with_role(:instructor).
+      with_uncomplete_offerings_during_or_before(@term)
+
+    @greenInstructors = User.
+      instructors.
+      with_complete_offerings_during(@term) -
+      @redInstructors
+
+    @redInstructors.map! do |instructor|
+      offerings = instructor.
+        offerings.
+        uncompleted.
+        before_or_during(@term)
       {
         :instructor => instructor,
-        :complete => offerings.select(&:completed?),
-        :uncomplete => offerings.reject(&:completed?)
+        :uncomplete => offerings
       }
     end
-    @greenInstructors = @instructors.select {|inst| inst[:uncomplete].empty?}
-    @redInstructors = @instructors.reject {|inst| inst[:uncomplete].empty?}
   end
 
   def admin

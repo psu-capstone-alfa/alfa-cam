@@ -2,7 +2,15 @@
 # by some number of instructors
 #
 class Offering < ActiveRecord::Base
+
+  # Stage state functionality
   include OfferingState
+  before_save :update_stages_complete
+  scope :order_by_status,
+    order("stages_left DESC")
+  scope :uncompleted, where('stages_left > 0')
+  scope :completed, where('stages_left = 0')
+
 
   belongs_to :course
   belongs_to :term, class_name: 'AcademicTerm', foreign_key: 'term_id'
@@ -69,10 +77,14 @@ class Offering < ActiveRecord::Base
   scope :course_order,
     includes(:course).
     order("courses.dept_code ASC, courses.course_num ASC")
-
   scope :with_instructors,
     includes(:instructors).
     order("users.name ASC")
+  scope :term_order,
+    order("term_id DESC")
+  scope :before_or_during, lambda { |term|
+    where('term_id <= ?', term.id)
+  }
 
   def to_s
     "#{term.short}-#{course.short}"
