@@ -1,3 +1,6 @@
+# Controller for manipulating the global configuration of
+# ContentGroup names. This is a very simple controller.
+
 require "minitest_helper"
 
 describe ContentGroupNamesController do
@@ -38,7 +41,8 @@ describe ContentGroupNamesController do
   end
 
   it "must update content_group_name" do
-    put :update, id: @content_group_name.to_param, content_group_name: @content_group_name.attributes
+    put :update, id: @content_group_name.to_param,
+                 content_group_name: @content_group_name.attributes
     assert_redirected_to content_group_name_path(assigns(:content_group_name))
   end
 

@@ -37,8 +37,9 @@ class Offering < ActiveRecord::Base
 
   ## Contents
   def prepare_content_groups
-    (ContentGroupName.active.all - content_group_names).each do |missing_content_group_name|
-      content_group_names << missing_content_group_name
+    missing_names = ContentGroupName.active.all - content_group_names
+    missing_names.each do |missing_name|
+      content_group_names << missing_name
     end
     content_groups.each do |cg|
       cg.content.build_with_mappings(term.outcomes)

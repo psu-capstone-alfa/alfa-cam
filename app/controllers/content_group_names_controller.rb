@@ -1,3 +1,5 @@
+# For ContentGroupNames, which control the availability of which
+# ContentGroups a new offering can have
 class ContentGroupNamesController < ApplicationController
   before_filter :require_user
   authorize_resource
@@ -47,11 +49,23 @@ class ContentGroupNamesController < ApplicationController
 
     respond_to do |format|
       if @content_group_name.save
-        format.html { redirect_to @content_group_name, notice: 'Content group name was successfully created.' }
-        format.json { render json: @content_group_name, status: :created, location: @content_group_name }
+        format.html do
+          redirect_to @content_group_name,
+                      notice: 'Content group name was successfully created.'
+        end
+        format.json do
+          render json: @content_group_name,
+                 status: :created,
+                 location: @content_group_name
+        end
       else
-        format.html { render action: "new" }
-        format.json { render json: @content_group_name.errors, status: :unprocessable_entity }
+        format.html do
+          render action: "new"
+        end
+        format.json do
+          render json: @content_group_name.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -63,11 +77,17 @@ class ContentGroupNamesController < ApplicationController
 
     respond_to do |format|
       if @content_group_name.update_attributes(params[:content_group_name])
-        format.html { redirect_to @content_group_name, notice: 'Content group name was successfully updated.' }
+        format.html do
+          redirect_to @content_group_name,
+                      notice: 'Content group name was successfully updated.'
+        end
         format.json { head :ok }
       else
         format.html { render action: "edit" }
-        format.json { render json: @content_group_name.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @content_group_name.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end

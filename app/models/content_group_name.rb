@@ -1,3 +1,5 @@
+# Available ContentGroupNames will be present when
+# creating a new offering
 class ContentGroupName < ActiveRecord::Base
   has_many :content_groups
 
