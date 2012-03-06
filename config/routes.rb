@@ -28,7 +28,8 @@ CourseAssessmentManager::Application.routes.draw do
     end
     scope :module => :offerings do # Sub controllers under Offering::
       resource :review, only: [:edit, :show], controller: :review do
-        get 'specific/:id', action: :specific, as: 'specific'
+        post :edit
+        post :show
       end
 
       resource :importing, only: [:edit, :show], controller: :importing do

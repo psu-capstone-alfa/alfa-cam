@@ -15,6 +15,15 @@
           <%= link_to 'Summary', @offering %>
         </li>
         <li class="disabled"><a></a></li>
+        <li class="<%= active_if(@nav_offering, :review) %>">
+          <%= stage_navbar_link :review %>
+        </li>
+        <% if @offering.is_ready? :importing %>
+          <li class="<%= active_if(@nav_offering, :importing) %>">
+            <%= stage_navbar_link :importing %>
+          </li>
+          <li class="disabled"><a></a></li>
+        <% end %>
         <% Offering::EDITING_STAGES.each do |stage| %>
           <%= stage_navbar_link stage %>
         <% end %>

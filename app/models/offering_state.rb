@@ -12,7 +12,7 @@ module OfferingState
     @complete = []
     @started = []
 
-    @ready << :review unless review_done
+    @ready << :review
     @complete << :review if review_done
 
     @ready << :importing if @complete.include?(:review) && !importing_done
@@ -20,7 +20,7 @@ module OfferingState
 
     @ready << :details if @complete.include?(:importing)
     @complete << :details if details_done
-    @started << :details
+    @started << :details if importing_done
 
     @ready << :objectives << :content if @complete.include?(:details)
     @complete << :objectives if objectives_done && @ready.include?(:objectives)

@@ -1,0 +1,34 @@
+<%= form_tag do %>
+  <%= select_tag(:review_id,
+        grouped_options_for_select(
+          {
+            'Recent offerings...' => @recent,
+            'Your recent offerings...' => @my_recent
+          },
+          selected_key = @reviewing_offering.try(:id)
+        )
+      )
+  %>
+  <%= submit_tag 'Review' %>
+<% end %>
+
+
+<% unless @reviewing_offering %>
+  <h3>No offering selected</h3>
+<% else %>
+
+<h2><%= @reviewing_offering %></h2>
+
+<p>
+  <strong>Taught by:</strong>
+  <%= @reviewing_offering.instructors.join ',' %>
+</p>
+
+<br>
+<% if @assessment %>
+  <%= render @assessment %>
+<% else %>
+  <h3>Selected offering has no assessment</h3><br>
+<% end %>
+
+<% end %>

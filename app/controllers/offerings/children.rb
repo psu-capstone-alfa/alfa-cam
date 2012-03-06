@@ -6,7 +6,6 @@ class Offerings::Children < ApplicationController
   before_filter { @nav_section = :offerings }
   before_filter :find_resource
 
-  before_filter :redirect_before_import
   before_filter :redirect_to_edit, only: [:show]
   before_filter :redirect_from_unready
 

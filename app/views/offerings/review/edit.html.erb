@@ -1,7 +1,7 @@
-<h1 class="fail">Nothing here</h1>
+<%= render 'review' %>
 
 <%= form_for @offering do |f| %>
   <%= redirect_token @redirect_url %>
   <%= f.hidden_field :review_done, value: true %>
-  <%= f.submit class: 'btn btn-success' %>
+  <%= f.submit class: 'btn btn-primary', value: 'Continue' %>
 <% end %>
