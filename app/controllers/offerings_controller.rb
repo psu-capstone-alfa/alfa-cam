@@ -30,8 +30,6 @@ class OfferingsController < ApplicationController
   end
 
   def edit
-    puts @offering
-    puts current_user
     if @offering.taught_by? current_user
       # Redirect to the first non-complete stage
       @offering.stage.each do |stage,phase|
