@@ -1,0 +1,14 @@
+
+<% @assessment.objective_assessments.each do |obj| %>
+  <h3><%= obj.objective %></h3>
+  <ul>
+  	<li><strong>Assessed: </strong><%= obj.assessed %><br></li>
+  	<li><strong>How well met: </strong><%= obj.well_met %><br></li>
+  	<li><strong>Improved: </strong><%= obj.improved %><br></li>
+  </ul>
+  <br>
+<% end %>
+
+<strong>Improved: </strong><%= @assessment.improved %><br>
+<strong>Comments: </strong><%= @assessment.comments %><br>
+

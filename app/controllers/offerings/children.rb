@@ -14,6 +14,7 @@ private
 
   def find_resource
     @offering = Offering.find params[:offering_id]
+    @course = @offering.course
   end
 
   def redirect_before_import

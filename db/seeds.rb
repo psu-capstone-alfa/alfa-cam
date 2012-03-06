@@ -68,7 +68,7 @@ class Seederation
 
   def content_group_with_mappings(offering)
     cg = ContentGroup.create!(offering: offering, content_group_name: @content_group_names.sample)
-    Random.new.rand(2..10).repetitions {
+    rand(2..5).repetitions {
       content_with_mappings(cg)
     }
     cg
@@ -76,8 +76,8 @@ class Seederation
 
   def content_with_mappings(cg)
     c = Content.create! title: 'Some content', content_group: cg
-    Mapping.import (c.outcomes.map { |o|
-      Mapping.new value: Random.new.rand(0..10), outcome: o, mappable: c
+    Mapping.import (c.offering.outcomes.map { |o|
+      Mapping.new value: [rand(-10..10),0].max, outcome: o, mappable: c
     })
     c.save!
   end
@@ -121,7 +121,11 @@ class Seederation
 
   def objective_with_mappings(offering)
     objective = Factory :objective, offering: offering
-    objective.mappings.create!(offering.outcomes.map {|out| {outcome: out}})
+    objective.mappings.create!(
+      offering.outcomes.map do |out|
+        {outcome: out, value: [rand(-1..1),0].max}
+      end
+    )
   end
 
   def build_old_year(year,outcome_group)
@@ -153,13 +157,22 @@ end
 
   def build_initial_term
     # Build the first term
+    puts "Building term: Initial w/ random courses"
     @initial_term = AcademicTerm.create! do |t|
       t.title = 'Initial'
       t.outcome_group = @ogroups[0]
     end
 
     # Seed it with a bunch of courses
-    50.times { Factory :course, created_term: @initial_term }
+    @courses = 5.repetitions { Factory :course, created_term: @initial_term }
+    done_it_all_instructor = Factory :instructor, name: 'Done Everything'
+    @courses.each do |course|
+      build_completed_offering do |o|
+        o.term = @initial_term
+        o.course = course
+        o.instructors = [done_it_all_instructor]
+      end
+    end
   end
 
   def build_current_term
@@ -195,18 +208,18 @@ end
     @instructors << Factory(:instructor, name: 'Instructor TEST')
 
     # Some instructors without classes
-    2.times { Factory :instructor, name: 'Instructor w/ 0 Offerings' }
+    1.times { Factory :instructor, name: 'Instructor w/ 0 New Offerings' }
 
     @staff = Factory :staff,  name: 'Staff TEST'
     @admin = Factory :admin, name: 'Admin TEST'
     @reviewer = Factory :reviewer, name: 'Reviewer TEST'
 
-    @instructors.concat 10.repetitions { Factory :instructor }
+    @instructors.concat 1.repetitions { Factory :instructor }
 
     build_initial_term
 
     # Then build some years
-    # build_old_year((Date.today.year - 1).to_s, @ogroups[0])
+    build_old_year((Date.today.year - 1).to_s, @ogroups[0])
     build_current_term
   end
 
