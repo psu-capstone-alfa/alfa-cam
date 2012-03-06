@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(:version => 20120302023735) do
   create_table "content_group_names", :force => true do |t|
     t.string   "name"
     t.boolean  "active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "content_groups", :force => true do |t|
@@ -110,14 +110,15 @@ ActiveRecord::Schema.define(:version => 20120302023735) do
     t.text     "textbook"
     t.text     "additional_textbooks"
     t.string   "required_or_elective"
+    t.text     "prerequisite"
     t.text     "prerequisites"
+    t.text     "description"
     t.boolean  "review_done"
     t.boolean  "importing_done"
     t.boolean  "details_done"
     t.boolean  "objectives_done"
     t.boolean  "content_done"
     t.boolean  "assessments_done"
-    t.text     "description"
   end
 
   create_table "outcome_groups", :force => true do |t|
