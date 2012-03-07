@@ -30,7 +30,8 @@ class Course < ActiveRecord::Base
   #
   # Scopes
   #
-  scope :ordered, order("dept_code ASC, course_num ASC")
+  default_scope order("dept_code ASC, course_num ASC, title ASC")
+  scope :ordered, {}
 
   #will show the fields
   def to_s

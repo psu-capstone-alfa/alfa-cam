@@ -99,6 +99,8 @@ Factory.define :course_replacement do |f|
 end
 
 Factory.define :teaching do |f|
+  f.instructor { Factory :user }
+  f.offering { Factory :offering }
 end
 
 Factory.define :outcome_mapping do |f|

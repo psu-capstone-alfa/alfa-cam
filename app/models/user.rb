@@ -5,6 +5,19 @@ require 'net/ldap'
 class User < ActiveRecord::Base
   has_many :teachings
   has_many :offerings, through: :teachings
+  has_many :courses, through: :offerings do
+    def frequent(term, limit = 5)
+      self.
+        available_during(term).
+        limit(limit).
+        joins(offerings: [:instructors]).
+        where(teachings: {user_id: proxy_association.owner.id}).
+        select("courses.*").
+        group("courses.id").
+        select("count(*) as taught_count").
+        order("taught_count DESC")
+    end
+  end
 
   validates :login, format: { with: /\w+/ }
 

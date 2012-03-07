@@ -6,10 +6,14 @@ class AcademicTerm < ActiveRecord::Base
 
   has_many :offerings, foreign_key: :term_id
 
+
   belongs_to :outcome_group, inverse_of: :terms
   has_many :outcomes, through: :outcome_group
 
   validates :title, :presence => true
+
+  validates_associated :offerings
+  accepts_nested_attributes_for :offerings, allow_destroy: true
 
   before_destroy :check_for_offerings
   def check_for_offerings()
@@ -19,10 +23,10 @@ class AcademicTerm < ActiveRecord::Base
     end
   end
 
-  # TODO:cd this should preferably output something like
-  # "Fa2012" or "Wi2012"
+  # "Fa'12" or "Wi'12"
   def short
-    to_s
+    season, year = title.split(/\s+/)
+    "#{season.first(2)}'#{year.last(2)}"
   end
 
   def to_s

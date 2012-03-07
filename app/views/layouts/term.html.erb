@@ -17,7 +17,7 @@
           <%= link_to 'Courses', [@term, :courses] %>
         </li>
         <li class="<%= active_if(@nav_term, :bulk) %>">
-          <%= link_to 'Offerings', [:bulk_edit, @term, :courses] %>
+          <%= link_to 'Offerings', [:edit, @term, :offerings, :bulk] %>
         </li>
       </ul>
     </div>

@@ -7,7 +7,7 @@
             <div id="error_explanation">
               <h2><%= pluralize(@academic_term.errors.count, "error") %>
                 prohibited this academic_term from being saved:</h2>
-              
+
                 <ul>
                   <% @academic_term.errors.full_messages.each do |msg| %>
                     <li><%= msg %></li>
