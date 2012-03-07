@@ -13,9 +13,41 @@ class OfferingsController < ApplicationController
   before_filter { @nav_section = :offerings }
   before_filter :find_resource, except: [:index, :create]
 
+=begin
   def index
     @offerings = Offering.order(:term_id).page params[:page]
     respond_with @offerings, layout: 'application'
+  end
+=end
+
+  def getConditions
+    conditions = Hash.new
+    conditions[:term_id] = params[:term].to_i unless params[:term].blank?
+    conditions[:users] = {
+      :id => params[:instructor].to_i
+    } unless params[:instructor].blank?
+    conditions[:crn] = params[:crn] unless params[:crn].blank?
+    conditions
+  end
+ 
+  def index
+    conditions = getConditions
+    
+    if(conditions.empty?) 
+      @offerings = Offering.order(:term_id).page(params[:page])\
+                           .per(params[:limit])
+    else 
+      @offerings = Offering.joins(:instructors).order(:term_id)\
+                           .where(conditions).uniq.page(params[:page])\
+                           .per(params[:limit])
+    end
+    
+    if params[:partial].blank?
+      respond_with @offerings, :layout => 'application'
+    else
+      render :partial => 'offerings_table', :layout => false
+    end
+
   end
 
   def show
@@ -91,22 +123,6 @@ class OfferingsController < ApplicationController
     ActiveSupport::JSON.encode(obj)
 
     render :json => obj
-  end
-
-  def search
-    conditions = Hash.new
-    conditions[:term_id] = params[:term].to_i unless params[:term].blank?
-    conditions[:users] = {
-      :id => params[:instructor].to_i
-    } unless params[:instructor].blank?
-    conditions[:crn] = params[:crn] unless params[:crn].blank?
-    @offerings = Offering.joins(:instructors).where(conditions).uniq
-    if params[:partial].blank?
-      respond_with @offerings, :layout => 'application'
-    else
-      render :partial => 'search_table', :layout => false
-    end
-
   end
 
   def export
