@@ -18,8 +18,8 @@ titleRow = [" "] # title row include name and Outcome keys
 titleRow.concat(arrKey)
 
 allRows.push(titleRow)
-
-@objectives.each do |objective| 
+objectives = @offering.objectives
+objectives.each do |objective| 
   aRow = []
   aRow.push(objective.description)
   objective.mappings.each do |mapping| 

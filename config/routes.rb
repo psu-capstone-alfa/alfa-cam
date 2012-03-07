@@ -1,4 +1,6 @@
 CourseAssessmentManager::Application.routes.draw do
+  get "export/offerings"
+
   resources :academic_terms do
     member { get 'bulk_courses' }
 

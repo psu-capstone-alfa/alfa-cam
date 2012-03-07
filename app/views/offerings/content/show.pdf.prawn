@@ -1,4 +1,4 @@
-# pdf format of objective show page
+# pdf format of content show page
 pdf.text "<font size='16'><b>#{@offering.course.dept_code} #{@offering.course.course_num} : #{@offering.course.title}</b></font>", :inline_format => true
 pdf.text " ",:leading => 5
 pdf.text "<font size='16'><b>#{@offering}</b></font>", :inline_format => true
