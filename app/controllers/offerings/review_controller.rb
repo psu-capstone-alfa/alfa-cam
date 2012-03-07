@@ -16,7 +16,9 @@ class Offerings::ReviewController < Offerings::Children
   end
 
   def edit
-    @redirect_url = url_for [:edit, @offering]
+    @redirect_url = polymorphic_path(
+      [:edit, @offering, :importing],
+      id: @recent_offering_choice)
   end
 
   private
