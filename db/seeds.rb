@@ -148,9 +148,9 @@ end
   def build_term(title,outcome_group)
     puts "Building term: #{title}"
     term = AcademicTerm.create! title: title, outcome_group: outcome_group
-    retired = Course.available_during(term).sample
-    retired.retired_term = term unless retired.nil?
-    Factory :course, created_term: term
+    #retired = Course.available_during(term).sample
+    #retired.retired_term = term unless retired.nil?
+    #Factory :course, created_term: term
     yield(term) if block_given?
     term
   end
