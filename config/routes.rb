@@ -26,6 +26,7 @@ CourseAssessmentManager::Application.routes.draw do
       get :export
       get :facets
     end
+
     scope :module => :offerings do # Sub controllers under Offering::
       resource :review, only: [:edit, :show], controller: :review do
         post :edit
@@ -33,6 +34,8 @@ CourseAssessmentManager::Application.routes.draw do
       end
 
       resource :importing, only: [:edit, :show], controller: :importing do
+        post :edit
+        post :import
       end
 
       resource :details, only: [:edit, :show, :update, :destroy]

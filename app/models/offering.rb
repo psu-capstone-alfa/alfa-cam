@@ -153,7 +153,7 @@ class Offering < ActiveRecord::Base
       import_without_mappins(offering)
     end
 
-    importing_done = true
+    self.importing_done = true
     save
   end
 
