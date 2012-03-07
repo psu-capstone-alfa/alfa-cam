@@ -15,7 +15,7 @@ module OfferingsHelper
   end
 
   def redirect_token(path)
-    tag :input, name: '_redirect_endpoint', type: 'hidden', value: path
+    hidden_field_tag '_redirect_endpoint', path
   end
 
   def stage_label_color(offering, stage)

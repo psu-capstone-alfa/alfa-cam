@@ -4,10 +4,13 @@
 class Offerings::ReviewController < Offerings::Children
   layout 'offering'
 
+  include Offerings::Recent
+
   before_filter { @nav_offering = :review }
   before_filter :require_user
-  before_filter :get_reviewing_offering
-  before_filter :get_review_choices
+  before_filter :get_recent_offering_choice
+  before_filter :get_recent_offering_choices
+  before_filter :get_recent_offering_assessment
 
   def show
   end
@@ -17,21 +20,7 @@ class Offerings::ReviewController < Offerings::Children
   end
 
   private
-    def get_reviewing_offering
-      if params.has_key? :review_id
-        @reviewing_offering = Offering.find params[:review_id]
-      end
-      @reviewing_offering ||= @offering.course.recent_offerings.first
-      @assessment = @reviewing_offering.assessment if @reviewing_offering
-    end
-
-    def get_review_choices
-      @recent = @course.recent_offerings.map do |offering|
-        [offering, offering.id]
-      end
-      @my_recent = @course.
-        recent_offerings_taught_by(current_user).map do |o|
-          [o, o.id]
-      end
+    def get_recent_offering_assessment
+      @assessment = @recent_offering_choice.try :assessment
     end
 end

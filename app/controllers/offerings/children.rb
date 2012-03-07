@@ -36,6 +36,7 @@ private
         not @offering.completed? and
         @offering.is_ready? controller_name and
         not @offering.is_complete? controller_name
+      flash.keep
       redirect_to action: :edit
     end
   end
