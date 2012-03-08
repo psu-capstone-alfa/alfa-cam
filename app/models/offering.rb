@@ -28,7 +28,8 @@ class Offering < ActiveRecord::Base
               :day_and_time,
               :prerequisites,
               :textbook,
-              :additional_textbooks
+              :additional_textbooks,
+              :description
             ]
 
   IMPORTED_DETAILS = DETAILS - [:section, :crn, :location, :day_and_time]
