@@ -1,0 +1,72 @@
+team alpha final presentation
+=============================
+
+- recap
+  - how much is really recap, how much is just context?
+
+  - we are building a program assessment manager
+    - help the CEE department ease the pain of ABET accreditation
+    - track curriculum changes and implement continuous improvement processes for instructors
+  - who we are
+    - who are we?
+    - just some dudes, right?
+  - requirements
+    - collect instructor course assessments and share with colleagues
+    - map course content to ABET requirements to simplify review process
+    - simple and easy to use for non-technical staff
+
+- development plan discussion
+  - user stories
+    - helpful in determining original project plan
+    - identified different use cases
+    - didn't always write new functionality in user story format
+    - ?
+  - iterative development
+    - weekly rhythm
+    - experienced schedule slippage
+    - ?
+  - tooling
+    - github was awesome
+      - initial hump gitting up to speed
+      - greatly facilitated distributed development
+    - jira/greenhopper
+      - too much ceremony for this small of a team/project
+      - switched to pivotal tracker (with good success!)
+        - allowed a "reboot" and stayed more in touch w/ reality
+    - flowdock
+      - kept people talking t/o week
+      - use gradually increased with time
+      - helpful to organize add'l artifacts due to file/link aggregation
+  - code acceptance
+    - "done criteria"
+      - mostly enforced
+      - found some automatic tooling support in Cane
+    - code review policy
+      - always at least 1 other pair of eyes on new code
+      - not always 2 as we had hoped
+  - points of pain
+    - "sunday night/monday morning" merge
+    - difficult to achieve/maintain momentum
+    - not enough time in the same room?
+
+- risk management
+  - no serious risks encountered
+    - closest was trickiness in getting CAT deploy
+    - is it even worth mentioning?
+  - or am i forgetting something?
+
+- results
+  - check out this hot hot site baby!
+  - maybe a statement from ariel here?
+
+- future work
+  - better modeling of course replacement?
+  - making things more generic, to be applicable in other depts
+  - deeper user testing and UI/UX iteration
+    - more online documentation?
+  - more/better export options
+  - working on the app with the dept during actual ABET process
+
+- deliver/handoff/licensing
+  - tarball to CAT
+  - documented code + deploy/architecture docs
