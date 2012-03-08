@@ -2,5 +2,5 @@
 git fetch origin
 git reset --hard origin/staging
 bundle
-RAILS_ENV=production rake db:reset
+RAILS_ENV=production bundle exec rake db:reset
 

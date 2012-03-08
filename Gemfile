@@ -43,7 +43,6 @@ group :test, :development do
     :branch => "gemspec"
   gem 'simplecov', :require => false
   gem 'cane'
-  gem 'miniskirt'
 end
 
 # User session management
@@ -64,6 +63,9 @@ gem 'acts_as_list' #, :git => 'git://github.com/swanandp/acts_as_list'
 group :ldap do
   gem 'net-ldap'
 end
+
+# Testing and seeding factories
+gem 'miniskirt'
 
 gem 'seedbank'
 gem 'activerecord-import'
