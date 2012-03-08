@@ -30,11 +30,11 @@ describe 'Code Coverage' do
       'Coverage test data too old')
   end
 
-  it "must have 65% or greater code coverage" do
+  it "must have 70% or greater code coverage" do
     File.open('coverage/covered_percent','r') do |file|
       covered_percent = file.gets
       covered_percent.wont_be_nil 'No coverage percentage'
-      Float(covered_percent).round(1).must_be :>, 75,
+      Float(covered_percent).round(1).must_be :>, 70,
         'Insufficient code coverage percentage'
     end
   end

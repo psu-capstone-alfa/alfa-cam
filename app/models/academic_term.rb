@@ -25,8 +25,9 @@ class AcademicTerm < ActiveRecord::Base
 
   # "Fa'12" or "Wi'12"
   def short
-    season, year = title.split(/\s+/)
-    "#{season.first(2)}'#{year.last(2)}"
+    #season, year = title.split(/\s+/)
+    #"#{season.first(2)}'#{year.last(2)}"
+    self
   end
 
   def to_s
@@ -49,4 +50,7 @@ class AcademicTerm < ActiveRecord::Base
       }
     }
   end
+
+  # Order Scopes
+  scope :order_oldest_first, order('id DESC')
 end

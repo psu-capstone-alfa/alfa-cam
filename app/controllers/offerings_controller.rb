@@ -29,19 +29,19 @@ class OfferingsController < ApplicationController
     conditions[:crn] = params[:crn] unless params[:crn].blank?
     conditions
   end
- 
+
   def index
     conditions = getConditions
-    
-    if(conditions.empty?) 
+
+    if(conditions.empty?)
       @offerings = Offering.order(:term_id).page(params[:page])\
                            .per(params[:limit])
-    else 
+    else
       @offerings = Offering.joins(:instructors).order(:term_id)\
                            .where(conditions).uniq.page(params[:page])\
                            .per(params[:limit])
     end
-    
+
     if params[:partial].blank?
       respond_with @offerings, :layout => 'application'
     else

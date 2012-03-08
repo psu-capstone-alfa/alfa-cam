@@ -51,17 +51,23 @@ end
 class Seederation
   include RandomText
 
-  def initialize
-    @outcomes = ('A'..'K').map do |key|
-      Outcome.create! key: key,
+  def build_outcomes(range)
+    range.map do |key|
+      Outcome.create!(
+        key: key,
         title: "Outcome #{key}",
         description: Lorem.sentence
+      )
     end
+  end
 
+  def initialize
     @ogroups = OutcomeGroup.create!( [
-      { title: 'Original outcomes', outcomes: @outcomes[0..8] },
-      { title: 'New outcomes', outcomes: @outcomes },
+      { title: 'Original outcomes', outcomes: build_outcomes('A'..'C') },
+      { title: 'New outcomes', outcomes: build_outcomes('A'..'K') },
     ])
+
+    @ogroup = @ogroups.last
 
     @content_group_names = 3.repetitions { Factory :content_group_name }
   end
@@ -160,7 +166,7 @@ end
     puts "Building term: Initial w/ random courses"
     @initial_term = AcademicTerm.create! do |t|
       t.title = 'Initial'
-      t.outcome_group = @ogroups[0]
+      t.outcome_group = @ogroup
     end
 
     # Seed it with a bunch of courses
@@ -176,7 +182,7 @@ end
   end
 
   def build_current_term
-    @current_term = build_term("Its #{Date.today.year}", @ogroups[0]) do |term|
+    @current_term = build_term("Its #{Date.today.year}", @ogroup) do |term|
       courses = term.available_courses
       @instructors.each do |instructor|
         build_completed_offering do |o|
@@ -219,7 +225,7 @@ end
     build_initial_term
 
     # Then build some years
-    build_old_year((Date.today.year - 1).to_s, @ogroups[0])
+    build_old_year((Date.today.year - 1).to_s, @ogroup)
     build_current_term
   end
 

@@ -11,24 +11,6 @@ describe OutcomeGroup do
     @og2 = Factory :outcome_group, outcomes: []
   end
 
-  it 'should not allow multiple outcomes with the same key' do
-    @og1.must_be :valid?
-    @og1.outcomes << @replace_outcomes
-    @og1.wont_be :valid?
-  end
-
-  it 'should replace outcomes with the same key as existing outcomes' do
-    @og2.outcomes << @og1.outcomes
-    @og2.replace_outcomes(@replace_outcomes)
-    
-    @replace_outcomes.each do |replacement|
-      @og2.outcomes.must_include replacement
-      @og2.outcomes.wont_include(
-        @orig_outcomes.find {|o| o.key == replacement.key }
-      )
-    end
-  end
-
   describe 'outcome groups interacting with terms' do
     before do
       @t1 = AcademicTerm.new({title: 't1'})
