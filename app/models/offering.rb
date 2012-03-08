@@ -150,7 +150,7 @@ class Offering < ActiveRecord::Base
       end
     )
 
-    if self.term.outcome_group == offering.term.outcome_group
+    if can_import_mappings_from? offering
       import_with_mappings(offering)
     else
       import_without_mappins(offering)
@@ -176,6 +176,10 @@ class Offering < ActiveRecord::Base
     offering.content_groups.each do |group|
       group.clones_without_mappings(self)
     end
+  end
+
+  def can_import_mappings_from?(other_offering)
+    self.term.outcome_group == other_offering.term.outcome_group
   end
 
 end
