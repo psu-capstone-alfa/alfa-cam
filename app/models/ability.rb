@@ -16,7 +16,7 @@ class Ability
     end
     if user.is? :staff
       can :manage, Course
-      can :manage, Term
+      can :manage, AcademicTerm
       can :manage, Outcome
       can :manage, Offering
       can :manage, ContentGroupName
