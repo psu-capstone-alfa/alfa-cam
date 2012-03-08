@@ -2,7 +2,7 @@
 <div id="staff2-dash" class="dashboard span12">
  <h3>Instructor - Offerings Status</h3>
  <p>List of Instructors teaching in the current term and their status in completing necessary information</p>
- <table id="sortTableExample" class="table table-striped">	
+ <table id="sortTableExample" class="table table-condensed">
   <thead>
    <tr>
     <th class="instructor">Instructor</th>
@@ -10,13 +10,13 @@
     <th class="stages"></th>
    </tr>
   </thead>
-	
+
   <% @offerings.each do |offering| %>
     <tr>
      <td class="instructor"><%=offering.instructors.first.name%></td>
      <td class="course"><%=offering.course %></td>
      <td class="stages">
-        <div class="btn-group"> 
+        <div class="btn-group">
           <% stages = stage_colors(offering) %>
           <button class="btn btn-mini <%= stages[:review] %>">Review</button>
           <button class="btn btn-mini <%= stages[:details] %>">Details</button>
@@ -25,7 +25,7 @@
           <button class="btn btn-mini <%= stages[:assessments] %>">Assessments</button>
         </div>
      </td>
-    
+
     </tr>
   <% end %>
  </table>

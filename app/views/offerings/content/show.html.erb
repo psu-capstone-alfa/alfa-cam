@@ -12,7 +12,7 @@
   <div class="tab-content">
     <div class="tab-pane active" id="1">
       <% @offering.content_groups.each do |group| %>
-        <table class="table-bordered table-striped objective mappings">
+        <table class="table-bordered table-condensed objective mappings">
           <thead>
             <tr>
               <th class="content_group">
@@ -38,7 +38,7 @@
     </div>
     <% @offering.content_groups.each do |group| %>
       <div class="tab-pane" id="group-<%= group.id %>">
-        <table class="table-bordered table-striped objective mappings">
+        <table class="table-bordered table-condensed objective mappings">
           <thead>
             <tr>
               <th class="content_group">
