@@ -8,4 +8,8 @@ class ExportController < ApplicationController
   	@offerings = Offering.all
   end
 
+  def offering
+  	@offering = Offering.find(4)
+  end
+
 end
