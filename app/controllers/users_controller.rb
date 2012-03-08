@@ -47,7 +47,8 @@ class UsersController < ApplicationController
       @user.destroy
       redirect_to users_url
     else
-      redirect_to :back, alert: "User cannot delete self"
+      flash[:alert] = "User cannot delete self"
+      redirect_to :back
     end
   end
 
