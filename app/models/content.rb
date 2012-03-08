@@ -23,7 +23,6 @@ class Content < ActiveRecord::Base
 
   def clones_with_mappings(new_content_group)
     cont = Content.create! position: position, title: title,
-      created_at: created_at, updated_at: updated_at,
       content_group_id: new_content_group
 
     mappings.each do |mapping|
@@ -33,7 +32,6 @@ class Content < ActiveRecord::Base
 
   def clones_without_mappings(new_content_group)
     cont = Content.create! position: position, title: title,
-      created_at: created_at, updated_at: updated_at,
       content_group_id: new_content_group
   end
 

@@ -44,8 +44,7 @@ class ContentGroup < ActiveRecord::Base
   end
 
   def clones_without_mappings(new_offering)
-    group = ContentGroup.create! offering_id: new_offering, name: name,
-      created_at: created_at, updated_at: updated_at
+    group = ContentGroup.create! offering_id: new_offering, name: name
     content.each do |content|
       content.clones_without_mappings(group)
     end
