@@ -12,6 +12,9 @@ gem 'sqlite3'
 #used for generating pdf
 gem "prawnto_2", :require => "prawnto"
 
+group :staging, :production do
+  gem 'pg'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
