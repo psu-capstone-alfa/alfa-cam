@@ -43,6 +43,7 @@ group :test, :development do
     :branch => "gemspec"
   gem 'simplecov', :require => false
   gem 'cane'
+  gem 'flowdock'
 end
 
 # User session management
