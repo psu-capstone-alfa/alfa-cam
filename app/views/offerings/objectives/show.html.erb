@@ -1,7 +1,7 @@
 <h1><%= @offering %></h1>
 <hr>
 
-<table class="table-bordered table-striped objective mappings">
+<table class="table-bordered table-condensed objective mappings">
   <thead>
     <tr>
       <th></th>
@@ -12,7 +12,7 @@
   </thead>
   <tbody>
     <% @objectives.each do |objective| %>
-      <tr> 
+      <tr>
         <th><%= objective.description %></th>
         <% objective.mappings.each do |mapping| %>
           <td>
