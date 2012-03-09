@@ -29,6 +29,9 @@ CourseAssessmentManager::Application.routes.draw do
       get :export
       get :facets
     end
+    member do
+      get :export, action: :export_member, as: "export"
+    end
     scope :module => :offerings do # Sub controllers under Offering::
       resource :review, only: [:show, :update] do
         get ':id', action: :specific, as: 'specific'

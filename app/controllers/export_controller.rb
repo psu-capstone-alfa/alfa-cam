@@ -10,6 +10,16 @@ class ExportController < ApplicationController
 
   def offering
   	@offering = Offering.find(4)
+    respond_to do |format|
+      format.html{
+      	render
+      }
+      format.pdf {
+        render
+      }
+
+    end
+
   end
 
 end
