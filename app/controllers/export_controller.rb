@@ -17,9 +17,17 @@ class ExportController < ApplicationController
       format.pdf {
         render
       }
-
     end
+  end
 
+# action to select term: range to select offerings
+  def range
+    @offerings = Offering.all
+  end
+
+# action to search for offerings in the selected term
+  def search
+    @term = AcademicTerm.find(params[:id])
   end
 
 end

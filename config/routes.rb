@@ -3,6 +3,10 @@ CourseAssessmentManager::Application.routes.draw do
 
   get "export/offerings"
   get "export/offering"
+  get "export/range"
+  get "export/search"
+
+  match 'search' => 'export#search'
 
   resources :academic_terms do
     member { get 'bulk_courses' }

@@ -1,0 +1,10 @@
+  
+  <h4>Links to export PDF of offering for term: <%= @term.title %> </h4>
+  <br>
+  <% if @term.offerings.empty?%>
+  <%= "no offerings for the chosen term" %>
+  <% end %>
+  <% @term.offerings.each do |offering| %>
+  	<a href="<%= export_offering_path(:id=>offering.id, :format => "pdf") %>"><%=offering.course%></a>
+  	<br>
+  <%end%>
