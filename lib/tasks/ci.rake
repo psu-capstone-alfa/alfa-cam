@@ -34,6 +34,9 @@ namespace :ci do
       flow.push_to_chat(:content => "#{env} build FAILED!", :tags => [:master, :FAILED])
     end
     namespace :deploy do
+      task :begin do
+        flow.push_to_chat(:content => "#{env} deploying...", :tags => [:master, :success])
+      end
       task :success do
         flow.push_to_chat(:content => "#{env} deploy success.", :tags => [:master, :success])
       end

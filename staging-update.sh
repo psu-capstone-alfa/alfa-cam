@@ -1,4 +1,7 @@
 #!/bin/sh
+
+bundle exec rake ci:staging:deploy:begin
+
 git fetch origin
 git reset --hard origin/staging
 bundle
