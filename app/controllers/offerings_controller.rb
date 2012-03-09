@@ -32,22 +32,19 @@ class OfferingsController < ApplicationController
 
   def index
     conditions = getConditions
+    @page = params[:page] or 1
+    @limit = params[:limit] or 25
 
-    if(conditions.empty?)
-      @offerings = Offering.order(:term_id).page(params[:page])\
-                           .per(params[:limit])
-    else
-      @offerings = Offering.joins(:instructors).order(:term_id)\
-                           .where(conditions).uniq.page(params[:page])\
-                           .per(params[:limit])
-    end
+    @offerings = Offering.
+      search_for(conditions).
+      page(@page).
+      per(@limit)
 
     if params[:partial].blank?
       respond_with @offerings, :layout => 'application'
     else
       render :partial => 'offerings_table', :layout => false
     end
-
   end
 
   def show

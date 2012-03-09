@@ -89,6 +89,12 @@ class Offering < ActiveRecord::Base
   scope :before_or_during, lambda { |term|
     where('term_id <= ?', term.id)
   }
+  scope :search_for, lambda { |conditions|
+    includes(:instructors, :course, :term).
+    term_order.
+    course_order.
+    where(conditions)
+  }
 
   def to_s
     "#{term.short}-#{course.short}"
