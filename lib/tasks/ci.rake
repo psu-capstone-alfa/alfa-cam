@@ -13,7 +13,7 @@ namespace :ci do
   namespace :master do
     env = "Master"
     task :build do
-      flow.push_to_chat(:content => "#{env} building...", :tags => [:master, :success])
+      #flow.push_to_chat(:content => "#{env} building...", :tags => [:master, :success])
     end
     task :success do
       flow.push_to_chat(:content => "#{env} build success.", :tags => [:master, :success])
@@ -25,7 +25,7 @@ namespace :ci do
   namespace :staging do
     env = "Staging"
     task :build do
-      flow.push_to_chat(:content => "#{env} building...", :tags => [:master, :success])
+      #flow.push_to_chat(:content => "#{env} building...", :tags => [:master, :success])
     end
     task :success do
       flow.push_to_chat(:content => "#{env} build success.", :tags => [:master, :success])
@@ -35,7 +35,7 @@ namespace :ci do
     end
     namespace :deploy do
       task :begin do
-        flow.push_to_chat(:content => "#{env} deploying...", :tags => [:master, :success])
+        #flow.push_to_chat(:content => "#{env} deploying...", :tags => [:master, :success])
       end
       task :success do
         flow.push_to_chat(:content => "#{env} deploy success.", :tags => [:master, :success])
