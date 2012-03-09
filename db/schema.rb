@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120308223026) do
+ActiveRecord::Schema.define(:version => 20120309050018) do
 
   create_table "academic_terms", :force => true do |t|
     t.string   "title"
@@ -90,11 +90,11 @@ ActiveRecord::Schema.define(:version => 20120308223026) do
   end
 
   create_table "objectives", :force => true do |t|
-    t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "offering_id"
     t.integer  "position"
+    t.text     "description"
   end
 
   create_table "offerings", :force => true do |t|
