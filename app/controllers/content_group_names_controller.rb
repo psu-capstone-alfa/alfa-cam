@@ -50,8 +50,8 @@ class ContentGroupNamesController < ApplicationController
     respond_to do |format|
       if @content_group_name.save
         format.html do
-          redirect_to @content_group_name,
-                      notice: 'Content group name was successfully created.'
+          flash[:notice] = "Content group name was successfully created."
+          redirect_to @content_group_name
         end
         format.json do
           render json: @content_group_name,
@@ -78,8 +78,8 @@ class ContentGroupNamesController < ApplicationController
     respond_to do |format|
       if @content_group_name.update_attributes(params[:content_group_name])
         format.html do
-          redirect_to @content_group_name,
-                      notice: 'Content group name was successfully updated.'
+          flash[:notice] = "Content group name was successfully updated."
+          redirect_to @content_group_name
         end
         format.json { head :ok }
       else

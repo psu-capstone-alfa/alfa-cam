@@ -32,8 +32,8 @@ class OutcomesController < ApplicationController
 
     respond_to do |format|
       if @outcome.save
-        format.html { redirect_to @outcome,
-          success: 'Outcome was successfully created.' }
+        format.html { flash[:success] = "Outcome was successfully created."
+        redirect_to @outcome }
       else
         format.html {
           flash[:error] = @outcome.errors.full_messages.to_sentence
@@ -47,8 +47,8 @@ class OutcomesController < ApplicationController
 
     respond_to do |format|
       if @outcome.update_attributes(params[:outcome])
-        format.html { redirect_to @outcome,
-          success: 'Outcome was successfully updated.' }
+        format.html { flash[:success] = "Outcome was successfully updated."
+          redirect_to @outcome}
       else
         format.html {
           flash[:error] = @outcome.errors.full_messages.to_sentence
