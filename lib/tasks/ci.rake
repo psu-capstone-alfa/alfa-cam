@@ -1,8 +1,12 @@
 require 'flowdock'
 
-flow = Flowdock::Flow.new(
-  :api_token => `git config flowdock.token`,
-  :external_user_name => 'CIJoe')
+begin
+  flow = Flowdock::Flow.new(
+    :api_token => `git config flowdock.token`,
+    :external_user_name => 'CIJoe')
+rescue
+  flow = nil
+end
 
 
 namespace :ci do
