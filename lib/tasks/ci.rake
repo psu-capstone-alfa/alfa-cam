@@ -12,6 +12,9 @@ end
 namespace :ci do
   namespace :master do
     env = "Master"
+    task :build do
+      flow.push_to_chat(:content => "#{env} building...", :tags => [:master, :success])
+    end
     task :success do
       flow.push_to_chat(:content => "#{env} build success.", :tags => [:master, :success])
     end
@@ -21,6 +24,9 @@ namespace :ci do
   end
   namespace :staging do
     env = "Staging"
+    task :build do
+      flow.push_to_chat(:content => "#{env} building...", :tags => [:master, :success])
+    end
     task :success do
       flow.push_to_chat(:content => "#{env} build success.", :tags => [:master, :success])
     end
