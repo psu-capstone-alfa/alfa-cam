@@ -102,6 +102,7 @@ class Offering < ActiveRecord::Base
     [
       'Dept',
       'Course Number',
+      'Description',
       'Term',
       'Section',
       'CRN',
@@ -114,7 +115,8 @@ class Offering < ActiveRecord::Base
       'Prerequisite(s)',
       'Location',
       'Program Outcomes',
-      'Course Objectives'
+      'Course Objectives',
+      'Content'
     ]
   end
 
@@ -124,10 +126,13 @@ class Offering < ActiveRecord::Base
     joined_outcomes = outcomes.map(&:key).join(',')
 
     joined_objectives = objectives.map(&:description).join(',')
+    
+    joined_content = content.map(&:title).join("; ").chomp " "
 
     return [
       course.dept_code,
       course.course_num,
+      description,
       term.title,
       section,
       crn,
@@ -140,7 +145,8 @@ class Offering < ActiveRecord::Base
       prerequisites,
       location,
       joined_outcomes,
-      joined_objectives
+      joined_objectives,
+      joined_content
     ]
   end
 
