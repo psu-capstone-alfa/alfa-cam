@@ -64,22 +64,50 @@
         </div>
         <div class="control-group">
           <label class="control-label">
-            Required for BSCE
+            BSCE Requirement
             <%= help_tooltip("Whether or not this offering is required for a B.S. in Civil Engineering. True means it is required. False means it is an elective.") %>
           </label>
           <div class="controls">
-            <%= f.radio_button :required_for_bsce, true, :class => :inline %> <label for="required_for_bsce" class='inline'>True</label><br />
-            <%= f.radio_button :required_for_bsce, false, :class => :inline %> <label for="required_for_bsce" class='inline'>False</label>
+            <%= f.radio_button :required_for_bsce, 
+                               :Required, 
+                               :class => :inline 
+            %>
+            <label for="required_for_bsce" class='inline'>Required</label><br />
+            <%= f.radio_button :required_for_bsce,
+                               :Elective,
+                               :class => :inline 
+            %>
+            <label for="required_for_bsce" class='inline'>Elective</label><br />
+            <%= f.radio_button :required_for_bsce,
+                               "N/A",
+                               :class => :inline
+            %>
+            <label for="required_for_bsce" class='inline'>N/A</label>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label">
-            Required For BSENVE
-            <%= help_tooltip("Whether or not this offering is required for a B.S. in Environmental Engineering. True means it is required. False means it is an elective.") %>
+            BSENVE Requirement
+            <%= help_tooltip("Indicate if this offering is required, an elective or N/A for a B.S. in Environmental Engineering.") %>
           </label>
           <div class="controls">
-            <%= f.radio_button :required_for_bsenve, true, :class => :inline %> <label for="required_for_bsenve" class='inline'>True</label><br />
-            <%= f.radio_button :required_for_bsenve, false, :class => :inline %> <label for="required_for_bsenve" class='inline'>False</label>
+            <%= f.radio_button :required_for_bsenve,
+                               :Required,
+                               :class => :inline
+            %>
+            <label for="required_for_bsenve" class='inline'>Required</label>
+            <br />
+            <%= f.radio_button :required_for_bsenve,
+                               :Elective,
+                               :class => :inline
+            %>
+            <label for="required_for_bsenve" class='inline'>Elective</label>
+            <br />
+            <%= f.radio_button :required_for_bsenve,
+                               "N/A",
+                               :class => :inline
+            %>
+            <label for="required_for_bsenve" class='inline'>N/A</label>
           </div>
         </div>
         <div class="control-group">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120309232423) do
+ActiveRecord::Schema.define(:version => 20120310011449) do
 
   create_table "academic_terms", :force => true do |t|
     t.string   "title"
@@ -118,8 +118,8 @@ ActiveRecord::Schema.define(:version => 20120309232423) do
     t.boolean  "assessments_done"
     t.text     "description"
     t.integer  "stages_left"
-    t.boolean  "required_for_bsce",    :default => false, :null => false
-    t.boolean  "required_for_bsenve",  :default => false, :null => false
+    t.string   "required_for_bsce",    :default => "N/A"
+    t.string   "required_for_bsenve",  :default => "N/A"
   end
 
   create_table "outcome_groups", :force => true do |t|

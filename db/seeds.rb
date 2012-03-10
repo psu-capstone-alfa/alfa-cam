@@ -42,8 +42,8 @@ Factory.define :detailed_offering, parent: :offering do |f|
     f.day_and_time { Forgery::Date.day_of_week << " " << random_time}
     f.textbook { Lorem.paragraph }
     f.additional_textbooks { Lorem.paragraphs(3).join "\n" }
-    f.required_for_bsce { [true, false].sample }
-    f.required_for_bsenve { [true, false].sample }
+    f.required_for_bsce { ["Required", "Elective", "N/A"].sample }
+    f.required_for_bsenve { ["Required", "Elective", "N/A"].sample }
     f.prerequisites { Factory.build(:course).to_s }
     f.description { Lorem.sentences(5).join ' ' }
 end
