@@ -168,7 +168,7 @@ class Offering < ActiveRecord::Base
     if can_import_mappings_from? offering
       import_with_mappings(offering)
     else
-      import_without_mappins(offering)
+      import_without_mappings(offering)
     end
 
     self.importing_done = true

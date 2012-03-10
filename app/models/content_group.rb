@@ -34,19 +34,18 @@ class ContentGroup < ActiveRecord::Base
   end
 
   def clones_with_mappings(new_offering)
-    group = ContentGroup.create!({
-      offering_id: new_offering,
+    group = ContentGroup.create! offering: new_offering,
       content_group_name_id: content_group_name_id
-    })
-    content.each do |content|
-      content.clones_with_mappings(group)
+    self.content.each do |cnt|
+      cnt.clones_with_mappings(group)
     end
   end
 
   def clones_without_mappings(new_offering)
-    group = ContentGroup.create! offering_id: new_offering, name: name
-    content.each do |content|
-      content.clones_without_mappings(group)
+    group = ContentGroup.create! offering: new_offering,
+      content_group_name_id: content_group_name_id
+    self.content.each do |cnt|
+      cnt.clones_without_mappings(group)
     end
   end
 
