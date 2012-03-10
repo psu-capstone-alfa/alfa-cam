@@ -1,0 +1,32 @@
+.help-bubble {
+  z-index: 2050;
+  position: relative;
+
+  a, & > div {
+    position: absolute;
+  }
+}
+
+.help-overlay {
+  display: none;
+}
+
+.help-backdrop {
+  z-index: 2000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.2;
+}
+
+#toggle-help-overlay {
+  z-index: 2050;
+  position: relative;
+  padding: 6px 0 0;
+  &:hover {
+    cursor: pointer;
+  }
+}
