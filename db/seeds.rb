@@ -3,6 +3,14 @@
 
 include RandomText
 
+def random_time
+  times = [
+    "09:00-11:50", "12:00-13:50", "08:15-10:05", "16:40-18:30", "18:40-21:30",
+    "14:00-15:50", "12:00-13:20", "10:00-11:50", "09:30-11:20", "12:45-14:35"
+  ]
+  times.sample
+end
+
 Factory.define :user do |f|
   f.name { Forgery::Name.full_name }
   f.login 'user %d'
@@ -31,7 +39,7 @@ Factory.define :detailed_offering, parent: :offering do |f|
     f.crn { Forgery::Extend("#####").to_numbers }
     f.location { Forgery::Address.street_name << " Hall" }
     f.credits { rand(1..6) }
-    f.day_and_time { Forgery::Date.day_of_week }
+    f.day_and_time { Forgery::Date.day_of_week << " " << random_time}
     f.textbook { Lorem.paragraph }
     f.additional_textbooks { Lorem.paragraphs(3).join "\n" }
     f.required_or_elective { %w(Required Elective).sample }
