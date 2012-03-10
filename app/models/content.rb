@@ -22,17 +22,17 @@ class Content < ActiveRecord::Base
   end
 
   def clones_with_mappings(new_content_group)
-    cont = Content.create! position: position, title: title,
-      content_group_id: new_content_group
+    cnt = Content.create! position: position, title: title,
+      content_group: new_content_group
 
     mappings.each do |mapping|
-      mapping.clone_for_mappable(cont)
+      mapping.clone_for_mappable(cnt)
     end
   end
 
   def clones_without_mappings(new_content_group)
-    cont = Content.create! position: position, title: title,
-      content_group_id: new_content_group
+    cnt = Content.create! position: position, title: title,
+      content_group: new_content_group
   end
 
 end
