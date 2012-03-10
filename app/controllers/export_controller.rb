@@ -20,14 +20,13 @@ class ExportController < ApplicationController
     end
   end
 
-# action to select term: range to select offerings
-  def range
-    @offerings = Offering.all
-  end
-
 # action to search for offerings in the selected term
   def search
-    @term = AcademicTerm.find(params[:id])
+    if(params[:id].nil?)
+      @term = AcademicTerm.find(1)  
+    else
+      @term = AcademicTerm.find(params[:id])
+    end
   end
 
 end

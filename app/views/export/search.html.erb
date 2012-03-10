@@ -1,10 +1,18 @@
-  
-  <h4>Links to export PDF of offering for term: <%= @term.title %> </h4>
-  <br>
-  <% if @term.offerings.empty?%>
-  <%= "no offerings for the chosen term" %>
-  <% end %>
-  <% @term.offerings.each do |offering| %>
-  	<a href="<%= export_offering_path(:id=>offering.id, :format => "pdf") %>"><%=offering.course%></a>
-  	<br>
-  <%end%>
+<!-- this page display the result of search offering by term and link to pdf for each offering -->
+<% term_array = AcademicTerm.all.map { |term| [term.title,term.id] } %>
+
+<%= form_tag("/search", :method => "get") do %>
+  <%= label_tag("Choose Term:") %>
+  <%= select_tag "id", options_for_select(term_array)%>	
+  <%= submit_tag("Genarate") %>
+<% end %>
+
+<h4>Links to export PDF of offering for term: <%= @term.title %> </h4>
+<br>
+<% if @term.offerings.empty?%>
+<%= "no offerings for the chosen term" %>
+<% end %>
+<% @term.offerings.each do |offering| %>
+	<a href="<%= export_offering_path(:id=>offering.id, :format => "pdf") %>"><%=offering.course%></a>
+	<br>
+<%end%>

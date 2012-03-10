@@ -1,7 +1,0 @@
-<% term_array = AcademicTerm.all.map { |term| [term.title,term.id] } %>
-
-<%= form_tag("/search", :method => "get") do %>
-  <%= label_tag("Choose Term:") %>
-  <%= select_tag "id", options_for_select(term_array)%>	
-  <%= submit_tag("Genarate") %>
-<% end %>
