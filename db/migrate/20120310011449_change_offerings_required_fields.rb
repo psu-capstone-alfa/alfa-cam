@@ -1,7 +1,7 @@
 class ChangeOfferingsRequiredFields < ActiveRecord::Migration
   def up
-    change_column :offerings, :required_for_bsce, :string, :default => "N/A", :null => "N/A"
-    change_column :offerings, :required_for_bsenve, :string, :default => "N/A", :null => "N/A"
+    change_column :offerings, :required_for_bsce, :string, :default => "N/A"
+    change_column :offerings, :required_for_bsenve, :string, :default => "N/A"
   end
 
   def down
