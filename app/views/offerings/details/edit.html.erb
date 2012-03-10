@@ -64,25 +64,50 @@
         </div>
         <div class="control-group">
           <label class="control-label">
-            Required
-            <%= help_tooltip("Required for the degree program") %>
+            BSCE Requirement
+            <%= help_tooltip("Whether or not this offering is required for a B.S. in Civil Engineering. True means it is required. False means it is an elective.") %>
           </label>
           <div class="controls">
-            <%=
-              #options = [
-              #  ["Required for BSCE", "Required for BSCE"],
-              #  ["Required for BSENVE", "Required for BSENVE"],
-              #  ["Elective for BSCE", "Elective for BSCE"],
-              #  ["Elective for BSENVE", "Elective for BSENVE"]
-              #]
-              #f.select(:required_or_elective, options, {}, {:multiple=>true})
-              # FIXME: tm Use a control like a multi-select or radio
-              # button groups
-              # instead of a textfield for required_or_elective
-              f.text_field :required_or_elective,
-                           :placeholder =>'Required for BSCE',
-                           class: 'span4'
+            <%= f.radio_button :required_for_bsce, 
+                               :Required, 
+                               :class => :inline 
             %>
+            <label for="required_for_bsce" class='inline'>Required</label><br />
+            <%= f.radio_button :required_for_bsce,
+                               :Elective,
+                               :class => :inline 
+            %>
+            <label for="required_for_bsce" class='inline'>Elective</label><br />
+            <%= f.radio_button :required_for_bsce,
+                               "N/A",
+                               :class => :inline
+            %>
+            <label for="required_for_bsce" class='inline'>N/A</label>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">
+            BSENVE Requirement
+            <%= help_tooltip("Indicate if this offering is required, an elective or N/A for a B.S. in Environmental Engineering.") %>
+          </label>
+          <div class="controls">
+            <%= f.radio_button :required_for_bsenve,
+                               :Required,
+                               :class => :inline
+            %>
+            <label for="required_for_bsenve" class='inline'>Required</label>
+            <br />
+            <%= f.radio_button :required_for_bsenve,
+                               :Elective,
+                               :class => :inline
+            %>
+            <label for="required_for_bsenve" class='inline'>Elective</label>
+            <br />
+            <%= f.radio_button :required_for_bsenve,
+                               "N/A",
+                               :class => :inline
+            %>
+            <label for="required_for_bsenve" class='inline'>N/A</label>
           </div>
         </div>
         <div class="control-group">

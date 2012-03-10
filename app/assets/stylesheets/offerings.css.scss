@@ -69,3 +69,11 @@ form.offering-assessment {
   border: 1px solid #ddd;
   border-left-width: 0;
 }
+
+.controls label.inline {
+  display: inline;
+  margin: 0
+}
+.controls input[type='radio'].inline {
+  margin-bottom: 6px;
+}

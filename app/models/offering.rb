@@ -117,7 +117,8 @@ class Offering < ActiveRecord::Base
       'Day/Time',
       'Textbook',
       'Additional Textbook(s)',
-      'Required',
+      'BSCE Requirement',
+      'BSENVE Requirement',
       'Prerequisite(s)',
       'Location',
       'Program Outcomes',
@@ -132,7 +133,7 @@ class Offering < ActiveRecord::Base
     joined_outcomes = outcomes.map(&:key).join(',')
 
     joined_objectives = objectives.map(&:description).join(',')
-    
+
     joined_content = content.map(&:title).join("; ").chomp " "
 
     return [
@@ -147,7 +148,8 @@ class Offering < ActiveRecord::Base
       day_and_time,
       textbook,
       additional_textbooks,
-      required_or_elective,
+      required_for_bsce,
+      required_for_bsenve,
       prerequisites,
       location,
       joined_outcomes,
