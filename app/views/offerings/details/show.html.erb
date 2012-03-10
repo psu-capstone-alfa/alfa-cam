@@ -108,10 +108,20 @@
         <div class="row">
           <dl>
             <div class="span2">
-              <dt>Required/Elective</dt>
+              <dt>Required For BSCE</dt>
             </div>
             <div class="span2">
-              <dd><%= @offering.required_or_elective %></dd>
+              <dd><%= @offering.required_for_bsce %></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="row">
+          <dl>
+            <div class="span2">
+              <dt>Required For BSENVE</dt>
+            </div>
+            <div class="span2">
+              <dd><%= @offering.required_for_bsenve %></dd>
             </div>
           </dl>
         </div>

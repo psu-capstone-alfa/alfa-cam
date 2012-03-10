@@ -64,25 +64,22 @@
         </div>
         <div class="control-group">
           <label class="control-label">
-            Required
-            <%= help_tooltip("Required for the degree program") %>
+            Required for BSCE
+            <%= help_tooltip("Whether or not this offering is required for a B.S. in Civil Engineering. True means it is required. False means it is an elective.") %>
           </label>
           <div class="controls">
-            <%=
-              #options = [
-              #  ["Required for BSCE", "Required for BSCE"],
-              #  ["Required for BSENVE", "Required for BSENVE"],
-              #  ["Elective for BSCE", "Elective for BSCE"],
-              #  ["Elective for BSENVE", "Elective for BSENVE"]
-              #]
-              #f.select(:required_or_elective, options, {}, {:multiple=>true})
-              # FIXME: tm Use a control like a multi-select or radio
-              # button groups
-              # instead of a textfield for required_or_elective
-              f.text_field :required_or_elective,
-                           :placeholder =>'Required for BSCE',
-                           class: 'span4'
-            %>
+            <%= f.radio_button :required_for_bsce, true, :class => :inline %> <label for="required_for_bsce" class='inline'>True</label><br />
+            <%= f.radio_button :required_for_bsce, false, :class => :inline %> <label for="required_for_bsce" class='inline'>False</label>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">
+            Required For BSENVE
+            <%= help_tooltip("Whether or not this offering is required for a B.S. in Environmental Engineering. True means it is required. False means it is an elective.") %>
+          </label>
+          <div class="controls">
+            <%= f.radio_button :required_for_bsenve, true, :class => :inline %> <label for="required_for_bsenve" class='inline'>True</label><br />
+            <%= f.radio_button :required_for_bsenve, false, :class => :inline %> <label for="required_for_bsenve" class='inline'>False</label>
           </div>
         </div>
         <div class="control-group">
