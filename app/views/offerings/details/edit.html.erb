@@ -65,7 +65,7 @@
         <div class="control-group">
           <label class="control-label">
             BSCE Requirement
-            <%= help_tooltip("Whether or not this offering is required for a B.S. in Civil Engineering. True means it is required. False means it is an elective.") %>
+            <%= help_tooltip("Indicate if this offering is required, an elective or not applicable toward a B.S. in Civil Engineering.") %>
           </label>
           <div class="controls">
             <%= f.radio_button :required_for_bsce, 
@@ -88,7 +88,7 @@
         <div class="control-group">
           <label class="control-label">
             BSENVE Requirement
-            <%= help_tooltip("Indicate if this offering is required, an elective or N/A for a B.S. in Environmental Engineering.") %>
+            <%= help_tooltip("Indicate if this offering is required, an elective or not applicable toward a B.S. in Environmental Engineering.") %>
           </label>
           <div class="controls">
             <%= f.radio_button :required_for_bsenve,
