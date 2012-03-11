@@ -1,3 +1,35 @@
+<!--Help POPOVERS -->
+<%
+  @help = {
+    :one => { title: '1',
+      content: "First type in a content name if adding others then click the
+      \"Add Content\" button then type in your content name.",
+      position:'bottom',
+      style: ''},
+
+    :two => {title: '2',
+      content: "Assign outcome(s) with a score which will add up to 10.",
+      position: 'bottom',
+      style: ''},
+
+    :three => {title: '3',
+      content: "Clicking \"Save\" or \"Save and Next\" will permanently save
+      all changes, \"Save and Next\" will continue to next screen that needs to
+      be filled out, \"Reset\" will erase all data on page, that has not been
+      saved before. \"Cancel\" will not save any changed information and return
+      you to the summary page.",
+      position:'right',
+      style: ''},
+
+    :A => {title: 'A',
+      content: "Delete will not permanently delete content until you click
+      \"Save\" or \"Save and Next\".",
+      position: 'right',
+      style: 'top: -16px'},
+
+  }
+%>
+
 <h1><%= @offering %></h1>
 <hr>
 
@@ -5,7 +37,8 @@
   <%= f.hidden_field :content_done, value: true %>
   <% if @offering.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@offering.errors.count, "error") %> prohibited this offering from being saved:</h2>
+    <h2><%= pluralize(@offering.errors.count, "error") %>
+      prohibited this offering from being saved:</h2>
 
     <ul>
       <% @offering.errors.full_messages.each do |msg| %>
@@ -17,7 +50,8 @@
 
   <div class="tabbable">
     <ul class="nav nav-pills">
-      <% content_group_scopes(@offering.content_groups) do |group, id, name, css_class| %>
+      <% content_group_scopes(@offering.content_groups) do
+        |group, id, name, css_class| %>
         <li class="<%= css_class %>">
           <%= link_to name, "##{id}", 'data-toggle' => "pill" %>
         </li>
@@ -25,16 +59,21 @@
     </ul>
 
     <div class="tab-content">
-      <% content_group_scopes(@offering.content_groups) do |group, id, name, css_class| %>
+      <% content_group_scopes(@offering.content_groups) do
+        |group, id, name, css_class| %>
         <%= f.fields_for :content_groups, group do |cgf| %>
           <div id="<%= id %>" class="content-group tab-pane <%= css_class %>">
-            <table id="content_container" class="table-bordered table-condensed mappings content-and-mappings">
-            <table class="table-bordered table-condensed mappings content-and-mappings">
+            <table id="content_container"
+                   class="table-bordered table-condensed mappings
+                    content-and-mappings">
+            <table class="table-bordered table-condensed mappings
+                    content-and-mappings">
               <thead>
                 <tr>
                   <th></th>
                   <% @outcomes.each do |outcome| %>
-                  <th class="outcome"><abbr title="<%= outcome.title %>"><%= outcome.key %></abbr></th>
+                  <th class="outcome"><abbr title="<%= outcome.title %>">
+                    <%= outcome.key %></abbr></th>
                   <% end %>
                 </tr>
               </thead>
@@ -63,11 +102,16 @@
                 <% end %>
                 <tr id="content-footer">
                   <td colspan="<%= 1 + @outcomes.count %>">
-                    <button id="" class="add-content btn btn-success"><i class="icon-white icon-plus"></i> Add Content</button>
+                    <button id="" class="add-content btn btn-success">
+                      <i class="icon-white icon-plus"></i> Add Content</button>
+                        &nbsp;<%= insert_help :one %>
+                      <span class="offset1"><%= insert_help :A %></span>
+                      <span class="offset2"><%= insert_help :two %></span>
                   </td>
                 </tr>
               </tbody>
             </table>
+
           </div>
         <% end %>
       <% end %>
@@ -82,5 +126,8 @@
     <button type="submit" class="btn btn-primary">Save and Next</button>
     <button type="reset" class="btn">Reset</button>
     <%= link_to 'Cancel', @offering %>
+    &nbsp;
+    <%= insert_help :three %>
+
   </div>
 <% end %>

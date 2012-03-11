@@ -1,3 +1,19 @@
+<!--HELP POPOVER -->
+<%
+  @help = {
+    :one => {title: '1',
+      content: "Select an offering then click \"Review\" to refresh offering
+      below",
+      position: 'right',
+      style: ''},
+
+    :two => {title: '2',
+      content: "Click \"Continue\" to next page.",
+      position: 'bottom',
+      style: ''},
+  }
+%>
+
 <%= form_tag do %>
   <%= select_tag(:id,
         grouped_options_for_select(
@@ -6,12 +22,12 @@
             'Your recent offerings...' => @my_recent_options
           },
           selected_key = @recent_offering_choice.try(:id)
+
         )
       )
   %>
-  <%= submit_tag 'Review' %>
+  <%= submit_tag 'Review' %> &nbsp; <%= insert_help :one %>
 <% end %>
-
 
 <% unless @recent_offering_choice %>
   <h3>No offering selected</h3>
@@ -32,7 +48,6 @@
 <%= form_tag action: 'import' do %>
   <%= redirect_token @redirect_url %>
   <%= hidden_field_tag :import_from_id, @recent_offering_choice.id %>
-  <%= submit_tag 'Import', class: 'btn btn-primary' %>
+  <%= submit_tag 'Import', class: 'btn btn-primary' %> &nbsp;
+  <%= insert_help :two %>
 <% end %>
-
-
