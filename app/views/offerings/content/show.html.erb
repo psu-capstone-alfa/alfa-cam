@@ -1,34 +1,42 @@
 <h1><%= @offering %></h1>
 <hr>
 
-
 <div class="tabbable">
   <ul class="nav nav-pills">
     <li class="active"><a href="#1" data-toggle="tab">Summary</a></li>
     <% @offering.content_groups.each do |group| %>
-      <li><a href="#group-<%= group.id %>" data-toggle="tab"><%= group.name %></a></li>
+      <li><a href="#group-<%= group.id %>" data-toggle="tab">
+        <%= group.name %></a></li>
     <% end %>
+     <div class="edit-button">
+    <%=
+    link_to_if can?(:edit, @offering),
+      'Edit',
+      edit_offering_content_path(@offering),
+      :class => 'btn btn-danger'
+    %>
+    </div>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="1">
       <% @offering.content_groups.each do |group| %>
-        <table class="table-bordered table-condensed objective mappings">
+        <table class="offering table table-bordered objective mappings">
           <thead>
             <tr>
-              <th class="content_group">
+              <strong><th class="content_group row-content-title">
                 <abbr title="<%= group.name %>"><%= group.name %></abbr>
-              </th>
+              </th></strong>
               <% @offering.outcomes.each do |outcome| %>
-                <td><%= outcome.key %></td>
+                <th class="col-outcome"><%= outcome.key %></th>
               <% end %>
             </tr>
           </thead>
           <tbody>
             <% group.content.each do |content| %>
               <tr>
-              <th><%= content.title %></th>
+              <td class="row-content"><%= content.title %></td>
                 <% content.mappings.each do |mapping| %>
-                  <td><%= mapping.value %></td>
+                  <td class="col-outcome"><%= mapping.value %></td>
                 <% end %>
               </tr>
             <% end %>
@@ -38,23 +46,23 @@
     </div>
     <% @offering.content_groups.each do |group| %>
       <div class="tab-pane" id="group-<%= group.id %>">
-        <table class="table-bordered table-condensed objective mappings">
+        <table class="offering table table-bordered objective mappings">
           <thead>
             <tr>
-              <th class="content_group">
+              <strong><th class="content_group">
                 <abbr title="<%= group.name %>"><%= group.name %></abbr>
-              </th>
+              </th></strong>
               <% @offering.outcomes.each do |outcome| %>
-                <td><%= outcome.key %></td>
+                <th class="col-outcome"><%= outcome.key %></th>
               <% end %>
             </tr>
           </thead>
           <tbody>
             <% group.content.each do |content| %>
               <tr>
-              <th><%= content.title %></th>
+              <td class="row-content"><%= content.title %></td>
                 <% content.mappings.each do |mapping| %>
-                  <td><%= mapping.value %></td>
+                  <td class="col-outcome"><%= mapping.value %></td>
                 <% end %>
               </tr>
             <% end %>
