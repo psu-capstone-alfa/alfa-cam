@@ -1,8 +1,15 @@
 <div class="row">
 <div id="staff2-dash" class="dashboard span12">
+
+
  <h3>Instructor - Offerings Status</h3>
- <p>List of Instructors teaching in the current term and their status in completing necessary information</p>
- <table id="sortTableExample" class="table table-condensed">
+ <p>List of Instructors teaching in the current term and their status in completing necessary information
+<button id="hideCompletedButton" style="float: right;" class="btn btn-small btn-primary">
+ Show/Hide Completed
+</button>
+</p>
+
+ <table id="staffDashboardTable" class="table table-condensed">
   <thead>
    <tr>
     <th class="instructor">Instructor</th>
@@ -12,10 +19,10 @@
   </thead>
 
   <% @offerings.each do |offering| %>
-    <tr>
+    <tr class="<%= "completed" if offering.completed? %>">
       <td class="instructor"><%=offering.instructors.first.name%></td>      
       <td><a class="course" href="<%=offering_path(offering)%>"><%= offering.course %></a></td>
-     <td class="stages">
+      <td class="stages">
         <div class="btn-group">
           <% stages = stage_colors(offering) %>
           <button class="btn btn-mini <%= stages[:review] %>">Review</button>
@@ -24,8 +31,7 @@
           <button class="btn btn-mini <%= stages[:content] %>">Content</button>
           <button class="btn btn-mini <%= stages[:assessments] %>">Assessments</button>
         </div>
-     </td>
-
+      </td>
     </tr>
   <% end %>
  </table>

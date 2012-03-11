@@ -29,6 +29,11 @@
   }
 }
 
+.dashboard.staff{
+  table.hide_completed tr.completed {
+    display: none;
+  }
+}
 
 
 .dashboard {
