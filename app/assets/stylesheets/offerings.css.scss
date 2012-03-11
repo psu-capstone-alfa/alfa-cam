@@ -70,10 +70,49 @@ form.offering-assessment {
   border-left-width: 0;
 }
 
-.controls label.inline {
-  display: inline;
-  margin: 0
+table.offering {
+  width: 100%;
+  td, th {
+  padding: 3px;
+  }
+
+  th.row-objective {
+    text-align: left;
+    vertical-align: middle;
+    width: 600px;
+  }
+
+  th.col-outcome, td.col-outcome {
+    width: 20px;
+    vertical-align: middle;
+    text-align: center;
+    padding: 1px;
+  }
+
+  td.row-content {
+    padding-right:10px;
+    text-align: right;
+    width: 300px;
+  }
+
+  th.row-content-title {
+    text-align: left;
+    width: 300px;
+  }
 }
-.controls input[type='radio'].inline {
-  margin-bottom: 6px;
+
+div.edit-button {
+  float: right;
+
+  a:visited {
+  color: #FFFFFF;
+  }
+
+  a:hover {
+  color: gray;
+  }
 }
+
+
+
+
