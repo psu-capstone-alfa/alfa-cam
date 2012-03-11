@@ -6,7 +6,6 @@ class AcademicTermsController < ApplicationController
   before_filter only: [:show, :edit] { @nav_term = :details }
 
   layout 'term', except: [:index, :new]
-  before_filter :require_user
   authorize_resource
 
   def index

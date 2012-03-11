@@ -7,7 +7,6 @@ class Offerings::ReviewController < Offerings::Children
   include Offerings::Recent
 
   before_filter { @nav_offering = :review }
-  before_filter :require_user
   before_filter :get_recent_offering_choice
   before_filter :get_recent_offering_choices
   before_filter :get_recent_offering_assessment

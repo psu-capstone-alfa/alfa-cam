@@ -5,7 +5,6 @@ class OutcomesController < ApplicationController
   respond_to :html, :json
 
   before_filter { @nav_section = :outcomes }
-  before_filter :require_user
   authorize_resource
 
   def index

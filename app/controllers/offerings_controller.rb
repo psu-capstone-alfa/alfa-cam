@@ -5,7 +5,6 @@ require 'csv'
 #
 class OfferingsController < ApplicationController
   respond_to :html, :json
-  before_filter :require_user
   authorize_resource class: Offering
 
   layout 'offering', only: [:show, :new, :edit]

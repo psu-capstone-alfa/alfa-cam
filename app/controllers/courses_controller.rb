@@ -7,7 +7,6 @@ class CoursesController < ApplicationController
   before_filter { @nav_term = :courses }
 
   layout 'term'
-  before_filter :require_user
   authorize_resource
 
   def index

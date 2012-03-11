@@ -1,7 +1,6 @@
 # For ContentGroupNames, which control the availability of which
 # ContentGroups a new offering can have
 class ContentGroupNamesController < ApplicationController
-  before_filter :require_user
   authorize_resource
 
   # GET /content_group_names

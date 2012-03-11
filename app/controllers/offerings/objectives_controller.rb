@@ -4,7 +4,6 @@
 class Offerings::ObjectivesController < Offerings::Children
   layout 'offering'
 
-  before_filter :require_user
   before_filter do
     @nav_offering = :objectives
     @offering = Offering.find params[:offering_id]

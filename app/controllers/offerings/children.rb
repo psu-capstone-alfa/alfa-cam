@@ -1,6 +1,5 @@
 # Common functionality among Offerings:: sub controllers
 class Offerings::Children < ApplicationController
-  before_filter :require_user
   authorize_resource class: Offering
 
   before_filter { @nav_section = :offerings }
