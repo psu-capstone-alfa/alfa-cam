@@ -133,6 +133,15 @@ class OfferingsController < ApplicationController
     end
   end
 
+  # export for a single offering
+  def export_member
+    respond_to do |format|
+      format.pdf {
+        render
+      }
+    end
+  end
+
   private
 
   def find_resource

@@ -1,6 +1,10 @@
 CourseAssessmentManager::Application.routes.draw do
   resources :content_group_names
 
+
+  post "export/search"
+  get "export/search"
+
   resources :academic_terms do
     member { get 'bulk_courses' }
 
@@ -30,7 +34,9 @@ CourseAssessmentManager::Application.routes.draw do
       get :export
       get :facets
     end
-
+    member do
+      get :export, action: :export_member, as: "export"
+    end
     scope :module => :offerings do # Sub controllers under Offering::
       resource :review, only: [:edit, :show], controller: :review do
         post :edit
