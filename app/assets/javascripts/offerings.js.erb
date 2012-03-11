@@ -1,14 +1,5 @@
 var OfferingEnhancements = {
 	// ------------------------------------------------------------
-	// Ajax spinner
-	// ------------------------------------------------------------
-	working: function() {
-		
-	},
-	doneWorking: function() {
-		$('#overlay').remove();
-	},
-	// ------------------------------------------------------------
 	// Fixes issues with some browsers not rendering an empty 
 	// table row (tr) correctly
 	// ------------------------------------------------------------
@@ -150,7 +141,66 @@ var OfferingEnhancements = {
 	     }
 	   });
 	  this.searchContainer.append("<div id='search_help'>Possible search terms are: " + facetCategories.join(", "));
-	}
+	},
+	
+	// ------------------------------------------------------------
+	// The sum of the values in every cell in a content row 
+	// must equal this value
+	// ------------------------------------------------------------
+	contentRowTotalMustEqual: <%= Offering.content_to_outcome_mapping_row_total %>,
+	
+	// ------------------------------------------------------------
+	// Calculate a content row's total value
+	// ------------------------------------------------------------
+	calculateRowTotal: function(tr) {
+		var rowTotal = 0;
+		var cells = $("input.number_field", tr);
+		cells.each(function(index, input){
+			rowTotal  += parseInt($(input).val()) || 0;
+		});
+		return rowTotal;
+	},
+	
+	// ------------------------------------------------------------
+	// Validate a single content row's value.
+	// Inform the user if it does not validate.
+	// ------------------------------------------------------------
+	validateRowTotal: function(tr) {
+		var rowTotal = this.calculateRowTotal(tr);
+		var lastCell = $("td", tr).last();
+		
+		// Remove any previously set classes and/or tooltips
+		$(tr).removeClass("incorrectContentRowTotal");
+		$("a[rel='tooltip']", lastCell).remove();
+		
+		// Check the row total and inform the user if it is not correct
+		if(rowTotal < this.contentRowTotalMustEqual || rowTotal > this.contentRowTotalMustEqual) {
+			$(tr).addClass("incorrectContentRowTotal");
+			var link = $("<a data-placement='bottom' rel='tooltip' data-original-title='Row total must equal " + this.contentRowTotalMustEqual + ". The current total is " + rowTotal + "'><i class='icon-black  icon-question-sign'></i></a>");
+			lastCell.append(" ", link);
+			link.tooltip();
+		}
+	},	
+	
+	// ------------------------------------------------------------
+	// Make sure each content row sums up to the correct value.
+	// ------------------------------------------------------------
+	validateContentRowTotals: function(){
+		var context = this;
+		$(".mappings tbody tr.content").each(function(index, tr){
+			context.validateRowTotal(tr);
+		});
+	},
+	
+	makeContentRowInputsTriggerRowValidation: function() {
+		var context = this;
+		$(".number_field").on("change", function(evt){
+			var tr = $(this).parents("tr").get(0);
+			if(tr) {
+				context.validateRowTotal(tr);
+			}
+		});
+	},
 }
 
 // ------------------------------------------------------------
@@ -169,6 +219,8 @@ $(document).ajaxStop(function(){
 	$("#overlay").remove();
 });
 $(document).ready(function(){
+	OfferingEnhancements.makeContentRowInputsTriggerRowValidation();
+	OfferingEnhancements.validateContentRowTotals();
 	OfferingEnhancements.makeContentAndObjectivesSortable();
 	OfferingEnhancements.interceptPaginationLinks();
 	OfferingEnhancements.loadFacets();
