@@ -12,6 +12,7 @@ class Ability
       can :manage, Offering do |offering|
         offering.taught_by? user
       end
+      can :profile, User
       can :read, :all
     end
     if user.is? :staff

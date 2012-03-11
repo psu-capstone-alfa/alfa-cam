@@ -7,7 +7,6 @@ class Offerings::ImportingController < Offerings::Children
   include Offerings::Recent
 
   before_filter { @nav_offering = :importing }
-  before_filter :require_user
   before_filter :get_recent_offering_choice
   before_filter :get_recent_offering_choices
   before_filter :get_recent_offering_summary

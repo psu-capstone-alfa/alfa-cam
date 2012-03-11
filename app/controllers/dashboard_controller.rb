@@ -2,7 +2,6 @@
 #
 class DashboardController < ApplicationController
   respond_to :html, :json
-  before_filter :require_user
   skip_authorization_check
 
   def home

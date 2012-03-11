@@ -1,7 +1,6 @@
 # Manage user accounts and details
 #
 class UsersController < ApplicationController
-  before_filter :require_user
   authorize_resource
 
   def index
