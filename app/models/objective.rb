@@ -14,7 +14,6 @@ class Objective < ActiveRecord::Base
   acts_as_list :scope => :offering_id
 
   validates :description, :presence => true
-  
   default_scope order(:position)
 
   def to_s

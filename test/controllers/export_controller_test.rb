@@ -1,11 +1,12 @@
 require "minitest_helper"
 
 describe ExportController do
-  # fixtures :all
+  tests ExportController
+  with_admin_session
 
-  describe "offerings action" do
+  describe "search action" do
     it "respond with success" do
-      get :offerings
+      get :search
       must_respond_with :success
     end
   end
