@@ -22,7 +22,9 @@
             <li><%= inst_offr[:instructor].name %></li>
             <ul>
               <% inst_offr[:uncomplete].each do |offering| %>
-                <li><%= offering.course.dept_code%> <%= offering.course.course_num%></li>
+                <li> 
+                  <a href="<%=offering_path(offering)%>"><%= offering.course.dept_code%> <%= offering.course.course_num%></a> 
+                </li>
               <% end %>
             </ul>
           <% end %>
