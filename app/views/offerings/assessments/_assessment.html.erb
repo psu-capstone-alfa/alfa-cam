@@ -1,14 +1,44 @@
 
 <% @assessment.objective_assessments.each do |obj| %>
   <h3><%= obj.objective %></h3>
-  <ul>
-  	<li><strong>Assessed: </strong><%= obj.assessed %><br></li>
-  	<li><strong>How well met: </strong><%= obj.well_met %><br></li>
-  	<li><strong>Improved: </strong><%= obj.improved %><br></li>
-  </ul>
-  <br>
+  <div class="row">
+		<div class="offset1 span8"><strong>How was the objective assessed?</strong></div>
+	</div>
+	<div class="row">
+		<div class="offset1 span8"><%= obj.assessed %></div>
+	</div>
+
+  <div class="row">
+		<div class="offset1 span8"><strong>How well met was this objective?</strong></div>
+	</div>
+	<div class="row">
+		<div class="offset1 span8"><%= obj.well_met %></div>
+	</div>
+
+  <div class="row">
+		<div class="offset1 span8"><strong>How could the objective be improved?</strong></div>
+	</div>
+	<div class="row">
+		<div class="offset1 span8"><%= obj.improved %></div>
+	</div>
+	<br>
+	<br>
 <% end %>
 
-<strong>Improved: </strong><%= @assessment.improved %><br>
-<strong>Comments: </strong><%= @assessment.comments %><br>
+
+  <div class="row">
+		<div class=" span8"><strong>How could this course be improved?</strong></div>
+	</div>
+	<div class="row">
+		<div class="offset1 span8"><%= @assessment.improved %></div>
+	</div>
+
+  <div class="row">
+		<div class=" span8"><strong>Any additional comments:</strong></div>
+	</div>
+	<div class="row">
+		<div class="offset1 span8"><%= @assessment.comments %></div>
+	</div>
+
+
 
