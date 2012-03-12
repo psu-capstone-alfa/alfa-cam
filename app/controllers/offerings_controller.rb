@@ -57,7 +57,7 @@ class OfferingsController < ApplicationController
         redirect_to [@offering, stage] and return unless phase == :complete
       end
       # Or to details if all stages are complete
-      redirect_to [:edit, @offering, :details]
+      redirect_to @offering and return
     end
     render
   end

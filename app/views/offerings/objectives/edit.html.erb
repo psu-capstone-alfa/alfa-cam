@@ -36,7 +36,8 @@
 <h1><%= @offering %></h1>
 <hr>
 
-<%= bs_form_for(@offering, html: {class: 'offering-content-groups'}) do |f| %>
+<%= bs_form_for(@offering,
+      html: {class: 'offering-content-groups fancy-buttons'}) do |f| %>
   <%= f.hidden_field :objectives_done, value: true %>
   <% if @offering.errors.any? %>
   <div id="error_explanation">
@@ -82,9 +83,8 @@
       </tr>
     </tbody>
   </table>
-  <div class="form-actions">
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button type="reset" class="btn">Cancel</button>&nbsp;
-    <%= insert_help :three %>
-  </div>
+
+  <% @no_reset_button = true %>
+  <%= render 'offerings/fancy-buttons' %>
+
 <% end %>

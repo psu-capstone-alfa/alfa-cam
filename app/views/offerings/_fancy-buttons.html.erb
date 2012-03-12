@@ -1,0 +1,26 @@
+<%= hidden_field_tag :_redirect_endpoint, url_for([:edit, @offering]) %>
+
+<div class="form-actions">
+  <button type="submit"
+          class="btn btn-success save"
+          name="_redirect_endpoint"
+          value="<%= url_for action: 'edit' %>"
+  >Save Chages</button>
+  <% unless @no_complete_button %>
+    <button type="submit"
+            class="btn btn-primary continue"
+            name="<%= "offering[#{@stage}_done]" %>"
+            value="true"
+    >Complete</button>
+  <% else %>
+    <button type="submit"
+            class="btn btn-primary continue"
+            name="_redirect_endpoint"
+            value="<%= url_for action: 'show' %>"
+    >Back</button>
+  <% end %>
+  <% unless @no_reset_button %>
+    <button type="reset" class="btn">Reset</button>
+  <% end %>
+  <%= link_to 'Cancel', @offering %>
+</div>

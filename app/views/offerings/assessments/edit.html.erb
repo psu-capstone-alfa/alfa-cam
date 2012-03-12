@@ -36,7 +36,7 @@
 <% end %>
 
 <%= form_for(@offering,
-  html: {class: 'offering-assessment form-horizontal'}) do |f|
+  html: {class: 'offering-assessment form-horizontal fancy-buttons'}) do |f|
   %>
   <%= f.hidden_field :assessments_done, value: true %>
   <div class="row"><div class="span8 offset1">
@@ -64,11 +64,7 @@
 
     <% end %>
 
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Save</button>
-      <button type="reset" class="btn">Cancel</button> &nbsp;
-      <%= insert_help :three %>
-    </div>
+    <%= render 'offerings/fancy-buttons' %>
 
   </div></div>
 <% end %>

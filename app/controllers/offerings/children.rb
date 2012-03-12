@@ -7,6 +7,7 @@ class Offerings::Children < ApplicationController
 
   before_filter :redirect_to_edit, only: [:show]
   before_filter :redirect_from_unready
+  before_filter :stage_name
 
 private
 
@@ -45,5 +46,10 @@ private
         not @offering.is_ready? controller_name
       render "offerings/not_ready" and return
     end
+  end
+
+  def stage_name
+    # FIXME:rs this should be validated somehow
+    @stage = controller_name
   end
 end

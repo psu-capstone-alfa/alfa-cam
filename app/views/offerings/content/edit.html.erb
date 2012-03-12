@@ -33,7 +33,8 @@
 <h1><%= @offering %></h1>
 <hr>
 
-<%= bs_form_for(@offering, html: {class: 'offering-content-groups'}) do |f| %>
+<%= bs_form_for(@offering,
+      html: {class: 'offering-content-groups fancy-buttons'}) do |f| %>
   <%= f.hidden_field :content_done, value: true %>
   <% if @offering.errors.any? %>
   <div id="error_explanation">
@@ -84,10 +85,12 @@
                       <th>
                         <%= cf.hidden_field :position, :class => "position" %>
                         <%= cf.text_field :title, placeholder: 'Content name' %>
-                        <%= cf.hidden_field :_destroy, value: 1, disabled: true %>
-                        <button class="btn btn-danger delete-content">
-                          <i class="icon-white icon-remove">&nbsp;</i>
-                        </button>
+                        <%= cf.check_box :_destroy %>
+                        <%= cf.label :_destroy, style: 'display: inline' do %>
+                          <a class="btn btn-danger delete-content">
+                            <i class="icon-white icon-remove">&nbsp;</i>
+                          </a>
+                        <% end %>
                       </th>
                       <% mapping_scopes(cf.object.mappings) do |mapping| %>
                         <td class="outcome">
@@ -118,16 +121,8 @@
     </div>
   </div>
 
-  <div class="form-actions">
-    <button type="submit"
-            class="btn btn-success"
-            name="_redirect_endpoint"
-            value="<%= url_for(action: 'edit') %>">Save</button>
-    <button type="submit" class="btn btn-primary">Save and Next</button>
-    <button type="reset" class="btn">Reset</button>
-    <%= link_to 'Cancel', @offering %>
-    &nbsp;
-    <%= insert_help :three %>
+  <% @no_reset_button = true %>
+  <%= render 'offerings/fancy-buttons' %>
+  <%= insert_help :three %>
 
-  </div>
 <% end %>
