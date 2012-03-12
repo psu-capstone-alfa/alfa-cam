@@ -1,3 +1,38 @@
+<!--HELP POPOVER -->
+<%
+  @help = {
+    :one => {title: '1',
+      content: "First type in a objective description if adding others then
+      click \"Add Objective\" then type in an objective description",
+      position: 'bottom',
+      style: ''},
+
+    :two => {title: '2',
+      content: "Assign outcome(s)",
+      position: 'bottom',
+      style: ''},
+
+    :three => {title: '3',
+      content: "Click \"Save\" button to retain the data you have entered.
+      \"Cancel\" will not save any changed information and return you
+      to the summary page.",
+      position: 'right',
+      style: '' },
+
+    :A => {title: 'A',
+      content: "Click the double arrow and hold to drag the offering
+      description in the order you want",
+      position:'top',
+      style: ''},
+
+    :B => {title: 'B',
+      content: "Delete will not permanently delete content until you click
+      \"Save\".",
+      position: 'bottom',
+      style: 'top: -16px; left: 20px'},
+  }
+%>
+
 <h1><%= @offering %></h1>
 <hr>
 
@@ -5,7 +40,8 @@
   <%= f.hidden_field :objectives_done, value: true %>
   <% if @offering.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@offering.errors.count, "error") %> prohibited this offering from being saved:</h2>
+    <h2><%= pluralize(@offering.errors.count, "error") %>
+     prohibited this offering from being saved:</h2>
 
     <ul>
       <% @offering.errors.full_messages.each do |msg| %>
@@ -15,15 +51,18 @@
   </div>
   <% end %>
 
-  <table id='objectives_container' class="table-bordered table-condensed objective mappings">
+  <table id='objectives_container'
+    class="table-bordered table-condensed objective mappings">
     <thead>
       <tr>
         <th></th>
         <% @outcomes.each do |outcome| %>
-        <th class="outcome"><abbr title="<%= outcome.title %>"><%= outcome.key %></abbr></th>
+        <th class="outcome"><abbr title="<%= outcome.title %>">
+          <%= outcome.key %></abbr></th>
         <% end %>
       </tr>
     </thead>
+    <%= insert_help :A %>
     <tbody>
       <%= render partial: 'objective',
         collection: @objectives,
@@ -33,15 +72,19 @@
             locals: {f: f, fields_for_args: {child_index: 'new'}} %>
       <tr id="content-footer">
         <td colspan="4">
-          <a id="add-mapping" class="btn btn-success"><i class="icon-white icon-plus"></i> Add Objective</a>
+          <a id="add-mapping" class="btn btn-success">
+            <i class="icon-white icon-plus"></i> Add Objective</a>
+            &nbsp;
+            <%= insert_help :one %>
+            <span class="offset1"><%= insert_help :B %></span>
+            <span class="offset2"><%= insert_help :two %></span>
         </td>
       </tr>
     </tbody>
   </table>
-
   <div class="form-actions">
     <button type="submit" class="btn btn-primary">Save</button>
-    <button type="reset" class="btn">Cancel</button>
+    <button type="reset" class="btn">Cancel</button>&nbsp;
+    <%= insert_help :three %>
   </div>
 <% end %>
-

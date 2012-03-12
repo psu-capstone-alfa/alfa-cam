@@ -12,4 +12,13 @@ module HelpOverlayHelper
     end
   end
 
+  def insert_help(key)
+    return '' unless @help.has_key?(key)
+    entry = {title: '', content: ''}.merge!(@help[key])
+    help_overlay_bubble(
+    entry.delete(:title),
+    entry.delete(:content),
+    entry)
+  end
+
 end

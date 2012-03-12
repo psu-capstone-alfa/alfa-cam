@@ -1,3 +1,14 @@
+<!--HELP POPOVER -->
+<%
+  @help = {
+    :one => {title: '1',
+      content: "Select an offering then click \"Review\" to refresh offering
+      below",
+      position: 'right',
+      style: ''},
+  }
+%>
+
 <%= form_tag do %>
   <%= select_tag(:id,
         grouped_options_for_select(
@@ -9,9 +20,8 @@
         )
       )
   %>
-  <%= submit_tag 'Review' %>
+  <%= submit_tag 'Review' %> &nbsp; <%= insert_help :one %>
 <% end %>
-
 
 <% unless @recent_offering_choice %>
   <h3>No offering selected</h3>

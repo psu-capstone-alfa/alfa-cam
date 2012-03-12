@@ -11,6 +11,15 @@
   display: none;
 }
 
+body.show-help {
+  .help-overlay {
+    display: inline;
+  }
+  .popover {
+    z-index: 2100;
+  }
+}
+
 .help-backdrop {
   z-index: 2000;
   position: fixed;

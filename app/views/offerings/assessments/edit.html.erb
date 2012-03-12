@@ -1,7 +1,31 @@
+<!--Help POPOVERS -->
+<%
+  @help = {
+    :one => {title: '1',
+      content: "Enter information about each objective by clicking the objective
+      title.",
+      position: 'right',
+      style: ''},
+
+    :two => {title: '2',
+      content: "Fill out the \"How could this course be improved course\"
+      and \"Any additional comments\".",
+      position: 'right',
+      style: ''},
+
+    :three => {title: '3',
+      content: "Clicking \"Save\" will save all your information. \"Cancel\"
+      will not save any changed information and return you to the summary
+      page.",
+      position: 'right',
+      style: ''},
+  }
+%>
 
 <% if @offering.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@offering.errors.count, "error") %> prohibited this offering from being saved:</h2>
+    <h2><%= pluralize(@offering.errors.count, "error") %>
+     prohibited this offering from being saved:</h2>
 
     <ul>
       <% @offering.errors.full_messages.each do |msg| %>
@@ -10,7 +34,6 @@
     </ul>
   </div>
 <% end %>
-
 
 <%= form_for(@offering,
   html: {class: 'offering-assessment form-horizontal'}) do |f|
@@ -22,7 +45,9 @@
         collection: @objective_assessments,
         locals: {f: f}
       %>
+      <div id="help_right"><%= insert_help :one %></div>
     </div>
+
     <br>
     <%= f.fields_for :assessment do |af| %>
       <%= render partial: 'assessment_field', locals: {
@@ -30,20 +55,20 @@
         field: :improved,
         label: "How could this course be improved?" }
       %>
+      <div id="help_right"><%= insert_help :two %></div>
       <%= render partial: 'assessment_field', locals: {
         f: af,
         field: :comments,
         label: "Any additional comments:" }
       %>
-    <% end %>
 
+    <% end %>
 
     <div class="form-actions">
       <button type="submit" class="btn btn-primary">Save</button>
-      <button type="reset" class="btn">Cancel</button>
+      <button type="reset" class="btn">Cancel</button> &nbsp;
+      <%= insert_help :three %>
     </div>
 
   </div></div>
 <% end %>
-
-
