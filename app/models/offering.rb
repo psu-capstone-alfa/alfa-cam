@@ -197,4 +197,8 @@ class Offering < ActiveRecord::Base
     self.term.outcome_group == other_offering.term.outcome_group
   end
 
+  def self.content_to_outcome_mapping_row_total
+    10
+  end
+
 end

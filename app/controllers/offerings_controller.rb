@@ -12,13 +12,6 @@ class OfferingsController < ApplicationController
   before_filter { @nav_section = :offerings }
   before_filter :find_resource, except: [:index, :create]
 
-=begin
-  def index
-    @offerings = Offering.order(:term_id).page params[:page]
-    respond_with @offerings, layout: 'application'
-  end
-=end
-
   def getConditions
     conditions = Hash.new
     conditions[:term_id] = params[:term].to_i unless params[:term].blank?
@@ -153,6 +146,5 @@ class OfferingsController < ApplicationController
         Offering.new
     end
   end
-
 
 end
