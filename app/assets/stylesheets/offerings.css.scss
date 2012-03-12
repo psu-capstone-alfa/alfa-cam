@@ -121,6 +121,10 @@ div#help_right{
   float: right;
 }
 
+input[name*=_destroy] {
+  display: none;
+}
+
 .incorrectContentRowTotal {
   background-color: #FFE3E3;
 }

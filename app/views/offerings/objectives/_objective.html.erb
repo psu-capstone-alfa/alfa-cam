@@ -3,11 +3,13 @@
   <tr class="<%= 'cloneable' if objective.new_record?%>">
     <th>
       <%= of.text_field :description, placeholder: 'Objective Description' %>
-      <%= of.hidden_field :_destroy, value: 1, disabled: true %>
       <%= of.hidden_field :position, :class => "position" %>
-      <button class="btn btn-danger delete-mapping">
-        <i class="icon-white icon-remove">&nbsp;</i>
-      </button>
+      <%= of.check_box :_destroy %>
+      <%= of.label :_destroy, style: 'display: inline' do %>
+        <a class="btn btn-danger delete-mapping">
+          <i class="icon-white icon-remove">&nbsp;</i>
+        </a>
+      <% end %>
     </th>
     <%= of.fields_for :mappings do |mf| %>
       <td class="outcome">

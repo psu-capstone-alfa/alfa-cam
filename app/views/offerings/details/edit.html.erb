@@ -36,7 +36,7 @@
     </div>
   <% end %>
   <%= form_for(@offering,
-    :html => {:class => 'form-horizontal edit-offering'}) do |f|
+    :html => {:class => 'form-horizontal edit-offering fancy-buttons'}) do |f|
   %>
     <%= redirect_token url_for(action: 'edit') %>
     <div class="row">
@@ -203,13 +203,6 @@
         </div>
       </div>
     </div>
-    <div class="actions offset1">
-      <%= f.submit class: 'btn btn-success' %>
-      <%= link_to 'View', offering_details_path(@offering),
-        :class => 'btn btn-info' %>
-      <%= link_to 'Return to offering List', offerings_path,  :class => 'btn'%>
-      &nbsp; <%= insert_help :two %>
-    </div>
-    <%= f.hidden_field :details_done, value: true %>
+    <%= render 'offerings/fancy-buttons' %>
   <% end %>
 </div>

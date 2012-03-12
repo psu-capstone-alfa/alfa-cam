@@ -19,16 +19,19 @@ $ ->
         input.attr('id',
                    input.attr('id').replace(/_new_/g,
                                             '_'+ new_id + '_'))
+    $('label', clone).each ->
+      label = $(this)
+      if label.attr('for') != undefined
+        label.attr('for',
+          label.attr('for').replace(/_new_/g,
+            '_'+ new_id + '_'))
     clone.removeClass('cloneable').show()
     clone.insertBefore(original)
     false
 
   $('.delete-mapping') . click (e) ->
     input = $(this)
-    input . siblings('[name*=_destroy]') . toggleDisabled()
     input . closest('tr') . toggleClass('destroyed')
     label = input . find('span')
-    label . text( if (label . text() == 'Delete') then 'Undelete' else 'Delete')
     input . find('i') . toggleClass('icon-remove') . toggleClass('icon-ok')
     input . toggleClass('btn-danger') . toggleClass('btn-warning')
-    false

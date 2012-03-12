@@ -1,0 +1,16 @@
+// CSS for fancy dynamic save/continue form buttons
+
+form.fancy-buttons {
+  &.pristine {
+    .form-actions .save {
+      display: none;
+    }
+  }
+
+  &.changed {
+    .form-actions {
+      .save { display: auto; }
+      .continue { display: none; }
+    }
+  }
+}
