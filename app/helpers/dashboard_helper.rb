@@ -3,11 +3,11 @@ module DashboardHelper
   # Returns a css class color ('green','yellow', 'red')
   def stage_color(offering, stage)
     if offering.complete_stages.include?(stage)
-      "green"
+      "btn-success"
     elsif offering.started_stages.include?(stage)
-      "yellow"
+      "btn-warning"
     else
-      "red"
+      "btn-danger"
     end
   end
 
@@ -19,11 +19,11 @@ module DashboardHelper
     Offering::STAGES.each do |stage|
       output[stage] = case
         when completed.include?(stage)
-          'green'
+          'btn-success'
         when started.include?(stage)
-          'yellow'
+          'btn-warning'
         else
-          'red'
+          'btn-danger'
       end
     end
     output

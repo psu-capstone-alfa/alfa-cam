@@ -8,13 +8,8 @@
     height: 30px;
     font-size: 12pt;
     letter-spacing: 1px;
-    text-align: center;
-    cursor: pointer;
-    vertical-align: bottom;
     color: white;
     line-height: 28px;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    z-index: auto;
   }
 }
 
@@ -38,34 +33,6 @@
 
 .dashboard {
   .stages {
-    .btn {
-      text-align: center;
-    cursor: pointer;
-      vertical-align: bottom;
-      color: white;
-      border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-      z-index: auto;
-    }
-    .normal {
-      color: black;
-    }
-    .red {
-      background: #DA4F49;
-      background-image: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
-      background-image: -o-linear-gradient(top, #ee5f5b, #bd362f);
-      background-image: linear-gradient(top, #ee5f5b, #bd362f);
-      background-repeat: repeat-x;
-    }
-    .green {
-      background: #5BB75B;
-      background-image: -webkit-linear-gradient(top, #62c462, #51a351);
-      background-image: -o-linear-gradient(top, #62c462, #51a351);
-      background-image: linear-gradient(top, #62c462, #51a351);
-      background-repeat: repeat-x;
-    }
-    .yellow {
-      background: #FFAD33;
-    }
 
     &.btn-group {
       $border-radius: 8px;
