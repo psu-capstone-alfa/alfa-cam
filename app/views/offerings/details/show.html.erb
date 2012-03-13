@@ -1,5 +1,12 @@
 <!-- Offering Details Show -->
-
+<div class="edit-button">
+  <%=
+    link_to_if can?(:edit, @offering),
+      'Edit',
+      edit_offering_details_path(@offering),
+      :class => 'btn btn-danger'
+  %>
+</div>
 <div class="span12">
   <div class="row">
 
@@ -7,14 +14,15 @@
       <div class="span4">
           <div class="row">
           <dl>
-            <div class="span2">
+            <div class="span1">
               <dt>Instructor(s)</dt>
             </div>
-            <div class="span2">
+            <div class="span3">
               <dd>
                 <%=
                   str = ""
-                  @offering.instructors.each { |instructor| str << "#{instructor.name}, " }
+                  @offering.instructors.each { |instructor|
+                    str << "#{instructor.name}, " }
                   str.chomp!(", ")
                   str
                 %>
@@ -24,83 +32,83 @@
         </div>
         <div class="row">
           <dl>
-            <div class="span2">
+            <div class="span1">
               <dt>CRN</dt>
             </div>
-            <div class="span2">
+            <div class="span3">
               <dd><%= @offering.crn %></dd>
             </div>
           </dl>
         </div>
         <div class="row">
           <dl>
-            <div class="span2">
+            <div class="span1">
               <dt>Term</dt>
             </div>
-            <div class="span2">
+            <div class="span3">
               <dd><%= @offering.term %></dd>
             </div>
           </dl>
         </div>
         <div class="row">
           <dl>
-            <div class="span2">
+            <div class="span1">
               <dt>Course</dt>
             </div>
-            <div class="span2">
+            <div class="span3">
               <dd><%= "#{@course.dept_code} #{@course.course_num}" %></dd>
             </div>
           </dl>
         </div>
         <div class="row">
           <dl>
-            <div class="span2">
+            <div class="span1">
               <dt>Title</dt>
             </div>
-            <div class="span2">
+            <div class="span3">
               <dd><%= @course.title %></dd>
             </div>
           </dl>
         </div>
         <div class="row">
           <dl>
-            <div class="span2">
+            <div class="span1">
               <dt>Section</dt>
             </div>
-            <div class="span2">
+            <div class="span3">
               <dd><%= @offering.section %></dd>
             </div>
           </dl>
         </div>
         <div class="row">
           <dl>
-            <div class="span2">
+            <div class="span1">
               <dt>Credit(s)</dt>
             </div>
-            <div class="span2">
+            <div class="span3">
               <dd><%= @offering.credits %></dd>
             </div>
           </dl>
         </div>
         <div class="row">
           <dl>
-            <div class="span2">
+            <div class="span1">
               <dt>Location</dt>
             </div>
-            <div class="span2">
+            <div class="span3">
               <dd><%= @offering.location %></dd>
             </div>
           </dl>
         </div>
       </div>
 
-      <div class="span6">
+      <div class="span8">
         <div class="row">
           <dl>
             <div class="span2">
               <dt>Days/Time</dt>
             </div>
-            <div class="span2">
+            <div class="span6">
               <dd><%= @offering.day_and_time %></dd>
             </div>
           </dl>
@@ -110,7 +118,7 @@
             <div class="span2">
               <dt>BSCE Requirement</dt>
             </div>
-            <div class="span2">
+            <div class="span6">
               <dd><%= @offering.required_for_bsce %></dd>
             </div>
           </dl>
@@ -120,7 +128,7 @@
             <div class="span2">
               <dt>BSENVE Requirement</dt>
             </div>
-            <div class="span2">
+            <div class="span6">
               <dd><%= @offering.required_for_bsenve %></dd>
             </div>
           </dl>
@@ -130,7 +138,7 @@
             <div class="span2">
               <dt>Course Objective</dt>
             </div>
-            <div class="span2">
+            <div class="span6">
               <dd><%= @offering.objectives_done %></dd>
             </div>
           </dl>
@@ -140,7 +148,7 @@
             <div class="span2">
               <dt>Content</dt>
             </div>
-            <div class="span2">
+            <div class="span6">
               <dd><%= @offering.content_done %></dd>
             </div>
           </dl>
@@ -150,7 +158,7 @@
             <div class="span2">
               <dt>Assessment</dt>
             </div>
-            <div class="span2">
+            <div class="span6">
               <dd><%= @offering.assessments_done %></dd>
             </div>
           </dl>
@@ -160,7 +168,7 @@
             <div class="span2">
               <dt>Textbook</dt>
             </div>
-            <div class="span2">
+            <div class="span6">
               <dd><%= @offering.textbook %></dd>
             </div>
           </dl>
@@ -170,7 +178,7 @@
             <div class="span2">
               <dt>Additional Textbooks</dt>
             </div>
-            <div class="span2">
+            <div class="span6">
               <dd><%= @offering.additional_textbooks %></dd>
             </div>
           </dl>
@@ -180,7 +188,7 @@
             <div class="span2">
               <dt>Prerequisite(s)</dt>
             </div>
-            <div class="span2">
+            <div class="span6">
               <dd><%= @offering.prerequisites %></dd>
             </div>
           </dl>
@@ -188,13 +196,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="offset1">
-  <%=
-    link_to_if can?(:edit, @offering),
-      'Edit',
-      edit_offering_details_path(@offering),
-      :class => 'btn btn-success'
-  %>
 </div>

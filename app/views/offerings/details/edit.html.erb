@@ -1,26 +1,4 @@
 <!-- Offering-Details-Edit -->
-
-<!--Help Popovers -->
-<%
-  @help = {
-    :one => {title: '1',
-      content: "Enter all information in offering including CRN, Section,
-      Location, and Day/Time",
-      position: 'right',
-      style: ''},
-
-    :two => {title: '2',
-      content: "Clicking the \"Update Offering\" will be permanent. By clicking
-      \"Return to offering List\" or \"View\" without first, \"Update Offering\"
-      information will not be saved. \"View\" will return to the view page of
-      saved offering.",
-      position: 'right',
-      style: ''},
-  }
-%>
-
-<h2>Details Edit &nbsp; &nbsp; &nbsp; &nbsp;  <%= insert_help :one %> </h2>
-
 <div class="row"><div class="span12">
   <% if @offering.errors.any? %>
     <div id="error_explanation">
@@ -36,7 +14,7 @@
     </div>
   <% end %>
   <%= form_for(@offering,
-    :html => {:class => 'form-horizontal edit-offering fancy-buttons'}) do |f|
+    :html => {:class => 'form-horizontal edit-offering'}) do |f|
   %>
     <%= redirect_token url_for(action: 'edit') %>
     <div class="row">
@@ -47,7 +25,7 @@
             <%= help_tooltip("Course Number") %>
           </label>
           <div class="controls">
-            <%= f.text_field :crn, :placeholder =>'12345', class: 'span4' %>
+            <%= f.text_field :crn, :placeholder =>'12345', class: 'span3' %>
           </div>
         </div>
         <div class="control-group">
@@ -84,60 +62,6 @@
         </div>
         <div class="control-group">
           <label class="control-label">
-            BSCE Requirement
-            <%= help_tooltip("Indicate if this offering is required,
-              an elective or not applicable toward a B.S. in Civil
-              Engineering.")
-            %>
-          </label>
-          <div class="controls">
-            <%= f.radio_button :required_for_bsce,
-                               :Required,
-                               :class => :inline
-            %>
-            <label for="required_for_bsce" class='inline'>Required</label><br />
-            <%= f.radio_button :required_for_bsce,
-                               :Elective,
-                               :class => :inline
-            %>
-            <label for="required_for_bsce" class='inline'>Elective</label><br />
-            <%= f.radio_button :required_for_bsce,
-                               "N/A",
-                               :class => :inline
-            %>
-            <label for="required_for_bsce" class='inline'>N/A</label>
-          </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label">
-            BSENVE Requirement
-            <%= help_tooltip("Indicate if this offering is required,
-              an elective or not applicable toward a B.S. in Environmental
-              Engineering.")
-            %>
-          </label>
-          <div class="controls">
-            <%= f.radio_button :required_for_bsenve,
-                               :Required,
-                               :class => :inline
-            %>
-            <label for="required_for_bsenve" class='inline'>Required</label>
-            <br />
-            <%= f.radio_button :required_for_bsenve,
-                               :Elective,
-                               :class => :inline
-            %>
-            <label for="required_for_bsenve" class='inline'>Elective</label>
-            <br />
-            <%= f.radio_button :required_for_bsenve,
-                               "N/A",
-                               :class => :inline
-            %>
-            <label for="required_for_bsenve" class='inline'>N/A</label>
-          </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label">
             Day/Time
             <%= help_tooltip("Day and time of the course being offered") %>
           </label>
@@ -148,6 +72,74 @@
             %>
           </div>
         </div>
+        <div class="control-group">
+          <label class="control-label">
+              <a rel="tooltip" data-original-title="Bachelor of Science Civil
+                Engineering">BSCE Program</a>
+            <!-- These help tips need to use the helper function -->
+            <%= help_tooltip("Indicate if this offering is required, an
+              elective or not applicable toward a B.S. in Civil Engineering.")
+            %>
+          </label>
+
+          <div class="controls">
+            <label class="radio inline">
+              <%= f.radio_button :required_for_bsce,
+                                 :Required,
+                                 :class => :inline
+              %>
+              Required
+            </label>
+            <label class="radio inline">
+              <%= f.radio_button :required_for_bsce,
+                                 :Elective,
+                                 :class => :inline
+              %>
+              Elective
+            </label>
+            <label class="radio inline">
+              <%= f.radio_button :required_for_bsce,
+                                 "N/A",
+                                 :class => :inline
+              %>
+            N/A
+            </label>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">
+            <a rel="tooltip" data-original-title="Bachelor of Science
+              Environmental Engineering">BSENVE Program</a>
+            <%= help_tooltip("Indicate if this offering is required,
+              an elective or not applicable toward a B.S. in Environmental
+              Engineering.")
+            %>
+          </label>
+          <div class="controls">
+            <label class="radio inline">
+              <%= f.radio_button :required_for_bsenve,
+                                 :Required,
+                                 :class => :inline
+              %>
+              Required
+            </label>
+            <label class="radio inline">
+              <%= f.radio_button :required_for_bsenve,
+                                 :Elective,
+                                 :class => :inline
+              %>
+              Elective
+            </label>
+            <label class="radio inline">
+              <%= f.radio_button :required_for_bsenve,
+                                 "N/A",
+                                 :class => :inline
+              %>
+              N/A
+            </label>
+          </div>
+        </div>
+
         <div class="control-group">
           <label class="control-label">
             Description
@@ -203,6 +195,12 @@
         </div>
       </div>
     </div>
-    <%= render 'offerings/fancy-buttons' %>
+    <div class="actions offset1">
+      <%= f.submit class: 'btn btn-success' %>
+      <%= link_to 'View', offering_details_path(@offering),
+        :class => 'btn btn-info' %>
+      <%= link_to 'Return to offering List', offerings_path,  :class => 'btn'%>
+    </div>
+    <%= f.hidden_field :details_done, value: true %>
   <% end %>
 </div>
