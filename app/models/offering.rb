@@ -10,6 +10,7 @@ class Offering < ActiveRecord::Base
     order("stages_left DESC")
   scope :uncompleted, where('stages_left > 0')
   scope :completed, where('stages_left = 0')
+   
 
 
   belongs_to :course
@@ -89,11 +90,30 @@ class Offering < ActiveRecord::Base
   scope :before_or_during, lambda { |term|
     where('term_id <= ?', term.id)
   }
+  # Expects a two element array that contains the id's of a start term
+  # and an end term, either of which can be nil
+  scope :with_term_range, lambda { |term_range|
+    if term_range.nil? 
+      return nil
+    end
+    start_term = term_range[0]
+    end_term = term_range[1]
+    if start_term.nil? && end_term.nil? 
+      return nil
+    elsif !start_term.nil? && end_term.nil?
+      where('term_id >= ?', start_term)
+    elsif start_term.nil? && !end_term.nil?
+      where('term_id <= ?', end_term)
+    else
+      where('term_id >= ? AND term_id <= ?', start_term, end_term)
+    end
+  }
   scope :search_for, lambda { |conditions|
     includes(:instructors, :course, :term).
     term_order.
     course_order.
-    where(conditions)
+    with_term_range(conditions.delete(:term_range)).
+    where(conditions) # we should slice out only allowed searching attrs
   }
 
   def to_s

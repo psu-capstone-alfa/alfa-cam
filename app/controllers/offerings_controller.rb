@@ -14,11 +14,16 @@ class OfferingsController < ApplicationController
 
   def getConditions
     conditions = Hash.new
-    conditions[:term_id] = params[:term].to_i unless params[:term].blank?
     conditions[:users] = {
       :id => params[:instructor].to_i
     } unless params[:instructor].blank?
     conditions[:crn] = params[:crn] unless params[:crn].blank?
+    start_term = params[:start_term].nil? ? nil : params[:start_term].to_i
+    end_term = params[:end_term].nil? ? nil : params[:end_term].to_i
+    conditions[:term_range] = [
+      start_term,
+      end_term
+    ]
     conditions
   end
 
@@ -106,7 +111,8 @@ class OfferingsController < ApplicationController
   def facets
     obj = {}
     obj["Instructor"] = User.with_role(:instructor).facets
-    obj["Term"] = AcademicTerm.facets
+    obj["Start_Term"] = AcademicTerm.facets
+    obj["End_Term"] = AcademicTerm.facets
     obj["CRN"] = Offering.find(:all, :select => "crn").map(&:crn).compact!
 
     ActiveSupport::JSON.encode(obj)
