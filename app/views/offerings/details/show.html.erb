@@ -1,12 +1,15 @@
 <!-- Offering Details Show -->
-<div class="edit-button">
-  <%=
-    link_to_if can?(:edit, @offering),
-      'Edit',
-      edit_offering_details_path(@offering),
-      :class => 'btn btn-danger'
-  %>
-</div>
+  <div class="edit-button">
+    <%=
+      link_to_if can?(:edit, @offering),
+        'Edit',
+        edit_offering_details_path(@offering),
+        :class => 'btn btn-danger'
+    %>
+  </div>
+&nbsp;
+<hr>
+
 <div class="span12">
   <div class="row">
 

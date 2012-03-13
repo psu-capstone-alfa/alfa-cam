@@ -30,9 +30,6 @@
   }
 %>
 
-<h1><%= @offering %></h1>
-<hr>
-
 <%= bs_form_for(@offering,
       html: {class: 'offering-content-groups fancy-buttons'}) do |f| %>
   <%= f.hidden_field :content_done, value: true %>
@@ -57,6 +54,8 @@
           <%= link_to name, "##{id}", 'data-toggle' => "pill" %>
         </li>
       <% end %>
+      &nbsp;
+      <hr>
     </ul>
 
     <div class="tab-content">
