@@ -18,6 +18,8 @@ class OfferingsController < ApplicationController
       :id => params[:instructor].to_i
     } unless params[:instructor].blank?
     conditions[:crn] = params[:crn] unless params[:crn].blank?
+    conditions[:course] = params[:course].split(" ")\
+      unless params[:course].blank?
     start_term = params[:start_term].nil? ? nil : params[:start_term].to_i
     end_term = params[:end_term].nil? ? nil : params[:end_term].to_i
     conditions[:term_range] = [
@@ -113,6 +115,7 @@ class OfferingsController < ApplicationController
     obj["Instructor"] = User.with_role(:instructor).facets
     obj["Start_Term"] = AcademicTerm.facets
     obj["End_Term"] = AcademicTerm.facets
+    obj["Course"] = Course.courses
     obj["CRN"] = Offering.find(:all, :select => "crn").map(&:crn).compact!
 
     ActiveSupport::JSON.encode(obj)
