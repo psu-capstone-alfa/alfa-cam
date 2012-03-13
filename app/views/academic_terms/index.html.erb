@@ -26,14 +26,6 @@
                   Edit
               <% end %>
             <% end %>
-            <% if can? :delete, term %>
-              <%= link_to(term,
-                  confirm: 'Are you sure?',
-                  method: :delete,
-                  :class => 'btn btn-tiny btn-danger') do %>
-                <i class="icon-white icon-trash"></i>
-              <% end %>
-            <% end %>
             </div>
           </td>
         </tr>
