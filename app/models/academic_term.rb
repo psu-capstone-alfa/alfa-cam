@@ -17,7 +17,7 @@ class AcademicTerm < ActiveRecord::Base
 
   before_destroy :check_for_offerings
   def check_for_offerings()
-    unless offering_ids.empty?
+    unless offerings.empty?
       self.errors[:base] << "Sorry, you cannot delete a term with offerings."
       false
     end
@@ -43,8 +43,8 @@ class AcademicTerm < ActiveRecord::Base
   end
 
   def self.facets
-    AcademicTerm.all.map {
-      |term| {
+    AcademicTerm.all.map { |term|
+      {
         :label => term.title,
         :value => "#{term.id}_#{term.to_s.gsub(/\s/, '_')}"
       }

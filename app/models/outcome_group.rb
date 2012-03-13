@@ -4,7 +4,7 @@
 class OutcomeGroup < ActiveRecord::Base
   has_many :terms, class_name: 'AcademicTerm', inverse_of: :outcome_group
 
-  has_many :outcomes
+  has_many :outcomes, dependent: :destroy
 
   def initial_term
     terms.order_oldest_first.last

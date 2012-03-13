@@ -3,7 +3,7 @@
 #
 class Assessment < ActiveRecord::Base
   belongs_to :offering
-  has_many :objective_assessments do
+  has_many :objective_assessments, dependent: :destroy do
     def find_or_create_by_objective(objective)
       find_or_create_by_objective_id(objective.id)
     end

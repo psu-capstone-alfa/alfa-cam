@@ -7,7 +7,7 @@ class ContentGroup < ActiveRecord::Base
   belongs_to :offering
   has_many :outcomes, :through => :offering
 
-  has_many :content do
+  has_many :content, dependent: :destroy do
     def build_with_mappings(outcomes)
       new_content = self.build
       outcomes.each do |outcome|

@@ -16,9 +16,9 @@ class Offering < ActiveRecord::Base
   belongs_to :course
   belongs_to :term, class_name: 'AcademicTerm', foreign_key: 'term_id'
   has_many :outcomes, :through => :term
-  has_many :objectives
+  has_many :objectives, dependent: :destroy
 
-  has_many :teachings
+  has_many :teachings, dependent: :destroy
   has_many :instructors, through: :teachings
 
   DETAILS = [
@@ -39,7 +39,7 @@ class Offering < ActiveRecord::Base
   validates_associated :teachings
 
   ## Assessments
-  has_one :assessment, include: :objective_assessments
+  has_one :assessment, include: :objective_assessments, dependent: :destroy
   has_many :objective_assessments, through: :assessment
   accepts_nested_attributes_for :assessment, :objective_assessments
   def get_or_create_assessment
@@ -59,7 +59,7 @@ class Offering < ActiveRecord::Base
     end
   end
 
-  has_many :content_groups
+  has_many :content_groups, dependent: :destroy
   has_many :content_group_names, through: :content_groups
   has_many :content, through: :content_groups
 

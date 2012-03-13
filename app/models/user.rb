@@ -3,7 +3,7 @@ require 'net/ldap'
 # Defines authlogic login functionality
 #
 class User < ActiveRecord::Base
-  has_many :teachings
+  has_many :teachings, dependent: :destroy
   has_many :offerings, through: :teachings
   has_many :courses, through: :offerings do
     def frequent(term, limit = 5)
