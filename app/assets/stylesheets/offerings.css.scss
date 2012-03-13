@@ -128,3 +128,37 @@ input[name*=_destroy] {
 .incorrectContentRowTotal {
   background-color: #FFE3E3;
 }
+
+#offering-nav {
+  li {
+    position: relative;
+    &:after {
+      content: "\00a0";
+      border-radius: 10px 10px 0 0;
+      -moz-border-radius: 10px 10px 0 0;
+      -webkit-border-radius: 10px 10px 0 0;
+      background: none;
+      width: 10px;
+      height: 6px;
+      position: absolute;
+      left: 50%;
+      margin-left: -5px;
+      top: 27px;
+    }
+    &.active:after {
+      border-radius: 10px;
+      -moz-border-radius: 10px;
+      -webkit-border-radius: 10px;
+      height: 10px;
+    }
+    &.red:after {
+      background: #DA4F49;
+    }
+    &.green:after {
+      background: #5BB75B;
+    }
+    &.yellow:after {
+      background: #FAA732;
+    }
+  }
+}

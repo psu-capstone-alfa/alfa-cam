@@ -4,6 +4,7 @@ module OfferingsHelper
     classes = []
     classes << active_if(@nav_offering, stage)
     classes << 'disabled' unless ready
+    classes << stage_navbar_color(stage)
 
     content_tag :li, class: classes.join(' ') do
       if ready
@@ -11,6 +12,17 @@ module OfferingsHelper
       else
         content_tag :a, stage.to_s.humanize
       end
+    end
+  end
+
+  def stage_navbar_color(stage)
+    case
+    when @offering.is_complete?(stage)
+      'green'
+    when @offering.is_started?(stage)
+      'yellow'
+    else
+      'red'
     end
   end
 

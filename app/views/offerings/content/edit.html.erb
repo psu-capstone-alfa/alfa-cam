@@ -32,7 +32,6 @@
 
 <%= bs_form_for(@offering,
       html: {class: 'offering-content-groups fancy-buttons'}) do |f| %>
-  <%= f.hidden_field :content_done, value: true %>
   <% if @offering.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@offering.errors.count, "error") %>

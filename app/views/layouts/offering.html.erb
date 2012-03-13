@@ -10,7 +10,7 @@
   <br>
   <div class="row">
     <div class="span12">
-      <ul class="nav nav-tabs">
+      <ul id="offering-nav" class="nav nav-tabs">
         <li class="<%= active_if(@nav_offering, :summary) %>">
           <%= link_to 'Summary', @offering %>
         </li>
@@ -18,10 +18,8 @@
         <li class="<%= active_if(@nav_offering, :review) %>">
           <%= stage_navbar_link :review %>
         </li>
-        <% if @offering.is_ready? :importing %>
-          <li class="<%= active_if(@nav_offering, :importing) %>">
-            <%= stage_navbar_link :importing %>
-          </li>
+        <% unless @offering.is_complete? :importing %>
+          <%= stage_navbar_link :importing %>
           <li class="disabled"><a></a></li>
         <% end %>
         <% Offering::EDITING_STAGES.each do |stage| %>

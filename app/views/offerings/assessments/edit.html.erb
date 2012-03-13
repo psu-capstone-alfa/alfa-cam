@@ -38,7 +38,6 @@
 <%= form_for(@offering,
   html: {class: 'offering-assessment form-horizontal fancy-buttons'}) do |f|
   %>
-  <%= f.hidden_field :assessments_done, value: true %>
   <div class="row"><div class="span8 offset1">
     <div class="accordion" id="assessment-accordion">
       <%= render partial: 'objective_assessment',

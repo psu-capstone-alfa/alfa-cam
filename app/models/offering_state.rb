@@ -16,6 +16,7 @@ module OfferingState
     @complete << :review if review_done
 
     @ready << :importing if @complete.include?(:review) && !importing_done
+    @started << :importing if @ready.include?(:importing)
     @complete << :importing if importing_done
 
     @ready << :details if @complete.include?(:importing)
