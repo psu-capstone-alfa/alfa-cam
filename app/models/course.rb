@@ -70,4 +70,13 @@ class Course < ActiveRecord::Base
       where(:users => {:id => instructor.id })
   end
 
+  def self.courses
+    Course.all.map {
+      |course| {
+        :label => "#{course.dept_code} #{course.course_num}",
+        :value => "#{course.dept_code} #{course.course_num}"
+      }
+    }
+  end
+
 end
