@@ -1,8 +1,8 @@
 <% fields_for_args ||= {} %>
 <%= f.no_bs_fields_for :objectives, objective, fields_for_args do |of| %>
   <tr class="<%= 'cloneable' if objective.new_record?%>">
-    <th>
-      <%= of.text_field :description, placeholder: 'Objective Description' %>
+    <th class="row-content-title">
+      <%= of.text_field :description, placeholder: 'Objective Description' , class: 'span6' %>
       <%= of.hidden_field :position, :class => "position" %>
       <%= of.check_box :_destroy %>
       <%= of.label :_destroy, style: 'display: inline' do %>
@@ -12,7 +12,7 @@
       <% end %>
     </th>
     <%= of.fields_for :mappings do |mf| %>
-      <td class="outcome">
+      <td class="col-outcome outcome">
         <%= mf.check_box :value %>
         <%= mf.hidden_field :outcome_id %>
       </td>

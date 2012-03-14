@@ -51,12 +51,12 @@
   <% end %>
 
   <table id='objectives_container'
-    class="table-bordered table-condensed objective mappings">
+    class="table offering table-bordered table-condensed objective mappings">
     <thead>
       <tr>
         <th></th>
         <% @outcomes.each do |outcome| %>
-        <th class="outcome"><abbr title="<%= outcome.title %>">
+        <th class="col-outcome outcome"><abbr title="<%= outcome.title %>">
           <%= outcome.key %></abbr></th>
         <% end %>
       </tr>
@@ -69,8 +69,10 @@
       <%= render partial: 'objective',
             object: @new_objective,
             locals: {f: f, fields_for_args: {child_index: 'new'}} %>
+
       <tr id="content-footer">
-        <td colspan="4">
+        <td colspan="12">
+          &nbsp;
           <a id="add-mapping" class="btn btn-success">
             <i class="icon-white icon-plus"></i> Add Objective</a>
             &nbsp;
