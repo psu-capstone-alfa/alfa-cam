@@ -4,23 +4,34 @@ class Offerings::DetailsController < Offerings::Children
   layout 'offering'
 
   before_filter { @nav_offering = :details }
+  before_filter :load_layout_variables
 
   def edit
-    @offering = Offering.find(params[:offering_id])
   end
 
   def show
-    @offering = Offering.find(params[:offering_id])
-    @course = @offering.course
-    @term = @offering.term
-    @instructors = @offering.instructors
-    @outcomes = @offering.outcomes
-    @objectives = @offering.objectives
   end
 
   def update
+    if @offering.update_attributes(params[:offering])
+      flash[:success] = case
+        when params[:offering][:details_done]
+          'Details complete'
+        else
+          'Details saved'
+      end
+      redirect_to action: :edit
+    else
+      render :edit
+    end
   end
 
-  def destroy
+  private
+    def load_layout_variables
+      @course = @offering.course
+      @term = @offering.term
+      @instructors = @offering.instructors
+      @outcomes = @offering.outcomes
+    end
+
   end
-end
