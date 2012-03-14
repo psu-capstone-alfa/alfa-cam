@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to(*args)
+    flash.keep
     if params[:_redirect_endpoint]
       args[0] = params[:_redirect_endpoint]
     end

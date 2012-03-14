@@ -27,6 +27,8 @@ class Offering < ActiveRecord::Base
               :location,
               :credits,
               :day_and_time,
+              :required_for_bsce,
+              :required_for_bsenve,
               :prerequisites,
               :textbook,
               :additional_textbooks,
@@ -34,6 +36,8 @@ class Offering < ActiveRecord::Base
             ]
 
   IMPORTED_DETAILS = DETAILS - [:section, :crn, :location, :day_and_time]
+
+  validates_presence_of DETAILS, if: lambda {|o| o.details_done }
 
   accepts_nested_attributes_for :teachings
   validates_associated :teachings
