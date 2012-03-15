@@ -3,11 +3,12 @@
   <div class="row"><div class="span8 offset2">
     <h2><%= term.title %></h2>
     <div class="well">
-    <% for offering in offerings %> 
-    <div class="row"><div class="span8 offering">
-        <div>
-          <h3><%=offering.course.dept_code%> <%=offering.course.course_num%> : <%=offering.course.title%></h3>
-        </div>
+    <% offerings.each_with_index do |offering,i| %> 
+      <% unless i == 0 %><hr><% end %>
+      <div class="inner-row">
+          <h3><%= link_to offering do %>
+            <%=offering.course.dept_code%> <%=offering.course.course_num%> : <%=offering.course.title%>
+          <% end %></h3>
         <br/>
         <div class = "btn-group stages"> 
           <a class="btn <%= stage_color(offering, :review)%>" href="<%=offering_review_path(offering)%>">Review</a>
@@ -16,7 +17,7 @@
           <a class="btn <%= stage_color(offering, :content)%>" href="<%=offering_content_path(offering)%>">Content</a> 
           <a class="btn <%= stage_color(offering, :assessments)%>" href="<%=offering_assessments_path(offering)%>">Assessment</a>
         </div>
-      </div></div>
+      </div>
     <%end%>
     </div>
   </div></div>

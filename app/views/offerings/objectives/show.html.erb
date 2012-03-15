@@ -1,16 +1,13 @@
-<div class="edit-button">
+<div class="span1">
   <%=
   link_to_if can?(:edit, @offering),
     'Edit',
     edit_offering_objectives_path(@offering),
-    :class => 'btn btn-danger'
+    :class => 'btn btn-success'
   %>
 </div>
 
-&nbsp;
-<hr>
-
-&nbsp;
+<div class="span10">
   <table class="offering table table-bordered objective mappings">
     <thead>
       <tr>
@@ -36,3 +33,4 @@
       <% end %>
     </tbody>
   </table>
+</div>

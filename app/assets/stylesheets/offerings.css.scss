@@ -43,13 +43,6 @@ form.offering-assessment {
   }
 }
 
-#offering-summary {
-  dt, dd { float: right; }
-  dd { float: left;}
-  dt: { clear: left; }
-  dd {margin-bottom: 2em}
-}
-
 #search_help {
   font-size: 11px;
   color: #aaa;
@@ -159,6 +152,39 @@ input[name*=_destroy] {
     }
     &.yellow:after {
       background: #FAA732;
+    }
+  }
+}
+
+#offering-summary {
+  h2 {
+    margin-left: -1em;
+  }
+
+  .summary {
+    .title {
+      position: relative;
+      .middle {
+        position: absolute;
+        top: 50%;
+        margin-top: -1em;
+      }
+    }
+  }
+
+  .summary {
+    &.content {
+      .title { height: 3em; }
+      ul {
+        width: 100%;
+      }
+      li {
+        text-align: center;
+        font-weight: bold;
+      }
+    }
+    &.objectives {
+      .title { height: 9em; }
     }
   }
 }
