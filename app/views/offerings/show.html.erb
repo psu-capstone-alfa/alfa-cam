@@ -1,132 +1,30 @@
 <!-- Offering-Summary-Show -->
 
 <div class="row">
-  <div id="offering-summary">
-    <div class="span4">
-
-      <div class="row">
-        <dl>
-          <div class="span2">
-            <dt>Instructor(s)</dt>
-          </div>
-          <div class="span2">
-            <dd>
-              <%=
-                str = ""
-                @offering.instructors.each { |instructor| str << "#{instructor.name}, " }
-                str.chomp!(", ")
-                str
-              %>
-            </dd>
-          </div>
-        </dl>
-      </div>
-      <div class="row">
-        <dl>
-          <div class="span2">
-            <dt>Section</dt>
-          </div>
-          <div class="span2">
-            <dd><%= @offering.section %></dd>
-          </div>
-        </dl>
-      </div>
-      <div class="row">
-        <dl>
-          <div class="span2">
-            <dt>Credit(s)</dt>
-          </div>
-          <div class="span2">
-            <dd><%= @offering.credits %></dd>
-          </div>
-        </dl>
-      </div>
-      <div class="row">
-        <dl>
-          <div class="span2">
-            <dt>Location</dt>
-          </div>
-          <div class="span2">
-            <dd><%= @offering.location %></dd>
-          </div>
-        </dl>
-      </div>
-      <div class="row">
-        <dl>
-          <div class="span2">
-            <dt>Days/Time</dt>
-          </div>
-          <div class="span2">
-            <dd><%= @offering.day_and_time %></dd>
-          </div>
-        </dl>
-      </div>
-    </div>
-
-    <div class="span6">
-      <div class="row">
-        <dl>
-          <div class="span2">
-            <dt>Course Objective</dt>
-          </div>
-          <div class="span2">
-            <dd></dd>
-          </div>
-        </dl>
-      </div>
-      <div class="row">
-        <dl>
-          <div class="span2">
-            <dt>Content</dt>
-          </div>
-          <div class="span2">
-            <dd></dd>
-          </div>
-        </dl>
-      </div>
-      <div class="row">
-        <dl>
-          <div class="span2">
-            <dt>Assessment</dt>
-          </div>
-          <div class="span2">
-            <dd></dd>
-          </div>
-        </dl>
-      </div>
-      <div class="row">
-        <dl>
-          <div class="span2">
-            <dt>Prerequisite(s)</dt>
-          </div>
-          <div class="span2">
-            <dd><%= @offering.prerequisites %></dd>
-          </div>
-        </dl>
-      </div>
-
-    </div>
+  <div id="offering-summary" class="span8 offset1">
+    <% if @offering.is_complete? :details %>
+      <%= render 'offerings/details/summary' %>
+    <% end %>
+    <% if @offering.is_complete? :objectives %>
+      <%= render 'offerings/objectives/summary' %>
+    <% end %>
+    <% if @offering.is_complete? :content %>
+      <%= render 'offerings/content/summary' %>
+    <% end %>
   </div>
 
   <!--Sidebar-->
   <div class="span2">
-    <div class="span2 float-right">
-
-       <ul class='unstyled'>
-        <li class="label label-important">Course Objective</li>
-        <li class="label label-success">Content</li>
-        <li class="label label-warning">Assessments</li>
-      </ul>
-      <dl>
-        <dt>Export</dt>
-          <dd><a href="#">CSV</a></dd>
-          <dd><a href="#">HTML</a></dd>
-          <dd><a href="<%=export_offering_path(:format => "pdf")%>">PDF</a></dd>
-        <dt>Other</dt>
-          <dd><a href="#">Do Something</a></dd>
-          <dd><a href="#">Other</a></dd>
-      </dl>
-
+    <div class="float-right">
+    <dl>
+      <dt>Export</dt>
+        <dd><a href="#">CSV</a></dd>
+        <dd><a href="#">HTML</a></dd>
+        <dd><a href="<%=export_offering_path(:format => "pdf")%>">PDF</a></dd>
+      <dt>Other</dt>
+        <dd><a href="#">Do Something</a></dd>
+        <dd><a href="#">Other</a></dd>
+    </dl>
     </div>
   </div>
 
