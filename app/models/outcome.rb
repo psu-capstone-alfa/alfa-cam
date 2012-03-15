@@ -6,6 +6,8 @@ class Outcome < ActiveRecord::Base
 
   acts_as_list scope: :outcome_group
 
+  default_scope order: :key
+
   validates :title, :key, :description, :presence => true
 
   before_destroy :check_for_associated
