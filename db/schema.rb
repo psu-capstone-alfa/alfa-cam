@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(:version => 20120316200554) do
     t.integer  "roles_mask"
     t.string   "crypted_password"
     t.string   "password_salt"
+    t.string   "email"
   end
 
 end

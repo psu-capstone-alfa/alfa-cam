@@ -86,4 +86,10 @@ class AcademicTermsController < ApplicationController
       format.json { render json: @academic_term.offerings }
     end
   end
+
+  def pre_term_notification
+    @academic_term.instructors.include(:offerings).each do |instructor|
+      UserMailer.send_start_term_notice(@academic_term,instructor).deliver
+    end
+  end
 end

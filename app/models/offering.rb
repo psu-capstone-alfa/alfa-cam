@@ -83,6 +83,7 @@ class Offering < ActiveRecord::Base
   validates_associated :content_groups
 
   # Scope
+  scope :for_term, lambda {|term| where(:term_id => term.id); }
   scope :course_order,
     includes(:course).
     order("courses.dept_code ASC, courses.course_num ASC")

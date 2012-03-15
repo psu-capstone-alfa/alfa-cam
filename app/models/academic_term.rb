@@ -5,6 +5,7 @@ class AcademicTerm < ActiveRecord::Base
   validates :title, :presence => true
 
   has_many :offerings, foreign_key: :term_id
+  has_many :instructors, through: :offerings
 
 
   belongs_to :outcome_group, inverse_of: :terms
@@ -51,6 +52,7 @@ class AcademicTerm < ActiveRecord::Base
     }
   end
 
-  # Order Scopes
+  # Scopes
   scope :order_oldest_first, order('id DESC')
+
 end

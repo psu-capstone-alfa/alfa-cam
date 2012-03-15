@@ -1,0 +1,15 @@
+ActionMailer::Base.smtp_settings = {
+  :address => "REPLACEME",
+  :port    => 587,
+  :domain  => "REPLACEME",
+  :user_name => "REPLACEME",
+  :password  => "REPLACEME",
+  :authentication => "plain",
+  :enable_starttls_auto =>true
+}
+ActionMailer::Base.default = {
+  sender: 'REPLACEME'
+}
+ActionMailer::Base.default_url_options = {
+  host: 'REPLACEME'
+}

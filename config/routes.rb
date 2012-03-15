@@ -30,6 +30,12 @@ CourseAssessmentManager::Application.routes.draw do
     resources :outcomes, shallow: true
   end
 
+  scope controller: :notification, path: 'notification', as: 'notification' do
+    get '', action: :home
+    get :remind
+    get :start_term
+  end
+
   resources :offerings do
     collection do
       get :search
