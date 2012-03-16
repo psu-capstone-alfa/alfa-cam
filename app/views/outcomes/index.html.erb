@@ -1,27 +1,30 @@
-<h1>Listing outcomes</h1>
+<div class="row"><div class="span12">
+  <%= link_to "Back to Outcome Groups", [OutcomeGroup] %>
+  <h1><%= @outcome_group %></h1>
 
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @outcomes.each do |outcome| %>
-  <tr>
-    <td><%= outcome.key %></td>
-    <td><%= outcome.title %></td>
-    <td><%= outcome.description %></td>
-    <td><%= link_to 'Show', outcome %></td>
-    <td><%= link_to_if can?(:edit, outcome), 'Edit', edit_outcome_path(outcome) %></td>
-    <td><%= link_to_if can?(:destroy, outcome), 'Destroy', outcome, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Outcome', new_outcome_path %>
+  <div class="row"><div class="span10 offset1">
+    <table class="table outcomes">
+      <thead>
+        <tr>
+          <th class="key">Key</th>
+          <th class="description">Description</th>
+          <th class="actions"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @outcomes.each do |outcome| %>
+          <tr>
+            <th class="key"><%= outcome.key %></th>
+            <td class="description"><%= outcome.description %></td>
+            <td class="actions">
+              <%= link_to_if can?(:edit, outcome),
+                'Edit',
+                [:edit, outcome],
+                class: 'btn btn-mini' %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div></div>
+  <%= link_to 'New', [:new, @outcome_group, :outcome], class: 'btn btn-primary' %>
+</div></div>

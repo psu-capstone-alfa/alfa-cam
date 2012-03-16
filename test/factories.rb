@@ -63,12 +63,12 @@ Factory.define :instructor, class: :user do |f|
 end
 
 Factory.define :outcome do |f|
-  f.title 'Outcome %d'
   f.key '%d'
   f.description 'Outcome description %d'
 end
 
 Factory.define :outcome_group do |f|
+  f.title 'Outcome group %d'
   f.outcomes { 3.repetitions { Factory :outcome } }
 end
 

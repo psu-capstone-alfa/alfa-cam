@@ -9,18 +9,21 @@ class Ability
       can :read, :all
     end
     if user.is? :instructor
-      can :manage, Offering do |offering|
+      can :update, Offering do |offering|
         offering.taught_by? user
       end
       can :profile, User
+      can :update, User, :id => user.id
       can :read, :all
     end
     if user.is? :staff
       can :manage, Course
       can :manage, AcademicTerm
       can :manage, Outcome
+      can :manage, OutcomeGroup
       can :manage, Offering
       can :manage, ContentGroupName
+      can :manage, :all
       can :read, :all
     end
     if user.is? :admin

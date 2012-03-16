@@ -26,7 +26,9 @@ CourseAssessmentManager::Application.routes.draw do
     get :admin
   end
 
-  resources :outcomes
+  resources :outcome_groups do
+    resources :outcomes, shallow: true
+  end
 
   resources :offerings do
     collection do

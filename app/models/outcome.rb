@@ -8,12 +8,12 @@ class Outcome < ActiveRecord::Base
 
   default_scope order: :key
 
-  validates :title, :key, :description, :presence => true
+  validates_presence_of :key, :description
 
   before_destroy :check_for_associated
 
   def to_s
-    "#{key}:#{title}"
+    "#{key}:#{description.truncate(20)}"
   end
 
   private

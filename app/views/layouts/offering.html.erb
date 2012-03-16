@@ -15,8 +15,8 @@
           <li class="<%= active_if(@nav_offering, :summary) %>">
             <%= link_to 'Summary', @offering %>
           </li>
-        <% end %>
         <li class="disabled"><a></a></li>
+        <% end %>
         <li class="<%= active_if(@nav_offering, :review) %>">
           <%= stage_navbar_link :review %>
         </li>

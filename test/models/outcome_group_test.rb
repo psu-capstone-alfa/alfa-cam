@@ -4,8 +4,8 @@ describe OutcomeGroup do
   before do
     @orig_outcomes = (1..4).collect { Factory :outcome }
     @replace_outcomes = @orig_outcomes[1,2].map(&:dup)
-    @replace_outcomes[0].title = 'New Title!'
-    @replace_outcomes[1].title = 'Newer title!'
+    @replace_outcomes[0].description = 'New Title!'
+    @replace_outcomes[1].description = 'Newer title!'
 
     @og1 = Factory :outcome_group, outcomes: @orig_outcomes
     @og2 = Factory :outcome_group, outcomes: []

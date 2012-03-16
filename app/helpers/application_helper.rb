@@ -47,7 +47,7 @@ module ApplicationHelper
       home: home,
       offerings: offerings_path,
       terms: academic_terms_path,
-      outcomes: outcomes_path
+      outcomes: outcome_groups_path
     }
   end
 

@@ -1,29 +1,34 @@
-<%= form_for(@outcome) do |f| %>
+<% record = @outcome.new_record? ? [@outcome_group, @outcome] : @outcome %>
+<%= form_for record,
+  builder: FancyFormBuilder,
+  html: {class: 'form-horizontal'} do |f| %>
+
+
+  <legend>
+    <%= @outcome_group %>
+    :
+    <% if @outcome.new_record? %>
+      New Outcome
+    <% else %>
+      <%= @outcome.key %>
+    <% end %>
+  </legend>
+
   <% if @outcome.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@outcome.errors.count, "error") %> prohibited this outcome from being saved:</h2>
-
-      <ul>
-      <% @outcome.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :key %><br />
-    <%= f.text_field :key %>
-  </div>
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <%= f.control_group :key, label: 'Outcome Key' do %>
+    <%= f.text_field :key, class: 'span2' %>
+  <% end %>
+  <%= f.control_group :description, label: 'Description' do %>
+    <%= f.text_area :description, class: 'span6' %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit 'Save', class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', [@outcome_group, Outcome], class: 'btn' %>
   </div>
 <% end %>
