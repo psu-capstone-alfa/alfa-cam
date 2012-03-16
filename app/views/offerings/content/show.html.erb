@@ -28,7 +28,8 @@
                 <abbr title="<%= group.name %>"><%= group.name %></abbr>
               </th></strong>
               <% @offering.outcomes.each do |outcome| %>
-                <th class="col-outcome"><%= outcome.key %></th>
+                <th class="col-outcome"> <abbr title="<%= outcome.description %>">
+            <%= outcome.key %></abbr></th>
               <% end %>
             </tr>
           </thead>
@@ -54,7 +55,8 @@
                 <abbr title="<%= group.name %>"><%= group.name %></abbr>
               </th></strong>
               <% @offering.outcomes.each do |outcome| %>
-                <th class="col-outcome"><%= outcome.key %></th>
+                <th class="col-outcome"> <abbr title="<%= outcome.description %>">
+            <%= outcome.key %></abbr></th>
               <% end %>
             </tr>
           </thead>
