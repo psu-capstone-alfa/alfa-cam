@@ -35,7 +35,19 @@ describe OfferingsController do
       @offering = Factory(:offering)
     end
 
-    it "must show offering" do
+    it "must redirect show when review not done" do
+      get :show, id: @offering.id
+      assert_response :redirect
+    end
+
+    it "must redirect show when importing not done" do
+      @offering.update_attributes review_done: true
+      get :show, id: @offering.id
+      assert_response :redirect
+    end
+
+    it "must show success when importing done" do
+      @offering.update_attributes review_done: true, importing_done: true
       get :show, id: @offering.id
       assert_response :success
     end

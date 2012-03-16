@@ -11,6 +11,7 @@ class OfferingsController < ApplicationController
 
   before_filter { @nav_section = :offerings }
   before_filter :find_resource, except: [:index, :create]
+  before_filter :redirect_summary_before_import, only: :show
 
   def getConditions
     conditions = Hash.new
@@ -153,6 +154,16 @@ class OfferingsController < ApplicationController
         Offering.find params[:id]
       else
         Offering.new
+    end
+  end
+
+  def redirect_summary_before_import
+    return if @offering.is_complete?(:importing)
+    case
+      when @offering.is_complete?(:review)
+        redirect_to [@offering, :importing]
+      else
+        redirect_to [@offering, :review]
     end
   end
 
