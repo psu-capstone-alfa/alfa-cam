@@ -1,0 +1,17 @@
+Hello <%= @instructor.name %>,
+
+<% if @message %>
+<%= @message %>
+
+<% end%>
+The following classes your teaching need attention on
+the course assessment manager:
+
+<% @instructor.offerings.completed.each do |offering| %>
+ - <%= offering %>
+<% end %>
+
+The manager is available <%= link_to 'Here', root_url %>,
+please take the time to complete the information as soon as possible.
+
+Thanks!

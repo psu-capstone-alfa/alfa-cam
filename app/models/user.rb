@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
 
   acts_as_authentic do |c|
     c.merge_validates_length_of_password_field_options({allow_nil: true})
+    c.validate_email_field = false  # FIX ME !!!!!!!!!
   end
 
   ROLES = [:reviewer, :instructor, :staff, :admin]

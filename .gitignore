@@ -8,3 +8,4 @@ app/assets/stylesheets/scaffolds.css.scss
 vendor/bundle
 
 config/database.yml
+config/initializers/setup_mail.rb

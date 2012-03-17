@@ -14,6 +14,7 @@ end
 Factory.define :user do |f|
   f.name { Forgery::Name.full_name }
   f.login 'user %d'
+  f.email 'nobody%d@nowhere.non'
 end
 
 User::ROLES.each do |role|

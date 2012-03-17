@@ -19,7 +19,14 @@
       <div class="mini-layout">
         <ul>
           <% @redInstructors.each do |inst_offr| %>
-            <li><%= inst_offr[:instructor].name %></li>
+            <li>
+              <%= inst_offr[:instructor].name %>
+              :
+              <%= link_to "Send a reminder",
+                notification_remind_path(id: inst_offr[:instructor].id),
+                class: ''
+              %>
+            </li>
             <ul>
               <% inst_offr[:uncomplete].each do |offering| %>
                 <li> 

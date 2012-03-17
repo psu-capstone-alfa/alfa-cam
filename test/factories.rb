@@ -47,6 +47,7 @@ end
 Factory.define :user do |f|
   f.login 'user%d'
   f.name 'User McUserton'
+  f.email 'user%d@nowhere.non'
   f.roles []
 end
 
