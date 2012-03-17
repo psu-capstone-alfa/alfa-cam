@@ -4,18 +4,8 @@
    <p>List of instructors with complete and uncomplete courses</p> 
   </div>
   <div class="row">
-    <div class="span5 alert alert-success">
-      <h4>Instructors with all complete classes</h4><br>
-      <div class="mini-layout">
-        <ul>
-          <% @greenInstructors.each do |inst| %>
-            <li><%= inst.name %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
     <div class="span5 alert alert-error">
-      <h4>Instructors with uncomplete classes</h4><br>
+      <h4>Instructors with incomplete classes</h4><br>
       <div class="mini-layout">
         <ul>
           <% @redInstructors.each do |inst_offr| %>
@@ -34,6 +24,16 @@
                 </li>
               <% end %>
             </ul>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="span5 alert alert-success">
+      <h4>Instructors with all complete classes</h4><br>
+      <div class="mini-layout">
+        <ul>
+          <% @greenInstructors.each do |inst| %>
+            <li><%= inst.name %></li>
           <% end %>
         </ul>
       </div>
