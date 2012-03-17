@@ -4,6 +4,7 @@ module HelpOverlayHelper
     content_tag :div, class: 'help-bubble help-overlay' do
       content_tag(:a,
         title,
+        :title => title,
         :rel => 'popover',
         :style => options[:style],
         :class => "btn",

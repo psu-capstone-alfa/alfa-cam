@@ -11,7 +11,7 @@ $ ->
     # then original.clone(true) could bring along the
     # delete-content handler, and make life easier.
     button = $ this
-    container = button.closest('tbody')
+    container = button.closest('tfoot').siblings('tbody')
     clone = container.find('tr.cloneable').clone(true)
     new_id = Date.now()
     $('input, select, textarea', clone).each ->
@@ -25,7 +25,7 @@ $ ->
         label.attr('for', label.attr('for').replace(/content_attributes_(\d+)/g, 'content_attributes_' + new_id))
 
     clone.removeClass('cloneable').show()
-    clone.insertBefore(container.find('#content-footer'))
+    container.append(clone)
 
     false
 

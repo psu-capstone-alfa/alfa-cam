@@ -69,7 +69,8 @@
       <%= render partial: 'objective',
             object: @new_objective,
             locals: {f: f, fields_for_args: {child_index: 'new'}} %>
-
+    </tbody>
+    <tfoot>
       <tr id="content-footer">
         <td colspan="12">
           &nbsp;
@@ -81,7 +82,7 @@
             <span class="offset2"><%= insert_help :two %></span>
         </td>
       </tr>
-    </tbody>
+    </tfoot>
   </table>
 
   <% @no_reset_button = true %>
