@@ -1,0 +1,20 @@
+Hello <%= @instructor.name %>,
+
+<% if @message %>
+<%= @message %>
+
+<% end%>
+With the term beginning you should review your upcoming classes.
+If you find some are missing or otherwise incorrect please contact the staff.
+
+You are scheduled to teach the following courses for <%= @term %>:
+
+<% @offerings.completed.each do |offering| %>
+ - <%= offering.course %>
+<% end %>
+
+The manager is available <%= link_to 'Here', root_url %>,
+please take the time to complete the review stage as soon as possible.
+
+Thanks!
+

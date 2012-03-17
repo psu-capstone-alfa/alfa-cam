@@ -1,4 +1,4 @@
-#Mailer
+# User Notification Mailer
 class UserMailer < ActionMailer::Base
   # Pre/Early term reminder to review course assessments
   def send_start_term_notice(term,instructor)
