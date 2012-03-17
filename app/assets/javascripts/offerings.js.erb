@@ -1,227 +1,238 @@
 var OfferingEnhancements = {
-	// ------------------------------------------------------------
-	// Fixes issues with some browsers not rendering an empty 
-	// table row (tr) correctly
-	// ------------------------------------------------------------
-	forceHelper: function(e,ui) {
-		$(".ui-state-highlight").html("<td colspan='100%'>&nbsp;</td>");
-	},
-	
-	// ------------------------------------------------------------
-	// Allows persistent, user-based sorting of content and objectives
-	// ------------------------------------------------------------
-	makeContentAndObjectivesSortable: function() {
-		var container = $('#objectives_container, #content_container');
-		if(container.length < 1) {
-			return;
-		}
-		container.each(function(index, element){
-		  $('tbody tr', element).addClass("draggable");
-		  $('tbody', element).sortable({
-		    axis: 'y',
-		    items: 'tr',
-		    placeholder: 'ui-state-highlight',
-	      opacity: 0.4,
-		    scroll: true,
-		    change: function(e, ui) {
-	     		this.forceHelper(e,ui);
-	      }
-		  });
-		});
-	  $('.offering-content-groups').submit(function(){
+    // ------------------------------------------------------------
+    // Fixes issues with some browsers not rendering an empty
+    // table row (tr) correctly
+    // ------------------------------------------------------------
+    forceHelper: function(e,ui) {
+	$(".ui-state-highlight").html("<td colspan='100%'>&nbsp;</td>");
+    },
+
+    // ------------------------------------------------------------
+    // Allows persistent, user-based sorting of content and objectives
+    // ------------------------------------------------------------
+    makeContentAndObjectivesSortable: function() {
+	var container = $('#objectives_container, #content_container');
+	if(container.length < 1) {
+	    return;
+	}
+	container.each(function(index, element){
+	    $('tbody tr', element).addClass("draggable");
+	    $('tbody', element).sortable({
+		axis: 'y',
+		items: 'tr',
+		placeholder: 'ui-state-highlight',
+	        opacity: 0.4,
+		scroll: true,
+		change: function(e, ui) {
+	     	    OfferingEnhancements.forceHelper(e,ui);
+	        }
+	    });
+	});
+	$('.offering-content-groups').submit(function(){
 	    $(".offering-content-groups input.position").each(function(index) {
-	      $(this).val(index);
+	        $(this).val(index);
 	    });
 	    return true;
-	  });
-	},
-	
-	interceptPaginationLinks: function() {
-		var context = this;
-		$(".pagination a").click(function(evt){
-			evt.preventDefault();
-			$.ajax({
-				type: 'GET',
-				url: $(this).attr("href"),
-				dataType: 'html',
-				data: {partial: 'true'},
-				context: context,
-				success: function(results, textStatus, jqXHR) {
-					$(this.resultsSelector).replaceWith(results);
-					this.interceptPaginationLinks();
-				},
-				error: function(jqXHR, textStatus, errorThrown) {
-					console.log("Error. Status code: " + jqXHR.status, jqXHR.statusText);
-				}
-			});
-		});
-	},
-	
-	// ------------------------------------------------------------
-	// Loads facets for Visual Search from the server.
-	// ------------------------------------------------------------
-	loadFacets: function() {
-		this.searchContainer = $('#offerings');
-		if(this.searchContainer.length < 1) {
-			return;
-		}
-		this.baseUrl = this.searchContainer.data('baseurl');
-		if(this.baseUrl.length < 1) {
-			return;
-		}
-		this.resultsSelector = this.searchContainer.data('results-selector');
-		if(this.resultsSelector.length < 1) {
-			return;
-		}
-		$.ajax({
-			type: 'GET',
-			url: this.baseUrl + "/facets",
-			dataType: 'json',
-			context: this,
-			success: function(facets, textStatus, jqXHR) {
-				this.initializeSearch(facets, this.baseUrl, this.searchContainer);
-			},
-			error: function(jqXHR, textStatus, errorThrown) {
-				console.log(textStatus);
-			}
-		});
-	},
+	});
+    },
 
-	// ------------------------------------------------------------
-	// Called by the VS search method when a user selects a facet 
-	// and value
-	// ------------------------------------------------------------
-	runSearch: function(data, context) {
-		$.ajax({
-			type: 'GET',
-			url: context.baseUrl, 
-		  data: data,
-		  dataType: "html",
-			context: context,
-		  success: function(searchResults, textStatus, jqXHR) {
-				$(context.resultsSelector).replaceWith(searchResults);
-				context.interceptPaginationLinks();
-		  },
-			error: function(jqXHR, textStatus, errorThrown) {
-				console.log(textStatus)
-			}
-		});
-	},
+    interceptPaginationLinks: function() {
+	var context = this;
+	$(".pagination a").click(function(evt){
+	    evt.preventDefault();
+	    $.ajax({
+		type: 'GET',
+		url: $(this).attr("href"),
+		dataType: 'html',
+		data: {partial: 'true'},
+		context: context,
+		success: function(results, textStatus, jqXHR) {
+		    $(this.resultsSelector).replaceWith(results);
+		    this.interceptPaginationLinks();
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+		    console.log("Error. Status code: " + jqXHR.status, jqXHR.statusText);
+		}
+	    });
+	});
+    },
 
-	// ------------------------------------------------------------
-	// Initialize / configure Visual Search (visualsearch.js)
-	// VS: http://documentcloud.github.com/visualsearch/
-	// ------------------------------------------------------------
-	initializeSearch: function(facets, baseUrl) {
-		facetCategories = [];
-		for (var propertyName in facets) {
-		  if (facets.hasOwnProperty(propertyName)) {
-		    facetCategories.push(propertyName);
-		  }
-		}
-		var context = this; // closure
-		VS.init({
-			container  : this.searchContainer,
-			query      : '',
-			unquotable : [],
-			callbacks  : {
-				search : function(query, searchCollection) {
-					var data = { partial: true };
-					var queriedFacets = searchCollection.each(function(facet){
-						data[facet.get("category").toLowerCase()] = facet.get("value");
-					});
-					context.runSearch(data, context);
-	       },
-	       facetMatches : function(callback) {
-	        callback(facetCategories, {preserveOrder: true});
-	       },
-	       valueMatches : function(facet, searchTerm, callback) {
-	         callback(facets[facet], {preserveOrder: true});
-	       }
-	     }
-	   });
-	  this.searchContainer.append("<div id='search_help'>Possible search terms are: " + facetCategories.join(", "));
-	},
-	
-	// ------------------------------------------------------------
-	// The sum of the values in every cell in a content row 
-	// must equal this value
-	// ------------------------------------------------------------
-	contentRowTotalMustEqual: <%= Offering.content_to_outcome_mapping_row_total %>,
-	
-	// ------------------------------------------------------------
-	// Calculate a content row's total value
-	// ------------------------------------------------------------
-	calculateRowTotal: function(tr) {
-		var rowTotal = 0;
-		var cells = $("input.number_field", tr);
-		cells.each(function(index, input){
-			rowTotal  += parseInt($(input).val()) || 0;
-		});
-		return rowTotal;
-	},
-	
-	// ------------------------------------------------------------
-	// Validate a single content row's value.
-	// Inform the user if it does not validate.
-	// ------------------------------------------------------------
-	validateRowTotal: function(tr) {
-		var rowTotal = this.calculateRowTotal(tr);
-		var lastCell = $("td", tr).last();
-		
-		// Remove any previously set classes and/or tooltips
-		$(tr).removeClass("incorrectContentRowTotal");
-		$("a[rel='tooltip']", lastCell).remove();
-		
-		// Check the row total and inform the user if it is not correct
-		if(rowTotal < this.contentRowTotalMustEqual || rowTotal > this.contentRowTotalMustEqual) {
-			$(tr).addClass("incorrectContentRowTotal");
-			var link = $("<a data-placement='bottom' rel='tooltip' data-original-title='Row total must equal " + this.contentRowTotalMustEqual + ". The current total is " + rowTotal + "'><i class='icon-black  icon-question-sign'></i></a>");
-			lastCell.append(" ", link);
-			link.tooltip();
-		}
-	},	
-	
-	// ------------------------------------------------------------
-	// Make sure each content row sums up to the correct value.
-	// ------------------------------------------------------------
-	validateContentRowTotals: function(){
-		var context = this;
-		$(".mappings tbody tr.content").each(function(index, tr){
-			context.validateRowTotal(tr);
-		});
-	},
-	
-	makeContentRowInputsTriggerRowValidation: function() {
-		var context = this;
-		$(".number_field").on("change", function(evt){
-			var tr = $(this).parents("tr").get(0);
-			if(tr) {
-				context.validateRowTotal(tr);
-			}
-		});
-	},
+    // ------------------------------------------------------------
+    // Loads facets for Visual Search from the server.
+    // ------------------------------------------------------------
+    loadFacets: function() {
+	this.searchContainer = $('#offerings');
+	if(this.searchContainer.length < 1) {
+	    return;
+	}
+	this.baseUrl = this.searchContainer.data('baseurl');
+	if(this.baseUrl.length < 1) {
+	    return;
+	}
+	this.resultsSelector = this.searchContainer.data('results-selector');
+	if(this.resultsSelector.length < 1) {
+	    return;
+	}
+	$.ajax({
+	    type: 'GET',
+	    url: this.baseUrl + "/facets",
+	    dataType: 'json',
+	    context: this,
+	    success: function(facets, textStatus, jqXHR) {
+		this.initializeSearch(facets, this.baseUrl, this.searchContainer);
+	    },
+	    error: function(jqXHR, textStatus, errorThrown) {
+		console.log(textStatus);
+	    }
+	});
+    },
+
+    // ------------------------------------------------------------
+    // Called by the VS search method when a user selects a facet
+    // and value
+    // ------------------------------------------------------------
+    runSearch: function(data, context) {
+	$.ajax({
+	    type: 'GET',
+	    url: context.baseUrl,
+	    data: data,
+	    dataType: "html",
+	    context: context,
+	    success: function(searchResults, textStatus, jqXHR) {
+		$(context.resultsSelector).replaceWith(searchResults);
+		context.interceptPaginationLinks();
+	    },
+	    error: function(jqXHR, textStatus, errorThrown) {
+		console.log(textStatus)
+	    }
+	});
+    },
+
+    // ------------------------------------------------------------
+    // Initialize / configure Visual Search (visualsearch.js)
+    // VS: http://documentcloud.github.com/visualsearch/
+    // ------------------------------------------------------------
+    initializeSearch: function(facets, baseUrl) {
+	facetCategories = [];
+	for (var propertyName in facets) {
+	    if (facets.hasOwnProperty(propertyName)) {
+		facetCategories.push(propertyName);
+	    }
+	}
+	var context = this; // closure
+	VS.init({
+	    container  : this.searchContainer,
+	    query      : '',
+	    unquotable : [],
+	    callbacks  : {
+		search : function(query, searchCollection) {
+		    var data = { partial: true };
+		    var queriedFacets = searchCollection.each(function(facet){
+			data[facet.get("category").toLowerCase()] = facet.get("value");
+		    });
+		    context.runSearch(data, context);
+	        },
+	        facetMatches : function(callback) {
+	            callback(facetCategories, {preserveOrder: true});
+	        },
+	        valueMatches : function(facet, searchTerm, callback) {
+	            callback(facets[facet], {preserveOrder: true});
+	        }
+	    }
+	});
+	this.searchContainer.append("<div id='search_help'>Possible search terms are: " + facetCategories.join(", "));
+    },
+
+    // ------------------------------------------------------------
+    // The sum of the values in every cell in a content row
+    // must equal this value
+    // ------------------------------------------------------------
+    contentRowTotalMustEqual: <%= Offering.content_to_outcome_mapping_row_total %>,
+
+    // ------------------------------------------------------------
+    // Calculate a content row's total value
+    // ------------------------------------------------------------
+    calculateRowTotal: function(tr) {
+	var rowTotal = 0;
+	var cells = $("input.number_field", tr);
+	cells.each(function(index, input){
+	    rowTotal  += parseInt($(input).val()) || 0;
+	});
+	return rowTotal;
+    },
+
+    // ------------------------------------------------------------
+    // Validate a single content row's value.
+    // Inform the user if it does not validate.
+    // ------------------------------------------------------------
+    validateRowTotal: function(tr) {
+	var rowTotal = this.calculateRowTotal(tr);
+
+        var hintCell = $("td:last", tr);
+
+	// Remove any previously set classes and/or tooltips
+	$(tr).removeClass("incorrectContentRowTotal");
+        var tooltip = $("a[rel='tooltip']", tr).data('tooltip');
+	tooltip && tooltip.hide();
+        $("a[rel='tooltip']", tr).remove();
+
+	// Check the row total and inform the user if it is not correct
+        // note that the <a> is essentially empty, just a placeholder
+	if(rowTotal != this.contentRowTotalMustEqual) {
+	    $(tr).addClass("incorrectContentRowTotal");
+	    var link = $("<a data-placement='right' rel='tooltip' data-original-title='Row total must equal " + this.contentRowTotalMustEqual + ". The current total is " + rowTotal + "'>&nbsp;</a>");
+	    hintCell.append(" ", link);
+	    link.tooltip('show');
+	}
+    },
+
+    // ------------------------------------------------------------
+    // Make sure each content row sums up to the correct value.
+    // ------------------------------------------------------------
+    validateContentRowTotals: function(){
+	var context = this;
+	$(".mappings tbody tr.content:visible").each(function(index, tr){
+	    context.validateRowTotal(tr);
+	});
+    },
+
+    makeContentRowInputsTriggerRowValidation: function() {
+	var context = this;
+	$(".number_field").on("change", function(evt){
+	    var tr = $(this).parents("tr").get(0);
+	    if (tr) {
+		context.validateRowTotal(tr);
+	    }
+	});
+    },
 }
 
 // ------------------------------------------------------------
 // Kick things off when the page finishes loading.
 // ------------------------------------------------------------
 $(document).ajaxStart(function(){
-	var top = $(window).height() / 2;
-	var overlay = $("<div id='overlay'></div>");
-	var spinner = $("<div id='spinner'></div>")
-		.css({"position": "absolute", "left": (window.innerWidth / 2 - 16) + "px", "top": (window.innerHeight / 2 - 16) + "px", "width": "32px"})
-		.append('<img src="<%= asset_path("ajax-loader.gif") %>">');
-	overlay.append(spinner);
-	$("body").append(overlay);
+    var top = $(window).height() / 2;
+    var overlay = $("<div id='overlay'></div>");
+    var spinner = $("<div id='spinner'></div>")
+	.css({"position": "absolute", "left": (window.innerWidth / 2 - 16) + "px", "top": (window.innerHeight / 2 - 16) + "px", "width": "32px"})
+	.append('<img src="<%= asset_path("ajax-loader.gif") %>">');
+    overlay.append(spinner);
+    $("body").append(overlay);
 });
 $(document).ajaxStop(function(){
-	$("#overlay").remove();
+    $("#overlay").remove();
 });
 $(document).ready(function(){
-	OfferingEnhancements.makeContentRowInputsTriggerRowValidation();
-	OfferingEnhancements.validateContentRowTotals();
-	OfferingEnhancements.makeContentAndObjectivesSortable();
-	OfferingEnhancements.interceptPaginationLinks();
-	OfferingEnhancements.loadFacets();
+    OfferingEnhancements.makeContentRowInputsTriggerRowValidation();
+    OfferingEnhancements.validateContentRowTotals();
+
+    // update all visible tooltips by listening to the 'shown' event from pills
+    $('[data-toggle=pill]').bind('shown', function() {
+        $('a[rel=tooltip]').tooltip('hide');
+        OfferingEnhancements.validateContentRowTotals();
+    });
+
+    OfferingEnhancements.makeContentAndObjectivesSortable();
+    OfferingEnhancements.interceptPaginationLinks();
+    OfferingEnhancements.loadFacets();
 });

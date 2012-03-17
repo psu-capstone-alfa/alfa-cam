@@ -81,13 +81,13 @@
                   <tr class="content <%= css_class %>" id="<%= row_id %>">
                     <%= cgf.no_bs_fields_for :content, content do |cf| %>
                       <th>
+                        <a class="btn btn-danger delete-content">
+                          <i class="icon-white icon-remove">&nbsp;</i>
+                        </a>
                         <%= cf.hidden_field :position, :class => "position" %>
                         <%= cf.text_field :title, placeholder: 'Content name' %>
                         <%= cf.check_box :_destroy %>
                         <%= cf.label :_destroy, style: 'display: inline' do %>
-                          <a class="btn btn-danger delete-content">
-                            <i class="icon-white icon-remove">&nbsp;</i>
-                          </a>
                         <% end %>
                       </th>
                       <% mapping_scopes(cf.object.mappings) do |mapping| %>
@@ -101,6 +101,8 @@
                     <% end %>
                   </tr>
                 <% end %>
+              </tbody>
+              <tfoot>
                 <tr id="content-footer">
                   <td colspan="<%= 1 + @outcomes.count %>">
                     <button id="" class="add-content btn btn-success">
@@ -110,7 +112,7 @@
                       <span class="offset2"><%= insert_help :two %></span>
                   </td>
                 </tr>
-              </tbody>
+              </tfoot>
             </table>
 
           </div>

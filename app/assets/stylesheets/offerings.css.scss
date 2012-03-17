@@ -7,9 +7,10 @@ table.mappings {
 
   tbody input { margin: .5em; }
 
-  button#add-content { margin: .5em; }
+  button.add-content,
+  a#add-mapping { margin: .5em; }
 
-  .delete-content { margin-right: .5em; }
+  a.btn[class*=delete] { margin: 0 .5em; }
 
   tr.cloneable { display: none; }
 
