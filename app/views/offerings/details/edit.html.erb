@@ -22,13 +22,8 @@
         <% end %>
         <%= f.control_group :section,
             label: 'Section',
-            tooltip: 'Class section number or numbers, seperated by spaces' do %>
+            tooltip: 'Class section number or numbers, separated by spaces' do %>
           <%= f.text_field :section, placeholder: '001 002', class: 'span4' %>
-        <% end %>
-        <%= f.control_group :credits,
-            label: 'Credits',
-            tooltip: 'Credit hours for class' do %>
-          <%= f.text_field :credits, placeholder: '4', class: 'span4' %>
         <% end %>
         <%= f.control_group :location,
             label: 'Location',
@@ -43,11 +38,16 @@
             class: 'span4'
           %>
         <% end %>
+        <%= f.control_group :credits,
+            label: 'Credits',
+            tooltip: 'Credit hours for class' do %>
+          <%= f.text_field :credits, placeholder: '4', class: 'span4' %>
+        <% end %>
         <%= f.control_group :required_for_bsce,
             label: 'BSCE Program',
             tooltip: 'In what way the class is applicable toward the B.S. Civil Engineering program' do %>
           <label class="radio inline">
-            <%= f.radio_button :required_for_bsce, 'Requied', class: 'inline' %>
+            <%= f.radio_button :required_for_bsce, 'Required', class: 'inline' %>
             Required
           </label>
           <label class="radio inline">
@@ -86,7 +86,7 @@
       </div>
       <div class="span6">
         <%= f.control_group :prerequisites,
-            label: 'Prerquisite(s)',
+            label: 'Prerequisite(s)',
             tooltip: 'Required courses for taking this class' do %>
           <%= f.text_area :prerequisites,
             placeholder: 'CE 210, CEE 101',
