@@ -41,6 +41,7 @@ CourseAssessmentManager::Application.routes.draw do
       get :search
       get :export
       get :facets
+      get :search_explanation
     end
     member do
       get :export, action: :export_member, as: "export"

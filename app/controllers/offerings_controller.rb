@@ -127,6 +127,10 @@ class OfferingsController < ApplicationController
     render :json => obj
   end
 
+  def search_explanation
+    render :partial => 'search_explanation', :layout => false
+  end
+
   def export
     @offerings = Offering
 
