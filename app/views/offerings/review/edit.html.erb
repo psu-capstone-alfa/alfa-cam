@@ -4,15 +4,17 @@
 <%
   @help = {
     :two => {title: '2',
-      content: "Click \"Continue\" to next page.",
+      content: 'Click "Continue" to next page.',
       position: 'right',
       style: ''},
   }
 %>
 
+<br>
+
 <%= form_for @offering do |f| %>
   <%= redirect_token @redirect_url %>
   <%= f.hidden_field :review_done, value: true %>
-  <%= f.submit class: 'btn btn-primary', value: 'Continue' %> &nbsp;
+  <%= f.submit class: 'btn btn-primary', value: 'Complete Review' %> &nbsp;
   <%= insert_help :two %>
 <% end %>

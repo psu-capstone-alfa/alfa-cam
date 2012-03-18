@@ -60,7 +60,7 @@ class Course < ActiveRecord::Base
 
   # Querying recent offerings for a course
   def recent_offerings
-    offerings.order(:term_id).completed
+    offerings.term_order.completed
   end
 
   # Restrict to a specific instructor

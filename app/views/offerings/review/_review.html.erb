@@ -9,7 +9,7 @@
   }
 %>
 
-<%= form_tag do %>
+<%= form_tag '', class: 'review-select' do %>
   <%= select_tag(:id,
         grouped_options_for_select(
           {
@@ -20,7 +20,9 @@
         )
       )
   %>
-  <%= submit_tag 'Review' %> &nbsp; <%= insert_help :one %>
+  <%= submit_tag 'Review', class: 'btn' %>
+  &nbsp;
+  <%= insert_help :one %>
 <% end %>
 
 <% unless @recent_offering_choice %>

@@ -1,6 +1,8 @@
 # Manage user accounts and details
 #
 class UsersController < ApplicationController
+  before_filter { @nav_section = :users }
+  load_resource except: :profile
   authorize_resource
 
   def index
@@ -22,7 +24,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to @user, success: 'User was successfully created.'
+      flash[:success] = 'User successfully created.'
+      redirect_to @user
     else
       flash[:error] = @user.errors.full_messages.to_sentence
       render action: "new"
@@ -32,7 +35,8 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      redirect_to @user, success: 'User was successfully updated.'
+      flash[:success] = 'User successfully updated.'
+      redirect_to @user
     else
       flash[:error] = @user.errors.full_messages.to_sentence
       render action: "edit"

@@ -32,7 +32,7 @@ module ApplicationHelper
     [:instructor, :staff, :reviewer].each do |role|
       home[role] = send("home_#{role.to_s}_path") if current_user.is? role
     end
-    home[:staff_second] = home_staff2_path if current_user.is? :staff
+    home[:instructor_status] = home_staff2_path if current_user.is? :staff
 
     home = case home.length
       when 1
@@ -44,10 +44,11 @@ module ApplicationHelper
     end
 
     {
-      home: home,
+      dashboard: home,
       offerings: offerings_path,
       terms: academic_terms_path,
-      outcomes: outcome_groups_path
+      outcomes: outcome_groups_path,
+      users: users_path,
     }
   end
 

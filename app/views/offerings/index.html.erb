@@ -1,14 +1,7 @@
-<div id="offerings" data-baseurl='/offerings' data-results-selector='#offering-index'></div>
-<h1>Offerings</h1>
-
 <div class="row">
-  <div id='offering_list' class="span10 offset1">
+  <div class="span12">
+    <h2>Offerings Search</h2>
+    <div id="offerings" data-baseurl='/offerings' data-results-selector='#offering-index'></div>
     <%= render "offerings_table" %>
   </div>
 </div>
-
-<br />
-
-<% if can? :edit, @offerings %>
-	<%= link_to 'New Offering', new_offering_path, :class => 'btn' %>
-<% end %>

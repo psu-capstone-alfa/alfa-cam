@@ -1,5 +1,5 @@
 .help-bubble {
-  z-index: 2050;
+  z-index: 1029;
   position: relative;
 
   a, & > div {
@@ -16,12 +16,12 @@ body.show-help {
     display: inline;
   }
   .popover {
-    z-index: 2100;
+    z-index: 1030;
   }
 }
 
 .help-backdrop {
-  z-index: 2000;
+  z-index: 1028;
   position: fixed;
   top: 0;
   right: 0;
@@ -32,7 +32,7 @@ body.show-help {
 }
 
 #toggle-help-overlay {
-  z-index: 2050;
+  z-index: 1031;
   position: relative;
   padding: 6px 0 0;
   &:hover {

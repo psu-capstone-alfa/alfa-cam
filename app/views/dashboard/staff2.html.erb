@@ -14,7 +14,9 @@
               :
               <%= link_to "Send a reminder",
                 notification_remind_path(id: inst_offr[:instructor].id),
-                class: ''
+                class: '',
+                confirm: 'This will send the instructor an email. ' <<
+                  'Continue?'
               %>
             </li>
             <ul>
