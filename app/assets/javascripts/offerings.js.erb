@@ -4,115 +4,95 @@ var OfferingEnhancements = {
     // table row (tr) correctly
     // ------------------------------------------------------------
     forceHelper: function(e,ui) {
-	$(".ui-state-highlight").html("<td colspan='100%'>&nbsp;</td>");
+			$(".ui-state-highlight").html("<td colspan='100%'>&nbsp;</td>");
     },
 
     // ------------------------------------------------------------
     // Allows persistent, user-based sorting of content and objectives
     // ------------------------------------------------------------
-    makeContentAndObjectivesSortable: function() {
-	var container = $('#objectives_container, #content_container');
-	if(container.length < 1) {
-	    return;
-	}
-	container.each(function(index, element){
+   makeContentAndObjectivesSortable: function() {
+		var container = $('#objectives_container, #content_container');
+		if(container.length < 1) {
+		    return;
+		}
+		container.each(function(index, element){
 	    $('tbody tr', element).addClass("draggable");
 	    $('tbody', element).sortable({
-		axis: 'y',
-		items: 'tr',
-		placeholder: 'ui-state-highlight',
-	        opacity: 0.4,
-		scroll: true,
-		change: function(e, ui) {
-	     	    OfferingEnhancements.forceHelper(e,ui);
-	        }
-	    });
-	});
-	$('.offering-content-groups').submit(function(){
-	    $(".offering-content-groups input.position").each(function(index) {
-	        $(this).val(index);
-	    });
-	    return true;
-	});
-    },
+				axis: 'y',
+				items: 'tr',
+				placeholder: 'ui-state-highlight',
+			        opacity: 0.4,
+				scroll: true,
+				change: function(e, ui) {
+		    	OfferingEnhancements.forceHelper(e,ui);
+		    }
+			});
+		});
+		
+		$('.offering-content-groups').submit(function(){
+			$(".offering-content-groups input.position").each(function(index) {
+		  	$(this).val(index);
+		   });
+		   return true;
+		});
+	 },
 
-    interceptPaginationLinks: function() {
-	var context = this;
-	$(".pagination a").click(function(evt){
-	    evt.preventDefault();
-	    $.ajax({
-		type: 'GET',
-		url: $(this).attr("href"),
-		dataType: 'html',
-		data: {partial: 'true'},
-		context: context,
-		success: function(results, textStatus, jqXHR) {
-		    $(this.resultsSelector).replaceWith(results);
-		    this.interceptPaginationLinks();
-		},
-		error: function(jqXHR, textStatus, errorThrown) {
-		    console.log("Error. Status code: " + jqXHR.status, jqXHR.statusText);
-		}
-	    });
-	});
+	  interceptPaginationLinks: function() {
+			var context = this;
+			$(".pagination a").click(function(evt){
+			    evt.preventDefault();
+			    $.ajax({
+				type: 'GET',
+				url: $(this).attr("href"),
+				dataType: 'html',
+				data: {partial: 'true'},
+				context: context,
+				success: function(results, textStatus, jqXHR) {
+				    $(this.resultsSelector).replaceWith(results);
+				    this.interceptPaginationLinks();
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+				    console.log("Error. Status code: " + jqXHR.status, jqXHR.statusText);
+				}
+			    });
+			});
     },
 
     // ------------------------------------------------------------
     // Loads facets for Visual Search from the server.
     // ------------------------------------------------------------
     loadFacets: function() {
-	this.searchContainer = $('#offerings');
-	if(this.searchContainer.length < 1) {
-	    return;
-	}
-	this.baseUrl = this.searchContainer.data('baseurl');
-	if(this.baseUrl.length < 1) {
-	    return;
-	}
-	this.resultsSelector = this.searchContainer.data('results-selector');
-	if(this.resultsSelector.length < 1) {
-	    return;
-	}
-	$.ajax({
-	    type: 'GET',
-	    url: this.baseUrl + "/facets",
-	    dataType: 'json',
-	    context: this,
-	    success: function(facets, textStatus, jqXHR) {
-		this.initializeSearch(facets, this.baseUrl, this.searchContainer);
-	    },
-	    error: function(jqXHR, textStatus, errorThrown) {
-		console.log(textStatus);
-	    }
-	});
-    },
-
-    // ------------------------------------------------------------
-    // Called by the VS search method when a user selects a facet
-    // and value
-    // ------------------------------------------------------------
-    runSearch: function(data, context) {
-	$.ajax({
-	    type: 'GET',
-	    url: context.baseUrl,
-	    data: data,
-	    dataType: "html",
-	    context: context,
-	    success: function(searchResults, textStatus, jqXHR) {
-		$(context.resultsSelector).replaceWith(searchResults);
-		context.interceptPaginationLinks();
-	    },
-	    error: function(jqXHR, textStatus, errorThrown) {
-		console.log(textStatus)
-	    }
-	});
+			this.searchContainer = $('#offerings');
+			if(this.searchContainer.length < 1) {
+			    return;
+			}
+			this.baseUrl = this.searchContainer.data('baseurl');
+			if(this.baseUrl.length < 1) {
+			    return;
+			}
+			this.resultsSelector = this.searchContainer.data('results-selector');
+			if(this.resultsSelector.length < 1) {
+			    return;
+			}
+			var context = this;
+			$.when(
+				$.ajax({url: this.baseUrl + "/facets", dataType: 'json'}), 
+				$.get(this.baseUrl + "/search_explanation")
+			)
+			 .done(function(facetArgs, explanationArgs) {
+				 context.initializeSearch(facetArgs[0], explanationArgs[0]);
+			 })
+			 .fail(function(jqXHR, textStatus){
+					console.log("Error loading " + this.url);
+					console.log("Status: " + jqXHR.status + " " + jqXHR.statusText);
+			 });
     },
 
     // ------------------------------------------------------------
     // Initialize / configure Visual Search (visualsearch.js)
     // VS: http://documentcloud.github.com/visualsearch/
     // ------------------------------------------------------------
-    initializeSearch: function(facets, baseUrl) {
+    initializeSearch: function(facets, search_help) {
 	facetCategories = [];
 	for (var propertyName in facets) {
 	    if (facets.hasOwnProperty(propertyName)) {
@@ -139,10 +119,36 @@ var OfferingEnhancements = {
 	            callback(facets[facet], {preserveOrder: true});
 	        }
 	    }
-	});
-	this.searchContainer.append("<div id='search_help'>Possible search terms are: " + facetCategories.join(", "));
-    },
+		});
+		this.searchContainer.append("<div id='search_explanation'>Possible search terms are: " + facetCategories.join(", ") + " <a href='#' id='toggle_search_help'>(more info)</a>");
+		$("#toggle_search_help", this.searchContainer).click(function(evt){
+				evt.preventDefault();
+				$("#search_help").toggle("fast");
+		});
+		this.searchContainer.append("<div id='search_help'>" + search_help + "</div>");
+		$("#search_help").css("display", "none");
+  },
 
+	// ------------------------------------------------------------
+  // Called by the VS search method when a user selects a facet
+  // and value
+  // ------------------------------------------------------------
+  runSearch: function(data, context) {
+		$.ajax({
+		    type: 'GET',
+		    url: context.baseUrl,
+		    data: data,
+		    dataType: "html",
+		    context: context,
+		    success: function(searchResults, textStatus, jqXHR) {
+			$(context.resultsSelector).replaceWith(searchResults);
+			context.interceptPaginationLinks();
+		    },
+		    error: function(jqXHR, textStatus, errorThrown) {
+			console.log(textStatus)
+		    }
+		});
+  },
     // ------------------------------------------------------------
     // The sum of the values in every cell in a content row
     // must equal this value
