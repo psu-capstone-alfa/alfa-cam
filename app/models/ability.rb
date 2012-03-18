@@ -9,9 +9,10 @@ class Ability
       can :read, :all
     end
     if user.is? :instructor
-      can :update, Offering do |offering|
+      can :manage, Offering do |offering|
         offering.taught_by? user
       end
+      cannot :destroy, Offering
       can :profile, User
       can :update, User, :id => user.id
       can :read, :all
