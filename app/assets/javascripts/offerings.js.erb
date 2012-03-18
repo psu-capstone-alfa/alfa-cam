@@ -82,8 +82,9 @@ var OfferingEnhancements = {
 			 .done(function(facetArgs, explanationArgs) {
 				 context.initializeSearch(facetArgs[0], explanationArgs[0]);
 			 })
-			 .fail(function(jqXHR, statusText, errorMsg){
-					console.log(statusText);
+			 .fail(function(jqXHR, textStatus){
+					console.log("Error loading " + this.url);
+					console.log("Status: " + jqXHR.status + " " + jqXHR.statusText);
 			 });
     },
 
