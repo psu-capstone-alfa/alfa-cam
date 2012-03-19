@@ -1,2 +1,22 @@
-Nothing here but us words
-
+<div class="row details summary">
+  <div class="span2">
+    <dl class="">
+      <dt>CRN #</dt>
+      <dd><%= offering.crn %></dd>
+      <dt>Section(s)</dt>
+      <dd><%= offering.section %></dd>
+      <dt>Credits</dt>
+      <dd><%= offering.credits %></dd>
+      <dt>Location</dt>
+      <dd><%= offering.location %></dd>
+    
+  </dl></div>
+  <div class="span5">
+    <dl class="padded">
+      <dt>Description</dt>
+      <dd><%= offering.description %></dd>
+      <dt>Primary Textbook</dt>
+      <dd><%= offering.textbook %></dd>
+    </dl>
+  </div>
+</div>

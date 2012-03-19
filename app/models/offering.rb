@@ -238,4 +238,14 @@ class Offering < ActiveRecord::Base
     10
   end
 
+
+  def summed_mappings
+    outcomes.map do |outcome|
+      objectives.
+      includes(:mappings).
+      where(mappings: {outcome_id: outcome, value: 1}).count
+    end
+  end
+
+
 end

@@ -1,2 +1,29 @@
-Nothing here but us words
+<div class="row summary objectives">
+  <div class="title span2">
+    <h2 class="middle">Objectives</h2>
+  </div>
+  <div class="span5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th colspan="11" style="text-align: center">
+            <%= offering.objectives.count %> objectives meeting outcomes
+          </th>
+        </tr>
+        <tr>
+          <% offering.outcomes.each do |outcome| %>
+            <th class="col-outcome"><%= outcome.key %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% offering.summed_mappings.each do |value| %>
+            <td class="col-oucome"><%= value %></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 

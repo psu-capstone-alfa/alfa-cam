@@ -1,1 +1,12 @@
-Nothing here but us words
+<div class="row summary content">
+  <div class="title span2">
+    <h2 class="middle">Content</h2>
+  </div>
+  <div class="span5">
+    <ul class="horizontal-list">
+      <% offering.content_groups.each do |cg| %>
+        <li><%= cg.content.count %><br><%= cg.name %></li>
+      <% end %>
+  </ul></div>
+</div>
+

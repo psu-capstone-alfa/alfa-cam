@@ -2,15 +2,8 @@
 
 <div class="row">
   <div id="offering-summary" class="span8 offset1">
-    <% if @offering.is_complete? :details %>
-      <%= render 'offerings/details/summary' %>
-    <% end %>
-    <% if @offering.is_complete? :objectives %>
-      <%= render 'offerings/objectives/summary' %>
-    <% end %>
-    <% if @offering.is_complete? :content %>
-      <%= render 'offerings/content/summary' %>
-    <% end %>
+    <%= render partial: 'summary', locals: {offering: @offering} %>
+    &nbsp;<br>
   </div>
 
   <!--Sidebar-->
