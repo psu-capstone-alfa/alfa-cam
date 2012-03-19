@@ -32,18 +32,7 @@
 
 <%= bs_form_for(@offering,
       html: {class: 'offering-content-groups fancy-buttons'}) do |f| %>
-  <% if @offering.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@offering.errors.count, "error") %>
-      prohibited this offering from being saved:</h2>
-
-    <ul>
-      <% @offering.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
+  <%= errors_for @offering, true %>
 
   <div class="tabbable">
     <ul class="nav nav-pills">
@@ -65,8 +54,6 @@
             <table id="content_container"
                    class="table-bordered table-condensed mappings
                     content-and-mappings">
-            <table class="table-bordered table-condensed mappings
-                    content-and-mappings">
               <thead>
                 <tr>
                   <th></th>
@@ -81,14 +68,14 @@
                   <tr class="content <%= css_class %>" id="<%= row_id %>">
                     <%= cgf.no_bs_fields_for :content, content do |cf| %>
                       <th>
-                        <a class="btn btn-danger delete-content">
-                          <i class="icon-white icon-remove">&nbsp;</i>
-                        </a>
+                        <%= cf.label :_destroy, style: 'display: inline' do %>
+                          <a class="btn btn-danger delete-content">
+                            <i class="icon-white icon-remove">&nbsp;</i>
+                          </a>
+                        <% end %>
+                        <%= cf.check_box :_destroy %>
                         <%= cf.hidden_field :position, :class => "position" %>
                         <%= cf.text_field :title, placeholder: 'Content name' %>
-                        <%= cf.check_box :_destroy %>
-                        <%= cf.label :_destroy, style: 'display: inline' do %>
-                        <% end %>
                       </th>
                       <% mapping_scopes(cf.object.mappings) do |mapping| %>
                         <td class="outcome">

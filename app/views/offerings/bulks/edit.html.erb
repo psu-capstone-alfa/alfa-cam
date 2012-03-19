@@ -28,7 +28,7 @@
             <div class="tab-pane active row" id="frequent_<%= instructor.id %>">
               <% @frequent_courses[instructor.id][:courses].each do |course| %>
                 <div>
-                  <button class="btn span2 <% unless @offerings[instructor][course].new_record? %>active btn-primary<% end %>" value="<%= instructor.id %>_<%= course.id %>">
+                  <button class="btn span2 bulk-offering <% unless @offerings[instructor][course].new_record? %>active btn-primary<% end %>" value="<%= instructor.id %>_<%= course.id %>">
                     <%= course %>
                   </button>
                 </div>
@@ -63,7 +63,7 @@
   <div class="row">
     <div class="span8 offset4">
       <hr>
-      <button class="btn btn-primary pull-right" type="submit">Do eet</button>
+      <button class="btn btn-primary pull-right" type="submit">Update Term Offerings</button>
     </div>
   </div>
 <% end %>

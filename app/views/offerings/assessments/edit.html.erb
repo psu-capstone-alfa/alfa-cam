@@ -22,18 +22,7 @@
   }
 %>
 
-<% if @offering.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@offering.errors.count, "error") %>
-     prohibited this offering from being saved:</h2>
-
-    <ul>
-      <% @offering.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= errors_for @offering, true %>
 
 <%= form_for(@offering,
   html: {class: 'offering-assessment form-horizontal fancy-buttons'}) do |f|

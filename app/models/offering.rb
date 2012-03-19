@@ -37,7 +37,11 @@ class Offering < ActiveRecord::Base
 
   IMPORTED_DETAILS = DETAILS - [:section, :crn, :location, :day_and_time]
 
-  validates_presence_of DETAILS, if: lambda {|o| o.details_done }
+  REQUIRED_DETAILS = DETAILS - [:prerequisites,
+                                :textbook,
+                                :additional_textbooks]
+
+  validates_presence_of REQUIRED_DETAILS, if: lambda {|o| o.details_done }
 
   accepts_nested_attributes_for :teachings
   validates_associated :teachings

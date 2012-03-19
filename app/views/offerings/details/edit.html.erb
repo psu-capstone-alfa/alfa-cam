@@ -1,13 +1,6 @@
 <!-- Offering-Details-Edit -->
 <div class="row"><div class="span12">
-  <% if @offering.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@offering.errors.count, "error") %>
-        prohibited this offering from being saved:
-      </h2>
-    </div>
-  <% end %>
+  <%= errors_for @offering %>
   <%= form_for(@offering,
     builder: FancyFormBuilder,
     url: url_for(action: :update),
