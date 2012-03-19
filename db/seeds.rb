@@ -91,8 +91,15 @@ class Seederation
 
   def content_with_mappings(cg)
     c = Content.create! title: 'Some content', content_group: cg
+    points = 10
     Mapping.import (c.offering.outcomes.map { |o|
-      Mapping.new value: [rand(-10..10),0].max, outcome: o, mappable: c
+      if o == c.offering.outcomes.last
+        amt = points
+      else
+        amt = [rand(-30..points),0].max
+      end
+      points -= amt
+      Mapping.new value: amt, outcome: o, mappable: c
     })
     c.save!
   end

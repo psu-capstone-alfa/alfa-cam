@@ -75,7 +75,7 @@ private
         .where('(select count(*)
                 from teachings t
                 join offerings o
-                where t.offering_id = o.id
+                on t.offering_id = o.id
                 and o.course_id = ?
                 and o.term_id = ?) >= 1', course.id, @term.id)
         .first

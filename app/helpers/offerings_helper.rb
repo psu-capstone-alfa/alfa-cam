@@ -40,6 +40,4 @@ module OfferingsHelper
     end
   end
 
-
-
 end

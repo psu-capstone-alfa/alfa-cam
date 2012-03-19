@@ -53,13 +53,11 @@ module ApplicationHelper
   end
 
   def active_section?(section)
-    ''
     'active' if @nav_section.is_a? Array and @nav_section.include? section
     'active' if @nav_section == section
   end
 
   def active_sections?(sections)
-    ''
     if @nav_section.is_a? Array
       sections.each do |section|
         return 'active' if @nav_section.include? section
@@ -71,10 +69,20 @@ module ApplicationHelper
     end
   end
 
-
   def empty_row
     content_tag :div, class: 'row' do
       content_tag :br
     end
   end
+
+  # a generic means for displaying an error notice on forms
+  def errors_for(object, show_full_error = false)
+    object_type = object.class.table_name.singularize.titleize.downcase
+    render partial: 'misc/error', locals: {
+      object: object,
+      object_type: object_type,
+      show_full_error: show_full_error
+    }
+  end
+
 end

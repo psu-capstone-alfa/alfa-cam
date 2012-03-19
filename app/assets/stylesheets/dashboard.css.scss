@@ -3,13 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #instructor-dash {
-  .stages .btn {
-    width: 120px;
-    height: 30px;
-    font-size: 12pt;
-    letter-spacing: 1px;
-    color: white;
-    line-height: 28px;
+  .stages {
+    margin: 0 auto;
+
+    .btn {
+      width: 124px;
+      height: 30px;
+      font-size: 12pt;
+      letter-spacing: 1px;
+      color: white;
+      line-height: 28px;
+    }
   }
 }
 

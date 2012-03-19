@@ -14,7 +14,9 @@
   }
 %>
 
-<%= form_tag do %>
+<%= form_tag '', class: 'form-inline pull-right alert import-review' do %>
+<label class="control-label" for="id">Choose a previous offering to review:</label>
+<fieldset>
   <%= select_tag(:id,
         grouped_options_for_select(
           {
@@ -22,11 +24,11 @@
             'Your recent offerings...' => @my_recent_options
           },
           selected_key = @recent_offering_choice.try(:id)
-
         )
       )
   %>
-  <%= submit_tag 'Review' %> &nbsp; <%= insert_help :one %>
+  <%= submit_tag 'Review', class: 'btn' %> &nbsp; <%= insert_help :one %>
+</fieldset>
 <% end %>
 
 <% unless @recent_offering_choice %>

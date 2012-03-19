@@ -1,0 +1,9 @@
+<% if object.errors.any? %>
+<div id="error_explanation" class="alert alert-warning">
+  <a class="close" data-dismiss="alert">&times;</a>
+  <p>
+    <%= pluralize(object.errors.count, "error") %>
+    prohibited this <%= object_type %> from being saved:
+  </p>
+</div>
+<% end %>

@@ -37,18 +37,8 @@
 
 <%= bs_form_for(@offering,
       html: {class: 'offering-content-groups fancy-buttons'}) do |f| %>
-  <% if @offering.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@offering.errors.count, "error") %>
-     prohibited this offering from being saved:</h2>
 
-    <ul>
-      <% @offering.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-  <% end %>
+  <%= errors_for @offering, true %>
 
   <table id='objectives_container'
     class="table offering table-bordered table-condensed objective mappings">

@@ -7,8 +7,9 @@
 
 <div class="row">
 <div class="span6 offset3">
-<form class="well" style="background-color: #ADD8E6;">
-<%= form_for @user_session, :url => user_session_path do |f| %>
+<%= form_for @user_session,
+             url: user_session_path,
+             html: { class: 'well login-form' } do |f| %>
   <%= f.label :login %>
   <%= f.text_field :login %>
   <%= f.label :password %>
@@ -29,7 +30,6 @@
     )
   %>
 <% end %>
-</form>
 </div>
 </div>
 
