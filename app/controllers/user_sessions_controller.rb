@@ -1,11 +1,11 @@
 # Provides pages for logging in and out users
 #
 class UserSessionsController < ApplicationController
-  before_filter :require_no_user, only: [:new, :create]
-  before_filter :require_user, except: [:new, :create]
+  skip_before_filter :require_user
   skip_authorization_check
 
   def new
+    redirect_to profile_path and return if current_user_session
     @nav_section = :login
     @user_session = UserSession.new
     @users = User.all
@@ -40,6 +40,7 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
+    redirect_to login_path and return unless current_user_session
     current_user_session.destroy
     flash[:success] = 'Logout successful'
     redirect_to login_path
