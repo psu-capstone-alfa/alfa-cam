@@ -4,10 +4,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new # guest user (not logged in)
-    if user.is? :reviewer
-      can :read, :all
-    end
+    return unless user # Fail if guest user
+
+    # Default permissions
+    can :read, :all
+    can :export_member, Offering
+
     if user.is? :instructor
       can :manage, Offering do |offering|
         offering.taught_by? user
@@ -15,7 +17,6 @@ class Ability
       cannot :destroy, Offering
       can :profile, User
       can :update, User, :id => user.id
-      can :read, :all
     end
     if user.is? :staff
       can :manage, Course
@@ -25,7 +26,6 @@ class Ability
       can :manage, Offering
       can :manage, ContentGroupName
       can :manage, :all
-      can :read, :all
     end
     if user.is? :admin
       can :manage, :all
