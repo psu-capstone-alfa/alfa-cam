@@ -288,19 +288,19 @@ end
     end
 
     content = [
-      { content_group_name: @lectures, content_attributes: [
+      { content_group_name: @content_group_names[0], content_attributes: [
         { title: 'Orthographic projection' },
         { title: 'Sectioning' },
         { title: 'Dimensioning and tolerance' },
         ]
       },
-      { content_group_name: @assignments, content_attributes: [
+      { content_group_name: @content_group_names[1], content_attributes: [
         { title: 'Section 2.3 from the text: problems 2,4,7,10' },
         { title: 'Chapter 3 end of chapter exercises 5, 10, 12' },
         { title: 'Problems 1.2, 1.7 and 1.8 from the study guide' },
         ]
       },
-      { content_group_name: @content_group_names[0] },
+      { content_group_name: @content_group_names[2] },
       { content_group_name: @content_group_names[3] },
       { content_group_name: @content_group_names[4] },
     ]
@@ -308,6 +308,31 @@ end
     @old_offering.content.each do |c|
       faked_content_mappings(c)
     end
+
+    assessment = @old_offering.get_or_create_assessment
+    assessment.update_attributes({
+      comments: 'None',
+      improved: 'Focus more on terminology in the beginning of the class as the material builds on it as the course progresses.',
+    })
+
+    oa = assessment.objective_assessments
+    oa[0].update_attributes(
+      assessed: 'Periodic homework assignments and 3 graded sketches during the term.',
+      well_met: 'Students performed well at interpreting scales and basic lettering, but they struggled with the technical sketches.',
+      improved: 'Spend more time on sketches and consider increasing the number of graded sketches.'
+    )
+    oa[1].update_attributes(
+      assessed: 'Students submitted two transcribed drawings during the term.',
+      well_met: 'Students seemed to perform well at this.',
+      improved: 'N/A'
+    )
+    oa[2].update_attributes(
+      assessed: '2 homework assignments covered reading and creating civil engineering drawings and both the midterm and the final had sections covering this topic.',
+      well_met: 'Terminology was a sticking point. Many students struggled with even basic terminology on the midterm and final.',
+      improved: 'N/A'
+    )
+
+
 
     @old_offering.update_attributes(
       objectives_done: true,

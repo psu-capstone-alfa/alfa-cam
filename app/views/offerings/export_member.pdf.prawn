@@ -16,7 +16,7 @@ arrKey = []
 end
 
 content_groups = @offering.content_groups.each do |group|
-
+  break unless group.content.count > 0
   allRows = []  # 2D array of all Rows
 
   titleRow = [group.name] # title row include name and Outcome keys
