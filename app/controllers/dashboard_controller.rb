@@ -4,6 +4,8 @@ class DashboardController < ApplicationController
   respond_to :html, :json
   skip_authorization_check
 
+  before_filter { @nav_section = :dashboard }
+
   def home
     @user = current_user
     if @user.is? :instructor

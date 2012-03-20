@@ -65,7 +65,7 @@ class Seederation
     range.map do |key|
       Outcome.create!(
         key: key,
-        description: Lorem.paragraph
+        description: Forgery::University.outcome
       )
     end
   end
