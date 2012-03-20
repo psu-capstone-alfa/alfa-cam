@@ -78,11 +78,16 @@ class Seederation
 
     @ogroup = @ogroups.last
 
-    @content_group_names = 3.repetitions { Factory :content_group_name }
+    cg_names = ['Lectures','Assignments','Labs','Projects / Papers','Other']
+    @content_group_names = cg_names.map do |name|
+      Factory :content_group_name, name: name
+    end
+    @lectures = @content_group_names[0]
+    @assignments = @content_group_names[1]
   end
 
-  def content_group_with_mappings(offering)
-    cg = ContentGroup.create!(offering: offering, content_group_name: @content_group_names.sample)
+  def content_group_with_mappings(offering,name)
+    cg = ContentGroup.create!(offering: offering, content_group_name: name)
     rand(2..5).repetitions {
       content_with_mappings(cg)
     }
@@ -91,6 +96,10 @@ class Seederation
 
   def content_with_mappings(cg)
     c = Content.create! title: 'Some content', content_group: cg
+    faked_content_mappings(c)
+  end
+
+  def faked_content_mappings(c)
     points = 10
     Mapping.import (c.offering.outcomes.map { |o|
       if o == c.offering.outcomes.last
@@ -135,7 +144,7 @@ class Seederation
       o.details_done = true
     end
     5.repetitions { objective_with_mappings(offering) }
-    3.repetitions { content_group_with_mappings(offering) }
+    @content_group_names.each { |cg| content_group_with_mappings(offering, cg)}
     offering.save!
     offering
   end
@@ -143,6 +152,10 @@ class Seederation
 
   def objective_with_mappings(offering)
     objective = Factory :objective, offering: offering
+    faked_objective_mapping(offering, objective)
+  end
+
+  def faked_objective_mapping(offering, objective)
     objective.mappings.create!(
       offering.outcomes.map do |out|
         {outcome: out, value: [rand(-1..1),0].max}
@@ -181,7 +194,7 @@ end
     # Build the first term
     puts "Building term: Initial w/ random courses"
     @initial_term = AcademicTerm.create! do |t|
-      t.title = 'Initial'
+      t.title = 'Fall 1900'
       t.outcome_group = @ogroup
     end
 
@@ -248,6 +261,60 @@ end
       term: @initial_term,
       instructors: [@demo_instructor]
     )
+    details = {
+      section: '1',
+      crn: '12345',
+      location: 'FAB 40-6',
+      credits: '4',
+      day_and_time: 'MW 1200-1400',
+      required_for_bsce: 'Required',
+      required_for_bsenve: 'Elective',
+      prerequisites: '',
+      textbook: 'Modern Languages Text',
+      description: 'An awesome class!',
+      details_done: true,
+      review_done: true,
+      importing_done: true,
+    }
+    @old_offering.update_attributes(details)
+    objectives = [
+      { description: 'Use and interpret scales, basic lettering, and do simple technical sketching.' },
+      { description: 'Be able to transcribe a three dimensional object to a two-dimensional representation in an engineering drawing.' },
+      { description: 'Be able to read and create simple common civil engineering drawings.' },
+    ]
+    @old_offering.update_attributes(objectives_attributes: objectives)
+    @old_offering.objectives.each do |objective|
+      faked_objective_mapping(@old_offering, objective)
+    end
+
+    content = [
+      { content_group_name: @lectures, content_attributes: [
+        { title: 'Orthographic projection' },
+        { title: 'Sectioning' },
+        { title: 'Dimensioning and tolerance' },
+        ]
+      },
+      { content_group_name: @assignments, content_attributes: [
+        { title: 'Section 2.3 from the text: problems 2,4,7,10' },
+        { title: 'Chapter 3 end of chapter exercises 5, 10, 12' },
+        { title: 'Problems 1.2, 1.7 and 1.8 from the study guide' },
+        ]
+      },
+      { content_group_name: @content_group_names[0] },
+      { content_group_name: @content_group_names[3] },
+      { content_group_name: @content_group_names[4] },
+    ]
+    @old_offering.update_attributes(content_groups_attributes: content)
+    @old_offering.content.each do |c|
+      faked_content_mappings(c)
+    end
+
+    @old_offering.update_attributes(
+      objectives_done: true,
+      content_done: true,
+      assessments_done: true
+    )
+
 
     @new_offering = Offering.create!(
       course: @course,
@@ -268,12 +335,12 @@ end
       password: '1234')
     @staff = Factory :staff, name: 'Staff', login: 'staff', password: '1234'
 
-    @instructors.concat 2.repetitions { Factory :instructor }
+    #@instructors.concat 2.repetitions { Factory :instructor }
 
     build_initial_term
 
     # Then build some years
-    build_old_year((Date.today.year - 1).to_s, @ogroup)
+    #build_old_year((Date.today.year - 1).to_s, @ogroup)
     build_demo_term
   end
 

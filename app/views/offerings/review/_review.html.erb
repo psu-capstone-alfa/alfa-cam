@@ -10,19 +10,21 @@
 %>
 
 <%= form_tag '', class: 'form-inline pull-right alert import-review' do %>
-<label class="control-label" for="id">Choose a previous offering to review:</label>
-<fieldset>
-    <%= select_tag(:id,
-          grouped_options_for_select(
-            {
-              'Recent offerings...' => @recent_options,
-              'Your recent offerings...' => @my_recent_options
-            },
-            selected_key = @recent_offering_choice.try(:id)
-          )
-        ) %>
-  <%= submit_tag 'Review', class: 'btn' %> &nbsp; <%= insert_help :one %>
-</fieldset>
+  <label class="control-label" for="id">
+    Choose a previous offering to review:
+  </label>
+  <fieldset>
+      <%= select_tag(:id,
+            grouped_options_for_select(
+              {
+                'Recent offerings...' => @recent_options,
+                'Your recent offerings...' => @my_recent_options
+              },
+              selected_key = @recent_offering_choice.try(:id)
+            )
+          ) %>
+    <%= submit_tag 'Review', class: 'btn' %> &nbsp; <%= insert_help :one %>
+  </fieldset>
 <% end %>
 
 <% unless @recent_offering_choice %>
@@ -33,18 +35,18 @@
   <% end %>
 <% else %>
 
-<h2><%= @recent_offering_choice %></h2>
+  <h2><%= @recent_offering_choice %></h2>
 
-<p>
-  <strong>Taught by:</strong>
-  <%= @recent_offering_choice.instructors.join ',' %>
-</p>
+  <p>
+    <strong>Taught by:</strong>
+    <%= @recent_offering_choice.instructors.join ',' %>
+  </p>
 
-<br>
-<% if @assessment %>
-  <%= render @assessment %>
-<% else %>
-  <h3>Selected offering has no assessment</h3><br>
-<% end %>
+  <br>
+  <% if @assessment %>
+    <%= render @assessment %>
+  <% else %>
+    <h3>Selected offering has no assessment</h3><br>
+  <% end %>
 
 <% end %>
