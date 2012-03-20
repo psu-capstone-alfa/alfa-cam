@@ -20,6 +20,13 @@ class Offerings::ImportingController < Offerings::Children
   end
 
   def import
+    if params[:import_blank]
+      @offering.importing_done = true
+      @offering.save!
+      flash[:success] = 'Success: Blank offering started'
+      redirect_to [:edit, @offering]
+      return
+    end
     imported_offering = Offering.find params[:import_from_id]
     case
       when imported_offering.nil?

@@ -26,7 +26,11 @@
 <% end %>
 
 <% unless @recent_offering_choice %>
-  <h3>No offering selected</h3>
+  <% if @recent_options.length == 0 && @my_recent_options.length == 0 %>
+    <h3>No other offerings to review</h3>
+  <% else %>
+    <h3>No offering selected</h3>
+  <% end %>
 <% else %>
 
 <h2><%= @recent_offering_choice %></h2>

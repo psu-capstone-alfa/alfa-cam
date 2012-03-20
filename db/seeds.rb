@@ -219,30 +219,62 @@ end
     end
   end
 
+  def build_demo_term
+    @current_term = build_term("Winter #{Date.today.year}", @ogroup) do |term|
+      courses = term.available_courses
+      @instructors.each do |instructor|
+        build_completed_offering do |o|
+          o.term = term
+          o.course = courses.sample
+          o.instructors = [instructor]
+        end
+        build_started_offering do |o|
+          o.term = term
+          o.course = courses.sample
+          o.instructors = [instructor]
+        end
+      end
+    end
+
+    # Build our demo instructor a course/offering to copy from
+    @course = Course.create!(
+      dept_code: 'CS',
+      course_num: '557',
+      title: 'Modern Language Processors',
+      created_term: @initial_term
+    )
+    @old_offering = Offering.create!(
+      course: @course,
+      term: @initial_term,
+      instructors: [@demo_instructor]
+    )
+
+    @new_offering = Offering.create!(
+      course: @course,
+      term: @current_term,
+      instructors: [@demo_instructor]
+    )
+
+  end
+
+
 
 
   def run_the_seedening
     @instructors = []
-    @instructors << Factory(:user,
-      login: 'inst-staff',
-      roles: [:staff, :instructor],
-      name: 'Staff Instructor TEST')
-    @instructors << Factory(:instructor, name: 'Instructor TEST')
+    @instructors << @demo_instructor = Factory(:instructor,
+      name: 'Instructor',
+      login: 'inst',
+      password: '1234')
+    @staff = Factory :staff, name: 'Staff', login: 'staff', password: '1234'
 
-    # Some instructors without classes
-    1.times { Factory :instructor, name: 'Instructor w/ 0 New Offerings' }
-
-    @staff = Factory :staff,  name: 'Staff TEST'
-    @admin = Factory :admin, name: 'Admin TEST'
-    @reviewer = Factory :reviewer, name: 'Reviewer TEST'
-
-    @instructors.concat 1.repetitions { Factory :instructor }
+    @instructors.concat 2.repetitions { Factory :instructor }
 
     build_initial_term
 
     # Then build some years
     build_old_year((Date.today.year - 1).to_s, @ogroup)
-    build_current_term
+    build_demo_term
   end
 
 end

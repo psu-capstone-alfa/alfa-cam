@@ -6,49 +6,31 @@
 </div>
 
 <div class="row">
-<div class="span6 offset3">
-<%= form_for @user_session,
+  <div class="span4 offset4">
+    <div style="margin: auto">
+    <%= form_for @user_session,
              url: user_session_path,
              html: { class: 'well login-form' } do |f| %>
-  <%= f.label :login %>
-  <%= f.text_field :login %>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <br />
-  <%= button_tag(
-    "CAT Login",
-    name: "login_type",
-    value: 'ldap',
-    class: 'btn'
-    )
-  %>
-  <%= button_tag(
-    "Local Login",
-    name: "login_type",
-    value: 'local',
-    class: 'btn'
-    )
-  %>
-<% end %>
+      <%= f.label :login %>
+      <%= f.text_field :login %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+      <br />
+      <%= button_tag(
+        "Local Login",
+        name: "login_type",
+        value: 'local',
+        class: 'btn'
+        )
+      %>
+      <%= button_tag(
+        "CAT Login",
+        name: "login_type",
+        value: 'ldap',
+        class: 'btn'
+        )
+      %>
+    <% end %>
+  </div>
+  </div>
 </div>
-</div>
-
-
-<br><br><br>
-
-<p>Or, since we're currently developing</p>
-<h2>Passwordless Sign In</h2>
-
-<%= form_for @user_session, :url => user_session_path do |f| %>
-  <%= f.label :login %>
-  <%= f.collection_select :login, User.all, :login, :name %>
-  <%= f.hidden_field :password, value: 'nopass' %>
-  <br>
-  <%= button_tag(
-    "Passwordless Login",
-    name: "login_type",
-    value: 'skip',
-    class: 'btn'
-    )
-  %>
-<% end %>
