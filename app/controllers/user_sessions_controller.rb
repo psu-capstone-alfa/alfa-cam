@@ -40,6 +40,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     redirect_to login_path and return unless current_user_session
+    clear_stored_location
     current_user_session.destroy
     flash[:success] = 'Logout successful'
     redirect_to login_path

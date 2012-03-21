@@ -10,4 +10,8 @@ class Forgery::University < Forgery
   def self.content_group_name
     dictionaries[:content_group_names].random.unextend
   end
+
+  def self.outcome
+    dictionaries[:program_outcome].random.unextend
+  end
 end

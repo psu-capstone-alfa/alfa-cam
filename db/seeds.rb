@@ -65,7 +65,7 @@ class Seederation
     range.map do |key|
       Outcome.create!(
         key: key,
-        description: Lorem.paragraph
+        description: Forgery::University.outcome
       )
     end
   end
@@ -78,11 +78,14 @@ class Seederation
 
     @ogroup = @ogroups.last
 
-    @content_group_names = 3.repetitions { Factory :content_group_name }
+    cg_names = ['Lectures','Assignments','Labs','Projects / Papers','Other']
+    @content_group_names = cg_names.map do |name|
+      Factory :content_group_name, name: name
+    end
   end
 
-  def content_group_with_mappings(offering)
-    cg = ContentGroup.create!(offering: offering, content_group_name: @content_group_names.sample)
+  def content_group_with_mappings(offering,name)
+    cg = ContentGroup.create!(offering: offering, content_group_name: name)
     rand(2..5).repetitions {
       content_with_mappings(cg)
     }
@@ -91,6 +94,10 @@ class Seederation
 
   def content_with_mappings(cg)
     c = Content.create! title: 'Some content', content_group: cg
+    faked_content_mappings(c)
+  end
+
+  def faked_content_mappings(c)
     points = 10
     Mapping.import (c.offering.outcomes.map { |o|
       if o == c.offering.outcomes.last
@@ -135,7 +142,7 @@ class Seederation
       o.details_done = true
     end
     5.repetitions { objective_with_mappings(offering) }
-    3.repetitions { content_group_with_mappings(offering) }
+    @content_group_names.each { |cg| content_group_with_mappings(offering, cg)}
     offering.save!
     offering
   end
@@ -143,6 +150,10 @@ class Seederation
 
   def objective_with_mappings(offering)
     objective = Factory :objective, offering: offering
+    faked_objective_mapping(offering, objective)
+  end
+
+  def faked_objective_mapping(offering, objective)
     objective.mappings.create!(
       offering.outcomes.map do |out|
         {outcome: out, value: [rand(-1..1),0].max}
@@ -181,7 +192,7 @@ end
     # Build the first term
     puts "Building term: Initial w/ random courses"
     @initial_term = AcademicTerm.create! do |t|
-      t.title = 'Initial'
+      t.title = 'Fall 1900'
       t.outcome_group = @ogroup
     end
 

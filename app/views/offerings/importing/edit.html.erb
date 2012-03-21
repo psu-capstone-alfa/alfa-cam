@@ -54,7 +54,15 @@
 
 <%= form_tag action: 'import' do %>
   <%= redirect_token @redirect_url %>
-  <%= hidden_field_tag :import_from_id, @recent_offering_choice.id %>
-  <%= submit_tag 'Import', class: 'btn btn-primary' %> &nbsp;
+  <% if @recent_offering_choice %>
+    <%= hidden_field_tag :import_from_id, @recent_offering_choice.id %>
+    <%= submit_tag 'Import', class: 'btn btn-primary' %> &nbsp;
+  <% end %>
+  <%= button_tag 'Blank Offering',
+    class: 'btn',
+    name: 'import_blank',
+    value: 'true'
+  %>
+  &nbsp;
   <%= insert_help :two %>
 <% end %>
