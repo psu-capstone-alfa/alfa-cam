@@ -1,1 +1,57 @@
-This is a demo!
+
+## Installation
+
+### Local Development
+
+    cp config/database.yml.example config/database.yml
+    # Will use local sqlite databases by default
+
+    bundle exec rake db:reset
+    # Will build the database and seed basic data
+
+    bundle exec rails s
+    # Start a local server
+
+
+### Production
+
+#### First-Time Setup
+
+Use the following instructions to start a fresh version of the application.
+If you would like to update a currently running installation,
+jump ahead to the next section.
+
+    cp config/database.yml.example config/database.yml
+    # Uses local sqlite databases by default,
+    # edit to use database setup of your choice,
+    # use the production environment only
+
+    cp config/initializers/setup_mail.rb.example config/initializers/setup_mail.rb
+    # Configure with mail host settings
+
+    RAILS_ENV=production bundle exec rake db:create db:seed
+    # Create database tables and seed with bootstraping data
+
+    # And then run rails server however you please (rackup, thin, passenger, etc)
+    # Example:
+    RAILS_ENV=production bundle exec rackup
+
+#### Updating
+
+Be sure to read any update notes and documentation,
+as there may be additional configuration required in new versions.
+
+    # To avoid data corru[tion during update,
+    # !!! Disable the application before continuing !!!
+    # !!! Make sure you have a database backup before continuing !!!
+
+    # Update the git repository to the desired new version
+
+    RAILS_ENV=production bundle exec rake db:migrate
+    # This updates the database with any changes from the new version
+
+    # Perform any other updates as specified by update notes
+
+    # Update complete, enable the application again
+
+
