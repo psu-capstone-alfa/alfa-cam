@@ -232,28 +232,24 @@ end
 
 
 
+
+
+
   def run_the_seedening
     @instructors = []
-    @instructors << Factory(:user,
-      login: 'inst-staff',
-      roles: [:staff, :instructor],
-      name: 'Staff Instructor TEST')
-    @instructors << Factory(:instructor, name: 'Instructor TEST')
-
-    # Some instructors without classes
-    1.times { Factory :instructor, name: 'Instructor w/ 0 New Offerings' }
-
-    @staff = Factory :staff,  name: 'Staff TEST'
-    @admin = Factory :admin, name: 'Admin TEST'
-    @reviewer = Factory :reviewer, name: 'Reviewer TEST'
-
-    @instructors.concat 1.repetitions { Factory :instructor }
+    @instructors << @demo_instructor = Factory(:instructor,
+      name: 'Instructor',
+      login: 'inst',
+      password: '1234')
+    @staff = Factory :staff, name: 'Staff', login: 'staff', password: '1234'
+    @reviewer = Factory :reviewer, name: 'Reviewer', login: 'review', password: '1234'
+    @admin = Factory :admin, name: 'Admin', login: 'admin', password: '1234'
 
     build_initial_term
 
     # Then build some years
-    build_old_year((Date.today.year - 1).to_s, @ogroup)
-    build_current_term
+    #build_old_year((Date.today.year - 1).to_s, @ogroup)
+    #build_demo_term
   end
 
 end
