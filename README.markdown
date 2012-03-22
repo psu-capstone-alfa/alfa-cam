@@ -3,14 +3,17 @@
 
 ### Local Development
 
+    # Install dependencies
+    bundle install
+
+    # Use local sqlite databases by default
     cp config/database.yml.example config/database.yml
-    # Will use local sqlite databases by default
 
+    # Build the database and seed basic data
     bundle exec rake db:reset
-    # Will build the database and seed basic data
 
-    bundle exec rails s
     # Start a local server
+    bundle exec rails s
 
 
 ### Production
@@ -21,16 +24,20 @@ Use the following instructions to start a fresh version of the application.
 If you would like to update a currently running installation,
 jump ahead to the next section.
 
+    # Install dependencies
+    bundle install
+
+    # Copy basic database config for editing
     cp config/database.yml.example config/database.yml
-    # Uses local sqlite databases by default,
-    # edit to use database setup of your choice,
-    # use the production environment only
+    # Then edit to use database setup of your choice,
+    # Use the production environment only
 
+    # Copy basic mail config
     cp config/initializers/setup_mail.rb.example config/initializers/setup_mail.rb
-    # Configure with mail host settings
+    # Then configure with mail host settings
 
+    # Build and seed database with bootstrapped data
     RAILS_ENV=production bundle exec rake db:create db:seed
-    # Create database tables and seed with bootstraping data
 
     # And then run rails server however you please (rackup, thin, passenger, etc)
     # Example:
@@ -41,17 +48,18 @@ jump ahead to the next section.
 Be sure to read any update notes and documentation,
 as there may be additional configuration required in new versions.
 
-    # To avoid data corru[tion during update,
+    # To avoid data corru[tion during update:
+
     # !!! Disable the application before continuing !!!
     # !!! Make sure you have a database backup before continuing !!!
 
     # Update the git repository to the desired new version
+    # For example: git checkout v2.0
 
+    # Update database with any changes needed for the new version
     RAILS_ENV=production bundle exec rake db:migrate
-    # This updates the database with any changes from the new version
 
     # Perform any other updates as specified by update notes
 
     # Update complete, enable the application again
-
 
