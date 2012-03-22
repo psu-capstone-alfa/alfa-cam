@@ -24,13 +24,12 @@ class UserSessionsController < ApplicationController
     end
 
     @session = UserSession.new(params[:user_session], login_type: login_type)
-
-    if @session.save!
+    if @session.save
       flash[:success] = "Login successful"
       redirect_back_or_default home_path
     else
       flash[:alert] = "Invalid login"
-      render :action => :new
+      redirect_to :login
     end
   end
 
