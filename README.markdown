@@ -1,4 +1,3 @@
-
 ## Installation
 
 ### Local Development
@@ -48,7 +47,7 @@ jump ahead to the next section.
 Be sure to read any update notes and documentation,
 as there may be additional configuration required in new versions.
 
-    # To avoid data corru[tion during update:
+    # To avoid data corruption during update:
 
     # !!! Disable the application before continuing !!!
     # !!! Make sure you have a database backup before continuing !!!
