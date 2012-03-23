@@ -16,7 +16,7 @@ CourseAssessmentManager::Application.routes.draw do
       resource :bulk, only: [:edit, :update, :create]
     end
 
-    resources :offerings, only: [:new, :create]
+    resources :offerings, only: [:new, :create, :index]
   end
 
   scope controller: :dashboard, path: 'home', as: 'home' do
@@ -38,9 +38,10 @@ CourseAssessmentManager::Application.routes.draw do
     get :start_term
   end
 
-  resources :offerings, except: [:new,:create] do
+  resources :offerings, except: [:new,:create,:index] do
     collection do
-      get :search
+      match '/' => 'offerings#search', via: [:get, :post]
+      post :search; get :search;
       get :export
       get :facets
       get :search_explanation

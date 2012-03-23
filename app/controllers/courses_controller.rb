@@ -2,7 +2,7 @@
 #
 class CoursesController < ApplicationController
   respond_to :html, :json
-  before_filter { @nav_section = :courses }
+  before_filter { @nav_section = :terms }
   before_filter { @term = AcademicTerm.find(params[:academic_term_id]) }
   before_filter { @nav_term = :courses }
 
@@ -31,18 +31,12 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(params[:course])
 
-    respond_to do |format|
-      if @course.save
-        format.html {
-          redirect_to [@term, @course],
-            success: 'Course was successfully created.'
-        }
-      else
-        format.html {
-          flash[:error] = @course.errors.full_messages.to_sentence
-          render action: "new"
-        }
-      end
+    if @course.save
+      flash[:success] = 'Course was successfully created.'
+      redirect_to [@term, @course]
+    else
+      flash[:error] = @course.errors.full_messages.to_sentence
+      render action: :new
     end
   end
 

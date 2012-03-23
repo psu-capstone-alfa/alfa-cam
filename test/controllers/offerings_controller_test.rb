@@ -3,10 +3,11 @@ require "minitest_helper"
 describe OfferingsController do
   with_admin_session
 
-  it "must get index" do
-    get :index
+  it "must get search" do
+    get :search
     must_respond_with :success
   end
+
 
   it "must export offerings" do
     @request.env["HTTP_ACCEPT"] = "*/*"
@@ -14,20 +15,28 @@ describe OfferingsController do
     must_respond_with :success
   end
 
-  it "must get new" do
-    skip("Need to debug this...")
-    get :new
-    must_respond_with :success
-  end
-
-  it "must create offering" do
-    term = Factory :academic_term
-    attributes = Factory(:offering).attributes
-    attributes.delete(:id)
-    assert_difference('Offering.count') do
-      post :create, academic_term_id: term.id, offering: attributes
+  describe "in a term" do
+    before do
+      @term = Factory :academic_term
     end
-    assert_redirected_to offering_path(assigns(:offering))
+
+    it "must index term's offerings" do
+      get :index, academic_term_id: @term.id
+      must_respond_with :success
+    end
+
+    it "must get new" do
+      get :new, academic_term_id: @term.id
+      must_respond_with :success
+    end
+
+    it "must create offering" do
+      attributes = Factory(:offering).attributes
+      attributes.delete(:id)
+      assert_difference('Offering.count') do
+        post :create, academic_term_id: @term.id, offering: attributes
+      end
+    end
   end
 
   it "must return a json representation of facets" do

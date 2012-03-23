@@ -6,7 +6,8 @@ require 'csv'
 class OfferingsController < ApplicationController
   respond_to :html
   load_and_authorize_resource :academic_term
-  load_resource through: :academic_term, shallow: true, except: :index
+  load_resource through: :academic_term, shallow: true
+  before_filter { @academic_term ||= @offering.try(:term) }
   authorize_resource
 
   layout 'offering', only: [:show, :edit]
@@ -14,8 +15,15 @@ class OfferingsController < ApplicationController
   before_filter { @nav_section = :offerings }
   before_filter :redirect_summary_before_import, only: :show
 
-
   def index
+    @nav_section = :terms
+    @offerings = @academic_term.offerings.ordered
+    @term = @academic_term
+    @nav_term = :offerings
+    render layout: 'term'
+  end
+
+  def search
     conditions = getConditions
     @page = params[:page] or 1
     @limit = params[:limit] or 25
@@ -28,7 +36,7 @@ class OfferingsController < ApplicationController
     if params[:partial].blank?
       respond_with @offerings, :layout => 'application'
     else
-      render :partial => 'offerings_table', :layout => false
+      render :partial => 'offerings_search', :layout => false
     end
   end
 
@@ -60,7 +68,7 @@ class OfferingsController < ApplicationController
 
     if @offering.save
       flash[:success] = 'Offering successfully created.'
-      redirect_to @offering
+      redirect_to [@academic_term, :offerings]
     else
       flash[:error] = @offering.errors.full_messages.to_sentence
       render action: "new"

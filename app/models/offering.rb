@@ -91,6 +91,7 @@ class Offering < ActiveRecord::Base
   scope :course_order,
     includes(:course).
     order("courses.dept_code ASC, courses.course_num ASC")
+  scope :ordered, course_order
   scope :with_instructors,
     includes(:instructors).
     order("users.name ASC")
