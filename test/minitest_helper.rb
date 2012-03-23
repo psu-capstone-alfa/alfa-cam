@@ -17,13 +17,15 @@ module AuthlogicTestHelpers
   def with_admin_session
     before do
       activate_authlogic
-      UserSession.create!(Factory :admin)
+      @current_user = Factory :admin
+      UserSession.create!(@current_user)
     end
   end
 
   def with_user(user)
     before do
       activate_authlogic
+      @current_user = Factory :admin
       UserSession.create!(user)
     end
   end

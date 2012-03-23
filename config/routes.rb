@@ -15,6 +15,8 @@ CourseAssessmentManager::Application.routes.draw do
     namespace :offerings do
       resource :bulk, only: [:edit, :update, :create]
     end
+
+    resources :offerings, only: [:new, :create]
   end
 
   scope controller: :dashboard, path: 'home', as: 'home' do
@@ -36,7 +38,7 @@ CourseAssessmentManager::Application.routes.draw do
     get :start_term
   end
 
-  resources :offerings do
+  resources :offerings, except: [:new,:create] do
     collection do
       get :search
       get :export

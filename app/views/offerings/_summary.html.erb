@@ -1,7 +1,5 @@
 <div id="offering-summary">
-  <% if offering.is_complete? :details %>
-    <%= render partial: 'offerings/details/summary', locals: {offering: offering} %>
-  <% end %>
+  <%= render partial: 'offerings/details/summary', locals: {offering: offering} %>
   <% if offering.is_complete? :objectives %>
     <%= render partial: 'offerings/objectives/summary', locals: {offering: offering} %>
   <% end %>

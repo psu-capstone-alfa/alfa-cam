@@ -1,1 +1,40 @@
-<h1 class='fail'>Nothing here</h1>
+<% @_form_record ||= @offering %>
+
+<%= form_for @_form_record,
+  builder: FancyFormBuilder,
+  html: {class: 'form-horizontal'} do |f| %>
+
+
+  <legend>
+    <% if @offering.new_record? %>
+      New Offering for: <%= @academic_term %>
+    <% else %>
+      Editing: <%= @offering %>
+    <% end %>
+  </legend>
+
+  <%= render partial: 'misc/errors', object: @offering.errors %>
+
+  <%= f.control_group :course_id, label: 'Course' do %>
+    <%= f.grouped_collection_select :course_id,
+      @academic_term.available_courses.group_by(&:group),
+      :second, :first,
+      :id, :to_s
+    %>
+  <% end %>
+
+  <%= f.control_group :instructor_ids, label: 'Instructors' do %>
+    <%= f.collection_select :instructor_ids,
+      User.instructors,
+      :id, :name,
+      {},
+      multiple: true
+    %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit 'Save', class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', :back, class: 'btn' %>
+  </div>
+<% end %>
+

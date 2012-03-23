@@ -19,9 +19,20 @@
         <body>
           <% @offerings.each do |offering| %>
           <tr class="<%= "completed" if offering.completed? %>">
-            <td class="instructor"><%=offering.instructors.first.name%></td>
-            <td><a class="course" href="<%=offering_path(offering)%>">
-            <%= offering.course %></a></td>
+            <td class="instructor">
+              <% if offering.instructors.count > 1 %>
+                <abbr title="<%= offering.instructors.join ', '%>">
+                  <%= offering.instructors.first %>, ...
+                </abbr>
+              <% else %>
+                <%= offering.instructors.first %>
+              <% end %>
+            </td>
+            <td>
+              <a class="course" href="<%=offering_path(offering)%>">
+                <%= offering.course %>
+              </a>
+            </td>
             <td class="stages">
             <div class="btn-group">
               <% stages = stage_colors(offering) %>
