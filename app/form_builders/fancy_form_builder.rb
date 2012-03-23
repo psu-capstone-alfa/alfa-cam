@@ -47,7 +47,7 @@ class FancyFormBuilder < ActionView::Helpers::FormBuilder
         options = args.extract_options!
         options[:rel] = 'tooltip'
         options[:title] = errors.join.humanize
-        options['data-trigger'] = 'focus'
+        #options['data-trigger'] = 'focus'
         args.unshift options
         super attribute, *args
       else

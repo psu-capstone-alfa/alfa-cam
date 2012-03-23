@@ -29,13 +29,14 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(params[:course])
+    @course = Course.new
+    @course.assign_attributes(params[:course])
+    @course.created_term = @term
 
     if @course.save
       flash[:success] = 'Course was successfully created.'
-      redirect_to [@term, @course]
+      redirect_to [@term, :courses]
     else
-      flash[:error] = @course.errors.full_messages.to_sentence
       render action: :new
     end
   end
@@ -43,28 +44,23 @@ class CoursesController < ApplicationController
   def update
     @course = Course.find(params[:id])
 
-    respond_to do |format|
-      if @course.update_attributes(params[:course])
-        format.html {
-          redirect_to [@term, @course],
-            success: 'Course was successfully updated.'
-        }
-      else
-        format.html {
-          flash[:error] = @course.errors.full_messages.to_sentence
-          render action: "edit"
-        }
-      end
+    if @course.update_attributes(params[:course])
+      flash[:success] = 'Course was successfully updated.'
+      redirect_to [@term, :courses]
+    else
+      render action: :edit
     end
   end
 
   def destroy
     @course = Course.find(params[:id])
-    @course.destroy
 
-    respond_to do |format|
-      format.html { redirect_to [@term, :courses] }
-      format.json { head :ok }
+    if @course.destroy
+      flash[:success] = 'Course successfully destroyed'
+      redirect_to [@term, :courses]
+    else
+      flash[:error] = 'Could not delete course'
+      redirect_to [:edit, @term, @course]
     end
   end
 end

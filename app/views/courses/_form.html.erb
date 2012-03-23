@@ -1,20 +1,32 @@
-<%= bs_form_for([@term, @course]) do |f| %>
-  <% if @course.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
+<%= form_for [@term, @course],
+  builder: FancyFormBuilder,
+  html: {class: 'form-horizontal'} do |f| %>
 
-      <ul>
-      <% @course.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+
+  <legend>
+    <% if @course.new_record? %>
+      New Course for <%= @term %>
+    <% else %>
+      Editing: <%= @course %>
+    <% end %>
+  </legend>
+
+  <%= render partial: 'misc/errors', object: @course.errors %>
+
+  <%= f.control_group :dept_code, label: 'Subject Code' do %>
+    <%= f.text_field :dept_code %>
   <% end %>
 
-  <%= f.text_field :dept_code, label: 'Department Code' %>
-  <%= f.text_field :course_num, label: 'Course Number' %>
-  <%= f.text_field :title, label: 'Course Title' %>
-  <div class="actions">
-    <%= f.submit %>
+  <%= f.control_group :course_num, label: 'Course Number' do %>
+    <%= f.text_field :course_num %>
+  <% end %>
+
+  <%= f.control_group :title, label: 'Course Title' do %>
+    <%= f.text_field :title %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit 'Save', class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', [@term, :courses], class: 'btn' %>
   </div>
 <% end %>
