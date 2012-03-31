@@ -1,3 +1,15 @@
+# ABET-inspired Course Assessment Manager
+
+Rails web application for collecting course details and assessments
+from instructors.
+
+## License
+
+The Course Assessment Manager is Copyright (c) 2012,
+and is released open source with the three-clause BSD license.
+
+See COPYING for more details.
+
 ## Installation
 
 ### Local Development
@@ -61,4 +73,13 @@ as there may be additional configuration required in new versions.
     # Perform any other updates as specified by update notes
 
     # Update complete, enable the application again
+
+
+
+## Contributing
+
+All contributions are welcome!
+Bugs should be reported as issues on the github page. All fixes and features
+should be submitted as pull requests. Please use topic branches and keep them
+updated with master to lessen work required to merge them. Thanks!
 
