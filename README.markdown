@@ -36,7 +36,7 @@ If you would like to update a currently running installation,
 jump ahead to the next section.
 
     # Install dependencies
-    bundle install
+    bundle install --without production
 
     # Copy basic database config for editing
     cp config/database.yml.example config/database.yml
