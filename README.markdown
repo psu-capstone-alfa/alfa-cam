@@ -14,6 +14,9 @@ See COPYING for more details.
 
 ### Local Development
 
+    # Install bundler
+    gem install bundler
+    
     # Install dependencies
     bundle install
 
