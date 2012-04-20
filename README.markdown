@@ -12,6 +12,8 @@ See COPYING for more details.
 
 ## Installation
 
+* Requires Ruby 1.9.3 *
+
 ### Local Development
 
     # Install bundler
